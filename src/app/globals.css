@@ -1,40 +1,58 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page: #fcfbfc;
+  --ink: #2a2f3a;
+  --muted: #6b6f7c;
+  --line: #e6e1e6;
+  --print: #ffffff;
+
+  --sage: #8fa89a;
+  --rose: #c98fa6;
+  --slate: #8394b5;
+  --mauve: #a99bb5;
+
+  --hand: var(--font-hand), "Comic Sans MS", cursive;
+  --body: var(--font-body), system-ui, sans-serif;
+
+  --gutter: clamp(16px, 5vw, 48px);
+  --max: 1120px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  height: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
-html,
 body {
-  max-width: 100vw;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* the soft colour haze behind every page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 30% at 18% 22%, rgba(215, 161, 184, 0.28), transparent 70%),
+    radial-gradient(34% 28% at 84% 30%, rgba(131, 148, 181, 0.22), transparent 70%),
+    radial-gradient(40% 32% at 70% 86%, rgba(143, 168, 154, 0.24), transparent 70%),
+    radial-gradient(30% 26% at 20% 80%, rgba(169, 155, 181, 0.22), transparent 70%);
+  filter: blur(10px);
 }
 
 a {
@@ -42,8 +60,31 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: #ecd1d8;
+}
+
+:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }

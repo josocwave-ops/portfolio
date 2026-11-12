@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 11</title>
+<link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Patrick+Hand&family=Gaegu:wght@400;700&family=Mali:wght@400;500&family=Delius&family=Playpen+Sans:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--muted:#77736c;--ink:#3a2e2a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f6f5f3;color:#1d1a1c;padding:28px 18px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:52px 0 14px}
+h2:first-of-type{margin-top:0}
+.cap{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.5}
+.cap b{color:#1d1a1c;font-weight:500}
+.scene{width:100%;display:block;border-radius:8px;overflow:hidden}
+.scene .o{cursor:pointer;transform-box:fill-box;transform-origin:50% 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.scene .o:hover{transform:translateY(-8px) rotate(-1.5deg)}
+.scene .o .lbl{opacity:0;transition:opacity .2s}
+.scene .o:hover .lbl{opacity:1}
+.scene .twk{animation:twk 2.6s ease-in-out infinite}
+@keyframes twk{50%{opacity:.35}}
+.fonts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.fs{background:#f7efe9;border-radius:8px;padding:16px 18px;color:var(--ink)}
+.fs .n{font-family:Inter;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.fs .big{font-size:26px;line-height:1.1}
+.fs .small{font-size:16px;line-height:1.45;margin-top:6px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="gingham" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#f7eeee"/>
+      <rect width="14" height="28" fill="#ecd1d8" opacity=".55"/>
+      <rect width="28" height="14" fill="#ecd1d8" opacity=".55"/>
+    </pattern>
+    <pattern id="gingSage" width="18" height="18" patternUnits="userSpaceOnUse">
+      <rect width="18" height="18" fill="#eef1ea"/>
+      <rect width="9" height="18" fill="#c9d6c2" opacity=".6"/>
+      <rect width="18" height="9" fill="#c9d6c2" opacity=".6"/>
+    </pattern>
+    <pattern id="tiles" width="120" height="120" patternUnits="userSpaceOnUse">
+      <image href="crops/tile-green.jpg" width="120" height="120" preserveAspectRatio="xMidYMid slice"/>
+      <rect width="120" height="120" fill="#f4eee4" opacity=".8"/>
+    </pattern>
+    <pattern id="tileRow" width="40" height="40" patternUnits="userSpaceOnUse">
+      <image href="crops/tile-pink.jpg" width="40" height="40" preserveAspectRatio="xMidYMid slice"/>
+    </pattern>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+
+    <g id="scene-body">
+      <!-- string lights -->
+      <path d="M20 46 Q 200 96 400 52 T 780 50" fill="none" stroke="#6b5a52" stroke-width="1.5"/>
+      <g>
+        <circle cx="90" cy="66" r="9" fill="#fbe7a1" opacity=".55" filter="url(#soft)"/><circle cx="90" cy="66" r="4" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1.2"/>
+        <circle cx="190" cy="80" r="9" fill="#fbe7a1" opacity=".55" filter="url(#soft)" class="twk"/><circle cx="190" cy="80" r="4" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1.2"/>
+        <circle cx="300" cy="74" r="9" fill="#fbe7a1" opacity=".55" filter="url(#soft)"/><circle cx="300" cy="74" r="4" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1.2"/>
+        <circle cx="500" cy="60" r="9" fill="#fbe7a1" opacity=".55" filter="url(#soft)" class="twk"/><circle cx="500" cy="60" r="4" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1.2"/>
+        <circle cx="610" cy="46" r="9" fill="#fbe7a1" opacity=".55" filter="url(#soft)"/><circle cx="610" cy="46" r="4" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1.2"/>
+        <circle cx="710" cy="54" r="9" fill="#fbe7a1" opacity=".55" filter="url(#soft)" class="twk"/><circle cx="710" cy="54" r="4" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1.2"/>
+      </g>
+      <!-- little spirals and sparkles on the wall -->
+      <g fill="none" stroke="#c98fa6" stroke-width="1.6" stroke-linecap="round">
+        <path d="M60 150c4-3 9 0 8 5s-8 7-12 3-1-12 6-13 13 5 12 12"/>
+        <path d="M742 170c4-3 9 0 8 5s-8 7-12 3-1-12 6-13 13 5 12 12" stroke="#8394b5"/>
+      </g>
+      <path d="M690 118l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1"/>
+      <path d="M120 210l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff" stroke="#3a2e2a" stroke-width="1"/>
+
+      <!-- name sign on the wall -->
+      <g transform="translate(400 150)">
+        <text text-anchor="middle" font-family="'Nothing You Could Do'" fill="#3a2e2a"><tspan font-size="42">on</tspan><tspan font-size="96" dy="14">A</tspan></text>
+        <text y="44" text-anchor="middle" font-family="'Nothing You Could Do'" font-size="22" fill="#6b5a52">cabedo wells</text>
+      </g>
+
+      <!-- table -->
+      <rect x="0" y="430" width="800" height="130" fill="#ead9c3"/>
+      <path d="M0 430 H800" stroke="#3a2e2a" stroke-width="2"/>
+      <path d="M0 448 H800 V462 Q790 476 780 462 Q770 476 760 462 Q750 476 740 462 Q730 476 720 462 Q710 476 700 462 Q690 476 680 462 Q670 476 660 462 Q650 476 640 462 Q630 476 620 462 Q610 476 600 462 Q590 476 580 462 Q570 476 560 462 Q550 476 540 462 Q530 476 520 462 Q510 476 500 462 Q490 476 480 462 Q470 476 460 462 Q450 476 440 462 Q430 476 420 462 Q410 476 400 462 Q390 476 380 462 Q370 476 360 462 Q350 476 340 462 Q330 476 320 462 Q310 476 300 462 Q290 476 280 462 Q270 476 260 462 Q250 476 240 462 Q230 476 220 462 Q210 476 200 462 Q190 476 180 462 Q170 476 160 462 Q150 476 140 462 Q130 476 120 462 Q110 476 100 462 Q90 476 80 462 Q70 476 60 462 Q50 476 40 462 Q30 476 20 462 Q10 476 0 462Z" fill="url(#tileRow)" stroke="#3a2e2a" stroke-width="1.4"/>
+
+      <!-- FASHION: dress form -->
+      <g class="o">
+        <line x1="130" y1="402" x2="130" y2="436" stroke="#3a2e2a" stroke-width="3"/>
+        <path d="M108 440 L130 430 L152 440" fill="none" stroke="#3a2e2a" stroke-width="2.4" stroke-linecap="round"/>
+        <rect x="124" y="196" width="12" height="12" rx="4" fill="#b88b5e" stroke="#3a2e2a" stroke-width="1.6"/>
+        <path d="M104 210 C 94 226, 92 258, 102 280 C 106 292, 102 304, 98 318 L 162 318 C 158 304, 154 292, 158 280 C 168 258, 166 226, 156 210 Z" fill="#40343f" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M130 214 V318 M116 222 L118 316 M144 222 L142 316" stroke="#7d6a7b" stroke-width="1"/>
+        <path d="M112 236 q4 3 8 0 q4 3 8 0 q4 3 8 0 q4 3 8 0 q4 3 8 0" fill="none" stroke="#c98fa6" stroke-width="1.2"/>
+        <path d="M98 318 C 88 350, 80 378, 72 404 L 188 404 C 180 378, 172 350, 162 318 Z" fill="#9db29f" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M110 324 C 104 352, 100 378, 96 402 M130 322 V402 M150 324 C 156 352, 160 378, 164 402" fill="none" stroke="#6f8a72" stroke-width="1.3"/>
+        <g class="lbl"><rect x="80" y="160" width="100" height="28" rx="14" fill="#9db29f"/><text x="130" y="180" text-anchor="middle" font-family="'Playpen Sans'" font-size="15" fill="#2c3a2e">fashion</text></g>
+      </g>
+
+      <!-- CERAMICS: vase with flowers + small mug -->
+      <g class="o">
+        <path d="M300 330 C 296 300, 290 282, 280 262" fill="none" stroke="#6f8a72" stroke-width="2"/>
+        <path d="M304 330 C 306 296, 314 276, 326 256" fill="none" stroke="#6f8a72" stroke-width="2"/>
+        <path d="M302 330 C 302 300, 300 280, 302 250" fill="none" stroke="#6f8a72" stroke-width="2"/>
+        <g stroke="#3a2e2a" stroke-width="1.2">
+          <circle cx="276" cy="258" r="7" fill="#c9b8cf"/><circle cx="284" cy="252" r="6" fill="#d7a1b8"/><circle cx="272" cy="248" r="5" fill="#c9b8cf"/>
+          <circle cx="328" cy="252" r="7" fill="#d7a1b8"/><circle cx="320" cy="246" r="5" fill="#c9b8cf"/><circle cx="334" cy="244" r="5" fill="#ecd1d8"/>
+          <circle cx="302" cy="244" r="7" fill="#ecd1d8"/><circle cx="296" cy="236" r="5" fill="#d7a1b8"/><circle cx="309" cy="237" r="5" fill="#c9b8cf"/>
+        </g>
+        <path d="M290 326 h24 v10 C 314 344, 346 354, 346 386 C 346 414, 328 428, 302 428 C 276 428, 258 414, 258 386 C 258 354, 290 344, 290 336 Z" fill="#ead8a8" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M288 326 h28" stroke="#3a2e2a" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M272 372 c6 10 4 22 -2 30 M292 366 c8 12 6 26 -2 36 M318 368 c6 10 6 22 0 32 M334 376 c4 8 2 18 -4 24" fill="none" stroke="#3a2e2a" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="282" cy="388" r="3" fill="#d7a1b8"/><circle cx="324" cy="398" r="3" fill="#d7a1b8"/>
+        <!-- small mug -->
+        <path d="M360 392 h44 v28 c0 6 -4 9 -10 9 h-24 c-6 0 -10 -3 -10 -9 Z" fill="#8394b5" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M404 398 c12 -2 14 16 0 18" fill="none" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M378 406c3-2 6 0 5 3s-5 4-7 2-1-7 3-8 8 3 7 7" fill="none" stroke="#f7eeee" stroke-width="1.4" stroke-linecap="round"/>
+        <g class="lbl"><rect x="262" y="198" width="104" height="28" rx="14" fill="#ead8a8"/><text x="314" y="218" text-anchor="middle" font-family="'Playpen Sans'" font-size="15" fill="#4a3c1e">ceramics</text></g>
+      </g>
+
+      <!-- ART: brush jar + propped drawing -->
+      <g class="o">
+        <g transform="translate(520 300) rotate(4)">
+          <rect x="0" y="0" width="86" height="112" fill="#fff" stroke="#3a2e2a" stroke-width="2"/>
+          <rect x="8" y="8" width="70" height="80" fill="#f2e8ef"/>
+          <path d="M43 22 c14 0 22 12 20 28 c-2 14 -10 24 -20 24 c-10 0 -18 -10 -20 -24 c-2 -16 6 -28 20 -28z" fill="none" stroke="#8394b5" stroke-width="1.6"/>
+          <path d="M34 46 q3 -3 6 0 M48 46 q3 -3 6 0 M40 60 q4 3 8 0" fill="none" stroke="#8394b5" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M23 40 c-6 -14 4 -24 20 -24 c18 0 26 12 22 26" fill="none" stroke="#c98fa6" stroke-width="2"/>
+          <text x="43" y="104" text-anchor="middle" font-family="'Nothing You Could Do'" font-size="10" fill="#3a2e2a">self portrait</text>
+        </g>
+        <g>
+          <path d="M630 300 L622 230" stroke="#b88b5e" stroke-width="4" stroke-linecap="round"/><path d="M622 230 l-4 -16 l8 2z" fill="#c98fa6" stroke="#3a2e2a" stroke-width="1.2"/>
+          <path d="M644 300 L646 222" stroke="#b88b5e" stroke-width="4" stroke-linecap="round"/><path d="M646 222 l-3 -18 l7 0z" fill="#8394b5" stroke="#3a2e2a" stroke-width="1.2"/>
+          <path d="M656 300 L668 236" stroke="#b88b5e" stroke-width="4" stroke-linecap="round"/><path d="M668 236 l1 -16 l6 3z" fill="#9db29f" stroke="#3a2e2a" stroke-width="1.2"/>
+          <path d="M638 300 L632 246" stroke="#3a2e2a" stroke-width="3" stroke-linecap="round"/><path d="M632 246 c-3 -8 -1 -14 2 -16 c3 4 3 10 -2 16z" fill="#f6d77a" stroke="#3a2e2a" stroke-width="1"/>
+          <path d="M616 290 h56 v118 c0 12 -6 18 -16 18 h-24 c-10 0 -16 -6 -16 -18 Z" fill="#dbe6ea" stroke="#3a2e2a" stroke-width="2" opacity=".95"/>
+          <path d="M624 300 v100" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+          <path d="M616 290 h56" stroke="#3a2e2a" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+        <g class="lbl"><rect x="546" y="250" width="70" height="28" rx="14" fill="#c6cde6"/><text x="581" y="270" text-anchor="middle" font-family="'Playpen Sans'" font-size="15" fill="#2c3352">art</text></g>
+      </g>
+
+      <!-- WRITING: open notebook + pen -->
+      <g class="o">
+        <path d="M690 420 L708 384 L762 388 L748 424 Z" fill="#fbf7ef" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M748 424 L762 388 L800 386 L790 420 Z" fill="#fbf7ef" stroke="#3a2e2a" stroke-width="2"/>
+        <path d="M712 394 l40 2 M709 401 l38 2 M706 408 l34 2" stroke="#c9b8cf" stroke-width="1.2"/>
+        <path d="M712 394 c4 -3 6 2 10 -1 s6 2 10 -1 s6 2 10 0" fill="none" stroke="#3a2e2a" stroke-width="1"/>
+        <path d="M772 362 L740 418" stroke="#3a2e2a" stroke-width="3" stroke-linecap="round"/><path d="M740 418 l-3 7 l7 -4z" fill="#3a2e2a"/>
+        <g class="lbl"><rect x="694" y="340" width="90" height="28" rx="14" fill="#e3cfdc"/><text x="739" y="360" text-anchor="middle" font-family="'Playpen Sans'" font-size="15" fill="#4a2d42">writing</text></g>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<h2>The studio, drawn properly (hover each object)</h2>
+<svg class="scene" viewBox="0 0 800 560" role="img" aria-label="Illustrated studio scene on pink gingham"><rect width="800" height="430" fill="url(#gingham)"/><g class="slot"></g></svg>
+<div class="cap"><b>W1 · Pink gingham wall</b>: string lights, your onA sign, and four drawn objects on a table with a scalloped tile-print cloth: a dress form for fashion, a painted vase and mug for ceramics, a brush jar and portrait for art, a notebook for writing. Each lifts and shows its label on hover.</div>
+
+<h2>Same studio, tile wall</h2>
+<svg class="scene" viewBox="0 0 800 560" role="img" aria-label="Illustrated studio scene on faded tile wall"><rect width="800" height="430" fill="url(#tiles)"/><g class="slot"></g></svg>
+<div class="cap"><b>W2 · Your grandmother's tile as faded wallpaper</b>, with the same drawn objects</div>
+
+<h2>Same studio, sage gingham</h2>
+<svg class="scene" viewBox="0 0 800 560" role="img" aria-label="Illustrated studio scene on sage gingham"><rect width="800" height="430" fill="url(#gingSage)"/><g class="slot"></g></svg>
+<div class="cap"><b>W3 · A smaller sage gingham</b>, calmer, with pink kept for accents</div>
+
+<h2>Cute but readable fonts for labels and captions</h2>
+<div class="fonts">
+  <div class="fs" style="font-family:'Playpen Sans'"><div class="n">f1 · Playpen Sans (used above)</div><div class="big">many funky mugs</div><div class="small">Stoneware, 2024. A set of mugs thrown in one week, each with a different handle.</div></div>
+  <div class="fs" style="font-family:'Patrick Hand'"><div class="n">f2 · Patrick Hand</div><div class="big">many funky mugs</div><div class="small">Stoneware, 2024. A set of mugs thrown in one week, each with a different handle.</div></div>
+  <div class="fs" style="font-family:'Gaegu'"><div class="n">f3 · Gaegu</div><div class="big" style="font-size:30px">many funky mugs</div><div class="small" style="font-size:19px">Stoneware, 2024. A set of mugs thrown in one week, each with a different handle.</div></div>
+  <div class="fs" style="font-family:'Mali'"><div class="n">f4 · Mali</div><div class="big">many funky mugs</div><div class="small">Stoneware, 2024. A set of mugs thrown in one week, each with a different handle.</div></div>
+  <div class="fs" style="font-family:'Delius'"><div class="n">f5 · Delius</div><div class="big">many funky mugs</div><div class="small">Stoneware, 2024. A set of mugs thrown in one week, each with a different handle.</div></div>
+</div>
+<script>
+const src=document.getElementById('scene-body');
+document.querySelectorAll('.scene .slot').forEach(slot=>{[...src.childNodes].forEach(n=>slot.appendChild(n.cloneNode(true)));});
+</script>
+</body>
+</html>

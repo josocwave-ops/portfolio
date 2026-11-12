@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 10</title>
+<link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Patrick+Hand&family=Inter:wght@400;500&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+:root{--muted:#77736c;--ink:#3a2e2a;--cream:#f6efe4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f6f5f3;color:#1d1a1c;padding:28px 18px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:52px 0 14px}
+h2:first-of-type{margin-top:0}
+.cap{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.5}
+.cap b{color:#1d1a1c;font-weight:500}
+img{display:block;-webkit-user-drag:none;user-select:none}
+.stage{position:relative;overflow:hidden;border-radius:6px;background:var(--cream);color:var(--ink)}
+.sig{font-family:'Nothing You Could Do',cursive;line-height:.8;white-space:nowrap}
+.sig .a{font-size:2.3em;display:inline-block;vertical-align:-.12em}
+.label{font-family:'Patrick Hand',cursive;font-size:19px;color:var(--ink)}
+.obj{position:absolute;cursor:pointer;transition:transform .25s ease, filter .25s}
+.obj:hover{transform:translateY(-6px) rotate(-2deg);filter:drop-shadow(0 8px 10px rgba(58,46,42,.18))}
+.obj .tag{position:absolute;left:50%;bottom:-26px;translate:-50% 0;opacity:0;transition:opacity .2s;white-space:nowrap}
+.obj:hover .tag{opacity:1}
+.sk path{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:0 18px 22px;position:relative;z-index:2}
+.card{position:relative;aspect-ratio:3/4.6;border-radius:12px;background:var(--bg);border:3px solid #fff;outline:1px solid rgba(58,46,42,.25);overflow:hidden;transition:transform .35s cubic-bezier(.3,1.5,.5,1);cursor:pointer}
+.card:hover{transform:translateY(-8px) rotate(var(--r))}
+.card .pic{position:absolute;left:50%;top:44%;translate:-50% -50%;width:74%;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))}
+.card .ttl{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:'Pirata One',cursive;font-size:22px;color:var(--ink)}
+.card .num{position:absolute;left:0;right:0;top:10px;text-align:center;font-family:'Patrick Hand',cursive;font-size:14px;color:var(--ink);opacity:.7}
+.card::after{content:"";position:absolute;inset:6px;border:1px solid rgba(58,46,42,.35);border-radius:8px;pointer-events:none}
+/* fridge */
+.drag{position:absolute;cursor:grab;touch-action:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.18))}
+.drag:active{cursor:grabbing;filter:drop-shadow(0 10px 12px rgba(0,0,0,.25))}
+.magnet{position:absolute;cursor:grab;touch-action:none;padding:6px 12px 4px;border-radius:999px;font-family:'Patrick Hand',cursive;font-size:18px;color:var(--ink);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+</style>
+</head>
+<body>
+
+<h2>A · The studio: your pieces live on drawn shelves and a clothes rail (hover them)</h2>
+<div class="stage" id="studio" style="height:600px">
+  <div class="sig" style="position:absolute;left:18px;top:18px;font-size:34px">on<span class="a">A</span></div>
+  <div class="label" style="position:absolute;left:20px;top:92px;opacity:.7">cabedo wells</div>
+  <svg class="sk" id="sketch" style="position:absolute;inset:0;width:100%;height:100%"></svg>
+  <div class="obj" style="left:6%;top:200px;width:24%"><img src="crops/cut-vase.png" style="width:100%" alt=""><span class="tag label">neighborhood flowers</span></div>
+  <div class="obj" style="left:36%;top:228px;width:26%"><img src="crops/facevase-cut.png" style="width:72%;margin:0 auto" alt=""><span class="tag label">hard work kills</span></div>
+  <div class="obj" style="left:66%;top:254px;width:28%"><img src="crops/cut-mugstack.png" style="width:100%" alt=""><span class="tag label">many funky mugs</span></div>
+  <div class="label" style="position:absolute;right:16px;top:186px;rotate:-4deg">ceramics →</div>
+  <div class="obj" style="left:9%;top:418px;width:26%"><img src="crops/cut-corset.png" style="width:100%" alt=""><span class="tag label">castle walls corset</span></div>
+  <div class="obj" style="left:40%;top:404px;width:22%"><img src="crops/cut-skirt.png" style="width:100%" alt=""><span class="tag label">the earthern skirt</span></div>
+  <div class="label" style="position:absolute;left:18px;top:388px;rotate:3deg">fashion ↓</div>
+  <div class="obj" style="left:68%;top:418px;width:26%;rotate:4deg"><div style="background:#fff;padding:5px 5px 18px"><img src="crops/drawings.jpg" style="width:100%" alt=""></div><span class="tag label">sketchbook</span></div>
+  <div class="label" style="position:absolute;right:16px;top:390px;rotate:-3deg">art + writing</div>
+</div>
+<div class="cap"><b>A · The studio</b>: like Emma's desk, but built from your real work. The shelves and rail are drawn lines (ideally you'd draw these in your own hand); each piece lifts and names itself on hover and opens its page.</div>
+
+<h2>B · The cards: tarot-style section cards, with your grandmother's tiles as the pattern</h2>
+<div class="stage" style="padding-top:20px;background-image:url(crops/tile-green.jpg);background-size:90px">
+  <div style="position:absolute;inset:0;background:rgba(246,239,228,.86)"></div>
+  <div style="position:relative;z-index:2;text-align:center;padding:6px 0 20px">
+    <div class="sig" style="font-size:40px">on<span class="a">A</span></div>
+    <div class="label" style="opacity:.7;margin-top:6px">cabedo wells · pick a card</div>
+  </div>
+  <div class="cards">
+    <div class="card" style="--bg:#d9c48a;--r:-3deg"><span class="num">I</span><img class="pic" src="crops/cut-mistake.png" alt=""><span class="ttl">Ceramics</span></div>
+    <div class="card" style="--bg:#b9c7a6;--r:3deg"><span class="num">II</span><img class="pic" src="crops/cut-corset.png" style="width:62%" alt=""><span class="ttl">Fashion</span></div>
+    <div class="card" style="--bg:#d7a8b4;--r:-2deg"><span class="num">III</span><div class="pic" style="width:62%;background:#fff;padding:4px 4px 12px;rotate:-3deg"><img src="crops/portrait.jpg" style="width:100%" alt=""></div><span class="ttl">Art</span></div>
+    <div class="card" style="--bg:#9a7f9e;--r:2deg"><span class="num">IV</span><div class="pic" style="width:70%;background:#fbf7ef;padding:10px;font-family:'Nothing You Could Do',cursive;font-size:15px;line-height:1.3;color:var(--ink);rotate:2deg">do you remember the mirror that warped my face?</div><span class="ttl">Writing</span></div>
+  </div>
+  <div style="position:relative;z-index:2;display:flex;justify-content:center;gap:10px;padding:0 0 22px"><img src="crops/tile-pink.jpg" style="width:40px;border-radius:4px" alt=""><img src="crops/tile-green.jpg" style="width:40px;border-radius:4px" alt=""><img src="crops/tile-pink.jpg" style="width:40px;border-radius:4px" alt=""></div>
+</div>
+<div class="cap"><b>B · The cards</b>: like the tarot portfolio. Each section is a card in a warm colour (mustard, sage, rose, plum) with one of your pieces on it; the background is your grandmother's tile, faded. The title face is a gothic display type, like the ornate type in ms_paint's.</div>
+
+<h2>C · The fridge: drag your pieces and the magnets around</h2>
+<div class="stage" id="fridge" style="height:560px;background:#f3ece6">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(201,143,166,.13) 50%,transparent 50%),linear-gradient(rgba(201,143,166,.13) 50%,transparent 50%);background-size:28px 28px"></div>
+  <div class="sig" style="position:absolute;left:0;right:0;top:20px;text-align:center;font-size:40px">on<span class="a">A</span></div>
+  <div class="label" style="position:absolute;left:0;right:0;top:96px;text-align:center;opacity:.7">cabedo wells · move things around, click to open</div>
+  <img class="drag" src="crops/cut-bowl.png" style="left:6%;top:150px;width:34%;rotate:-6deg" alt="">
+  <img class="drag" src="crops/cut-vase.png" style="left:58%;top:136px;width:28%;rotate:4deg" alt="">
+  <img class="drag" src="crops/cut-mistake.png" style="left:30%;top:300px;width:40%" alt="">
+  <img class="drag" src="crops/cut-skirt.png" style="left:76%;top:300px;width:18%" alt="">
+  <img class="drag" src="crops/tile-pink.jpg" style="left:8%;top:350px;width:56px;border-radius:6px" alt="">
+  <img class="drag" src="crops/tile-green.jpg" style="left:12%;top:430px;width:50px;border-radius:6px" alt="">
+  <span class="magnet" style="left:6%;top:500px;background:#d9c48a">ceramics</span>
+  <span class="magnet" style="left:34%;top:506px;background:#b9c7a6">fashion</span>
+  <span class="magnet" style="left:60%;top:498px;background:#d7a8b4">art</span>
+  <span class="magnet" style="left:78%;top:470px;background:#c9b8cf">writing</span>
+</div>
+<div class="cap"><b>C · The fridge</b>: like the drag-and-drop fridge in the second TikTok. A pink gingham page; your pieces and tiles are magnets visitors can push around, and the section names are magnets too.</div>
+
+<script>
+// hand-drawn shelves and clothes rail for the studio
+(function(){
+  const svg=document.getElementById('sketch'), W=svg.clientWidth, H=svg.clientHeight;
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  let s=7; const r=()=>((s=(s*9301+49297)%233280)/233280-.5);
+  const line=(x1,y1,x2,y2,w=1.6)=>{let d=`M${x1} ${y1}`;const n=14;for(let i=1;i<=n;i++){const t=i/n;d+=` L${(x1+(x2-x1)*t+r()*1.6).toFixed(1)} ${(y1+(y2-y1)*t+r()*1.6).toFixed(1)}`;}
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.setAttribute('stroke-width',w);svg.appendChild(p);};
+  const shelf=(y)=>{line(W*.03,y,W*.97,y+2,2);line(W*.03,y+7,W*.97,y+9,1.2);line(W*.08,y+9,W*.1,y+26,1.2);line(W*.9,y+9,W*.92,y+26,1.2);};
+  shelf(340);
+  line(W*.04,404,W*.64,402,1.8);
+  [[.22],[.51]].forEach(([x])=>{const cx=W*x;line(cx,404,cx,412,1.2);line(cx-W*.1,426,cx,412,1.3);line(cx,412,cx+W*.1,426,1.3);line(cx-W*.1,426,cx+W*.1,427,1.3);});
+  line(W*.64,402,W*.66,560,1.6);line(W*.04,404,W*.03,560,1.6);
+})();
+// drag on the fridge
+document.querySelectorAll('#fridge .drag, #fridge .magnet').forEach(el=>{
+  let sx,sy,ox,oy;
+  el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;ox=el.offsetLeft;oy=el.offsetTop;el.style.zIndex=++window.__z||(window.__z=10);});
+  el.addEventListener('pointermove',e=>{if(!el.hasPointerCapture(e.pointerId))return;el.style.left=(ox+e.clientX-sx)+'px';el.style.top=(oy+e.clientY-sy)+'px';});
+});
+</script>
+</body>
+</html>

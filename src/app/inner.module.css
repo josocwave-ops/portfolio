@@ -1,0 +1,231 @@
+/* shared by section, piece, writing, about and contact pages */
+.main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px var(--gutter) 0;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(44px, 8vw, 72px);
+  line-height: 1;
+  margin: 24px 0 8px;
+}
+
+.headingSpiral {
+  width: 0.6em;
+  height: 0.6em;
+}
+
+.lead {
+  max-width: 52ch;
+  color: var(--muted);
+  margin-bottom: 44px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 42vw), 1fr));
+  gap: 40px clamp(16px, 3vw, 34px);
+}
+
+/* piece page: big and calm */
+.piece {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.back {
+  display: inline-block;
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.hero {
+  margin: 28px auto 0;
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  object-fit: contain;
+}
+
+.pieceTitle {
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(38px, 6vw, 56px);
+  line-height: 1.05;
+  margin-top: 30px;
+}
+
+.details {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.statement {
+  max-width: 58ch;
+  margin: 26px auto 0;
+  text-align: left;
+  display: grid;
+  gap: 14px;
+}
+
+.more {
+  display: grid;
+  gap: 34px;
+  margin-top: 52px;
+}
+
+.more img {
+  width: 100%;
+  height: auto;
+  background: var(--print);
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(42, 47, 58, 0.1);
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 60px;
+  font-family: var(--hand);
+  font-size: 22px;
+}
+
+.pager a:hover {
+  color: var(--c, var(--ink));
+}
+
+/* writing paired with the work */
+.poems {
+  display: grid;
+  gap: 72px;
+}
+
+.poem {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(20px, 4vw, 48px);
+  align-items: center;
+}
+
+.poem:nth-child(even) .poemImage {
+  order: 2;
+}
+
+.poemImage {
+  background: var(--print);
+  padding: 8px 8px 12px;
+  box-shadow: 0 1px 3px rgba(42, 47, 58, 0.12);
+  rotate: -1.4deg;
+}
+
+.poem:nth-child(even) .poemImage {
+  rotate: 1.4deg;
+}
+
+.poemImage img {
+  width: 100%;
+  height: auto;
+}
+
+.poemTitle {
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.1;
+}
+
+.lines {
+  font-family: var(--hand);
+  font-size: 22px;
+  line-height: 1.3;
+  color: #7d6b8d;
+  margin: 18px 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--mauve);
+}
+
+.poemText {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.pairLink {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #5f7a6b;
+}
+
+.pairLink:hover {
+  text-decoration: underline;
+}
+
+/* about + contact */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  margin-top: 24px;
+}
+
+.portrait {
+  width: 100%;
+  height: auto;
+  border-radius: 999px 999px 18px 18px;
+}
+
+.prose {
+  display: grid;
+  gap: 16px;
+  max-width: 54ch;
+}
+
+.contactList {
+  display: grid;
+  gap: 18px;
+  margin-top: 12px;
+  font-size: clamp(22px, 3vw, 30px);
+  font-family: var(--hand);
+}
+
+.contactList a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contactList a:hover {
+  color: var(--rose);
+}
+
+.contactList small {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .poem,
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .poem:nth-child(even) .poemImage {
+    order: 0;
+  }
+}

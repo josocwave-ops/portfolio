@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 13</title>
+<link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Delius&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2a2f3a;--muted:#77736c;--sage:#8fa89a;--rose:#c98fa6;--slate:#8394b5;--mauve:#a99bb5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f6f5f3;color:#1d1a1c;padding:28px 20px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:48px 0 14px}
+h2:first-of-type{margin-top:0}
+.cap{margin-top:8px;font-size:13px;color:var(--muted)}
+.cap b{color:#1d1a1c;font-weight:500}
+img{display:block}
+.screen{position:relative;overflow:hidden;border-radius:6px;background:#fcfbfc;color:var(--ink)}
+.haze::before{content:"";position:absolute;inset:-20%;background:
+  radial-gradient(38% 30% at 18% 22%,rgba(215,161,184,.28),transparent 70%),
+  radial-gradient(34% 28% at 84% 30%,rgba(131,148,181,.22),transparent 70%),
+  radial-gradient(40% 32% at 70% 86%,rgba(143,168,154,.24),transparent 70%),
+  radial-gradient(30% 26% at 20% 80%,rgba(169,155,181,.22),transparent 70%);filter:blur(10px);pointer-events:none}
+.sw{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sw path,.sw circle{transition:opacity .4s}
+.hand{font-family:'Nothing You Could Do',cursive;line-height:1}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:2}
+.vase{width:34%;max-width:200px;filter:contrast(1.05)}
+.sig{font-family:'Nothing You Could Do',cursive;line-height:.8;text-align:center}
+.sig .on{font-size:50px}.sig .a{font-size:116px;display:inline-block;vertical-align:-.12em}
+.sig .sur{display:block;font-size:24px;margin-top:8px;opacity:.75}
+.menu{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.menu a{font-family:Delius,sans-serif;font-size:18px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:5px}
+.menu a svg{width:16px;height:16px;transition:rotate .6s}
+.menu a:hover svg{rotate:220deg}
+.menu a:hover{color:var(--c)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 16px;padding:0 20px 30px;position:relative;z-index:2}
+.print{background:#fff;padding:6px 6px 4px;box-shadow:0 1px 3px rgba(42,47,58,.12);position:relative;cursor:pointer;transition:transform .25s}
+.print:hover{transform:translateY(-3px) rotate(0deg)!important}
+.print img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.print .t{font-family:'Nothing You Could Do',cursive;font-size:16px;text-align:center;margin-top:4px}
+.tape{position:absolute;left:32%;top:-8px;width:36%;height:13px;opacity:.55}
+.back{font-family:'Nothing You Could Do',cursive;font-size:18px;color:var(--muted);cursor:pointer}
+.tile{background-color:#fbf9f6;background-image:linear-gradient(rgba(251,249,246,.84),rgba(251,249,246,.84)),url(crops/tile-green.jpg);background-size:auto,110px}
+.ging{background-color:#fbf8f8;background-image:linear-gradient(90deg,rgba(215,161,184,.13) 50%,transparent 50%),linear-gradient(rgba(215,161,184,.13) 50%,transparent 50%);background-size:30px 30px}
+</style>
+</head>
+<body>
+
+<h2>H1 · Soft colour haze (the one you liked)</h2>
+<div class="screen haze " style="height:600px">
+  <svg class="sw"></svg>
+  <div class="center">
+    <img class="vase" src="crops/facevase-cut.png" alt="">
+    <div class="sig"><span class="on">on</span><span class="a">A</span><span class="sur">cabedo wells</span></div>
+    <nav class="menu">
+      <a href="#" style="--c:#7f9a8b"><svg data-spiral="#8fa89a"></svg>ceramics</a>
+      <a href="#" style="--c:#b9768f"><svg data-spiral="#c98fa6"></svg>fashion</a>
+      <a href="#" style="--c:#6f81a6"><svg data-spiral="#8394b5"></svg>art</a>
+      <a href="#" style="--c:#8f7fa0"><svg data-spiral="#a99bb5"></svg>writing</a>
+    </nav>
+  </div>
+</div>
+<div class="cap"><b>H1 · The haze cover you liked</b>, as before, now with Delius for the section links</div>
+<h2>H2 · Haze over a faded tile pattern</h2>
+<div class="screen haze tile" style="height:600px">
+  <svg class="sw"></svg>
+  <div class="center">
+    <img class="vase" src="crops/facevase-cut.png" alt="">
+    <div class="sig"><span class="on">on</span><span class="a">A</span><span class="sur">cabedo wells</span></div>
+    <nav class="menu">
+      <a href="#" style="--c:#7f9a8b"><svg data-spiral="#8fa89a"></svg>ceramics</a>
+      <a href="#" style="--c:#b9768f"><svg data-spiral="#c98fa6"></svg>fashion</a>
+      <a href="#" style="--c:#6f81a6"><svg data-spiral="#8394b5"></svg>art</a>
+      <a href="#" style="--c:#8f7fa0"><svg data-spiral="#a99bb5"></svg>writing</a>
+    </nav>
+  </div>
+</div>
+<div class="cap"><b>H2 · Haze over your grandmother’s tile</b>, very faded, so there is a real pattern underneath</div>
+<h2>H3 · Haze over soft gingham</h2>
+<div class="screen haze ging" style="height:600px">
+  <svg class="sw"></svg>
+  <div class="center">
+    <img class="vase" src="crops/facevase-cut.png" alt="">
+    <div class="sig"><span class="on">on</span><span class="a">A</span><span class="sur">cabedo wells</span></div>
+    <nav class="menu">
+      <a href="#" style="--c:#7f9a8b"><svg data-spiral="#8fa89a"></svg>ceramics</a>
+      <a href="#" style="--c:#b9768f"><svg data-spiral="#c98fa6"></svg>fashion</a>
+      <a href="#" style="--c:#6f81a6"><svg data-spiral="#8394b5"></svg>art</a>
+      <a href="#" style="--c:#8f7fa0"><svg data-spiral="#a99bb5"></svg>writing</a>
+    </nav>
+  </div>
+</div>
+<div class="cap"><b>H3 · Haze over a soft pink gingham</b>, the background you liked from the fridge</div>
+<script>
+const PAL=['#8fa89a','#8394b5','#a99bb5','#c98fa6','#9fb3b8','#d7a1b8'];
+const NS='http://www.w3.org/2000/svg';
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function rng(seed){let s=seed>>>0||1;return()=>(s=(s*1664525+1013904223)>>>0)/4294967296;}
+
+function tendril(r,x,y,ang,len,steps,w,bold){
+  let curl=r()<.5?1:-1;
+  const pw=bold?1.6+r()*.8:1.8+r()*2.4, kmax=bold?.55+r()*.4:.25+r()*.5, noise=.02+r()*.05,
+        shrink=bold?.88+r()*.08:.7+r()*.22, flipAt=!bold&&r()<.4?.3+r()*.35:2, wf=.05+r()*.15, wa=.01+r()*.03,
+        open=!bold&&r()<.3?.75+r()*.2:1, asym=.6+r()*.8;
+  const pts=[];
+  for(let i=0;i<=steps;i++){const t=i/steps*open;pts.push([x,y,i/steps]);
+    if(t>flipAt&&t<flipAt+.01)curl=-curl;
+    const k=curl*(0.004+kmax*Math.pow(t,pw))+Math.sin(i*wf)*wa+(r()-.5)*noise*(1-t);
+    ang+=k;const ds=(len/steps)*(1-shrink*Math.pow(t,1.3))*1.3;x+=Math.cos(ang)*ds;y+=Math.sin(ang)*ds;}
+  const L=[],R=[];
+  for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[Math.min(i+1,pts.length-1)],o=pts[Math.max(i-1,0)];
+    let dx=q[0]-o[0],dy=q[1]-o[1];const m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
+    const tt=Math.pow(p[2],asym);const ww=w*Math.pow(Math.sin(Math.PI*Math.min(tt*1.05,1)),bold?.8:1.2)+.1;
+    L.push([p[0]-dy*ww,p[1]+dx*ww]);R.push([p[0]+dy*ww,p[1]-dx*ww]);}
+  return{d:'M'+L.concat(R.reverse()).map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z',pts};
+}
+
+function draw(svg, opts){
+  const W=svg.clientWidth,H=svg.clientHeight,r=rng(Math.floor(Math.random()*1e9)),S=Math.min(W,H);
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const pick=()=>PAL[Math.floor(r()*PAL.length)];
+  const groups=[];
+  const group=()=>{const g=el('g',{});svg.appendChild(g);groups.push({g,cx:0,cy:0,n:0,x:0,y:0,o:1});return groups[groups.length-1];};
+  for(let i=0;i<opts.threads;i++){const G=group();let x=r()*W,y=r()*H,a=r()*6.28,d=`M${x.toFixed(1)} ${y.toFixed(1)}`;
+    for(let s=0;s<70;s++){a+=Math.sin(s*.15+i*2)*.07+(r()-.5)*.05;x+=Math.cos(a)*(S/45);y+=Math.sin(a)*(S/45);d+=`L${x.toFixed(1)} ${y.toFixed(1)}`;G.cx+=x;G.cy+=y;G.n++;}
+    G.g.appendChild(el('path',{d,fill:'none',stroke:pick(),'stroke-width':.6,opacity:'.35'}));}
+  const grow=(G,x,y,ang,len,w,depth,col,op,bold)=>{
+    const t=tendril(r,x,y,ang,len,170,w,bold);
+    G.g.appendChild(el('path',{d:t.d,fill:col,opacity:op.toFixed(2)}));
+    t.pts.forEach(p=>{G.cx+=p[0];G.cy+=p[1];G.n++;});
+    for(let k=0;k<5;k++){const p=t.pts[Math.floor(r()*t.pts.length)];
+      G.g.appendChild(el('circle',{cx:(p[0]+(r()-.5)*18).toFixed(1),cy:(p[1]+(r()-.5)*18).toFixed(1),r:(.4+r()*1.2).toFixed(2),fill:col,opacity:(.35+r()*.55).toFixed(2)}));}
+    if(depth>0){const nb=1+Math.floor(r()*3);
+      for(let b=0;b<nb;b++){const i=Math.floor(t.pts.length*(.12+r()*.55)),q=t.pts[i],n=t.pts[i+1];
+        const a=Math.atan2(n[1]-q[1],n[0]-q[0])+(r()<.5?1:-1)*(.3+r()*.8);
+        grow(G,q[0],q[1],a,len*(.25+r()*.35),w*(.55+r()*.3),depth-1,r()<.5?col:pick(),Math.max(.2,op*(.5+r()*.6)),false);}}
+  };
+  const origins=[[-10,-10],[W+10,-10],[-10,H+10],[W+10,H+10],[W*.3,-10],[W+10,H*.55],[W*.65,H+10],[-10,H*.4]].slice(0,opts.origins);
+  origins.forEach((o,i)=>{const G=group();
+    const toC=Math.atan2(H*(.35+r()*.3)-o[1],W*(.3+r()*.4)-o[0]);
+    const bold=i<opts.bold;
+    if(bold){o=[o[0]+(W/2-o[0])*.22,o[1]+(H/2-o[1])*.22];}
+    grow(G,o[0],o[1],toC+(r()-.5)*1.1,S*(bold?.6+r()*.3:.55+r()*.45),bold?3.6+r()*1.6:1.3+r()*.8,bold?2:3,PAL[i%PAL.length],bold?.55+r()*.3:.35+r()*.6,bold);});
+  const dust=group();
+  for(let i=0;i<opts.dust;i++){const x=r()*W,y=r()*H;dust.cx+=x;dust.cy+=y;dust.n++;
+    dust.g.appendChild(el('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:(.3+Math.pow(r(),3)*1.9).toFixed(2),fill:pick(),opacity:(.2+r()*.75).toFixed(2)}));}
+  groups.forEach(G=>{G.cx/=G.n||1;G.cy/=G.n||1;});
+  dust.cx=W/2;dust.cy=H/2;
+  // mouse: swirls lean away and brighten near the cursor
+  let mx=-1e4,my=-1e4;const host=svg.parentElement;
+  host.addEventListener('pointermove',e=>{const b=svg.getBoundingClientRect();mx=(e.clientX-b.left)*(W/b.width);my=(e.clientY-b.top)*(H/b.height);});
+  host.addEventListener('pointerleave',()=>{mx=my=-1e4;});
+  (function tick(){groups.forEach(G=>{if(G===dust)return;
+      const dx=G.cx-mx,dy=G.cy-my,d=Math.hypot(dx,dy),f=Math.max(0,1-d/(S*.6));
+      const tx=d?dx/d*f*18:0,ty=d?dy/d*f*18:0;G.x+=(tx-G.x)*.08;G.y+=(ty-G.y)*.08;
+      G.o+=((1+f*.9)-G.o)*.08;G.g.setAttribute('transform',`translate(${G.x.toFixed(2)} ${G.y.toFixed(2)})`);
+      G.g.style.filter=`brightness(${G.o.toFixed(3)}) saturate(${(1+(G.o-1)*1.5).toFixed(3)})`;});
+    requestAnimationFrame(tick);})();
+}
+document.querySelectorAll('svg.sw').forEach(svg=>draw(svg,{threads:8,origins:8,bold:3,dust:130}));
+document.querySelectorAll('svg[data-spiral]').forEach((svg,i)=>{const r=rng(i+7);svg.setAttribute('viewBox','0 0 40 40');
+  const t=tendril(r,4,34,-0.9,46,140,2,false);svg.innerHTML=`<path d="${t.d}" fill="${svg.dataset.spiral}"/>`;});
+</script>
+</body>
+</html>

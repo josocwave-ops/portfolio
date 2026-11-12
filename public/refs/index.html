@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Oswald:wght@500;700&family=Reenie+Beanie&family=Anton&family=Inter:wght@400;500&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#161514;--muted:#77736c;--line:#e3e0da}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#efede8;color:var(--ink);padding:32px 28px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:48px 0 14px}
+h2:first-child{margin-top:0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.card .frame{background:#fff;height:300px;position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--line)}
+.card .cap{margin-top:8px;font-size:13px;color:var(--muted)}
+.card .cap b{color:var(--ink);font-weight:500}
+img{display:block}
+.cut{position:absolute;mix-blend-mode:multiply}
+.strip{display:inline-block;background:#fff;font-family:Oswald,sans-serif;font-weight:700;text-transform:uppercase;padding:2px 6px;line-height:1.05}
+/* name treatments */
+.nm{height:180px!important;display:flex;align-items:center;justify-content:center}
+/* doors */
+.doors{display:flex;height:100%}
+.doors>div{flex:1;position:relative;overflow:hidden;transition:flex .45s ease;border-right:1px solid var(--line);cursor:pointer}
+.doors>div:last-child{border-right:0}
+.doors:hover>div{flex:.6}.doors>div:hover{flex:2.4}
+.doors .lbl{position:absolute;left:10px;bottom:10px;font-family:'Archivo Black',sans-serif;font-size:13px;letter-spacing:.02em;z-index:2}
+.doors img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25;transition:opacity .4s;filter:grayscale(1)}
+.doors>div:hover img{opacity:1;filter:none}
+/* pile */
+.pile .it{transition:opacity .35s, transform .35s}
+.pile.f .it{opacity:.07}
+.pile.f .it.on{opacity:1}
+.tags{position:absolute;right:12px;bottom:10px;display:grid;grid-template-columns:auto;gap:0;text-align:right;z-index:3}
+.tags button{all:unset;cursor:pointer;font-family:'Archivo Black',sans-serif;font-size:15px;line-height:1.15}
+.tags button.on{text-decoration:underline;text-underline-offset:3px}
+.scroller{height:100%;overflow-y:auto}
+.bg-card .frame{height:220px}
+.noise{background-color:#f3efe6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .4  0 0 0 0 .35  0 0 0 0 .3  0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tape{position:absolute;width:54px;height:18px;background:rgba(240,220,140,.75);z-index:2}
+</style>
+</head>
+<body>
+
+<h2>Q1 · How Ona's name is set at the top</h2>
+<div class="row">
+  <div class="card"><div class="frame nm"><span style="font-family:'Pinyon Script',cursive;font-size:clamp(34px,4.2vw,60px);white-space:nowrap">Ona Cabedo Wells</span></div><div class="cap"><b>a · Ornate script</b>, as in the Sherry Ho reference</div></div>
+  <div class="card"><div class="frame nm noise"><div style="transform:rotate(-2deg)"><span class="strip" style="font-size:clamp(22px,2.6vw,38px);color:#7d9fd4">Ona</span> <span class="strip" style="font-size:clamp(22px,2.6vw,38px);color:#b0583a;transform:rotate(3deg)">Cabedo</span> <span class="strip" style="font-size:clamp(22px,2.6vw,38px);color:#3b3a7a">Wells</span></div></div><div class="cap"><b>b · Paper strips</b>, from her own PDF pages</div></div>
+  <div class="card"><div class="frame nm"><span style="font-family:'Reenie Beanie',cursive;font-size:clamp(38px,4.6vw,68px);white-space:nowrap;transform:rotate(-3deg)">ona cabedo wells</span></div><div class="cap"><b>c · Handwritten</b>, like a sketchbook</div></div>
+  <div class="card"><div class="frame nm"><span style="font-family:Anton,sans-serif;font-size:clamp(28px,3.4vw,58px);white-space:nowrap;text-transform:uppercase">Ona Cabedo Wells</span></div><div class="cap"><b>d · Heavy condensed</b>, poster-like</div></div>
+</div>
+
+<h2>Q2 · Combining four doors with the mixed feed (hover and click these)</h2>
+<div class="row">
+  <div class="card"><div class="frame">
+    <div class="doors">
+      <div><img src="crops/drawings.jpg" alt=""><span class="lbl">ART</span></div>
+      <div><img src="crops/facevase.jpg" alt=""><span class="lbl">CERAMICS</span></div>
+      <div><img src="crops/corset.jpg" alt=""><span class="lbl">FASHION</span></div>
+      <div style="background:#fff"><div style="position:absolute;top:30%;left:8px;right:8px;font-family:Oswald;font-weight:700;font-size:15px;text-transform:uppercase;color:#7d9fd4;line-height:1.1">Do you remember the mirror that warped my face?</div><span class="lbl">WRITING</span></div>
+    </div></div>
+    <div class="cap"><b>H1 · Doors first</b>: four doors fill the screen; scrolling down reaches the mixed pile</div></div>
+
+  <div class="card"><div class="frame pile" id="pile">
+    <span style="position:absolute;left:12px;top:6px;font-family:'Pinyon Script',cursive;font-size:38px;z-index:3">Ona</span>
+    <img class="cut it" data-c="ceramics" src="crops/facevase.jpg" style="left:150px;top:10px;width:110px" alt="">
+    <img class="cut it" data-c="fashion" src="crops/corset.jpg" style="left:24px;top:62px;width:96px" alt="">
+    <img class="cut it" data-c="art" src="crops/portrait.jpg" style="left:100px;top:150px;width:92px;transform:rotate(-4deg)" alt="">
+    <img class="cut it" data-c="ceramics" src="crops/mistake.jpg" style="left:265px;top:40px;width:120px" alt="">
+    <img class="cut it" data-c="fashion" src="crops/runway.jpg" style="left:215px;top:150px;width:62px" alt="">
+    <div class="it" data-c="writing" style="position:absolute;left:12px;top:220px;width:120px;transform:rotate(-2deg)"><span class="strip" style="font-size:12px;color:#b0583a">Do you remember the morning that smelled of smoke?</span></div>
+    <img class="cut it" data-c="art" src="crops/drawings.jpg" style="left:300px;top:150px;width:90px;transform:rotate(5deg)" alt="">
+    <div class="tags">
+      <button data-c="art">Art</button><button data-c="ceramics">Ceramics</button><button data-c="fashion">Fashion</button><button data-c="writing">Writing</button>
+    </div></div>
+    <div class="cap"><b>H2 · The pile is home</b>: cut-out work floats on white; the four disciplines stay pinned like doors and filter the pile (click them)</div></div>
+
+  <div class="card"><div class="frame"><div class="scroller">
+    <div class="doors" style="height:300px">
+      <div><img src="crops/portrait.jpg" alt=""><span class="lbl">ART</span></div>
+      <div><img src="crops/mugs.jpg" alt=""><span class="lbl">CERAMICS</span></div>
+      <div><img src="crops/skirt.jpg" alt=""><span class="lbl">FASHION</span></div>
+      <div><img src="crops/memorycup.jpg" alt=""><span class="lbl">WRITING</span></div>
+    </div>
+    <div style="columns:3;column-gap:6px;padding:6px">
+      <img src="crops/facevase.jpg" style="width:100%;margin-bottom:6px" alt=""><img src="crops/corset.jpg" style="width:100%;margin-bottom:6px" alt=""><img src="crops/vase.jpg" style="width:100%;margin-bottom:6px" alt="">
+      <img src="crops/drawings.jpg" style="width:100%;margin-bottom:6px" alt=""><img src="crops/mistake.jpg" style="width:100%;margin-bottom:6px" alt=""><img src="crops/runway.jpg" style="width:100%;margin-bottom:6px" alt="">
+    </div></div></div>
+    <div class="cap"><b>H3 · Doors, then a tidy grid</b>: scroll inside the frame; neater and calmer than the pile</div></div>
+</div>
+
+<h2>Q3 · The paper the work sits on</h2>
+<div class="row">
+  <div class="card bg-card"><div class="frame" style="background:#fff"><img class="cut" src="crops/facevase.jpg" style="left:50%;top:20px;width:150px;transform:translateX(-50%)" alt=""></div><div class="cap"><b>Pure white</b>, like the reference; cut-outs float freely</div></div>
+  <div class="card bg-card"><div class="frame noise"><img class="cut" src="crops/facevase.jpg" style="left:50%;top:20px;width:150px;transform:translateX(-50%)" alt=""></div><div class="cap"><b>Scanned paper</b>: warm and grainy, like her printed pages</div></div>
+  <div class="card bg-card"><div class="frame" style="background:#d8d7d3"><img class="cut" src="crops/facevase.jpg" style="left:50%;top:20px;width:150px;transform:translateX(-50%)" alt=""></div><div class="cap"><b>Studio gray</b>, matching the backdrop in her ceramics photos</div></div>
+  <div class="card bg-card"><div class="frame" style="background:#121110"><img src="crops/facevase.jpg" style="position:absolute;left:50%;top:20px;width:150px;transform:translateX(-50%)" alt=""></div><div class="cap"><b>Black</b>: dramatic, more of a fashion feel</div></div>
+</div>
+
+<h2>Q4 · How each piece is placed</h2>
+<div class="row">
+  <div class="card"><div class="frame">
+    <img class="cut" src="crops/mistake.jpg" style="left:20px;top:30px;width:170px" alt="">
+    <img class="cut" src="crops/corset.jpg" style="left:200px;top:90px;width:130px" alt="">
+    <img class="cut" src="crops/vase.jpg" style="left:110px;top:160px;width:110px" alt=""></div>
+    <div class="cap"><b>Cut-outs</b>: no frames, pieces overlap freely (each photo needs its background removed)</div></div>
+  <div class="card"><div class="frame noise">
+    <div style="position:absolute;left:24px;top:36px;transform:rotate(-5deg);background:#fff;padding:6px"><span class="tape" style="left:40px;top:-9px;transform:rotate(-4deg)"></span><img src="crops/mistake.jpg" style="width:150px" alt=""></div>
+    <div style="position:absolute;left:200px;top:70px;transform:rotate(4deg);background:#fff;padding:6px"><span class="tape" style="left:34px;top:-9px;transform:rotate(6deg)"></span><img src="crops/corset.jpg" style="width:120px" alt=""></div>
+    <div style="position:absolute;left:90px;top:190px;transform:rotate(-1deg)"><span class="strip" style="font-size:16px;color:#3b3a7a">The anatomy of a mistake</span></div></div>
+    <div class="cap"><b>Taped prints</b>: tilted photos, tape and paper-strip labels, like her PDF</div></div>
+  <div class="card"><div class="frame" style="padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-content:start">
+    <div><img src="crops/mistake.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover" alt=""><div style="font-size:11px;margin-top:4px">Anatomy of a Mistake</div></div>
+    <div><img src="crops/corset.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover" alt=""><div style="font-size:11px;margin-top:4px">Castle Walls Corset</div></div>
+    <div><img src="crops/vase.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover" alt=""><div style="font-size:11px;margin-top:4px">Neighborhood Flowers</div></div></div>
+    <div class="cap"><b>Clean grid</b>: same-sized crops and tidy captions</div></div>
+</div>
+
+<script>
+const pile=document.getElementById('pile');
+pile.querySelectorAll('.tags button').forEach(b=>b.addEventListener('click',()=>{
+  const on=b.classList.toggle('on');
+  pile.querySelectorAll('.tags button').forEach(x=>{if(x!==b)x.classList.remove('on')});
+  pile.classList.toggle('f',on);
+  pile.querySelectorAll('.it').forEach(it=>it.classList.toggle('on',on&&it.dataset.c===b.dataset.c));
+}));
+</script>
+</body>
+</html>

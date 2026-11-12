@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 12</title>
+<link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Delius&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--muted:#77736c;--ink:#3a302c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f6f5f3;color:#1d1a1c;padding:28px 18px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:52px 0 14px}
+h2:first-of-type{margin-top:0}
+.cap{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.5}
+.cap b{color:#1d1a1c;font-weight:500}
+svg.scene{width:100%;display:block;border-radius:8px;overflow:hidden}
+.o{cursor:pointer;transform-box:fill-box;transform-origin:50% 100%;transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.o:hover{transform:translateY(-7px)}
+.o .lbl{opacity:0;transition:opacity .25s}
+.o:hover .lbl{opacity:1}
+.ink{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.pv{opacity:0;transition:opacity .25s;pointer-events:none}
+.o:hover .pv{opacity:1}
+</style>
+</head>
+<body>
+
+<h2>The studio, finer and swirlier (hover the objects; reload for new swirls)</h2>
+<svg class="scene" id="studio" viewBox="0 0 800 560" role="img" aria-label="Studio scene with swirls">
+  <defs>
+    <pattern id="tiles" width="120" height="120" patternUnits="userSpaceOnUse">
+      <image href="crops/tile-green.jpg" width="120" height="120" preserveAspectRatio="xMidYMid slice"/>
+      <rect width="120" height="120" fill="#f3eee6" opacity=".84"/>
+    </pattern>
+    <pattern id="tileRow" width="34" height="34" patternUnits="userSpaceOnUse">
+      <image href="crops/tile-pink.jpg" width="34" height="34" preserveAspectRatio="xMidYMid slice"/>
+      <rect width="34" height="34" fill="#f3eee6" opacity=".25"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="430" fill="url(#tiles)"/>
+  <g id="wallSwirls"></g>
+
+  <!-- swirl garland across the top -->
+  <g id="garland"></g>
+
+  <!-- name -->
+  <g transform="translate(400 150)">
+    <text text-anchor="middle" font-family="'Nothing You Could Do'" fill="#3a302c"><tspan font-size="42">on</tspan><tspan font-size="96" dy="14">A</tspan></text>
+    <text y="44" text-anchor="middle" font-family="'Nothing You Could Do'" font-size="22" fill="#6b5a52">cabedo wells</text>
+  </g>
+
+  <!-- table -->
+  <rect x="0" y="430" width="800" height="130" fill="#e9dccb"/>
+  <path d="M0 430 H800" class="ink" stroke-width="1.6"/>
+  <path id="cloth" fill="url(#tileRow)" class="ink" style="fill:url(#tileRow)"/>
+
+  <!-- FASHION: dress form with swirl embroidery -->
+  <g class="o">
+    <path d="M130 404 V434 M112 440 L130 431 L148 440" class="ink" stroke-width="1.8"/>
+    <rect x="125" y="196" width="10" height="11" rx="3" fill="#b89a7a" class="ink" style="fill:#b89a7a"/>
+    <path d="M106 208 C 97 226, 95 256, 104 278 C 108 290, 104 302, 100 316 L 160 316 C 156 302, 152 290, 156 278 C 165 256, 163 226, 154 208 Z" style="fill:#4a3f4b" class="ink"/>
+    <path d="M130 212 V316" stroke="#6f6170" stroke-width="1"/>
+    <path id="dressEmb" fill="none" stroke="#d7b8c4" stroke-width="1" stroke-linecap="round"/>
+    <path d="M100 316 C 90 348, 82 378, 74 404 L 186 404 C 178 378, 170 348, 160 316 Z" style="fill:#a8b8a6" class="ink"/>
+    <path d="M112 322 C 106 352, 102 378, 98 402 M130 320 V402 M148 322 C 154 352, 158 378, 162 402" fill="none" stroke="#7f9480" stroke-width="1"/>
+    <g id="skirtSw"></g>
+    <g class="lbl"><text x="130" y="184" text-anchor="middle" font-family="Delius" font-size="16" fill="#3a302c">fashion</text><path d="M104 190 q26 6 52 0" class="ink" stroke-width="1"/></g>
+  </g>
+
+  <!-- CERAMICS: vase with swirl tendrils + mug with spiral steam -->
+  <g class="o">
+    <g id="vaseSw"></g>
+    <path d="M290 326 h24 v10 C 314 344, 346 354, 346 386 C 346 414, 328 428, 302 428 C 276 428, 258 414, 258 386 C 258 354, 290 344, 290 336 Z" style="fill:#e6d6ad" class="ink"/>
+    <path d="M288 326 h28" class="ink" stroke-width="2"/>
+    <path d="M272 372 c6 10 4 22 -2 30 M292 366 c8 12 6 26 -2 36 M318 368 c6 10 6 22 0 32 M334 376 c4 8 2 18 -4 24" class="ink" stroke-width="1.3"/>
+    <path d="M362 394 h40 v26 c0 6 -4 9 -10 9 h-20 c-6 0 -10 -3 -10 -9 Z" style="fill:#8f9cb8" class="ink"/>
+    <path d="M402 400 c11 -2 13 15 0 17" class="ink"/>
+    <g id="steam"></g>
+    <g class="lbl"><text x="314" y="208" text-anchor="middle" font-family="Delius" font-size="16" fill="#3a302c">ceramics</text><path d="M284 214 q30 6 60 0" class="ink" stroke-width="1"/></g>
+  </g>
+
+  <!-- ART: framed sketch + brush jar -->
+  <g class="o">
+    <g transform="translate(520 300) rotate(4)">
+      <rect width="86" height="112" fill="#fbf8f2" class="ink" style="fill:#fbf8f2"/>
+      <rect x="8" y="8" width="70" height="80" fill="#f1ebe6"/>
+      <path d="M43 22 c14 0 22 12 20 28 c-2 14 -10 24 -20 24 c-10 0 -18 -10 -20 -24 c-2 -16 6 -28 20 -28z" class="ink" stroke-width="1"/>
+      <path d="M34 46 q3 -3 6 0 M48 46 q3 -3 6 0 M40 60 q4 3 8 0" class="ink" stroke-width="1"/>
+      <path d="M23 40 c-8 -16 6 -30 22 -26 c10 2 6 12 -2 10 c-6 -2 -4 -8 2 -8 M63 42 c6 -14 -2 -26 -12 -26" fill="none" stroke="#b07e92" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+    <path d="M630 300 L622 232 M644 300 L646 224 M656 300 L668 238 M638 300 L632 248" class="ink" stroke-width="2.2"/>
+    <path d="M622 232 l-3 -14 l6 2z" style="fill:#b07e92" class="ink"/><path d="M646 224 l-3 -16 l6 0z" style="fill:#8f9cb8" class="ink"/><path d="M668 238 l1 -14 l5 3z" style="fill:#a8b8a6" class="ink"/>
+    <g id="brushSw"></g>
+    <path d="M616 290 h56 v118 c0 12 -6 18 -16 18 h-24 c-10 0 -16 -6 -16 -18 Z" style="fill:#dfe7e8;opacity:.92" class="ink"/>
+    <path d="M624 300 v100" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>
+    <g class="lbl"><text x="596" y="262" text-anchor="middle" font-family="Delius" font-size="16" fill="#3a302c">art</text><path d="M582 268 q14 5 28 0" class="ink" stroke-width="1"/></g>
+  </g>
+
+  <!-- WRITING: open notebook, pen line curling into a spiral -->
+  <g class="o">
+    <path d="M690 420 L708 384 L762 388 L748 424 Z" style="fill:#fbf8f2" class="ink"/>
+    <path d="M748 424 L762 388 L800 386 L790 420 Z" style="fill:#fbf8f2" class="ink"/>
+    <path d="M712 394 l40 2 M709 401 l38 2 M706 408 l34 2" stroke="#d3c7d6" stroke-width="1"/>
+    <g id="penSw"></g>
+    <path d="M772 362 L742 416" class="ink" stroke-width="2.4"/>
+    <g class="lbl"><text x="740" y="352" text-anchor="middle" font-family="Delius" font-size="16" fill="#3a302c">writing</text><path d="M716 358 q24 5 48 0" class="ink" stroke-width="1"/></g>
+  </g>
+</svg>
+<div class="cap"><b>Finer ink lines and quieter colours</b> on the faded tile wall. The swirls are part of the drawings: tendrils grow out of the vase, steam curls from the mug, swirls are embroidered on the dress and drift off the brushes, the pen's line curls into a spiral, and a swirl garland runs along the top. Labels are in Delius with a hand-drawn underline.</div>
+
+<h2>A room: ceramics (hover a pot to see the real piece)</h2>
+<svg class="scene" id="room" viewBox="0 0 800 560" role="img" aria-label="Ceramics room with drawn shelves">
+  <defs>
+    <pattern id="tiles2" width="120" height="120" patternUnits="userSpaceOnUse">
+      <image href="crops/tile-green.jpg" width="120" height="120" preserveAspectRatio="xMidYMid slice"/>
+      <rect width="120" height="120" fill="#f3eee6" opacity=".84"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="560" fill="url(#tiles2)"/>
+  <g id="roomSw"></g>
+  <text x="40" y="70" font-family="Delius" font-size="15" fill="#6b5a52">← studio</text>
+  <text x="400" y="80" text-anchor="middle" font-family="'Nothing You Could Do'" font-size="46" fill="#3a302c">ceramics</text>
+  <path d="M330 92 q70 10 140 0" class="ink" stroke-width="1.2"/>
+  <!-- shelves -->
+  <path d="M60 300 H740 M60 306 H740 M60 470 H740 M60 476 H740" class="ink" stroke-width="1.4"/>
+  <path d="M90 306 c-6 14 6 24 14 16 c6 -6 -2 -14 -8 -8 M710 306 c6 14 -6 24 -14 16 c-6 -6 2 -14 8 -8 M90 476 c-6 14 6 24 14 16 c6 -6 -2 -14 -8 -8 M710 476 c6 14 -6 24 -14 16 c-6 -6 2 -14 8 -8" class="ink" stroke-width="1.2"/>
+
+  <!-- pots, drawn in each piece's colour; hover shows the photo -->
+  <g class="o"><path d="M120 300 L116 226 C 116 214, 160 214, 160 226 L 156 300 Z" style="fill:#9a9690" class="ink"/><path d="M128 250 c6 4 12 4 18 0 M132 268 c4 3 8 3 12 0" class="ink" stroke-width="1"/>
+    <g class="pv"><rect x="96" y="120" width="88" height="96" rx="6" fill="#fbf8f2" class="ink" style="fill:#fbf8f2"/><image href="crops/facevase-cut.png" x="110" y="124" width="60" height="88"/></g>
+    <g class="lbl"><text x="138" y="324" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">hard work kills</text></g></g>
+  <g class="o"><path d="M230 300 c-26 0 -34 -22 -26 -40 c6 -12 18 -14 26 -26 c8 12 20 14 26 26 c8 18 0 40 -26 40z" style="fill:#8e3a3a" class="ink"/><path d="M220 246 c4 -6 16 -6 20 0" class="ink" stroke-width="1"/>
+    <g class="pv"><rect x="180" y="120" width="104" height="96" rx="6" class="ink" style="fill:#fbf8f2"/><image href="crops/cut-mistake.png" x="186" y="126" width="92" height="84"/></g>
+    <g class="lbl"><text x="230" y="324" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">anatomy of a mistake</text></g></g>
+  <g class="o"><path d="M350 228 h20 v8 c0 6 28 14 28 38 c0 18 -14 26 -38 26 c-24 0 -38 -8 -38 -26 c0 -24 28 -32 28 -38z" style="fill:#e6d6ad" class="ink"/><path d="M338 262 c4 8 2 18 -2 24 M356 258 c6 10 4 22 -2 30 M374 262 c4 8 4 18 0 26" class="ink" stroke-width="1.1"/>
+    <g class="pv"><rect x="312" y="110" width="96" height="108" rx="6" class="ink" style="fill:#fbf8f2"/><image href="crops/cut-vase.png" x="322" y="114" width="76" height="100"/></g>
+    <g class="lbl"><text x="360" y="324" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">neighborhood flowers</text></g></g>
+  <g class="o"><path d="M470 300 v-46 c0 -6 40 -6 40 0 v46 c0 4 -40 4 -40 0z" style="fill:#c4a35f" class="ink"/><path d="M510 266 c12 -2 12 22 0 22" class="ink"/><path d="M476 264 c8 6 20 6 28 0" fill="none" stroke="#6b4a23" stroke-width="1.4"/>
+    <g class="pv"><rect x="440" y="140" width="100" height="90" rx="6" class="ink" style="fill:#fbf8f2"/><image href="crops/cut-mugstack.png" x="448" y="144" width="84" height="82"/></g>
+    <g class="lbl"><text x="490" y="324" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">many funky mugs</text></g></g>
+  <g class="o"><ellipse cx="620" cy="292" rx="52" ry="10" style="fill:#c48a3a" class="ink"/><path d="M570 290 c6 8 94 8 100 0" class="ink"/><path d="M604 290c4-3 9 0 8 4s-8 6-12 2 0-10 8-10" fill="none" stroke="#f3e6c8" stroke-width="1.2"/>
+    <g class="pv"><rect x="570" y="170" width="100" height="100" rx="6" class="ink" style="fill:#fbf8f2"/><image href="crops/cut-bowl.png" x="578" y="176" width="84" height="88"/></g>
+    <g class="lbl"><text x="620" y="324" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">crema catalana bowl</text></g></g>
+  <!-- lower shelf: memory cups -->
+  <g class="o"><path d="M150 470 v-40 c0 -6 46 -6 46 0 v40 c0 4 -46 4 -46 0z" style="fill:#b9b6ae" class="ink"/><path d="M196 436 c12 -2 12 22 0 22" class="ink"/><path d="M162 446 q4 -3 8 0 M176 446 q4 -3 8 0 M168 458 q5 3 10 0" class="ink" stroke-width="1"/>
+    <g class="lbl"><text x="173" y="494" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">memory cups</text></g></g>
+  <g class="o"><path d="M300 470 v-48 c0 -8 50 -8 50 0 v48 c0 4 -50 4 -50 0z" style="fill:#5d4a3f" class="ink"/><path d="M350 430 c20 -14 24 26 0 30" class="ink"/><path d="M308 440 h34 M308 452 h34" stroke="#3a302c" stroke-width="1"/>
+    <g class="lbl"><text x="325" y="494" text-anchor="middle" font-family="Delius" font-size="14" fill="#3a302c">funky black mug</text></g></g>
+</svg>
+<div class="cap"><b>Each object becomes a room</b>: the ceramics room is drawn shelves with swirl brackets; every pot is drawn in its real colours, and hovering shows the actual photo above it (clicking would open its big, calm piece page).</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+const R=Math.random;
+const PAL=['#8fa89a','#8394b5','#a99bb5','#c98fa6','#9fb3b8','#d7a1b8'];
+function tendril(x,y,ang,len,steps,w,opt={}){
+  let curl=opt.curl??(R()<.5?1:-1);
+  const pw=opt.pw??(1.8+R()*2), kmax=opt.kmax??(.35+R()*.45), noise=.02+R()*.04, shrink=opt.shrink??(.75+R()*.18), flipAt=opt.flip?(.3+R()*.3):2;
+  const pts=[];
+  for(let i=0;i<=steps;i++){const t=i/steps;pts.push([x,y,t]);if(t>flipAt&&t<flipAt+1/steps)curl=-curl;
+    ang+=curl*(0.004+kmax*Math.pow(t,pw))+(R()-.5)*noise*(1-t);
+    const ds=(len/steps)*(1-shrink*Math.pow(t,1.3))*1.3;x+=Math.cos(ang)*ds;y+=Math.sin(ang)*ds;}
+  const L=[],Rr=[];
+  for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[Math.min(i+1,pts.length-1)],o=pts[Math.max(i-1,0)];
+    let dx=q[0]-o[0],dy=q[1]-o[1];const m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
+    const ww=w*Math.pow(Math.sin(Math.PI*Math.min(p[2]*1.05,1)),1.1)+.12;
+    L.push([p[0]-dy*ww,p[1]+dx*ww]);Rr.push([p[0]+dy*ww,p[1]-dx*ww]);}
+  return{d:'M'+L.concat(Rr.reverse()).map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z',pts};
+}
+function add(g,t,fill,op=1){g.appendChild(el('path',{d:t.d,fill,opacity:op}));}
+function dots(g,pts,n,col){for(let k=0;k<n;k++){const p=pts[Math.floor(R()*pts.length)];g.appendChild(el('circle',{cx:p[0]+(R()-.5)*10,cy:p[1]+(R()-.5)*10,r:.5+R()*1.1,fill:col,opacity:.5+R()*.4}));}}
+
+// wall swirls from the corners (subtle)
+function wall(g,W,H,n){[[-8,-8,.6],[W+8,-8,2.5],[-8,H*.7,-.3],[W+8,H*.65,3.4]].slice(0,n).forEach((o,i)=>{
+  const col=PAL[(i*2+Math.floor(R()*2))%PAL.length];const t=tendril(o[0],o[1],o[2]+(R()-.5)*.5,220+R()*120,170,2.2);add(g,t,col,.8);dots(g,t.pts,8,col);
+  for(let b=0;b<2;b++){const j=Math.floor(t.pts.length*(.2+R()*.4)),q=t.pts[j],nn=t.pts[j+1];const a=Math.atan2(nn[1]-q[1],nn[0]-q[0])+(R()<.5?1:-1)*(.5+R()*.6);
+    const t2=tendril(q[0],q[1],a,80+R()*60,120,1.4);add(g,t2,col,.7);dots(g,t2.pts,3,col);}});
+  for(let i=0;i<40;i++)g.appendChild(el('circle',{cx:R()*W,cy:R()*H,r:.4+Math.pow(R(),3)*1.6,fill:PAL[Math.floor(R()*6)],opacity:.3+R()*.5}));}
+wall(document.getElementById('wallSwirls'),800,430,4);
+wall(document.getElementById('roomSw'),800,560,4);
+
+// garland: a wavy line with little curls hanging off it
+(function(){const g=document.getElementById('garland');let d='M10 52';for(let x=10;x<=790;x+=10)d+=` L${x} ${(52+Math.sin(x/62)*14).toFixed(1)}`;
+  g.appendChild(el('path',{d,fill:'none',stroke:'#7d6a62','stroke-width':1.1}));
+  for(let x=60;x<780;x+=86+R()*30){const y=52+Math.sin(x/62)*14;const col=PAL[Math.floor(R()*6)];
+    const t=tendril(x,y,Math.PI/2+(R()-.5)*.4,34+R()*16,90,1.6,{kmax:.9,pw:1.6,shrink:.85});add(g,t,col,.9);dots(g,t.pts,2,col);}})();
+
+// vase tendrils instead of round flowers
+(function(){const g=document.getElementById('vaseSw');for(let i=0;i<7;i++){const col=['#a8b8a6','#c98fa6','#a99bb5','#8fa89a'][i%4];
+  const t=tendril(296+i*2,328,-Math.PI/2+(i-3)*.26+(R()-.5)*.15,150+R()*90,170,2,{kmax:.45+R()*.4});add(g,t,col,.95);dots(g,t.pts,4,col);}})();
+// steam spirals
+(function(){const g=document.getElementById('steam');[[374,388],[388,386]].forEach(([x,y],i)=>{const t=tendril(x,y,-Math.PI/2,40,90,.9,{kmax:.9,pw:1.4,shrink:.85,curl:i?1:-1});add(g,t,'#8f9cb8',.7);});})();
+// dress embroidery + skirt swirls
+(function(){const p=document.getElementById('dressEmb');let d='';for(let k=0;k<4;k++){const cx=114+k*10,cy=236+(k%2)*6;d+=`M${cx} ${cy}c2-2 5 0 4 2s-4 3-6 1-1-6 3-6 6 2 6 6 `;}p.setAttribute('d',d);
+  const g=document.getElementById('skirtSw');for(let i=0;i<3;i++){const t=tendril(106+i*22,396,-Math.PI/2+(R()-.5)*.6,40+R()*20,90,1,{kmax:.8});add(g,t,'#eef1ea',.85);}})();
+// swirls drifting off the brush tips
+(function(){const g=document.getElementById('brushSw');[[620,218,'#b07e92'],[646,208,'#8f9cb8'],[670,224,'#a8b8a6']].forEach(([x,y,c])=>{const t=tendril(x,y,-Math.PI/2+(R()-.5)*.8,80+R()*40,120,1.6,{kmax:.7});add(g,t,c,.85);dots(g,t.pts,3,c);});})();
+// pen line curling into a spiral on the page
+(function(){const g=document.getElementById('penSw');const t=tendril(742,414,-0.3,46,120,.9,{kmax:1.1,pw:1.5,shrink:.86,curl:-1});add(g,t,'#3a302c',.85);})();
+// scalloped cloth edge
+(function(){let d='M0 446 H800 V460';for(let x=800;x>0;x-=20)d+=` Q${x-10} 474 ${x-20} 460`;d+='Z';document.getElementById('cloth').setAttribute('d',d);})();
+</script>
+</body>
+</html>

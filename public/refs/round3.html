@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Caveat:wght@500;700&family=Reenie+Beanie&family=Fuzzy+Bubbles:wght@700&family=Playfair+Display:ital@1&family=Inter:wght@400;500&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--muted:#77736c;--line:#e6e0e6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f4f2f0;color:#1d1a1c;padding:28px 24px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:44px 0 14px}
+h2:first-of-type{margin-top:0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.one{display:grid;gap:22px}
+.frame{position:relative;overflow:hidden;border-radius:8px;border:1px solid var(--line);height:300px}
+.tall{height:380px}
+.cap{margin-top:8px;font-size:13px;color:var(--muted)}
+.cap b{color:#1d1a1c;font-weight:500}
+img{display:block}
+.d{position:absolute;pointer-events:none}
+.tape{position:absolute;width:52px;height:17px;z-index:2;opacity:.8}
+.print{position:absolute;background:#fff;padding:6px;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.nm{display:flex;align-items:center;justify-content:center;height:190px}
+.sw{height:120px;display:flex}
+.sw>div{flex:1;display:flex;align-items:flex-end;padding:6px;font-size:10px;color:#5b5258}
+a.k{color:inherit;text-decoration:none}
+.wob:hover{animation:wob .5s ease-in-out}
+@keyframes wob{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+@keyframes tw{50%{opacity:.25;transform:scale(.7)}}
+.tw{animation:tw 2.4s ease-in-out infinite}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l2.6 6.6L21 9.3l-5 4.6 1.5 6.9L12 17.3 6.5 20.8 8 13.9 3 9.3l6.4-.7z"/></symbol>
+  <symbol id="spark" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.5 9.6 10 11-6.5 1.4-9.2 5-10 11-.8-6-3.5-9.6-10-11 6.5-1.4 9.2-5 10-11z"/></symbol>
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></symbol>
+  <symbol id="flower" viewBox="0 0 24 24"><g><circle cx="12" cy="6" r="4"/><circle cx="18" cy="12" r="4"/><circle cx="12" cy="18" r="4"/><circle cx="6" cy="12" r="4"/></g><circle cx="12" cy="12" r="3" fill="#fff7c9"/></symbol>
+  <symbol id="squig" viewBox="0 0 60 16"><path d="M2 8c6-8 10 8 16 0s10 8 16 0 10 8 16 0 6-6 8-2" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+  <symbol id="cup" viewBox="0 0 80 70"><path d="M12 14h44v30c0 12-8 20-22 20S12 56 12 44z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M56 22c12-2 16 6 12 13s-12 7-12 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 34c2 2 5 2 7 0M38 34c2 2 5 2 7 0M29 46c3 3 8 3 11 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+</svg>
+
+<h2>Q1 · The first screen (your name, a decal, then the way in)</h2>
+<div class="one">
+  <div>
+    <div class="frame tall" style="background:#f8d9e7">
+      <svg class="d tw" style="left:8%;top:12%;width:14px;height:14px;color:#c58bb0;fill:currentColor"><use href="#flower"/></svg>
+      <svg class="d tw" style="left:44%;top:8%;width:12px;height:12px;fill:#b79be0;animation-delay:.6s"><use href="#spark"/></svg>
+      <svg class="d" style="left:86%;top:16%;width:14px;height:14px;fill:#c58bb0"><use href="#flower"/></svg>
+      <svg class="d tw" style="left:20%;top:82%;width:12px;height:12px;fill:#b79be0;animation-delay:1.2s"><use href="#spark"/></svg>
+      <svg class="d" style="left:62%;top:88%;width:14px;height:14px;fill:#c58bb0"><use href="#flower"/></svg>
+      <svg class="d" style="left:92%;top:70%;width:12px;height:12px;fill:#e0b84f"><use href="#star"/></svg>
+      <div class="wob" style="position:absolute;left:9%;top:24%;width:34%"><img src="crops/facevase.jpg" style="width:100%;mix-blend-mode:multiply;filter:saturate(.6) contrast(1.05)" alt=""></div>
+      <div style="position:absolute;left:52%;top:22%">
+        <div style="font-family:'Pinyon Script',cursive;font-size:44px;line-height:1">Ona</div>
+        <div style="font-family:'Caveat',cursive;font-weight:700;font-size:30px;line-height:1;margin:-2px 0 14px 18px">cabedo wells</div>
+        <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:24px;line-height:1.45">
+          <a class="k" href="#">Ceramics</a><br><a class="k" href="#">Fashion</a><br><a class="k" href="#">Art</a><br><a class="k" href="#">Writing</a><br><a class="k" href="#" style="font-size:18px;color:#8a6a80">about ✿</a></div>
+      </div>
+    </div>
+    <div class="cap"><b>L1 · Pink cover with a menu</b>: like Karolina's home page, with your face vase as the decal and the four sections listed beside it</div>
+  </div>
+
+  <div>
+    <div class="frame tall" style="background:#e6dcf6">
+      <svg class="d" style="left:6%;top:10%;width:18px;height:18px;fill:#f2a7c3"><use href="#heart"/></svg>
+      <svg class="d tw" style="left:30%;top:6%;width:16px;height:16px;fill:#fff"><use href="#spark"/></svg>
+      <svg class="d" style="left:72%;top:9%;width:16px;height:16px;fill:#f6d77a"><use href="#star"/></svg>
+      <svg class="d" style="left:88%;top:30%;width:60px;height:16px;color:#a98bd6"><use href="#squig"/></svg>
+      <svg class="d tw" style="left:4%;top:60%;width:14px;height:14px;fill:#fff;animation-delay:.8s"><use href="#spark"/></svg>
+      <div style="position:absolute;left:0;right:0;top:22%;text-align:center">
+        <div style="font-family:'Pinyon Script',cursive;font-size:62px;line-height:.9">Ona</div>
+        <div style="font-family:'Caveat',cursive;font-weight:700;font-size:34px;line-height:1">cabedo wells</div>
+        <div style="font-family:Caveat,cursive;font-size:20px;color:#7b6a95;margin-top:2px">art · clay · clothes · words</div>
+      </div>
+      <div class="print wob" style="left:4%;top:5%;transform:rotate(-8deg)"><span class="tape" style="left:20px;top:-9px;background:#f7c6d9;transform:rotate(-5deg)"></span><img src="crops/memorycup.jpg" style="width:80px" alt=""></div>
+      <div class="print wob" style="right:5%;top:58%;transform:rotate(7deg)"><span class="tape" style="left:14px;top:-9px;background:#c9e7d6;transform:rotate(6deg)"></span><img src="crops/corset.jpg" style="width:66px" alt=""></div>
+      <div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font-family:Caveat,cursive;font-size:22px">scroll down ↓</div>
+    </div>
+    <div class="cap"><b>L2 · Name in the middle, prints taped around it</b>: scroll down to reach the four sections</div>
+  </div>
+
+  <div>
+    <div class="frame tall" style="background:#fbefc9">
+      <svg class="d" style="left:5%;top:8%;width:16px;height:16px;fill:#f2a7c3"><use href="#star"/></svg>
+      <svg class="d" style="left:91%;top:12%;width:16px;height:16px;fill:#9fc9e8"><use href="#heart"/></svg>
+      <svg class="d" style="left:88%;top:86%;width:14px;height:14px;fill:#b79be0"><use href="#flower"/></svg>
+      <svg class="d" style="left:40%;top:6%;width:70px;height:60px;color:#c46b8e"><use href="#cup"/></svg>
+      <div style="position:absolute;left:0;right:0;top:24%;text-align:center"><span style="font-family:'Pinyon Script',cursive;font-size:48px">Ona</span> <span style="font-family:Caveat,cursive;font-weight:700;font-size:32px">cabedo wells</span></div>
+      <div style="position:absolute;left:5%;right:5%;bottom:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div class="wob" style="background:#f8d9e7;border-radius:10px 10px 4px 4px;height:120px;position:relative;padding:8px"><span class="tape" style="left:28%;top:-8px;background:#fff6;transform:rotate(-4deg)"></span><img src="crops/mistake.jpg" style="width:100%;height:70px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-weight:700;font-size:20px;text-align:center">ceramics</div></div>
+        <div class="wob" style="background:#d4f0e2;border-radius:10px 10px 4px 4px;height:120px;position:relative;padding:8px"><span class="tape" style="left:28%;top:-8px;background:#fff6;transform:rotate(5deg)"></span><img src="crops/skirt.jpg" style="width:100%;height:70px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-weight:700;font-size:20px;text-align:center">fashion</div></div>
+        <div class="wob" style="background:#e6dcf6;border-radius:10px 10px 4px 4px;height:120px;position:relative;padding:8px"><span class="tape" style="left:28%;top:-8px;background:#fff6;transform:rotate(-3deg)"></span><img src="crops/drawings.jpg" style="width:100%;height:70px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-weight:700;font-size:20px;text-align:center">art</div></div>
+        <div class="wob" style="background:#d6e6fa;border-radius:10px 10px 4px 4px;height:120px;position:relative;padding:8px"><span class="tape" style="left:28%;top:-8px;background:#fff6;transform:rotate(4deg)"></span><div style="height:70px;background:#fff;font-family:Caveat,cursive;font-size:15px;line-height:1.05;padding:5px">do you remember the moon outside my window?</div><div style="font-family:Caveat,cursive;font-weight:700;font-size:20px;text-align:center">writing</div></div>
+      </div>
+    </div>
+    <div class="cap"><b>L3 · Name with a hand-drawn doodle</b>, and four colour-coded cards taped below as the way in</div>
+  </div>
+</div>
+
+<h2>Q2 · Colours</h2>
+<div class="row">
+  <div><div class="frame sw" style="height:120px"><div style="background:#f8d9e7">blush</div><div style="background:#f2bcd2">rose</div><div style="background:#fff">white</div><div style="background:#2a2226;color:#fff">ink</div></div><div class="cap"><b>Pink</b>: one soft pink everywhere, like Karolina's</div></div>
+  <div><div class="frame sw" style="height:120px"><div style="background:#e6dcf6">lilac</div><div style="background:#cdb9ef">lavender</div><div style="background:#f8d9e7">blush</div><div style="background:#2a2240;color:#fff">ink</div></div><div class="cap"><b>Lilac</b>: purple-led with a touch of pink</div></div>
+  <div><div class="frame sw" style="height:120px"><div style="background:#f8d9e7">ceramics</div><div style="background:#d4f0e2">fashion</div><div style="background:#e6dcf6">art</div><div style="background:#d6e6fa">writing</div><div style="background:#fbefc9">home</div></div><div class="cap"><b>Pastel per section</b>: each section gets its own pastel</div></div>
+  <div><div class="frame sw" style="height:120px"><div style="background:#f8d9e7">blush</div><div style="background:#e6dcf6">lilac</div><div style="background:#d64561;color:#fff">cherry</div><div style="background:#fbefc9">butter</div></div><div class="cap"><b>Pastels with one bold pop</b>: cherry red for links, stamps and hovers</div></div>
+</div>
+
+<h2>Q3 · The little decorations (pick as many as you like)</h2>
+<div class="row">
+  <div><div class="frame" style="height:150px;background:#f8d9e7">
+    <svg class="d tw" style="left:10%;top:20%;width:16px;height:16px;fill:#fff"><use href="#spark"/></svg><svg class="d" style="left:30%;top:60%;width:20px;height:20px;fill:#f6d77a"><use href="#star"/></svg><svg class="d tw" style="left:55%;top:25%;width:22px;height:22px;fill:#fff;animation-delay:.7s"><use href="#spark"/></svg><svg class="d" style="left:75%;top:62%;width:16px;height:16px;fill:#f6d77a"><use href="#star"/></svg><svg class="d tw" style="left:88%;top:18%;width:12px;height:12px;fill:#fff;animation-delay:1.4s"><use href="#spark"/></svg></div>
+    <div class="cap"><b>Stars and sparkles</b>, some twinkling</div></div>
+  <div><div class="frame" style="height:150px;background:#f8d9e7">
+    <svg class="d" style="left:12%;top:24%;width:20px;height:20px;fill:#c58bb0"><use href="#flower"/></svg><svg class="d" style="left:40%;top:62%;width:16px;height:16px;fill:#b79be0"><use href="#flower"/></svg><svg class="d" style="left:62%;top:22%;width:22px;height:22px;fill:#9fc9e8"><use href="#flower"/></svg><svg class="d" style="left:84%;top:58%;width:18px;height:18px;fill:#c58bb0"><use href="#flower"/></svg></div>
+    <div class="cap"><b>Little flowers</b> ✿, like Karolina's</div></div>
+  <div><div class="frame" style="height:150px;background:#f8d9e7">
+    <svg class="d" style="left:8%;top:20%;width:24px;height:24px;fill:none;stroke:#c2477a;stroke-width:2"><use href="#heart"/></svg><svg class="d" style="left:30%;top:58%;width:70px;height:18px;color:#7c5fb5"><use href="#squig"/></svg><svg class="d" style="left:62%;top:14%;width:62px;height:54px;color:#c2477a"><use href="#cup"/></svg><div class="d" style="left:72%;top:66%;font-family:Caveat,cursive;font-size:22px;color:#7c5fb5;transform:rotate(-6deg)">← new!</div></div>
+    <div class="cap"><b>Hand-drawn doodles</b>: hearts, squiggles, arrows and a little cup</div></div>
+  <div><div class="frame" style="height:150px;background:#f8d9e7">
+    <div class="d" style="left:10%;top:18%;width:58px;height:58px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fuzzy Bubbles',cursive;font-size:12px;color:#d64561;border:3px dashed #f2a7c3;transform:rotate(-12deg)">hi!!</div>
+    <span class="d" style="left:42%;top:30%;width:60px;height:20px;background:#d4f0e2;opacity:.85;transform:rotate(-8deg)"></span>
+    <span class="d" style="left:46%;top:60%;width:60px;height:20px;background:#fbefc9;opacity:.85;transform:rotate(10deg)"></span>
+    <div class="d" style="left:72%;top:24%;padding:4px 10px;border-radius:999px;background:#d64561;color:#fff;font-family:'Fuzzy Bubbles',cursive;font-size:13px;transform:rotate(6deg)">made by hand</div></div>
+    <div class="cap"><b>Stickers and washi tape</b>: badges, dashed edges, coloured tape</div></div>
+</div>
+
+<h2>Q4 · Your name, again (handwriting plus a bit of the ornate script)</h2>
+<div class="row">
+  <div><div class="frame nm" style="background:#f8d9e7"><span style="font-family:'Pinyon Script',cursive;font-size:56px">Ona</span>&nbsp;<span style="font-family:Caveat,cursive;font-weight:700;font-size:42px">cabedo wells</span></div><div class="cap"><b>n1 · Script and handwriting</b>: fancy first name, casual surname</div></div>
+  <div><div class="frame nm" style="background:#f8d9e7"><span style="font-family:'Reenie Beanie',cursive;font-size:62px;transform:rotate(-3deg)">ona cabedo wells</span></div><div class="cap"><b>n2 · All handwritten</b>: loose sketchbook pencil</div></div>
+  <div><div class="frame nm" style="background:#f8d9e7"><span style="font-family:'Fuzzy Bubbles',cursive;font-weight:700;font-size:40px;color:#d64561">ona cabedo wells</span></div><div class="cap"><b>n3 · Bubbly and cute</b>: rounder, more playful</div></div>
+  <div><div class="frame nm" style="background:#f8d9e7"><span style="font-family:'Playfair Display',serif;font-style:italic;font-size:46px">Ona Cabedo Wells</span><svg style="width:22px;height:22px;fill:#d64561;margin:-30px 0 0 4px"><use href="#heart"/></svg></div><div class="cap"><b>n4 · Elegant italic</b> with one doodle: closest to Karolina</div></div>
+</div>
+
+<h2>Q5 · Inside a section (e.g. ceramics): pieces taped up, click one to open it</h2>
+<div class="row">
+  <div><div class="frame tall" style="background:#f8d9e7">
+    <div style="position:absolute;left:18px;top:12px;font-family:Caveat,cursive;font-weight:700;font-size:34px">ceramics</div>
+    <svg class="d" style="left:150px;top:22px;width:18px;height:18px;fill:#f6d77a"><use href="#star"/></svg>
+    <div class="print wob" style="left:6%;top:70px;transform:rotate(-4deg)"><span class="tape" style="left:30%;top:-9px;background:#e6dcf6"></span><img src="crops/facevase.jpg" style="width:110px;height:120px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:17px;text-align:center">hard work kills</div></div>
+    <div class="print wob" style="left:38%;top:96px;transform:rotate(3deg)"><span class="tape" style="left:30%;top:-9px;background:#d4f0e2"></span><img src="crops/mistake.jpg" style="width:120px;height:110px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:17px;text-align:center">anatomy of a mistake</div></div>
+    <div class="print wob" style="left:70%;top:62px;transform:rotate(-2deg)"><span class="tape" style="left:30%;top:-9px;background:#fbefc9"></span><img src="crops/vase.jpg" style="width:100px;height:120px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:17px;text-align:center">neighborhood flowers</div></div>
+    <div class="print wob" style="left:20%;top:240px;transform:rotate(5deg)"><span class="tape" style="left:30%;top:-9px;background:#d6e6fa"></span><img src="crops/memorycup.jpg" style="width:120px;height:80px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:17px;text-align:center">memory cups</div></div>
+    <div class="print wob" style="left:56%;top:250px;transform:rotate(-6deg)"><span class="tape" style="left:30%;top:-9px;background:#f2bcd2"></span><img src="crops/mugs.jpg" style="width:110px;height:76px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:17px;text-align:center">funky mugs</div></div>
+    </div><div class="cap"><b>S1 · Scattered board</b>: pieces taped at angles, like a studio wall</div></div>
+  <div><div class="frame tall" style="background:#f8d9e7;padding:14px 18px">
+    <div style="font-family:Caveat,cursive;font-weight:700;font-size:34px;margin-bottom:10px">ceramics <svg style="width:16px;height:16px;fill:#f6d77a"><use href="#star"/></svg></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px 14px">
+      <div class="print wob" style="position:relative;transform:rotate(-2deg)"><span class="tape" style="left:30%;top:-9px;background:#e6dcf6"></span><img src="crops/facevase.jpg" style="width:100%;height:100px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:16px;text-align:center">hard work kills</div></div>
+      <div class="print wob" style="position:relative;transform:rotate(2deg)"><span class="tape" style="left:30%;top:-9px;background:#d4f0e2"></span><img src="crops/mistake.jpg" style="width:100%;height:100px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:16px;text-align:center">anatomy of a mistake</div></div>
+      <div class="print wob" style="position:relative;transform:rotate(-1deg)"><span class="tape" style="left:30%;top:-9px;background:#fbefc9"></span><img src="crops/vase.jpg" style="width:100%;height:100px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:16px;text-align:center">neighborhood flowers</div></div>
+      <div class="print wob" style="position:relative;transform:rotate(1.5deg)"><span class="tape" style="left:30%;top:-9px;background:#d6e6fa"></span><img src="crops/memorycup.jpg" style="width:100%;height:100px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:16px;text-align:center">memory cups</div></div>
+      <div class="print wob" style="position:relative;transform:rotate(-2.5deg)"><span class="tape" style="left:30%;top:-9px;background:#f2bcd2"></span><img src="crops/mugs.jpg" style="width:100%;height:100px;object-fit:cover" alt=""><div style="font-family:Caveat,cursive;font-size:16px;text-align:center">funky mugs</div></div>
+    </div></div><div class="cap"><b>S2 · Tidy rows, slightly wonky</b>: a grid where each print is tilted a little; easier to browse</div></div>
+</div>
+</body>
+</html>

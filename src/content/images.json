@@ -1,0 +1,296 @@
+{
+ "memory-cups": [
+  {
+   "src": "/work/memory-cups/1.jpg",
+   "width": 2682,
+   "height": 1774
+  },
+  {
+   "src": "/work/memory-cups/2.jpg",
+   "width": 2518,
+   "height": 1772
+  },
+  {
+   "src": "/work/memory-cups/3.jpg",
+   "width": 2750,
+   "height": 1860
+  },
+  {
+   "src": "/work/memory-cups/4.jpg",
+   "width": 1784,
+   "height": 1308
+  },
+  {
+   "src": "/work/memory-cups/5.jpg",
+   "width": 1612,
+   "height": 1434
+  },
+  {
+   "src": "/work/memory-cups/6.jpg",
+   "width": 662,
+   "height": 514
+  },
+  {
+   "src": "/work/memory-cups/7.jpg",
+   "width": 1528,
+   "height": 840
+  }
+ ],
+ "many-funky-mugs": [
+  {
+   "src": "/work/many-funky-mugs/1.jpg",
+   "width": 1062,
+   "height": 906
+  },
+  {
+   "src": "/work/many-funky-mugs/2.jpg",
+   "width": 616,
+   "height": 1060
+  },
+  {
+   "src": "/work/many-funky-mugs/3.jpg",
+   "width": 656,
+   "height": 814
+  },
+  {
+   "src": "/work/many-funky-mugs/4.jpg",
+   "width": 1422,
+   "height": 1172
+  }
+ ],
+ "anatomy-of-a-mistake": [
+  {
+   "src": "/work/anatomy-of-a-mistake/1.jpg",
+   "width": 1240,
+   "height": 1768
+  },
+  {
+   "src": "/work/anatomy-of-a-mistake/2.jpg",
+   "width": 746,
+   "height": 1232
+  },
+  {
+   "src": "/work/anatomy-of-a-mistake/3.jpg",
+   "width": 1512,
+   "height": 2120
+  }
+ ],
+ "neighborhood-flowers": [
+  {
+   "src": "/work/neighborhood-flowers/1.jpg",
+   "width": 1494,
+   "height": 2068
+  },
+  {
+   "src": "/work/neighborhood-flowers/2.jpg",
+   "width": 924,
+   "height": 1684
+  }
+ ],
+ "bee-swarm": [
+  {
+   "src": "/work/bee-swarm/1.jpg",
+   "width": 972,
+   "height": 1740
+  },
+  {
+   "src": "/work/bee-swarm/2.jpg",
+   "width": 1064,
+   "height": 772
+  }
+ ],
+ "crema-catalana-bowl": [
+  {
+   "src": "/work/crema-catalana-bowl/1.jpg",
+   "width": 1004,
+   "height": 1116
+  },
+  {
+   "src": "/work/crema-catalana-bowl/2.jpg",
+   "width": 648,
+   "height": 638
+  }
+ ],
+ "decay-and-growth": [
+  {
+   "src": "/work/decay-and-growth/1.jpg",
+   "width": 1536,
+   "height": 2312
+  },
+  {
+   "src": "/work/decay-and-growth/2.jpg",
+   "width": 844,
+   "height": 1358
+  },
+  {
+   "src": "/work/decay-and-growth/3.jpg",
+   "width": 764,
+   "height": 494
+  }
+ ],
+ "grandmothers-tiles": [
+  {
+   "src": "/work/grandmothers-tiles/1.jpg",
+   "width": 994,
+   "height": 1088
+  },
+  {
+   "src": "/work/grandmothers-tiles/2.jpg",
+   "width": 852,
+   "height": 1168
+  },
+  {
+   "src": "/work/grandmothers-tiles/3.jpg",
+   "width": 818,
+   "height": 726
+  },
+  {
+   "src": "/work/grandmothers-tiles/4.jpg",
+   "width": 658,
+   "height": 668
+  }
+ ],
+ "hard-work-kills": [
+  {
+   "src": "/work/hard-work-kills/1.jpg",
+   "width": 1378,
+   "height": 2592
+  },
+  {
+   "src": "/work/hard-work-kills/2.jpg",
+   "width": 728,
+   "height": 1504
+  },
+  {
+   "src": "/work/hard-work-kills/3.jpg",
+   "width": 816,
+   "height": 1490
+  },
+  {
+   "src": "/work/hard-work-kills/4.jpg",
+   "width": 734,
+   "height": 1528
+  },
+  {
+   "src": "/work/hard-work-kills/5.jpg",
+   "width": 672,
+   "height": 540
+  }
+ ],
+ "medieval-silhouettes": [
+  {
+   "src": "/work/medieval-silhouettes/1.jpg",
+   "width": 802,
+   "height": 1618
+  },
+  {
+   "src": "/work/medieval-silhouettes/2.jpg",
+   "width": 828,
+   "height": 1744
+  }
+ ],
+ "repurposed-crochet": [
+  {
+   "src": "/work/repurposed-crochet/1.jpg",
+   "width": 1544,
+   "height": 1454
+  },
+  {
+   "src": "/work/repurposed-crochet/2.jpg",
+   "width": 1486,
+   "height": 1484
+  },
+  {
+   "src": "/work/repurposed-crochet/3.jpg",
+   "width": 926,
+   "height": 784
+  },
+  {
+   "src": "/work/repurposed-crochet/4.jpg",
+   "width": 1392,
+   "height": 494
+  }
+ ],
+ "earthern-skirt": [
+  {
+   "src": "/work/earthern-skirt/1.jpg",
+   "width": 770,
+   "height": 1710
+  },
+  {
+   "src": "/work/earthern-skirt/2.jpg",
+   "width": 1056,
+   "height": 1068
+  },
+  {
+   "src": "/work/earthern-skirt/3.jpg",
+   "width": 742,
+   "height": 1366
+  }
+ ],
+ "castle-walls-corset": [
+  {
+   "src": "/work/castle-walls-corset/1.jpg",
+   "width": 888,
+   "height": 914
+  },
+  {
+   "src": "/work/castle-walls-corset/2.jpg",
+   "width": 848,
+   "height": 1596
+  }
+ ],
+ "self-portrait": [
+  {
+   "src": "/work/self-portrait/1.jpg",
+   "width": 1712,
+   "height": 2068
+  },
+  {
+   "src": "/work/self-portrait/2.jpg",
+   "width": 670,
+   "height": 1028
+  }
+ ],
+ "colored-pencil": [
+  {
+   "src": "/work/colored-pencil/1.jpg",
+   "width": 578,
+   "height": 782
+  },
+  {
+   "src": "/work/colored-pencil/2.jpg",
+   "width": 1112,
+   "height": 1300
+  },
+  {
+   "src": "/work/colored-pencil/3.jpg",
+   "width": 372,
+   "height": 482
+  }
+ ],
+ "oil-pastels": [
+  {
+   "src": "/work/oil-pastels/1.jpg",
+   "width": 856,
+   "height": 830
+  },
+  {
+   "src": "/work/oil-pastels/2.jpg",
+   "width": 714,
+   "height": 628
+  },
+  {
+   "src": "/work/oil-pastels/3.jpg",
+   "width": 588,
+   "height": 1430
+  }
+ ],
+ "charcoal": [
+  {
+   "src": "/work/charcoal/1.jpg",
+   "width": 854,
+   "height": 1178
+  }
+ ]
+}

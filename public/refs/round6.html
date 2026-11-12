@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8e0f2;--ink:#3b2d5a;--muted:#77736c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f6f5f3;color:#1d1a1c;padding:28px 20px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:48px 0 14px}
+h2:first-of-type{margin-top:0}
+.one{display:grid;gap:26px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.frame{position:relative;overflow:hidden;border-radius:6px;background:var(--bg);color:var(--ink)}
+.cap{margin-top:8px;font-size:13px;color:var(--muted)}
+.cap b{color:#1d1a1c;font-weight:500}
+img{display:block}
+.mult{mix-blend-mode:multiply;filter:grayscale(.2) brightness(1.28) contrast(1.25)}
+.sw{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hand{font-family:'Nothing You Could Do',cursive;line-height:1}
+.sig{font-family:'Nothing You Could Do',cursive;line-height:.8;white-space:nowrap}
+.sig .a{font-size:2.3em;display:inline-block;margin-left:.02em;vertical-align:-.12em}
+.list a{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-family:'Nothing You Could Do',cursive;font-size:30px;line-height:1.5}
+.list svg{width:26px;height:26px;flex:none;transition:rotate .6s ease}
+.list a:hover svg{rotate:200deg}
+.list a:hover{color:var(--c)}
+.nm{display:flex;align-items:center;justify-content:center;height:190px;flex-direction:column;gap:6px}
+@keyframes drift{50%{transform:translateY(-4px) rotate(.6deg)}}
+.drift{animation:drift 7s ease-in-out infinite;transform-origin:center}
+</style>
+</head>
+<body>
+
+<h2>Q1 · The cover: swirls spreading around, with onA</h2>
+<div class="one">
+  <div>
+    <div class="frame" style="height:470px">
+      <svg class="sw drift" data-mode="frame" data-seed="4"></svg>
+      <img class="mult" src="crops/facevase.jpg" style="position:absolute;left:50%;top:15%;width:36%;translate:-50% 0" alt="">
+      <div class="sig" style="position:absolute;left:0;right:0;top:66%;text-align:center;font-size:44px">on<span class="a">A</span></div>
+      <div style="position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:11px;letter-spacing:.1em;color:#8a78b4">scroll</div>
+    </div>
+    <div class="cap"><b>V1 · Growing in from the edges</b>: swirls curl in from the corners and frame the vase</div>
+  </div>
+  <div>
+    <div class="frame" style="height:470px">
+      <svg class="sw drift" data-mode="halo" data-seed="11"></svg>
+      <img class="mult" src="crops/facevase.jpg" style="position:absolute;left:50%;top:15%;width:36%;translate:-50% 0" alt="">
+      <div class="sig" style="position:absolute;left:0;right:0;top:66%;text-align:center;font-size:44px">on<span class="a">A</span></div>
+    </div>
+    <div class="cap"><b>V2 · A halo</b>: swirls radiate out from behind the vase, like a sigil around it</div>
+  </div>
+  <div>
+    <div class="frame" style="height:470px">
+      <svg class="sw drift" data-mode="drift" data-seed="23"></svg>
+      <img class="mult" src="crops/facevase.jpg" style="position:absolute;left:50%;top:15%;width:36%;translate:-50% 0" alt="">
+      <div class="sig" style="position:absolute;left:0;right:0;top:66%;text-align:center;font-size:44px">on<span class="a">A</span></div>
+    </div>
+    <div class="cap"><b>V3 · Drifting across</b>: long swirls flow over the whole page, some passing behind the vase</div>
+  </div>
+</div>
+<p style="margin-top:14px;font-size:13px;color:var(--muted)">Each swirl is generated, so I can make them denser, thinner, brighter, or redraw them on every visit.</p>
+
+<h2>Q2 · Your signature</h2>
+<div class="row">
+  <div><div class="frame nm"><div class="sig" style="font-size:50px">on<span class="a">A</span></div></div><div class="cap"><b>s1 · onA only</b>, everywhere</div></div>
+  <div><div class="frame nm"><div class="sig" style="font-size:50px">on<span class="a">A</span></div><div style="font-size:11px;letter-spacing:.14em;color:#8a78b4">ONA CABEDO WELLS</div></div><div class="cap"><b>s2 · onA plus your full name</b>, small underneath</div></div>
+  <div><div class="frame nm"><div class="sig" style="font-size:50px">on<span class="a">A</span></div><div class="hand" style="font-size:22px;color:#6a5a92">cabedo wells</div></div><div class="cap"><b>s3 · onA plus a handwritten surname</b></div></div>
+</div>
+
+<h2>Q3 · The section list (hover the words)</h2>
+<div class="row">
+  <div><div class="frame" style="height:280px;padding:30px 28px">
+    <div class="list">
+      <a href="#" style="--c:#4fae9f"><svg data-spiral="#6cc4b8"></svg>ceramics</a>
+      <a href="#" style="--c:#d672a0"><svg data-spiral="#ef9dc0"></svg>fashion</a>
+      <a href="#" style="--c:#6f7fdc"><svg data-spiral="#8e9df0"></svg>art</a>
+      <a href="#" style="--c:#c9a43a"><svg data-spiral="#f0cf6a"></svg>writing</a>
+    </div>
+    <img class="mult" src="crops/mistake.jpg" style="position:absolute;right:22px;top:40px;width:120px" alt="">
+    <svg class="sw" data-mode="corner" data-seed="31"></svg>
+  </div><div class="cap"><b>A colour per section</b>: each spiral bullet has its own pastel, and the word turns that colour on hover</div></div>
+</div>
+
+<script>
+const PAL = ['#6cc4b8','#ef9dc0','#8e9df0','#f0cf6a','#a585d8','#9fd8c9'];
+function rng(seed){ let s = seed>>>0 || 1; return () => (s = (s*1664525+1013904223)>>>0) / 4294967296; }
+
+function tendril(r, x, y, ang, len, steps, curl, w){
+  const pts=[]; let k=0;
+  for(let i=0;i<=steps;i++){
+    const t=i/steps;
+    pts.push([x,y,t]);
+    k = curl*(0.008 + 0.5*Math.pow(t,2.6)) + (r()-.5)*0.035*(1-t);
+    ang += k;
+    const ds = (len/steps)*(1-0.86*t)*1.4;
+    x += Math.cos(ang)*ds; y += Math.sin(ang)*ds;
+  }
+  const L=[],R=[];
+  for(let i=0;i<pts.length;i++){
+    const p=pts[i], q=pts[Math.min(i+1,pts.length-1)], o=pts[Math.max(i-1,0)];
+    let dx=q[0]-o[0], dy=q[1]-o[1]; const m=Math.hypot(dx,dy)||1; dx/=m; dy/=m;
+    const ww = w*Math.pow(Math.sin(Math.PI*Math.min(p[2]*1.15,1)),.7)*(1-.55*p[2]) + .25;
+    L.push([p[0]-dy*ww, p[1]+dx*ww]); R.push([p[0]+dy*ww, p[1]-dx*ww]);
+  }
+  const all=L.concat(R.reverse());
+  return {d:'M'+all.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z', pts};
+}
+
+function grow(svg, r, x, y, ang, len, w, depth, color){
+  const curl = r()<.5?1:-1;
+  const t = tendril(r, x, y, ang, len, 160, curl, w);
+  const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d', t.d); p.setAttribute('fill', color); p.setAttribute('opacity', .92);
+  svg.appendChild(p);
+  if(depth>0){
+    const nb = 1 + Math.floor(r()*2);
+    for(let b=0;b<nb;b++){
+      const i = Math.floor(t.pts.length*(.2+r()*.4)), q=t.pts[i], n=t.pts[i+1];
+      const a = Math.atan2(n[1]-q[1], n[0]-q[0]) + (r()<.5?1:-1)*(0.5+r()*0.6);
+      grow(svg, r, q[0], q[1], a, len*(.35+r()*.25), w*.6, depth-1, r()<.6?color:PAL[Math.floor(r()*PAL.length)]);
+    }
+  }
+}
+
+function dots(svg, r, n, W, H){
+  for(let i=0;i<n;i++){
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', r()*W); c.setAttribute('cy', r()*H); c.setAttribute('r', .8+r()*1.4);
+    c.setAttribute('fill', PAL[Math.floor(r()*PAL.length)]); svg.appendChild(c);
+  }
+}
+
+document.querySelectorAll('svg.sw').forEach(svg=>{
+  const W=svg.clientWidth||380, H=svg.clientHeight||470, r=rng(+svg.dataset.seed);
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const mode=svg.dataset.mode, S=Math.min(W,H);
+  if(mode==='frame'){
+    const starts=[[-6,H*.08,.3],[W+6,H*.12,2.8],[-6,H*.9,-.4],[W+6,H*.86,-2.7],[-6,H*.5,.1],[W+6,H*.46,3.0]];
+    starts.forEach((s,i)=>grow(svg,r,s[0],s[1],s[2]+(r()-.5)*.3,S*(.5+r()*.2),3.2,2,PAL[i%PAL.length]));
+  } else if(mode==='halo'){
+    const cx=W/2, cy=H*.36;
+    for(let i=0;i<9;i++){ const a=i/9*Math.PI*2+r()*.3;
+      grow(svg,r,cx+Math.cos(a)*S*.3,cy+Math.sin(a)*S*.34,a+(r()-.5)*.5,S*(.3+r()*.15),2.8,1,PAL[i%PAL.length]); }
+  } else if(mode==='drift'){
+    for(let i=0;i<5;i++){ const y=H*(.1+i*.2);
+      grow(svg,r,-10,y,(r()-.5)*.6,W*(.9+r()*.4),2.6,2,PAL[i%PAL.length]); }
+  } else if(mode==='corner'){
+    grow(svg,r,W,H,-2.5,S*.55,2.6,2,PAL[0]); grow(svg,r,W*.6,H,-1.9,S*.4,2.2,1,PAL[1]);
+  }
+  dots(svg,r,mode==='corner'?6:14,W,H);
+});
+
+document.querySelectorAll('svg[data-spiral]').forEach((svg,i)=>{
+  const r=rng(i+7); svg.setAttribute('viewBox','0 0 40 40');
+  const t=tendril(r,4,34,-0.9,46,120,1,2.4);
+  svg.innerHTML=`<path d="${t.d}" fill="${svg.dataset.spiral}"/>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer a:hover {
+  color: var(--ink);
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ona — style round 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--lilac:#e6dcf6;--lav:#cdb9ef;--ink:#2e2442;--muted:#77736c;--line:#ddd5ea}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f4f2f0;color:#1d1a1c;padding:28px 20px 80px;font-size:14px}
+h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:44px 0 14px}
+h2:first-of-type{margin-top:0}
+.one{display:grid;gap:22px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.frame{position:relative;overflow:hidden;border-radius:8px;border:1px solid var(--line);background:var(--lilac);color:var(--ink)}
+.cap{margin-top:8px;font-size:13px;color:var(--muted)}
+.cap b{color:#1d1a1c;font-weight:500}
+.hand{font-family:'Reenie Beanie',cursive;line-height:.95}
+img{display:block}
+.d{position:absolute;pointer-events:none}
+.tape{position:absolute;width:46px;height:15px;z-index:2;opacity:.85}
+.print{background:#fff;padding:5px;box-shadow:0 1px 2px rgba(46,36,66,.18)}
+.sticker{border:5px solid #fff;border-radius:14px;box-shadow:0 2px 0 rgba(46,36,66,.25)}
+.wob{transition:transform .2s}
+.wob:hover{animation:wob .5s ease-in-out}
+@keyframes wob{25%{rotate:-4deg}75%{rotate:4deg}}
+@keyframes bob{50%{translate:0 -5px}}
+.bob{animation:bob 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.35;scale:.75}}
+.tw{animation:tw 2.2s ease-in-out infinite}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="pstar" viewBox="0 0 40 40"><path d="M20 4l4.7 9.6 10.5 1.5-7.6 7.4 1.8 10.5L20 28l-9.4 5 1.8-10.5-7.6-7.4 10.5-1.5z" fill="#fbe38a" stroke="#2e2442" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="16" cy="15" rx="2.6" ry="1.5" fill="#fff" transform="rotate(-30 16 15)"/></symbol>
+  <symbol id="pspark" viewBox="0 0 40 40"><path d="M20 3c2 9 6 13 17 17-11 4-15 8-17 17-2-9-6-13-17-17 11-4 15-8 17-17z" fill="#fff" stroke="#2e2442" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+  <symbol id="pheart" viewBox="0 0 40 36"><path d="M20 33S4 23 4 12a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 11-16 21-16 21z" fill="#f7b6cf" stroke="#2e2442" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="11" cy="11" rx="2.6" ry="1.6" fill="#fff" transform="rotate(-35 11 11)"/></symbol>
+  <symbol id="pcloud" viewBox="0 0 60 38"><path d="M14 33a10 10 0 0 1-2-19.8A13 13 0 0 1 37 9a10 10 0 0 1 15 8.5A8 8 0 0 1 50 33z" fill="#fff" stroke="#2e2442" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+  <symbol id="pbub" viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="#d6e6fa" stroke="#2e2442" stroke-width="2.5"/><ellipse cx="14" cy="13" rx="3.5" ry="2" fill="#fff" transform="rotate(-35 14 13)"/></symbol>
+  <symbol id="pmoon" viewBox="0 0 40 40"><path d="M26 5a15 15 0 1 0 9 22A12 12 0 0 1 26 5z" fill="#fbe38a" stroke="#2e2442" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+</svg>
+
+<h2>Q1 · First screen: L1's look with L3's clear way in</h2>
+<div class="one">
+  <div>
+    <div class="frame" style="height:440px">
+      <svg class="d bob" style="left:6%;top:5%;width:30px;height:30px"><use href="#pstar"/></svg>
+      <svg class="d tw" style="left:44%;top:7%;width:20px;height:20px"><use href="#pspark"/></svg>
+      <svg class="d bob" style="left:78%;top:4%;width:48px;height:30px;animation-delay:1s"><use href="#pcloud"/></svg>
+      <svg class="d tw" style="left:88%;top:44%;width:16px;height:16px;animation-delay:.7s"><use href="#pspark"/></svg>
+      <div class="wob sticker" style="position:absolute;left:7%;top:13%;width:40%;rotate:-5deg;overflow:hidden"><img src="crops/facevase.jpg" style="width:100%" alt=""></div>
+      <svg class="d" style="left:38%;top:12%;width:26px;height:24px;rotate:14deg"><use href="#pheart"/></svg>
+      <div class="hand" style="position:absolute;left:53%;top:16%;font-size:50px">ona<br>cabedo<br>wells</div>
+      <div style="position:absolute;left:5%;right:5%;bottom:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div class="print wob" style="position:relative;rotate:-3deg"><span class="tape" style="left:24%;top:-8px;background:#f7c6d9"></span><img src="crops/mistake.jpg" style="width:100%;height:58px;object-fit:cover" alt=""><div class="hand" style="font-size:22px;text-align:center;margin-top:3px">ceramics</div></div>
+        <div class="print wob" style="position:relative;rotate:2deg"><img src="crops/skirt.jpg" style="width:100%;height:58px;object-fit:cover" alt=""><div class="hand" style="font-size:22px;text-align:center;margin-top:3px">fashion</div></div>
+        <div class="print wob" style="position:relative;rotate:-1deg"><span class="tape" style="left:24%;top:-8px;background:#c9e7d6"></span><img src="crops/drawings.jpg" style="width:100%;height:58px;object-fit:cover" alt=""><div class="hand" style="font-size:22px;text-align:center;margin-top:3px">art</div></div>
+        <div class="print wob" style="position:relative;rotate:3deg"><div class="hand" style="height:58px;overflow:hidden;font-size:18px;padding:4px;background:#fffdf6">do you remember the moon?</div><div class="hand" style="font-size:22px;text-align:center;margin-top:3px">writing</div></div>
+      </div>
+    </div>
+    <div class="cap"><b>A · All on one screen</b>: decal and name on top, the four sections as small taped prints underneath</div>
+  </div>
+
+  <div>
+    <div class="frame" style="height:300px">
+      <svg class="d bob" style="left:8%;top:8%;width:30px;height:30px"><use href="#pstar"/></svg>
+      <svg class="d tw" style="left:50%;top:10%;width:20px;height:20px"><use href="#pspark"/></svg>
+      <svg class="d bob" style="left:76%;top:76%;width:28px;height:28px;animation-delay:1.2s"><use href="#pmoon"/></svg>
+      <div class="wob sticker" style="position:absolute;left:8%;top:22%;width:40%;rotate:-5deg;overflow:hidden"><img src="crops/facevase.jpg" style="width:100%" alt=""></div>
+      <div class="hand" style="position:absolute;left:54%;top:24%;font-size:54px">ona<br>cabedo<br>wells</div>
+      <div class="hand" style="position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:26px">come in ↓</div>
+    </div>
+    <div class="frame" style="height:170px;margin-top:6px;border-top:2px dashed var(--lav)">
+      <div style="position:absolute;left:5%;right:5%;top:22px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 14px">
+        <div class="print wob" style="position:relative;rotate:-2deg;display:flex;gap:6px;align-items:center"><span class="tape" style="left:30%;top:-8px;background:#f7c6d9"></span><img src="crops/mistake.jpg" style="width:52px;height:44px;object-fit:cover" alt=""><span class="hand" style="font-size:26px">ceramics</span></div>
+        <div class="print wob" style="position:relative;rotate:2deg;display:flex;gap:6px;align-items:center"><img src="crops/skirt.jpg" style="width:52px;height:44px;object-fit:cover" alt=""><span class="hand" style="font-size:26px">fashion</span></div>
+        <div class="print wob" style="position:relative;rotate:1deg;display:flex;gap:6px;align-items:center"><span class="tape" style="left:30%;top:-8px;background:#c9e7d6"></span><img src="crops/drawings.jpg" style="width:52px;height:44px;object-fit:cover" alt=""><span class="hand" style="font-size:26px">art</span></div>
+        <div class="print wob" style="position:relative;rotate:-3deg;display:flex;gap:6px;align-items:center"><img src="crops/memorycup.jpg" style="width:52px;height:44px;object-fit:cover" alt=""><span class="hand" style="font-size:26px">writing</span></div>
+      </div>
+    </div>
+    <div class="cap"><b>B · Cover first, then the cards</b>: the first screen is only the decal and name; scroll down to the four taped cards</div>
+  </div>
+</div>
+
+<h2>Q2 · How much decoration</h2>
+<div class="row">
+  <div><div class="frame" style="height:190px">
+    <svg class="d" style="left:10%;top:14%;width:26px;height:26px"><use href="#pstar"/></svg>
+    <svg class="d tw" style="left:82%;top:70%;width:18px;height:18px"><use href="#pspark"/></svg>
+    <div class="print" style="position:absolute;left:34%;top:26%;rotate:-3deg"><span class="tape" style="left:30%;top:-8px;background:#f7c6d9"></span><img src="crops/vase.jpg" style="width:96px;height:100px;object-fit:cover" alt=""></div>
+  </div><div class="cap"><b>A sprinkle</b>: two or three per screen; tape on some prints</div></div>
+  <div><div class="frame" style="height:190px">
+    <svg class="d bob" style="left:8%;top:10%;width:26px;height:26px"><use href="#pstar"/></svg>
+    <svg class="d tw" style="left:24%;top:70%;width:18px;height:18px"><use href="#pspark"/></svg>
+    <svg class="d bob" style="left:72%;top:8%;width:44px;height:28px;animation-delay:.8s"><use href="#pcloud"/></svg>
+    <svg class="d" style="left:82%;top:66%;width:24px;height:22px"><use href="#pheart"/></svg>
+    <svg class="d tw" style="left:60%;top:76%;width:14px;height:14px;animation-delay:1s"><use href="#pspark"/></svg>
+    <div class="print" style="position:absolute;left:34%;top:26%;rotate:-3deg"><span class="tape" style="left:30%;top:-8px;background:#f7c6d9"></span><img src="crops/vase.jpg" style="width:96px;height:100px;object-fit:cover" alt=""></div>
+  </div><div class="cap"><b>A handful</b>: five or six, a couple gently floating</div></div>
+  <div><div class="frame" style="height:190px">
+    <svg class="d bob" style="left:5%;top:8%;width:28px;height:28px"><use href="#pstar"/></svg>
+    <svg class="d tw" style="left:22%;top:40%;width:18px;height:18px"><use href="#pspark"/></svg>
+    <svg class="d" style="left:10%;top:70%;width:26px;height:26px"><use href="#pbub"/></svg>
+    <svg class="d bob" style="left:68%;top:6%;width:46px;height:30px;animation-delay:.8s"><use href="#pcloud"/></svg>
+    <svg class="d" style="left:84%;top:40%;width:24px;height:22px"><use href="#pheart"/></svg>
+    <svg class="d bob" style="left:76%;top:72%;width:26px;height:26px;animation-delay:1.4s"><use href="#pmoon"/></svg>
+    <svg class="d tw" style="left:58%;top:84%;width:14px;height:14px;animation-delay:1s"><use href="#pspark"/></svg>
+    <svg class="d" style="left:28%;top:84%;width:20px;height:20px"><use href="#pstar"/></svg>
+    <svg class="d tw" style="left:60%;top:30%;width:12px;height:12px;animation-delay:.4s"><use href="#pspark"/></svg>
+    <div class="print" style="position:absolute;left:34%;top:26%;rotate:-3deg"><span class="tape" style="left:30%;top:-8px;background:#f7c6d9"></span><span class="tape" style="left:62%;bottom:-8px;top:auto;background:#c9e7d6;rotate:8deg"></span><img src="crops/vase.jpg" style="width:96px;height:100px;object-fit:cover" alt=""></div>
+  </div><div class="cap"><b>Loads</b>: a full sky of stars, clouds, hearts, bubbles and moons</div></div>
+</div>
+
+<h2>Q3 · A section page (ceramics), in lilac</h2>
+<div class="row">
+  <div><div class="frame" style="height:380px">
+    <div class="hand" style="position:absolute;left:16px;top:10px;font-size:46px">ceramics</div>
+    <svg class="d bob" style="left:160px;top:16px;width:26px;height:26px"><use href="#pstar"/></svg>
+    <div class="print wob" style="position:absolute;left:5%;top:72px;rotate:-4deg"><span class="tape" style="left:30%;top:-8px;background:#f7c6d9"></span><img src="crops/facevase.jpg" style="width:100px;height:110px;object-fit:cover" alt=""><div class="hand" style="font-size:20px;text-align:center">hard work kills</div></div>
+    <div class="print wob" style="position:absolute;left:38%;top:100px;rotate:3deg"><img src="crops/mistake.jpg" style="width:110px;height:100px;object-fit:cover" alt=""><div class="hand" style="font-size:20px;text-align:center">anatomy of a mistake</div></div>
+    <div class="print wob" style="position:absolute;left:70%;top:64px;rotate:-2deg"><span class="tape" style="left:30%;top:-8px;background:#c9e7d6"></span><img src="crops/vase.jpg" style="width:90px;height:110px;object-fit:cover" alt=""><div class="hand" style="font-size:20px;text-align:center">neighborhood flowers</div></div>
+    <div class="print wob" style="position:absolute;left:16%;top:240px;rotate:5deg"><img src="crops/memorycup.jpg" style="width:110px;height:76px;object-fit:cover" alt=""><div class="hand" style="font-size:20px;text-align:center">memory cups</div></div>
+    <div class="print wob" style="position:absolute;left:56%;top:252px;rotate:-6deg"><span class="tape" style="left:30%;top:-8px;background:#fbefc9"></span><img src="crops/mugs.jpg" style="width:100px;height:72px;object-fit:cover" alt=""><div class="hand" style="font-size:20px;text-align:center">funky mugs</div></div>
+  </div><div class="cap"><b>S1 · Scattered studio wall</b>: messier and more fun</div></div>
+  <div><div class="frame" style="height:380px;padding:10px 16px">
+    <div class="hand" style="font-size:46px;margin-bottom:10px">ceramics <svg style="width:24px;height:24px;vertical-align:4px"><use href="#pstar"/></svg></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px 12px">
+      <div class="print wob" style="position:relative;rotate:-2deg"><span class="tape" style="left:28%;top:-8px;background:#f7c6d9"></span><img src="crops/facevase.jpg" style="width:100%;height:96px;object-fit:cover" alt=""><div class="hand" style="font-size:19px;text-align:center">hard work kills</div></div>
+      <div class="print wob" style="position:relative;rotate:2deg"><img src="crops/mistake.jpg" style="width:100%;height:96px;object-fit:cover" alt=""><div class="hand" style="font-size:19px;text-align:center">anatomy of a mistake</div></div>
+      <div class="print wob" style="position:relative;rotate:-1deg"><span class="tape" style="left:28%;top:-8px;background:#c9e7d6"></span><img src="crops/vase.jpg" style="width:100%;height:96px;object-fit:cover" alt=""><div class="hand" style="font-size:19px;text-align:center">neighborhood flowers</div></div>
+      <div class="print wob" style="position:relative;rotate:1.5deg"><img src="crops/memorycup.jpg" style="width:100%;height:96px;object-fit:cover" alt=""><div class="hand" style="font-size:19px;text-align:center">memory cups</div></div>
+      <div class="print wob" style="position:relative;rotate:-2.5deg"><span class="tape" style="left:28%;top:-8px;background:#fbefc9"></span><img src="crops/mugs.jpg" style="width:100%;height:96px;object-fit:cover" alt=""><div class="hand" style="font-size:19px;text-align:center">funky mugs</div></div>
+    </div>
+  </div><div class="cap"><b>S2 · Tidy but wonky rows</b>: easier to browse, especially on a phone</div></div>
+</div>
+
+<h2>Q4 · One piece's page (Hard Work Kills)</h2>
+<div class="row">
+  <div><div class="frame" style="height:420px;padding:14px 16px">
+    <div class="hand" style="font-size:20px;opacity:.7">← ceramics</div>
+    <div class="hand" style="font-size:44px;margin:4px 0 8px">hard work kills</div>
+    <div class="print" style="position:absolute;left:6%;top:110px;rotate:-3deg"><span class="tape" style="left:30%;top:-8px;background:#f7c6d9"></span><img src="crops/facevase.jpg" style="width:150px;height:190px;object-fit:cover" alt=""></div>
+    <div class="hand" style="position:absolute;left:56%;top:120px;width:40%;font-size:21px;line-height:1.05;rotate:2deg">two vases about what years of work leave on a face. one collapses, one holds it in.</div>
+    <div class="hand" style="position:absolute;left:58%;top:250px;font-size:20px;color:#7b5fb0">stoneware, 2025 ✦</div>
+    <div class="print" style="position:absolute;left:52%;top:290px;rotate:5deg"><img src="crops/facevase.jpg" style="width:80px;height:90px;object-fit:cover;object-position:top" alt=""></div>
+    <svg class="d bob" style="left:84%;top:84%;width:26px;height:26px"><use href="#pstar"/></svg>
+  </div><div class="cap"><b>P1 · Scrapbook page</b>: photos taped, with your notes handwritten around them, like your PDF pages</div></div>
+  <div><div class="frame" style="height:420px;padding:14px 16px;text-align:center">
+    <div class="hand" style="font-size:20px;opacity:.7;text-align:left">← ceramics</div>
+    <img src="crops/facevase.jpg" style="width:70%;height:240px;object-fit:cover;margin:10px auto 0;border:5px solid #fff" alt="">
+    <div class="hand" style="font-size:40px;margin-top:10px">hard work kills</div>
+    <div style="font-size:12px;line-height:1.5;color:#5d5175;margin-top:2px">stoneware, 2025<br>two vases about what years of work leave on a face</div>
+    <svg class="d tw" style="left:8%;top:40%;width:18px;height:18px"><use href="#pspark"/></svg>
+  </div><div class="cap"><b>P2 · Big and calm</b>: large photos one after another, a short caption underneath (like Karolina's)</div></div>
+</div>
+</body>
+</html>
