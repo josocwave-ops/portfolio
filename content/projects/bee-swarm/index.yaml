@@ -1,0 +1,18 @@
+title: bee swarm collection
+status: draft
+sections:
+  - ceramics
+year: ''
+details: stoneware, 2025
+teaser: Fear and fascination, chaos and delicacy.
+order: 70
+intro: 'I''ve always been drawn to beehives: the twisting, patterned structures, the way they feel both aggressive and mesmerising. Bees unsettle me, yet I am drawn to the flowers they inhabit. One vase spirals and tilts, echoing the hive''s dizzying chaos, while another embraces calm, covered in delicate lavender.'
+mood:
+  paper: parchment
+  accent: teal
+  line: spiral
+blocks:
+  - discriminant: outcome
+    value:
+      title: ''
+      caption: ''

@@ -1,0 +1,22 @@
+title: many funky mugs
+status: draft
+sections:
+  - ceramics
+year: ''
+details: stoneware, 2024–2025
+teaser: An ongoing family of mugs held together by their irregularities.
+order: 40
+intro: 'An ongoing collection of mugs connected less by uniformity than by shared irregularities: twisted handles, shifting proportions, glaze that slips or pools unpredictably. I was inspired by spirals found in tiles and snail shells, where variation exists within underlying structure.'
+mood:
+  paper: parchment
+  accent: teal
+  line: spiral
+blocks:
+  - discriminant: text
+    value:
+      heading: ''
+      body: Rather than correcting these “mistakes,” I chose to work with them, exploring how asymmetry can still create balance. Some mugs unintentionally mirror one another, fitting together in unexpected ways.
+  - discriminant: outcome
+    value:
+      title: ''
+      caption: ''

@@ -1,0 +1,16 @@
+threadsTitle: threads
+threadsIntro: The same ideas keep surfacing in clay, cloth, paint and words.
+threads:
+  - title: memory
+    intro: One mug for each memory I can't stop returning to.
+    line: spiral
+    projects:
+      - memory-cups
+      - neighborhood-flowers
+      - crema-catalana-bowl
+  - title: decay & regrowth
+    intro: Undoing and rebuilding informed the visual language, drawing from rust, erosion, and organic overgrowth.
+    line: wavy
+    projects:
+      - decay-and-growth
+      - repurposed-crochet

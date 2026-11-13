@@ -1,0 +1,51 @@
+title: the memory cup project
+status: draft
+sections:
+  - ceramics
+  - writing
+year: ''
+details: stoneware, ongoing capstone
+teaser: One mug for each memory I can't stop returning to.
+order: 10
+intro: 'This is my capstone, an ongoing project, the work I''ve chosen to mark the end of my high school journey. I thought about memory: about how countless memories exist in my life, yet there are eight I can''t stop returning to, eight that take over my mind with such vivid detail I can see every shadow, hear every sound, feel every texture. From age five to seventeen, these moments have quietly shaped me, and now they are demanding to be made visible.'
+mood:
+  paper: parchment
+  accent: teal
+  line: spiral
+blocks:
+  - discriminant: text
+    value:
+      heading: ''
+      body: |-
+        The concept became simple: one mug for each memory. Nothing about this process is accidental; every shape, every mark, every glaze choice is deliberate. Poems I've written over the years about these moments decorate the mugs' surfaces, fragments of sentences, some broken, some covered, some highlighted, forcing the viewer to read and move around the cup to grasp the story.
+
+        To hold one is to hold memory itself: visceral, fragmented, intimate. Each cup is both vessel and archive, object and story, surface and thought.
+  - discriminant: poem
+    value:
+      title: do you remember the mirror that warped my face?
+      lines: the mirror doesn't lie. it only repeats. it only shoves my own belief down my throat, makes me gag on the image.
+      note: I used to watch myself for hours, mapping every curve, waiting to catch the moment when the reflection stopped being mine. This cup explores dysmorphia and the first moment I became aware of my own face. The sculpted face is young, almost baby-like, and the handle stretches and pulls at it.
+  - discriminant: poem
+    value:
+      title: do you remember when i learned how to disappear?
+      lines: and what i invent, becoming…
+      note: 'This mug explores dissociation, the moment I realised I could vanish without leaving. The poem wrapping it is tangled in spiderwebs that crawl across the fragmented text, both decorating and suffocating it: the quiet terror of disappearing while remaining visible.'
+  - discriminant: poem
+    value:
+      title: do you remember the morning that smelled of smoke?
+      lines: it smells like the beginning of something terrible, like the day is a hinge.
+      note: This cup recalls living in a household perpetually marked by fire, a pattern baked into tradition and cycles of depression. Smoke wraps around the mug, and the poem traces tension creeping through walls, doors, and small sounds.
+  - discriminant: poem
+    value:
+      title: do you remember the eyes that linger?
+      lines: all eyes on me. i don't know you.
+      note: 'This cup recalls the day I saw my family after my grandfather died, a moment defined by gazes that wouldn''t look away. The surface is covered in sculpted eyes, each one watching, each one heavy: the sense of being seen but not known.'
+  - discriminant: poem
+    value:
+      title: do you remember the moon outside my window?
+      lines: 'all i see is the moon. and she says: i''m here.'
+      note: 'Sitting alone at dusk, in the dull orange light of the room, not knowing where my mother was, she seemed to become the moon: distant, quiet, unchanging. The cauldron form holds the magic and trust I felt toward her, while a vine climbs the handle.'
+  - discriminant: outcome
+    value:
+      title: ''
+      caption: ''

@@ -1,0 +1,18 @@
+title: charcoal
+status: draft
+sections:
+  - drawing
+year: ''
+details: ''
+teaser: Studies in charcoal.
+order: 170
+intro: Studies in charcoal.
+mood:
+  paper: bluegrey
+  accent: slate
+  line: wavy
+blocks:
+  - discriminant: outcome
+    value:
+      title: ''
+      caption: ''

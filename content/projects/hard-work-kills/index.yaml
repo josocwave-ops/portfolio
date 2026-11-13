@@ -1,0 +1,22 @@
+title: hard work kills!
+status: draft
+sections:
+  - ceramics
+year: ''
+details: stoneware, two sculptural vases
+teaser: Two faces recording what decades of labour leave behind.
+order: 20
+intro: This project began with a drawing I made on a train. I sketched an old man whose face appeared deeply worn, every wrinkle, shadow, and sag suggesting a lifetime of labour. Across from him sat another man who seemed to be the same age, yet looked relaxed, youthful, untouched by strain.
+mood:
+  paper: parchment
+  accent: teal
+  line: spiral
+blocks:
+  - discriminant: text
+    value:
+      heading: ''
+      body: 'One vase depicts a man overwhelmed by physical strain, his mouth open, his wrinkles long and deeply carved. The second portrays a woman whose exhaustion is quieter and more internalised: her mouth closed, yet heavy eye bags and a sunken expression suggest emotional depletion. Placed side by side, they form a dialogue about visible collapse versus silent endurance.'
+  - discriminant: outcome
+    value:
+      title: ''
+      caption: ''

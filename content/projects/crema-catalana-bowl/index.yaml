@@ -1,0 +1,18 @@
+title: the crema catalana bowl
+status: draft
+sections:
+  - ceramics
+year: ''
+details: stoneware, 2025
+teaser: Glaze as a surface you want to taste.
+order: 80
+intro: 'Glaze has always fascinated me for its strange, edible quality: smooth, glossy, and tempting even when empty. This bowl evokes the orange-hued memories of Catalan restaurants, where old lights and the murmur of conversation filled the air. The cracks and surface patterns echo both the texture of dessert and the lived-in quality of those moments.'
+mood:
+  paper: parchment
+  accent: teal
+  line: spiral
+blocks:
+  - discriminant: outcome
+    value:
+      title: ''
+      caption: ''
