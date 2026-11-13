@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { colourOf, getProject, getProjects, getProjectsIn, getSection, getSections, getSite, paperOf, paragraphs } from "@/content/load";
+import { colourOf, getProject, getProjects, getProjectsIn, getSection, getSections, getSite, paperOf, paragraphs, stickersFor } from "@/content/load";
 import Blocks from "../../components/Blocks";
 import { PageLines } from "../../components/Lines";
+import MarginStickers from "../../components/MarginStickers";
 import Paper from "../../components/Paper";
 import Print from "../../components/Print";
 import SiteFooter from "../../components/SiteFooter";
@@ -56,6 +57,7 @@ async function ProjectBody({ params }: { params: PageProps<"/[section]/[slug]">[
   return (
     <div className={styles.page} style={mood}>
       <PageLines kind={project.mood.line === "wavy" ? "wavy" : project.mood.line === "none" ? "none" : "spiral"} />
+      <MarginStickers id={slug} stickers={stickersFor(project.mood.stickers)} />
       <SiteHeader current={section} />
       <main className={styles.main}>
         <Link href={`/${section}`} className={`${styles.back} hand`}>

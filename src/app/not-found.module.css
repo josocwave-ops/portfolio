@@ -1,0 +1,60 @@
+.main {
+  position: relative;
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 60px var(--gutter);
+}
+
+.slip {
+  max-width: 520px;
+  rotate: -1.5deg;
+}
+
+.inner {
+  padding: 40px 44px 44px;
+  text-align: center;
+}
+
+.code {
+  font: italic 500 18px var(--display);
+  letter-spacing: 0.3em;
+  color: #7d6a5f;
+}
+
+.message {
+  margin-top: 10px;
+  font: italic 400 clamp(30px, 4.5vw, 42px) / 1.15 var(--display);
+}
+
+.home {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 20px;
+  color: var(--plum-ink);
+}
+
+.home:hover {
+  text-decoration: underline wavy;
+  text-underline-offset: 6px;
+}
+
+.moth {
+  position: absolute;
+  width: 90px;
+  top: 12%;
+  right: 22%;
+  rotate: 18deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .moth {
+    animation: flutter 5s ease-in-out infinite;
+  }
+}
+
+@keyframes flutter {
+  50% {
+    transform: translate(-14px, -10px) rotate(-8deg);
+  }
+}

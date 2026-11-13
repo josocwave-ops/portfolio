@@ -11,6 +11,9 @@ mood:
   paper: lilac
   accent: rose
   line: wavy
+  stickers:
+    - needle
+    - sprig
 blocks:
   - discriminant: outcome
     value:

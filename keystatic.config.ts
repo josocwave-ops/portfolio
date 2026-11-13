@@ -25,7 +25,7 @@ export default config({
   ui: {
     brand: { name: "onA · editing room" },
     navigation: {
-      "your work": ["projects", "sections"],
+      "your work": ["projects", "sections", "stickers"],
       "your website": ["homepage", "site"],
     },
   },
@@ -87,6 +87,11 @@ export default config({
                 { label: "None", value: "none" },
               ],
               defaultValue: "spiral",
+            }),
+            stickers: fields.multiRelationship({
+              label: "Stickers",
+              description: "A few little doodles scattered in the margins. Two or three is plenty!",
+              collection: "stickers",
             }),
           },
           { label: "Mood", description: "Small choices that give this project its own little world." },
@@ -205,6 +210,42 @@ export default config({
       },
     }),
 
+    stickers: collection({
+      label: "Stickers",
+      slugField: "name",
+      path: "content/stickers/*",
+      columns: ["drawing", "colour"],
+      schema: {
+        name: fields.slug({ name: { label: "Name", description: "e.g. moth, or 'my cat drawing'" } }),
+        image: fields.image({
+          label: "Your own drawing",
+          description: "Upload a photo or scan of a little drawing. A PNG with a see-through background looks best! Leave empty to use a built-in doodle instead.",
+          directory: "public/stickers",
+          publicPath: "/stickers/",
+        }),
+        drawing: fields.select({
+          label: "Built-in doodle",
+          description: "Used when there's no drawing uploaded above.",
+          options: [
+            { label: "Moth", value: "moth" },
+            { label: "Cat", value: "cat" },
+            { label: "Mushroom", value: "mushroom" },
+            { label: "Wonky mug", value: "mug" },
+            { label: "Sprig", value: "sprig" },
+            { label: "Eye", value: "eye" },
+            { label: "Old key", value: "key" },
+            { label: "Needle & thread", value: "needle" },
+          ],
+          defaultValue: "moth",
+        }),
+        colour: fields.select({
+          label: "Ink colour",
+          options: [{ label: "Parchment", value: "vellum" }, ...COLOURS],
+          defaultValue: "vellum",
+        }),
+      },
+    }),
+
     sections: collection({
       label: "Sections",
       slugField: "name",
@@ -224,6 +265,11 @@ export default config({
       label: "Homepage",
       path: "content/homepage",
       schema: {
+        stickers: fields.multiRelationship({
+          label: "Stickers on the homepage",
+          description: "A few doodles tucked around the threads.",
+          collection: "stickers",
+        }),
         threadsTitle: fields.text({ label: "Threads heading", defaultValue: "threads" }),
         threadsIntro: fields.text({ label: "Threads intro", multiline: true }),
         threads: fields.array(

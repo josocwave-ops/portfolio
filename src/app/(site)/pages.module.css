@@ -80,11 +80,14 @@
 .card {
   display: block;
   min-width: min(300px, 100%);
-  transition: translate 0.4s;
 }
 
-.card:hover {
-  translate: 0 -6px;
+.card > * {
+  transition: transform 0.4s;
+}
+
+.card:hover > * {
+  transform: translateY(-6px);
 }
 
 .cardInner {

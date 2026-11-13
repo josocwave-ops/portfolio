@@ -205,6 +205,81 @@ footer {
   white-space: nowrap;
 }
 
+/* ---------- depth ----------
+   Anything with data-depth drifts a little with the mouse (--mx/--my, set on <html> by Atmosphere)
+   and with scrolling (a scroll-driven animation). Bigger depth = closer = moves more. */
+@property --sy {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+[data-depth] {
+  --depth: 0;
+  translate: calc(var(--mx, 0) * var(--depth) * -14px) calc(var(--my, 0) * var(--depth) * -10px + var(--sy) * var(--depth) * 34px);
+}
+
+[data-depth^="0.0"] {
+  --depth: 0.05;
+}
+
+[data-depth^="0.1"] {
+  --depth: 0.15;
+}
+
+[data-depth^="0.2"] {
+  --depth: 0.25;
+}
+
+[data-depth^="0.3"] {
+  --depth: 0.35;
+}
+
+[data-depth^="0.4"] {
+  --depth: 0.45;
+}
+
+[data-depth^="0.5"] {
+  --depth: 0.55;
+}
+
+[data-depth^="0.6"] {
+  --depth: 0.65;
+}
+
+[data-depth^="0.7"] {
+  --depth: 0.75;
+}
+
+[data-depth^="0.8"] {
+  --depth: 0.85;
+}
+
+[data-depth^="0.9"] {
+  --depth: 0.95;
+}
+[data-depth^="1"] {
+  --depth: 1;
+}
+
+@keyframes depth-drift {
+  from {
+    --sy: 1;
+  }
+  to {
+    --sy: -1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-depth] {
+      animation: depth-drift linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -1,0 +1,33 @@
+/* ink lines, like a dip pen; set on the drawing so finer detail lines can override the width */
+.sticker {
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(20, 10, 30, 0.6));
+}
+
+.sticker :global(.fill) {
+  fill: var(--fill);
+  fill-opacity: 0.16;
+  stroke: none;
+}
+
+.sticker :global(.ink) {
+  fill: currentColor;
+}
+
+.sticker :global(.glint) {
+  fill: #fff6e0;
+  stroke: none;
+}
+
+/* an uploaded drawing */
+.own {
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgba(8, 4, 16, 0.5));
+}

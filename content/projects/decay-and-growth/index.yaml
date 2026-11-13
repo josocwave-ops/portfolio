@@ -11,6 +11,9 @@ mood:
   paper: parchment
   accent: teal
   line: spiral
+  stickers:
+    - mushroom
+    - moth
 blocks:
   - discriminant: outcome
     value:

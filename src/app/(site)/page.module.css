@@ -97,6 +97,11 @@
   }
 }
 
+/* lines may run off the sides of the screen, but never make it scroll sideways */
+.threads {
+  overflow-x: clip;
+}
+
 .intro {
   max-width: 760px;
   margin: 0 auto;

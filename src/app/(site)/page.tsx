@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { colourOf, getHomepage, getProject, getSections, getSite, type Project } from "@/content/load";
+import { colourOf, getHomepage, getProject, getSections, getSite, stickersFor, type Project } from "@/content/load";
 import { CoverLines } from "./components/Lines";
+import MarginStickers from "./components/MarginStickers";
 import Signature from "./components/Signature";
 import SiteFooter from "./components/SiteFooter";
 import Thread from "./components/Thread";
@@ -50,7 +51,8 @@ export default function Home() {
       </header>
 
       {threads.length > 0 && (
-        <main id="threads">
+        <main id="threads" className={styles.threads}>
+          <MarginStickers id="home" stickers={stickersFor(home.stickers)} />
           <section className={styles.intro}>
             <h2>{home.threadsTitle}</h2>
             {home.threadsIntro && <p>{home.threadsIntro}</p>}

@@ -102,7 +102,7 @@ export type Project = {
   cover: string | null;
   order: number;
   intro: string;
-  mood: { paper: string; accent: string; line: string };
+  mood: { paper: string; accent: string; line: string; stickers: string[] };
   blocks: Block[];
 };
 
@@ -152,7 +152,12 @@ function readProject(slug: string): Project {
     cover: img(d.cover),
     order: d.order ?? 100,
     intro: str(d.intro),
-    mood: { paper: d.mood?.paper ?? "parchment", accent: d.mood?.accent ?? "lavender", line: d.mood?.line ?? "spiral" },
+    mood: {
+      paper: d.mood?.paper ?? "parchment",
+      accent: d.mood?.accent ?? "lavender",
+      line: d.mood?.line ?? "spiral",
+      stickers: Array.isArray(d.mood?.stickers) ? d.mood.stickers : [],
+    },
     blocks: Array.isArray(d.blocks) ? d.blocks.map(block).filter((b): b is Block => b !== null) : [],
   };
 }
@@ -168,6 +173,27 @@ export function getProjects(): Project[] {
 
 export const getProjectsIn = (section: string) => getProjects().filter((p) => p.sections.includes(section));
 export const getProject = (slug: string) => getProjects().find((p) => p.slug === slug);
+
+// ---------- stickers ----------
+
+export type StickerDef = { slug: string; image: string | null; drawing: string; colour: string };
+
+export function getStickers(): Record<string, StickerDef> {
+  const all: Record<string, StickerDef> = {};
+  for (const f of list("stickers")) {
+    if (!f.isFile() || !f.name.endsWith(".yaml")) continue;
+    const slug = f.name.replace(/\.yaml$/, "");
+    const d = read(path.join(ROOT, "stickers", f.name));
+    all[slug] = { slug, image: img(d.image), drawing: str(d.drawing) || "moth", colour: str(d.colour) || "vellum" };
+  }
+  return all;
+}
+
+/** Look up stickers by name, skipping any that were deleted from the library. */
+export function stickersFor(names: string[]) {
+  const all = getStickers();
+  return names.map((n) => all[n]).filter((s): s is StickerDef => !!s);
+}
 
 // ---------- singletons ----------
 
@@ -205,6 +231,7 @@ export type Site = ReturnType<typeof getSite>;
 export function getHomepage() {
   const d = read(path.join(ROOT, "homepage.yaml"));
   return {
+    stickers: (Array.isArray(d.stickers) ? d.stickers : []).filter((s: unknown) => typeof s === "string") as string[],
     threadsTitle: str(d.threadsTitle) || "threads",
     threadsIntro: str(d.threadsIntro),
     threads: (Array.isArray(d.threads) ? d.threads : []).map((t: Yaml) => ({

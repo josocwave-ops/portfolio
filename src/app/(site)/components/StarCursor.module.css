@@ -1,0 +1,79 @@
+/* while the star is out, the usual arrow hides */
+:global(html).active,
+:global(html).active * {
+  cursor: none !important;
+}
+
+.star {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.star svg {
+  position: absolute;
+  left: -9px;
+  top: -9px;
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.35s;
+  filter: drop-shadow(0 0 3px rgba(240, 210, 140, 0.55));
+}
+
+.star path {
+  fill: #ecd391;
+  stroke: #c9a253;
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+}
+
+.shown {
+  opacity: 1;
+}
+
+/* over something clickable: a quarter-turn, a little bigger, a little brighter */
+.hover svg {
+  transform: rotate(45deg) scale(1.45);
+  filter: drop-shadow(0 0 6px rgba(250, 220, 150, 0.85));
+}
+
+.press svg {
+  transform: rotate(45deg) scale(1.05);
+}
+
+.speck {
+  position: fixed;
+  z-index: 99;
+  left: -20px;
+  top: -20px;
+  width: var(--size, 3px);
+  height: var(--size, 3px);
+  margin: -1.5px 0 0 -1.5px;
+  border-radius: 50%;
+  background: #f0d898;
+  box-shadow: 0 0 4px rgba(240, 210, 140, 0.8);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.fall {
+  animation: fall 0.8s ease-out forwards;
+}
+
+@keyframes fall {
+  from {
+    opacity: 0.85;
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--dx), 22px) scale(0.3);
+  }
+}

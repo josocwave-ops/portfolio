@@ -12,6 +12,9 @@ mood:
   paper: parchment
   accent: teal
   line: spiral
+  stickers:
+    - eye
+    - mug
 blocks:
   - discriminant: text
     value:

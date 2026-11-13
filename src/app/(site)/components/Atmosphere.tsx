@@ -1,17 +1,15 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import styles from "./Atmosphere.module.css";
 
 const WASH = ["#3d2f56", "#2a3153", "#46304a", "#17131f", "#322849", "#3f2c40", "#2c3a52"];
 
 // Painted night sky, grain, vignette and a faint candle glow that follows the mouse.
-// Also gives every [data-depth] element a little parallax, so the page has layers.
+// Also feeds the mouse position to the CSS depth effect, so the page has layers.
 export default function Atmosphere() {
   const sky = useRef<HTMLCanvasElement>(null);
   const glow = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   // the sky is painted once per visit (and again if the window changes size a lot)
   useEffect(() => {
@@ -54,24 +52,12 @@ export default function Atmosphere() {
     };
   }, []);
 
-  // depth + glow, re-measured on every page
+  // depth + glow: the mouse position goes onto <html> as --mx/--my, and every [data-depth]
+  // element works out its own drift in CSS (globals.css). Nothing on the page itself is touched.
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const fine = matchMedia("(pointer: fine)").matches;
-    const layers = [...document.querySelectorAll<HTMLElement>("[data-depth]")].map((el) => ({
-      el,
-      d: parseFloat(el.dataset.depth || "0"),
-      base: 0,
-    }));
-    const measure = () => {
-      for (const L of layers) L.el.style.translate = "";
-      for (const L of layers) {
-        const r = L.el.getBoundingClientRect();
-        L.base = r.top + scrollY + r.height / 2;
-      }
-    };
-    measure();
-
+    if (!matchMedia("(pointer: fine)").matches) return;
+    const root = document.documentElement;
     let tx = 0;
     let ty = 0;
     let mx = 0;
@@ -88,18 +74,8 @@ export default function Atmosphere() {
       glow.current?.classList.add(styles.on);
     };
     const onLeave = () => glow.current?.classList.remove(styles.on);
-    if (fine) {
-      addEventListener("pointermove", onMove);
-      document.documentElement.addEventListener("pointerleave", onLeave);
-    }
-    let rt = 0;
-    const onResize = () => {
-      clearTimeout(rt);
-      rt = window.setTimeout(measure, 250);
-    };
-    addEventListener("resize", onResize);
-    // images arriving late shift the layout, so measure again once things settle
-    const settle = window.setTimeout(measure, 900);
+    addEventListener("pointermove", onMove);
+    root.addEventListener("pointerleave", onLeave);
 
     let raf = 0;
     const frame = () => {
@@ -108,24 +84,17 @@ export default function Atmosphere() {
       gx += (ggx - gx) * 0.12;
       gy += (ggy - gy) * 0.12;
       if (glow.current) glow.current.style.transform = `translate(${gx.toFixed(1)}px, ${gy.toFixed(1)}px)`;
-      const mid = scrollY + innerHeight / 2;
-      for (const L of layers) {
-        const s = (L.base - mid) * L.d * -0.06;
-        L.el.style.translate = `${(-mx * L.d * 14).toFixed(2)}px ${(-my * L.d * 10 + s).toFixed(2)}px`;
-      }
+      root.style.setProperty("--mx", mx.toFixed(3));
+      root.style.setProperty("--my", my.toFixed(3));
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(rt);
-      clearTimeout(settle);
       removeEventListener("pointermove", onMove);
-      document.documentElement.removeEventListener("pointerleave", onLeave);
-      removeEventListener("resize", onResize);
-      for (const L of layers) L.el.style.translate = "";
+      root.removeEventListener("pointerleave", onLeave);
     };
-  }, [pathname]);
+  }, []);
 
   return (
     <div aria-hidden="true">
