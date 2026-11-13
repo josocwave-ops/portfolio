@@ -1,0 +1,132 @@
+/* A spread is laid out on a 1180-wide sheet and scales as one picture (container units). */
+.spread {
+  max-width: 1180px;
+  margin: 0 auto 120px;
+  aspect-ratio: 1180 / 960;
+  container-type: inline-size;
+}
+
+.item {
+  position: absolute;
+  left: var(--x);
+  top: calc(var(--y) * 100cqw / 1180);
+  width: var(--w);
+  z-index: var(--z, 5);
+  rotate: var(--r, 0deg);
+}
+
+.label {
+  z-index: 25;
+}
+
+.no {
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.title {
+  font: italic 400 clamp(52px, 8cqw, 100px) / 0.92 var(--display);
+  color: var(--vellum);
+  margin: 6px 0 14px;
+}
+
+.media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 15px;
+}
+
+.media span::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  vertical-align: 0.12em;
+}
+
+.intro {
+  margin-top: 18px;
+  max-width: 300px;
+}
+
+.more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 19px;
+  color: var(--gold);
+}
+
+.more:hover {
+  text-decoration: underline wavy;
+  text-underline-offset: 6px;
+}
+
+.sheet {
+  z-index: 2;
+}
+
+.sheetPaper {
+  height: calc(720 * 100cqw / 1180);
+}
+
+.slipPaper {
+  padding: 22px 26px 24px;
+}
+
+.slipPaper p {
+  font: italic 400 clamp(17px, 1.8cqw, 21px) / 1.45 var(--body);
+}
+
+.slipPaper span {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--plum-ink);
+}
+
+/* phones: the collage becomes a vertical stack that still overlaps */
+@media (max-width: 700px) {
+  .spread {
+    aspect-ratio: auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .item {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 82%;
+  }
+
+  .item:nth-of-type(even) {
+    align-self: flex-end;
+    margin-top: -28px;
+  }
+
+  .item:nth-of-type(odd) {
+    margin-top: -18px;
+  }
+
+  .label {
+    order: -1;
+    width: 100%;
+    margin: 0 0 64px !important;
+  }
+
+  /* on a narrow screen the overlapping prints are layering enough */
+  .sheet {
+    display: none;
+  }
+
+  .slip {
+    width: 90%;
+    margin-top: -20px !important;
+  }
+}

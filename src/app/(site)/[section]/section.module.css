@@ -1,0 +1,75 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px var(--gutter) 0;
+}
+
+.head {
+  max-width: 640px;
+  margin: 28px 0 70px;
+}
+
+.title {
+  font: italic 400 clamp(60px, 10vw, 120px) / 0.9 var(--display);
+  color: var(--vellum);
+}
+
+.title::after {
+  content: "";
+  display: inline-block;
+  width: 0.12em;
+  height: 0.12em;
+  margin-left: 0.12em;
+  border-radius: 50%;
+  background: var(--c);
+  vertical-align: 0.1em;
+}
+
+.intro {
+  margin-top: 18px;
+  max-width: 52ch;
+}
+
+/* a loose pile: a grid, but every print drops, grows and tilts a little */
+.pile {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(210px, 42vw), 1fr));
+  gap: 64px clamp(18px, 3.5vw, 44px);
+  align-items: start;
+}
+
+.spot {
+  margin-top: var(--drop);
+  scale: var(--scale);
+}
+
+.spot:nth-child(3n + 2) {
+  margin-left: -12px;
+}
+
+.empty {
+  font-size: 24px;
+  color: var(--vellum-3);
+}
+
+.loading {
+  padding: 40vh 0;
+  text-align: center;
+  font-size: 22px;
+  color: var(--vellum-3);
+}
+
+@media (max-width: 560px) {
+  .pile {
+    gap: 44px 14px;
+  }
+
+  .spot {
+    margin-top: calc(var(--drop) / 2);
+  }
+}

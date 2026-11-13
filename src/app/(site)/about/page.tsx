@@ -1,35 +1,42 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getSite, paragraphs } from "@/content/load";
-import Frame from "../components/Frame";
+import { PageLines } from "../components/Lines";
+import Paper from "../components/Paper";
+import Print from "../components/Print";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import Swirls from "../components/Swirls";
-import styles from "../inner.module.css";
+import styles from "../pages.module.css";
 
 export const metadata: Metadata = { title: "about" };
 
 export default function AboutPage() {
-  const { about } = getSite();
+  const { about, contact } = getSite();
   return (
-    <>
-      <Swirls density="page" />
+    <div className={styles.page}>
+      <PageLines kind="spiral" side="left" />
       <SiteHeader current="about" />
       <main className={styles.main}>
         <div className={styles.about}>
-          <Frame src={about.portrait} alt="Portrait" eager className={styles.portrait} />
-          <div className={styles.prose}>
-            {about.heading && (
-              <h1 className={styles.heading} style={{ marginTop: 0 }}>
-                {about.heading}
-              </h1>
-            )}
-            {paragraphs(about.body).map((p) => (
-              <p key={p.slice(0, 32)}>{p}</p>
-            ))}
+          <div className={styles.portrait} data-depth="0.5">
+            <Print id="about-portrait" image={about.portrait} alt="Portrait" fix="corners" depth={0.7} maxTilt={4} eager />
           </div>
+          <Paper id="about-sheet" tear={5} depth={0.3} className={styles.aboutSheet} innerClassName={styles.sheetInner}>
+            {about.heading && <h1 className={styles.heading}>{about.heading}</h1>}
+            <div className={styles.prose}>
+              {paragraphs(about.body).map((p) => (
+                <p key={p.slice(0, 32)}>{p}</p>
+              ))}
+            </div>
+            {(contact.email || contact.instagram) && (
+              <Link href="/contact" className={`${styles.hello} hand`}>
+                say hello →
+              </Link>
+            )}
+          </Paper>
         </div>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }

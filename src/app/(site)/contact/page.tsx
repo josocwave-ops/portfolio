@@ -1,56 +1,58 @@
 import type { Metadata } from "next";
 import { getSite } from "@/content/load";
+import { PageLines } from "../components/Lines";
+import Paper from "../components/Paper";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import Spiral from "../components/Spiral";
-import Swirls from "../components/Swirls";
-import styles from "../inner.module.css";
+import styles from "../pages.module.css";
 
 export const metadata: Metadata = { title: "contact" };
 
 export default function ContactPage() {
   const { contact } = getSite();
+  const cards = [
+    contact.email && { id: "email", href: `mailto:${contact.email}`, big: contact.email, small: "email", external: false },
+    contact.instagram && { id: "insta", href: `https://instagram.com/${contact.instagram}`, big: `@${contact.instagram}`, small: "instagram", external: true },
+    contact.shopUrl && {
+      id: "shop",
+      href: contact.shopUrl,
+      big: contact.shopUrl.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
+      small: contact.shopName || "the shop",
+      external: true,
+    },
+  ].filter((c): c is { id: string; href: string; big: string; small: string; external: boolean } => !!c);
+
   return (
-    <>
-      <Swirls density="page" />
+    <div className={styles.page}>
+      <PageLines kind="wavy" side="right" />
       <SiteHeader current="contact" />
       <main className={styles.main}>
-        <h1 className={styles.heading}>contact</h1>
-        {contact.line && <p className={styles.lead}>{contact.line}</p>}
-        <div className={styles.contactList}>
-          {contact.email && (
-            <a href={`mailto:${contact.email}`}>
-              <Spiral color="#c98fa6" seed={4} className={styles.headingSpiral} />
-              <span>
-                {contact.email}
-                <br />
-                <small>email</small>
-              </span>
+        <div className={styles.contactHead}>
+          <h1 className={styles.bigTitle}>contact</h1>
+          {contact.line && <p className={styles.lead}>{contact.line}</p>}
+        </div>
+        <div className={styles.cards}>
+          {cards.map((c, i) => (
+            <a
+              key={c.id}
+              href={c.href}
+              className={styles.card}
+              style={{ rotate: `${[-2, 1.5, -1][i % 3]}deg` }}
+              data-depth={(0.3 + i * 0.2).toFixed(1)}
+              {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              <Paper id={`contact-${c.id}`} tear={3} depth={0.5} innerClassName={styles.cardInner}>
+                <span className="hand">{c.small}</span>
+                <strong>
+                  {c.big}
+                  {c.external && " ↗"}
+                </strong>
+              </Paper>
             </a>
-          )}
-          {contact.instagram && (
-            <a href={`https://instagram.com/${contact.instagram}`} target="_blank" rel="noopener noreferrer">
-              <Spiral color="#8394b5" seed={5} className={styles.headingSpiral} />
-              <span>
-                @{contact.instagram}
-                <br />
-                <small>instagram</small>
-              </span>
-            </a>
-          )}
-          {contact.shopUrl && (
-            <a href={contact.shopUrl} target="_blank" rel="noopener noreferrer">
-              <Spiral color="#8fa89a" seed={6} className={styles.headingSpiral} />
-              <span>
-                {contact.shopUrl.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
-                <br />
-                <small>{contact.shopName || "the shop"}</small>
-              </span>
-            </a>
-          )}
+          ))}
         </div>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }

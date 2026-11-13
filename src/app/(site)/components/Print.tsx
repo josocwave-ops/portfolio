@@ -1,49 +1,79 @@
 import Link from "next/link";
 import { getSite } from "@/content/load";
+import { tapeColour, tilt, torn } from "../lib/scatter";
 import styles from "./Print.module.css";
 
-// A white-edged photo print, tilted a little, with tape on some.
-const TILTS = [-1.6, 1.2, -0.7, 1.8, -2.1, 0.9, -1.1, 1.5];
-
+// A photo on old photo paper: a little tilted, with tape or album corners.
+// With no photo yet, it's an empty frame with a note (only you will see those, on drafts).
 export default function Print({
-  href,
+  id,
   image,
-  title,
+  caption,
   note,
-  index,
-  color,
+  href,
+  alt,
+  crop,
+  fix = "tape",
+  tape,
   draft,
+  depth = 0.5,
+  maxTilt = 3,
+  eager,
+  className,
+  style,
 }: {
-  href: string;
+  id: string;
   image: string | null;
-  title: string;
+  caption?: string;
   note?: string;
-  index: number;
-  color: string;
+  href?: string;
+  alt?: string;
+  /** crop to a fixed shape (galleries) instead of keeping the photo's own shape */
+  crop?: "portrait" | "square" | "landscape";
+  fix?: "tape" | "corners" | "none";
+  tape?: string;
   draft?: boolean;
+  depth?: number;
+  maxTilt?: number;
+  eager?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   const words = getSite().words;
-  const tilt = TILTS[index % TILTS.length];
-  const taped = index % 3 !== 1;
-  return (
-    <Link
-      href={href}
-      className={styles.print}
-      style={{ "--tilt": `${tilt}deg`, "--tape": color } as React.CSSProperties}
-      title={words.peek || undefined}
-    >
-      {taped && <span className={styles.tape} aria-hidden="true" />}
-      {draft && <span className={styles.draft}>draft · only you can see this</span>}
-      <span className={styles.photo}>
-        {image ? (
-          // eslint-disable-next-line @next/next/no-img-element -- uploaded photos have no known size
-          <img src={image} alt="" loading={index < 4 ? "eager" : "lazy"} />
-        ) : (
-          <span className={styles.empty}>{words.emptyPhoto}</span>
-        )}
+  const body = (
+    <>
+      {fix === "tape" && <span className="tape" style={{ "--tape": tape ?? tapeColour(id), "--tr": `${tilt(`t${id}`, 6)}deg` } as React.CSSProperties} />}
+      {draft && <span className="draft-tag">draft · only you can see this</span>}
+      <span className="lift" style={{ "--d": depth } as React.CSSProperties}>
+        <span className={`paper ${styles.frame}`} style={{ clipPath: torn(id, 1.3, 30) }}>
+          <span className={`${styles.photo} ${crop ? styles[crop] : ""}`}>
+            {image ? (
+              // eslint-disable-next-line @next/next/no-img-element -- uploaded photos have no known size, so a plain img keeps their shape
+              <img src={image} alt={alt ?? caption ?? ""} loading={eager ? "eager" : "lazy"} />
+            ) : (
+              <span className={`${styles.empty} hand`}>{words.emptyPhoto}</span>
+            )}
+          </span>
+          {(caption || note) && (
+            <span className={styles.caption}>
+              {caption && <span className="hand">{caption}</span>}
+              {note && <small>{note}</small>}
+            </span>
+          )}
+        </span>
       </span>
-      <span className={styles.title}>{title}</span>
-      {note && <span className={styles.note}>{note}</span>}
+      {href && words.peek && <span className={`${styles.peek} hand`}>{words.peek}</span>}
+    </>
+  );
+  const cls = `${styles.print} ${fix === "corners" ? "corners" : ""} ${href ? styles.link : ""} ${className ?? ""}`;
+  const st = { "--tilt": `${tilt(id, maxTilt)}deg`, ...style } as React.CSSProperties;
+  return href ? (
+    <Link href={href} className={cls} style={st}>
+      {body}
     </Link>
+  ) : (
+    <figure className={cls} style={st}>
+      {body}
+    </figure>
   );
 }

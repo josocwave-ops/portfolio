@@ -1,0 +1,120 @@
+/* about + contact */
+.page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px var(--gutter) 0;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  align-items: center;
+  margin-top: 30px;
+}
+
+.portrait {
+  position: relative;
+  z-index: 2;
+  margin-right: -8%;
+}
+
+.aboutSheet {
+  rotate: 1deg;
+}
+
+.sheetInner {
+  padding: clamp(32px, 5vw, 60px) clamp(28px, 5vw, 64px) clamp(32px, 5vw, 56px) clamp(40px, 8vw, 90px);
+}
+
+.heading {
+  font: italic 400 clamp(44px, 6vw, 72px) / 0.95 var(--display);
+  margin-bottom: 22px;
+}
+
+.prose {
+  display: grid;
+  gap: 14px;
+  max-width: 56ch;
+  font-size: 17.5px;
+  line-height: 1.7;
+}
+
+.hello {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 21px;
+  color: var(--plum-ink);
+}
+
+.hello:hover {
+  text-decoration: underline wavy;
+  text-underline-offset: 6px;
+}
+
+.contactHead {
+  margin: 28px 0 60px;
+}
+
+.bigTitle {
+  font: italic 400 clamp(60px, 10vw, 120px) / 0.9 var(--display);
+  color: var(--vellum);
+}
+
+.lead {
+  margin-top: 16px;
+  max-width: 48ch;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 34px 40px;
+  align-items: flex-start;
+}
+
+.card {
+  display: block;
+  min-width: min(300px, 100%);
+  transition: translate 0.4s;
+}
+
+.card:hover {
+  translate: 0 -6px;
+}
+
+.cardInner {
+  display: grid;
+  gap: 4px;
+  padding: 22px 30px 26px;
+}
+
+.cardInner span {
+  font-size: 18px;
+  color: var(--plum-ink);
+}
+
+.cardInner strong {
+  font: italic 500 clamp(24px, 3vw, 30px) / 1.15 var(--display);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portrait {
+    width: 72%;
+    margin: 0 auto -40px;
+  }
+
+  .sheetInner {
+    padding-left: clamp(28px, 6vw, 40px);
+    padding-top: 60px;
+  }
+}

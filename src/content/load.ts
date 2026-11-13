@@ -40,14 +40,23 @@ export const paragraphs = (text: string) =>
 
 // ---------- colours ----------
 
+// color: dots, tape and lines on the night; ink: the same hue dark enough to write on paper
 export const COLOURS: Record<string, { color: string; ink: string }> = {
-  teal: { color: "#7fa9a6", ink: "#4f7a77" },
-  lavender: { color: "#a99bb5", ink: "#7d6b8d" },
-  slate: { color: "#8394b5", ink: "#5d6f94" },
-  rose: { color: "#c98fa6", ink: "#a5627c" },
-  sage: { color: "#8fa89a", ink: "#5f7a6b" },
-  gold: { color: "#d6b56f", ink: "#9c7a33" },
+  teal: { color: "#8cc0b8", ink: "#3f6f69" },
+  lavender: { color: "#b8a6d0", ink: "#634f80" },
+  slate: { color: "#98a9cc", ink: "#475b85" },
+  rose: { color: "#d3a3b9", ink: "#8c4d68" },
+  sage: { color: "#a7c2b0", ink: "#4e6b58" },
+  gold: { color: "#d9b873", ink: "#7d5f22" },
 };
+
+export const PAPERS: Record<string, string> = {
+  parchment: "#eadfc7",
+  bluegrey: "#d6dce2",
+  lilac: "#e0d6e6",
+  sage: "#d9e1d4",
+};
+export const paperOf = (name: string) => PAPERS[name] ?? PAPERS.parchment;
 export const colourOf = (name: string) => COLOURS[name] ?? COLOURS.lavender;
 
 // ---------- sections ----------
