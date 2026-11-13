@@ -5,7 +5,6 @@ import Atmosphere from "./(site)/components/Atmosphere";
 import Paper from "./(site)/components/Paper";
 import SiteFooter from "./(site)/components/SiteFooter";
 import SiteHeader from "./(site)/components/SiteHeader";
-import StarCursor from "./(site)/components/StarCursor";
 import Sticker from "./(site)/components/Sticker";
 import styles from "./not-found.module.css";
 
@@ -29,7 +28,6 @@ export default function NotFound() {
         </Paper>
       </main>
       <SiteFooter />
-      <StarCursor />
     </>
   );
 }

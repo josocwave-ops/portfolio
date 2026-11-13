@@ -252,7 +252,8 @@ export default config({
       path: "content/sections/*",
       columns: ["order"],
       schema: {
-        name: fields.slug({ name: { label: "Name", description: "e.g. ceramics" } }),
+        name: fields.slug({ name: { label: "Name", description: "e.g. ceramics, or art & drawing" } }),
+        menuName: fields.text({ label: "Short name for the menu", description: "Optional. e.g. 'art' instead of 'art & drawing'." }),
         intro: fields.text({ label: "Intro", multiline: true, description: "A line or two at the top of the section page." }),
         colour: fields.select({ label: "Colour", options: COLOURS, defaultValue: "lavender" }),
         order: fields.integer({ label: "Order in the menu", defaultValue: 1 }),
@@ -265,32 +266,16 @@ export default config({
       label: "Homepage",
       path: "content/homepage",
       schema: {
+        hello: fields.text({
+          label: "Hello line",
+          description: "A line under your signature, above the four doors.",
+          multiline: true,
+        }),
         stickers: fields.multiRelationship({
           label: "Stickers on the homepage",
-          description: "A few doodles tucked around the threads.",
+          description: "A few doodles tucked around the doors.",
           collection: "stickers",
         }),
-        threadsTitle: fields.text({ label: "Threads heading", defaultValue: "threads" }),
-        threadsIntro: fields.text({ label: "Threads intro", multiline: true }),
-        threads: fields.array(
-          fields.object({
-            title: fields.text({ label: "Title", description: "e.g. memory" }),
-            intro: fields.text({ label: "A line about it", multiline: true }),
-            line: fields.select({
-              label: "Line",
-              options: [
-                { label: "Starry spiral", value: "spiral" },
-                { label: "Wavy spiral", value: "wavy" },
-              ],
-              defaultValue: "spiral",
-            }),
-            projects: fields.array(fields.relationship({ label: "Project", collection: "projects" }), {
-              label: "Projects in this thread",
-              description: "2 to 4 projects, ideally from different sections.",
-            }),
-          }),
-          { label: "Threads", itemLabel: (p) => p.fields.title.value || "Thread" },
-        ),
       },
     }),
 
@@ -325,7 +310,6 @@ export default config({
             peek: fields.text({ label: "When hovering over a project" }),
             notFound: fields.text({ label: "Page not found" }),
             emptyPhoto: fields.text({ label: "Empty photo frame (only you see this)" }),
-            back: fields.text({ label: "Back link" }),
             next: fields.text({ label: "Next project link" }),
             footer: fields.text({ label: "Footer" }),
           },

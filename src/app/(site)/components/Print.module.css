@@ -27,9 +27,10 @@
   --paper-tone: #f5efe4;
 }
 
-/* photo paper ages less than the sheets around it */
-.frame::before {
-  opacity: 0.25;
+/* photo paper ages less than the sheets around it: fibres only */
+.frame {
+  background-image: var(--tex-fibre);
+  background-size: 300px;
 }
 
 .photo {
@@ -127,8 +128,28 @@
   translate: -50% 0;
 }
 
+/* a little sparkle that appears when you point at a print */
+.spark {
+  position: absolute;
+  z-index: 5;
+  top: -14px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transform: scale(0.3) rotate(-40deg);
+  transition: opacity 0.35s, transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.link:hover .spark,
+.link:focus-visible .spark {
+  opacity: 1;
+  transform: scale(1) rotate(20deg);
+}
+
 @media (hover: none) {
-  .peek {
+  .peek,
+  .spark {
     display: none;
   }
 }

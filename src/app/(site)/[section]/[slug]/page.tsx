@@ -10,6 +10,7 @@ import Paper from "../../components/Paper";
 import Print from "../../components/Print";
 import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/SiteHeader";
+import Trail from "../../components/Trail";
 import styles from "./project.module.css";
 
 export function generateStaticParams() {
@@ -60,9 +61,7 @@ async function ProjectBody({ params }: { params: PageProps<"/[section]/[slug]">[
       <MarginStickers id={slug} stickers={stickersFor(project.mood.stickers)} />
       <SiteHeader current={section} />
       <main className={styles.main}>
-        <Link href={`/${section}`} className={`${styles.back} hand`}>
-          ← {words.back}
-        </Link>
+        <Trail steps={[{ href: "/", label: "home" }, { href: `/${section}`, label: meta.name }, { label: project.title }]} />
 
         <section className={`${styles.hero} ${project.cover ? "" : styles.noCover}`}>
           {project.draft && <span className="draft-tag">draft · only you can see this page</span>}

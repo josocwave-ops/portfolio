@@ -32,8 +32,8 @@
 
   /* textures drawn by the browser (SVG noise), so they load instantly */
   --tex-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --tex-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .26 0 0 -1.4 0 .95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
-  --tex-fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .9' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .32 0 0 0 0 .22 0 0 0 -2.2 1.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --tex-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .26 0 0 -0.7 0 .48'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  --tex-fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .9' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .32 0 0 0 0 .22 0 0 0 -0.5 0.28'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
 }
 
 *,
@@ -103,36 +103,16 @@ footer {
 
 /* ---------- shared materials ---------- */
 
-/* aged paper: blotches, fibres, burnt edges. Torn edges come from an inline clip-path. */
+/* aged paper: blotches, fibres, burnt edges, all painted in one background (cheap to draw).
+   Torn edges come from an inline clip-path. */
 .paper {
   position: relative;
-  isolation: isolate;
   background-color: var(--paper-tone, var(--paper));
+  background-image: var(--tex-paper), var(--tex-fibre);
+  background-size: 420px, 300px;
+  background-blend-mode: multiply;
   color: var(--paper-ink);
   box-shadow: inset 0 0 38px rgba(118, 84, 40, 0.3), inset 0 0 4px rgba(118, 84, 40, 0.35);
-}
-
-.paper::before,
-.paper::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.paper::before {
-  background-image: var(--tex-paper);
-  background-size: 420px;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-}
-
-.paper::after {
-  background-image: var(--tex-fibre), var(--tex-grain);
-  background-size: 300px, 200px;
-  opacity: 0.22;
-  mix-blend-mode: multiply;
 }
 
 /* soft, layered shadows that make paper float above the night */
@@ -206,17 +186,10 @@ footer {
 }
 
 /* ---------- depth ----------
-   Anything with data-depth drifts a little with the mouse (--mx/--my, set on <html> by Atmosphere)
-   and with scrolling (a scroll-driven animation). Bigger depth = closer = moves more. */
-@property --sy {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
-
+   Anything with data-depth drifts as you scroll (a scroll-driven animation the browser runs on its own,
+   off the main thread). Bigger depth = closer = moves more. */
 [data-depth] {
   --depth: 0;
-  translate: calc(var(--mx, 0) * var(--depth) * -14px) calc(var(--my, 0) * var(--depth) * -10px + var(--sy) * var(--depth) * 34px);
 }
 
 [data-depth^="0.0"] {
@@ -264,10 +237,10 @@ footer {
 
 @keyframes depth-drift {
   from {
-    --sy: 1;
+    translate: 0 calc(var(--depth) * 34px);
   }
   to {
-    --sy: -1;
+    translate: 0 calc(var(--depth) * -34px);
   }
 }
 

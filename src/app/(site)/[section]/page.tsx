@@ -6,6 +6,7 @@ import { PageLines } from "../components/Lines";
 import Print from "../components/Print";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import Trail from "../components/Trail";
 import { rng } from "../lib/scatter";
 import styles from "./section.module.css";
 
@@ -40,6 +41,7 @@ async function SectionBody({ params }: { params: PageProps<"/[section]">["params
       <PageLines kind={index % 2 ? "wavy" : "spiral"} side={index % 2 ? "left" : "right"} />
       <SiteHeader current={section} />
       <main className={styles.main}>
+        <Trail steps={[{ href: "/", label: "home" }, { label: meta.name }]} />
         <div className={styles.head} data-depth="0.08">
           <h1 className={styles.title}>{meta.name}</h1>
           {meta.intro && <p className={styles.intro}>{meta.intro}</p>}

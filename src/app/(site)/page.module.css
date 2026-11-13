@@ -1,116 +1,225 @@
+.top {
+  position: relative;
+}
+
+/* the cover: signature and hello, under the night sky */
 .cover {
   position: relative;
-  height: 100svh;
-  min-height: 600px;
+  min-height: 56svh;
   display: grid;
   place-items: center;
   overflow: hidden;
+  margin-top: -20px;
 }
 
 .titleblock {
   position: relative;
+  z-index: 2;
   text-align: center;
-  padding: 16px;
+  padding: 32px 16px;
 }
 
 .title {
   font-weight: 400;
 }
 
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px 30px;
-  margin-top: 34px;
+.hello {
+  margin-top: 26px;
+  font-size: clamp(19px, 2.2vw, 22px);
+  color: var(--vellum-2);
 }
 
-.menu a,
-.small a {
-  position: relative;
-  padding-bottom: 6px;
-  background: no-repeat left bottom / 0% 6px
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 6'%3E%3Cpath d='M1 3 Q 8 0 15 3 T 30 3 T 45 3 T 59 3' fill='none' stroke='%23d9b873' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
-  transition: background-size 0.45s ease;
-}
-
-.menu a:hover,
-.small a:hover {
-  background-size: 100% 6px;
-}
-
-.menu a {
-  font: italic 500 clamp(23px, 3vw, 28px) / 1.3 var(--display);
-  color: var(--vellum);
-}
-
-.menu a::before {
-  content: "";
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 9px;
-  border-radius: 50%;
-  background: var(--c);
-  vertical-align: 0.22em;
-}
-
-.small {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px 22px;
-  margin-top: 16px;
-  font-size: 15px;
-  color: var(--vellum-3);
-}
-
-.hint {
+/* tiny twinkles in the sky */
+.sky {
   position: absolute;
-  bottom: 24px;
-  left: 50%;
-  translate: -50% 0;
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  font-size: 19px;
-  color: var(--vellum-3);
-}
-
-.hint svg path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  z-index: 1;
+  opacity: 0.25;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hint svg {
-    animation: drift 2.8s ease-in-out infinite;
+  .sky {
+    animation: twinkle 6s ease-in-out infinite alternate;
   }
 }
 
-@keyframes drift {
-  50% {
-    transform: translateY(5px);
+@keyframes twinkle {
+  0% {
+    opacity: 0.08;
+    transform: scale(0.6) rotate(0deg);
+  }
+  60% {
+    opacity: 0.85;
+    transform: scale(1) rotate(25deg);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8) rotate(40deg);
   }
 }
 
-/* lines may run off the sides of the screen, but never make it scroll sideways */
-.threads {
+/* ---------- the four doors ---------- */
+.doorsWrap {
+  position: relative;
+  padding: 10px var(--gutter) 40px;
   overflow-x: clip;
 }
 
-.intro {
-  max-width: 760px;
+.doors {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
   margin: 0 auto;
-  padding: 120px var(--gutter) 48px;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 40px);
+  padding-top: 70px;
 }
 
-.intro h2 {
-  font: italic 400 clamp(42px, 6vw, 64px) / 1 var(--display);
-  color: var(--vellum);
-  margin-bottom: 14px;
+.door {
+  position: relative;
+  display: block;
+  rotate: var(--tilt);
+}
+
+.door:nth-child(even) {
+  margin-top: 46px;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 26px 24px 24px;
+}
+
+.no {
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.name {
+  margin-top: 4px;
+  font: italic 400 clamp(32px, 3.2vw, 44px) / 1 var(--display);
+  color: var(--paper-ink);
+}
+
+.name::after {
+  content: "";
+  display: inline-block;
+  width: 0.16em;
+  height: 0.16em;
+  margin-left: 0.14em;
+  border-radius: 50%;
+  background: var(--c);
+  vertical-align: 0.08em;
+}
+
+.intro {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #5d4b45;
+}
+
+.count {
+  margin-top: auto;
+  padding-top: 18px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+/* covers peeking out from behind the card, fanning out on hover */
+.peeks {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: -54px;
+  width: 0;
+  height: 0;
+}
+
+.peek {
+  position: absolute;
+  left: -46px;
+  top: 0;
+  width: 92px;
+  height: 110px;
+  padding: 6px;
+  background: #f5efe4;
+  box-shadow: 0 6px 14px rgba(8, 4, 16, 0.45);
+  rotate: calc(var(--j) * 9deg);
+  translate: calc(var(--j) * 44px) calc(var(--a) * 10px);
+  transition: rotate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.peek img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spark {
+  position: absolute;
+  z-index: 3;
+  top: -12px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  transform: scale(0.3) rotate(-40deg);
+  transition: opacity 0.35s, transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.door:hover .card,
+.door:focus-visible .card {
+  transform: translateY(-10px) rotate(calc(var(--tilt) * -1));
+}
+
+.door:hover .peek,
+.door:focus-visible .peek {
+  rotate: calc(var(--j) * 15deg);
+  translate: calc(var(--j) * 62px) calc(var(--a) * 6px - 18px);
+}
+
+.door:hover .spark,
+.door:focus-visible .spark {
+  opacity: 1;
+  transform: scale(1) rotate(20deg);
+}
+
+@media (max-width: 1000px) {
+  .doors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 90px;
+  }
+}
+
+@media (max-width: 560px) {
+  .doors {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 80px;
+    padding-top: 60px;
+  }
+
+  .door:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .door {
+    width: 90%;
+  }
+
+  .door:nth-child(even) {
+    margin-left: auto;
+  }
+
+  .cardInner {
+    min-height: 0;
+  }
 }

@@ -1,0 +1,30 @@
+.trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 0;
+  margin: 10px 0 28px;
+  font-size: 18px;
+  color: var(--vellum-3);
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+}
+
+.step a:hover {
+  color: var(--gold);
+}
+
+.step [aria-current] {
+  color: var(--vellum-2);
+}
+
+.sep {
+  width: 7px;
+  height: 7px;
+  margin: 0 10px;
+  opacity: 0.6;
+  filter: none;
+}

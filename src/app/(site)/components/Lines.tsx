@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { BAND, band, chalk, CHALK, clearAround, type LineKind, type Pt, sized, spiralPts, starsAlong, wavyPts } from "../lib/lines";
+import { BAND, band, chalk, CHALK, clearAround, type LineKind, sized, spiralPts, starsAlong, wavyPts } from "../lib/lines";
 import styles from "./Lines.module.css";
 
 const R = Math.random;
@@ -50,46 +50,6 @@ export function CoverLines({ clear }: { clear: string }) {
       <canvas ref={far} className={`${styles.cover} ${styles.far}`} data-depth="0.12" aria-hidden="true" />
       <canvas ref={near} className={styles.cover} data-depth="0.3" aria-hidden="true" />
     </>
-  );
-}
-
-/** A line that weaves through its children: some stretches pass behind them, some in front. */
-export function Weave({ kind, children, className }: { kind: LineKind; children: React.ReactNode; className?: string }) {
-  const back = useRef<HTMLCanvasElement>(null);
-  const front = useRef<HTMLCanvasElement>(null);
-  useEffect(
-    () =>
-      redrawOnResize(() => {
-        if (!back.current || !front.current) return;
-        const [gb, w, h] = sized(back.current);
-        const [gf] = sized(front.current);
-        const pts =
-          kind === "spiral"
-            ? spiralPts(w * (0.95 + R() * 0.1), h * (0.45 + R() * 0.15), Math.max(w, h) * 0.95, 3.2 + R() * 0.8)
-            : wavyPts(w * (0.02 + R() * 0.08), h * (0.5 + R() * 0.15), Math.max(w, h) * 0.95, 3.4 + R() * 0.6);
-        let start = 0;
-        let over = R() < 0.5;
-        while (start < pts.length) {
-          const len = 220 + Math.floor(R() * 420);
-          const run: Pt[] = pts.slice(start, Math.min(start + len + 1, pts.length));
-          const g = over ? gf : gb;
-          if (kind === "spiral") {
-            chalk(g, run, 3.6, CHALK, over ? 0.65 : 0.5);
-            if (!over) starsAlong(g, run, 300, 8); // stars stay behind the work
-          } else if (over) chalk(g, run, 3.4, "#c99ab0", 0.65);
-          else band(g, run, 11, BAND);
-          start += len;
-          over = !over;
-        }
-      }),
-    [kind],
-  );
-  return (
-    <div className={`${styles.weave} ${className ?? ""}`}>
-      <canvas ref={back} className={styles.back} aria-hidden="true" />
-      {children}
-      <canvas ref={front} className={styles.front} aria-hidden="true" />
-    </div>
   );
 }
 

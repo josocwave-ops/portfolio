@@ -61,7 +61,7 @@ export const colourOf = (name: string) => COLOURS[name] ?? COLOURS.lavender;
 
 // ---------- sections ----------
 
-export type Section = { slug: string; name: string; intro: string; colour: string; order: number };
+export type Section = { slug: string; name: string; menuName: string; intro: string; colour: string; order: number };
 
 export function getSections(): Section[] {
   return list("sections")
@@ -69,7 +69,8 @@ export function getSections(): Section[] {
     .map((f) => {
       const d = read(path.join(ROOT, "sections", f.name));
       const slug = f.name.replace(/\.yaml$/, "");
-      return { slug, name: str(d.name) || slug, intro: str(d.intro), colour: str(d.colour) || "lavender", order: d.order ?? 1 };
+      const name = str(d.name) || slug;
+      return { slug, name, menuName: str(d.menuName) || name, intro: str(d.intro), colour: str(d.colour) || "lavender", order: d.order ?? 1 };
     })
     .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
 }
@@ -219,7 +220,6 @@ export function getSite() {
       peek: str(w.peek),
       notFound: str(w.notFound),
       emptyPhoto: str(w.emptyPhoto) || "photo goes here",
-      back: str(w.back) || "back",
       next: str(w.next) || "next",
       footer: str(w.footer),
     },
@@ -231,14 +231,7 @@ export type Site = ReturnType<typeof getSite>;
 export function getHomepage() {
   const d = read(path.join(ROOT, "homepage.yaml"));
   return {
+    hello: str(d.hello),
     stickers: (Array.isArray(d.stickers) ? d.stickers : []).filter((s: unknown) => typeof s === "string") as string[],
-    threadsTitle: str(d.threadsTitle) || "threads",
-    threadsIntro: str(d.threadsIntro),
-    threads: (Array.isArray(d.threads) ? d.threads : []).map((t: Yaml) => ({
-      title: str(t?.title),
-      intro: str(t?.intro),
-      line: str(t?.line) || "spiral",
-      projects: (Array.isArray(t?.projects) ? t.projects : []).filter((s: unknown) => typeof s === "string") as string[],
-    })),
   };
 }

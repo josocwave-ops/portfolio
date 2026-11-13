@@ -6,7 +6,6 @@ import styles from "./Atmosphere.module.css";
 const WASH = ["#3d2f56", "#2a3153", "#46304a", "#17131f", "#322849", "#3f2c40", "#2c3a52"];
 
 // Painted night sky, grain, vignette and a faint candle glow that follows the mouse.
-// Also feeds the mouse position to the CSS depth effect, so the page has layers.
 export default function Atmosphere() {
   const sky = useRef<HTMLCanvasElement>(null);
   const glow = useRef<HTMLDivElement>(null);
@@ -52,47 +51,36 @@ export default function Atmosphere() {
     };
   }, []);
 
-  // depth + glow: the mouse position goes onto <html> as --mx/--my, and every [data-depth]
-  // element works out its own drift in CSS (globals.css). Nothing on the page itself is touched.
+  // the candle glow follows the mouse, and only animates while it's catching up (then it rests)
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!matchMedia("(pointer: fine)").matches) return;
-    const root = document.documentElement;
-    let tx = 0;
-    let ty = 0;
-    let mx = 0;
-    let my = 0;
-    let gx = innerWidth / 2;
-    let gy = innerHeight / 2;
-    let ggx = gx;
-    let ggy = gy;
-    const onMove = (e: PointerEvent) => {
-      tx = (e.clientX / innerWidth) * 2 - 1;
-      ty = (e.clientY / innerHeight) * 2 - 1;
-      ggx = e.clientX;
-      ggy = e.clientY;
-      glow.current?.classList.add(styles.on);
-    };
-    const onLeave = () => glow.current?.classList.remove(styles.on);
-    addEventListener("pointermove", onMove);
-    root.addEventListener("pointerleave", onLeave);
-
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const el = glow.current;
+    if (!el) return;
+    let x = innerWidth / 2;
+    let y = innerHeight / 2;
+    let tx = x;
+    let ty = y;
     let raf = 0;
     const frame = () => {
-      mx += (tx - mx) * 0.06;
-      my += (ty - my) * 0.06;
-      gx += (ggx - gx) * 0.12;
-      gy += (ggy - gy) * 0.12;
-      if (glow.current) glow.current.style.transform = `translate(${gx.toFixed(1)}px, ${gy.toFixed(1)}px)`;
-      root.style.setProperty("--mx", mx.toFixed(3));
-      root.style.setProperty("--my", my.toFixed(3));
-      raf = requestAnimationFrame(frame);
+      x += (tx - x) * 0.14;
+      y += (ty - y) * 0.14;
+      el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(frame) : 0;
     };
-    raf = requestAnimationFrame(frame);
+    const onMove = (e: PointerEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+      el.classList.add(styles.on);
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+    const onLeave = () => el.classList.remove(styles.on);
+    addEventListener("pointermove", onMove, { passive: true });
+    document.documentElement.addEventListener("pointerleave", onLeave);
     return () => {
       cancelAnimationFrame(raf);
       removeEventListener("pointermove", onMove);
-      root.removeEventListener("pointerleave", onLeave);
+      document.documentElement.removeEventListener("pointerleave", onLeave);
     };
   }, []);
 

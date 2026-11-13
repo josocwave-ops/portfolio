@@ -4,34 +4,14 @@
   width: calc(100% + 80px);
   height: calc(100% + 80px);
   pointer-events: none;
+  /* fade out at the top and bottom instead of stopping at a hard edge */
+  -webkit-mask-image: linear-gradient(transparent 4%, #000 22%, #000 74%, transparent 96%);
+  mask-image: linear-gradient(transparent 4%, #000 22%, #000 74%, transparent 96%);
 }
 
 .far {
   filter: blur(2.2px);
   opacity: 0.32;
-}
-
-.weave {
-  position: relative;
-}
-
-.back,
-.front {
-  position: absolute;
-  inset: -60px -40px;
-  width: calc(100% + 80px);
-  height: calc(100% + 120px);
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
-}
-
-.back {
-  z-index: 0;
-}
-
-.front {
-  z-index: 20;
 }
 
 /* behind a whole page, fading out towards the bottom */

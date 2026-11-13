@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSite } from "@/content/load";
 import { tapeColour, tilt, torn } from "../lib/scatter";
+import Twinkle from "./Twinkle";
 import styles from "./Print.module.css";
 
 // A photo on old photo paper: a little tilted, with tape or album corners.
@@ -63,6 +64,7 @@ export default function Print({
         </span>
       </span>
       {href && words.peek && <span className={`${styles.peek} hand`}>{words.peek}</span>}
+      {href && <Twinkle className={styles.spark} />}
     </>
   );
   const cls = `${styles.print} ${fix === "corners" ? "corners" : ""} ${href ? styles.link : ""} ${className ?? ""}`;

@@ -1,29 +1,37 @@
 import Link from "next/link";
-import { colourOf, getSections } from "@/content/load";
+import { getSections } from "@/content/load";
 import Signature from "./Signature";
+import Twinkle from "./Twinkle";
 import styles from "./SiteHeader.module.css";
 
+// The signature (home) on the left; the four areas, about and contact on the right,
+// strung together with tiny twinkles rather than sitting in a menu bar.
 export default function SiteHeader({ current }: { current?: string }) {
+  const links = [
+    ...getSections().map((s) => ({ href: `/${s.slug}`, key: s.slug, label: s.menuName })),
+    { href: "/about", key: "about", label: "about" },
+    { href: "/contact", key: "contact", label: "contact" },
+  ];
   return (
     <header className={styles.header}>
-      <Link href="/" className={styles.home} aria-label="Home">
-        <Signature size="small" />
-      </Link>
-      <nav className={styles.nav} aria-label="Sections">
-        {getSections().map((s) => (
-          <Link
-            key={s.slug}
-            href={`/${s.slug}`}
-            className={styles.link}
-            style={{ "--c": colourOf(s.colour).color } as React.CSSProperties}
-            aria-current={current === s.slug ? "page" : undefined}
-          >
-            {s.name}
-          </Link>
-        ))}
-        <Link href="/about" className={`${styles.link} ${styles.plain}`} aria-current={current === "about" ? "page" : undefined}>
-          about
+      {current === "home" ? (
+        <span />
+      ) : (
+        <Link href="/" className={styles.home} aria-label="Home">
+          <Signature size="small" />
         </Link>
+      )}
+      <nav aria-label="Main">
+        <ul className={styles.nav}>
+          {links.map((l, i) => (
+            <li key={l.key}>
+              {i > 0 && <Twinkle className={styles.sep} />}
+              <Link href={l.href} className={styles.link} aria-current={current === l.key ? "page" : undefined}>
+                {l.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
   );
