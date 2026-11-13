@@ -19,7 +19,7 @@ export default function SiteFooter() {
           </a>
         )}
       </nav>
-      {words.footer && <p className={`${styles.words} hand`}>{words.footer}</p>}
+      {words.footer && <p className={styles.words}>{words.footer}</p>}
     </footer>
   );
 }

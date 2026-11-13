@@ -18,8 +18,11 @@
   color: var(--vellum);
 }
 
+/* the sign-off, in the pixel font */
 .words {
-  margin-top: 14px;
-  font-size: 18px;
-  color: var(--vellum-3);
+  margin-top: 16px;
+  font: 400 12px / 1.6 var(--pixel);
+  letter-spacing: 0.08em;
+  color: var(--pink);
+  opacity: 0.85;
 }

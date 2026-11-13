@@ -36,10 +36,12 @@
   font-weight: 400;
 }
 
+/* the hello line, in the pixel font: a small, cheeky surprise under the signature */
 .hello {
-  margin-top: 26px;
-  font-size: clamp(19px, 2.2vw, 22px);
-  color: var(--vellum-2);
+  margin-top: 28px;
+  font: 400 clamp(12px, 1.4vw, 14px) / 1.6 var(--pixel);
+  letter-spacing: 0.08em;
+  color: var(--pink);
 }
 
 /* tiny twinkles in the sky */

@@ -38,7 +38,7 @@ export default function Home() {
             <h1 className={styles.title}>
               <Signature size="large" />
             </h1>
-            {home.hello && <p className={`${styles.hello} hand`}>{home.hello}</p>}
+            {home.hello && <p className={styles.hello}>{home.hello}</p>}
           </div>
         </header>
       </div>
