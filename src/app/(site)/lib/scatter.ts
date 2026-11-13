@@ -35,5 +35,5 @@ export function torn(key: string | number, amp = 3, steps = 26) {
   return `polygon(${pts.join(",")})`;
 }
 
-const TAPES = ["rgba(211,163,185,0.62)", "rgba(140,192,184,0.6)", "rgba(184,166,208,0.62)", "rgba(217,184,115,0.55)"];
+const TAPES = ["rgba(244,191,211,0.7)", "rgba(227,145,178,0.6)", "rgba(196,179,224,0.62)", "rgba(246,214,226,0.75)"];
 export const tapeColour = (key: string | number) => TAPES[Math.floor(rng(`tape${key}`)() * TAPES.length)];

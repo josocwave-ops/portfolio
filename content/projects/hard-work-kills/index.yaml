@@ -8,8 +8,8 @@ teaser: Two faces recording what decades of labour leave behind.
 order: 20
 intro: This project began with a drawing I made on a train. I sketched an old man whose face appeared deeply worn, every wrinkle, shadow, and sag suggesting a lifetime of labour. Across from him sat another man who seemed to be the same age, yet looked relaxed, youthful, untouched by strain.
 mood:
-  paper: parchment
-  accent: teal
+  paper: blush
+  accent: rose
   line: spiral
 blocks:
   - discriminant: text

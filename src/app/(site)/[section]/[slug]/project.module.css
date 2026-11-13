@@ -51,9 +51,8 @@
 }
 
 .facts {
-  margin-top: 12px;
-  font: italic 15px var(--body);
-  color: #7d6a5f;
+  margin-top: 14px;
+  color: #7d5f68;
 }
 
 .sections {
@@ -66,7 +65,15 @@
 }
 
 .sections a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--c);
+}
+
+.tagMark {
+  width: 18px;
+  height: 18px;
 }
 
 .sections a:hover {
@@ -83,10 +90,27 @@
   line-height: 1.7;
 }
 
-.intro p:first-child::first-letter {
+/* the ornamental first letter */
+.initial {
   float: left;
-  font: italic 500 3.4em/0.8 var(--display);
-  margin: 0.08em 0.08em 0 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  margin: 6px 14px 2px 0;
+}
+
+.initial svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.initial b {
+  position: relative;
+  font: italic 400 54px/1 var(--display);
   color: var(--accent-ink);
 }
 

@@ -8,12 +8,12 @@ teaser: 'An exploration of mould: consuming and transforming.'
 order: 90
 intro: This collection investigates decay and growth through the lens of mould. One piece appears almost devoured, raw clay exposed beneath spreading redness inspired by mouldy strawberries. The second is carved and covered, fully “grown,” yet new forms push through the surface. Together they explore impermanence and transformation through destruction.
 mood:
-  paper: parchment
-  accent: teal
+  paper: blush
+  accent: rose
   line: spiral
   stickers:
     - mushroom
-    - moth
+    - stitched-mushroom
 blocks:
   - discriminant: outcome
     value:

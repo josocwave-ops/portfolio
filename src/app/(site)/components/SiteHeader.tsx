@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getSections } from "@/content/load";
 import Signature from "./Signature";
-import Twinkle from "./Twinkle";
+import { PixelSpark } from "./Ornaments";
 import styles from "./SiteHeader.module.css";
 
 // The signature (home) on the left; the four areas, about and contact on the right,
@@ -25,7 +25,7 @@ export default function SiteHeader({ current }: { current?: string }) {
         <ul className={styles.nav}>
           {links.map((l, i) => (
             <li key={l.key}>
-              {i > 0 && <Twinkle className={styles.sep} />}
+              {i > 0 && <PixelSpark colour="#e391b2" className={styles.sep} />}
               <Link href={l.href} className={styles.link} aria-current={current === l.key ? "page" : undefined}>
                 {l.label}
               </Link>

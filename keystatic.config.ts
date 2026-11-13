@@ -8,6 +8,24 @@ const photo = (label: string, description?: string) =>
 
 const caption = (label = "Caption") => fields.text({ label, description: "Optional. Little words under the photo." });
 
+// optional scribbles on a photo: a handwritten note with an arrow, and a circle around one spot
+const scribbles = {
+  note: fields.text({ label: "Handwritten note", description: "Optional. Appears beside the photo with a little arrow pointing at it." }),
+  circle: fields.select({
+    label: "Circle something",
+    description: "Optional. Draws a hand-drawn pink circle on part of the photo.",
+    options: [
+      { label: "No circle", value: "none" },
+      { label: "Top left", value: "top-left" },
+      { label: "Top right", value: "top-right" },
+      { label: "Middle", value: "middle" },
+      { label: "Bottom left", value: "bottom-left" },
+      { label: "Bottom right", value: "bottom-right" },
+    ],
+    defaultValue: "none",
+  }),
+};
+
 const captioned = (label: string) =>
   fields.object({ image: photo("Photo"), caption: caption() }, { label });
 
@@ -15,7 +33,8 @@ const COLOURS = [
   { label: "Teal", value: "teal" },
   { label: "Lavender", value: "lavender" },
   { label: "Slate blue", value: "slate" },
-  { label: "Dusty rose", value: "rose" },
+  { label: "Rose pink", value: "rose" },
+  { label: "Pale pink", value: "pink" },
   { label: "Sage", value: "sage" },
   { label: "Gold", value: "gold" },
 ] as const;
@@ -71,19 +90,20 @@ export default config({
             paper: fields.select({
               label: "Paper",
               options: [
+                { label: "Blush pink", value: "blush" },
                 { label: "Parchment", value: "parchment" },
-                { label: "Blue-grey", value: "bluegrey" },
                 { label: "Lilac", value: "lilac" },
+                { label: "Blue-grey", value: "bluegrey" },
                 { label: "Sage", value: "sage" },
               ],
-              defaultValue: "parchment",
+              defaultValue: "blush",
             }),
             accent: fields.select({ label: "Accent colour", options: COLOURS, defaultValue: "lavender" }),
             line: fields.select({
-              label: "Line in the background",
+              label: "Ink in the margins",
               options: [
-                { label: "Starry spiral", value: "spiral" },
-                { label: "Wavy spiral", value: "wavy" },
+                { label: "Inky filigree corners", value: "spiral" },
+                { label: "A stitched vine", value: "wavy" },
                 { label: "None", value: "none" },
               ],
               defaultValue: "spiral",
@@ -114,6 +134,7 @@ export default config({
                   ],
                   defaultValue: "full",
                 }),
+                ...scribbles,
               }),
             },
             scatter: {
@@ -190,6 +211,15 @@ export default config({
                 lines: fields.text({ label: "The poem", multiline: true }),
                 note: fields.text({ label: "A few words about it", multiline: true, description: "Optional." }),
                 image: photo("Photo", "Optional. e.g. the piece the poem lives on."),
+                shape: fields.select({
+                  label: "Shape",
+                  description: "A spiral winds the poem's words inward. The plain text is always there too, for screen readers.",
+                  options: [
+                    { label: "On a page", value: "page" },
+                    { label: "As a spiral", value: "spiral" },
+                  ],
+                  defaultValue: "page",
+                }),
               }),
             },
             outcome: {
@@ -199,6 +229,7 @@ export default config({
                 image: photo("Photo"),
                 title: fields.text({ label: "Title", description: "Optional. e.g. the finished set!!" }),
                 caption: caption(),
+                ...scribbles,
               }),
             },
           },
@@ -235,13 +266,18 @@ export default config({
             { label: "Eye", value: "eye" },
             { label: "Old key", value: "key" },
             { label: "Needle & thread", value: "needle" },
+            { label: "Cross-stitch moth", value: "x-moth" },
+            { label: "Cross-stitch heart", value: "x-heart" },
+            { label: "Cross-stitch mushroom", value: "x-mushroom" },
+            { label: "Cross-stitch star", value: "x-star" },
+            { label: "Cross-stitch daisy", value: "x-daisy" },
           ],
           defaultValue: "moth",
         }),
         colour: fields.select({
           label: "Ink colour",
           options: [{ label: "Parchment", value: "vellum" }, ...COLOURS],
-          defaultValue: "vellum",
+          defaultValue: "pink",
         }),
       },
     }),
@@ -256,6 +292,17 @@ export default config({
         menuName: fields.text({ label: "Short name for the menu", description: "Optional. e.g. 'art' instead of 'art & drawing'." }),
         intro: fields.text({ label: "Intro", multiline: true, description: "A line or two at the top of the section page." }),
         colour: fields.select({ label: "Colour", options: COLOURS, defaultValue: "lavender" }),
+        mark: fields.select({
+          label: "Cross-stitch mark",
+          description: "The little stitched flower that marks this area.",
+          options: [
+            { label: "Daisy", value: "daisy" },
+            { label: "Round bloom", value: "bloom" },
+            { label: "Tulip", value: "tulip" },
+            { label: "Rose", value: "rose" },
+          ],
+          defaultValue: "daisy",
+        }),
         order: fields.integer({ label: "Order in the menu", defaultValue: 1 }),
       },
     }),

@@ -10,25 +10,35 @@
   margin-bottom: 22px;
 }
 
-.arrow {
-  display: block;
-  width: 70px;
-  margin-bottom: 4px;
-}
-
-.arrow path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* a note in the margin, in handwriting */
-.margin {
-  max-width: 34ch;
+/* a handwritten note with a hand-drawn arrow, scribbled beside a photo */
+.scribble {
+  position: relative;
+  max-width: 30ch;
   font-size: 21px;
-  color: var(--gold);
+  line-height: 1.25;
+  color: var(--pink);
+}
+
+.scribbleArrow {
+  display: block;
+  width: 84px;
+  margin: 0 0 4px -6px;
+  transform: scaleX(-1) rotate(-10deg);
+}
+
+.flip .scribbleArrow {
+  transform: none;
+}
+
+.withScribble {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 28px;
+  align-items: end;
+}
+
+.withScribble > .scribble {
+  margin-bottom: 12%;
 }
 
 /* ---------- big photo ---------- */
@@ -71,7 +81,7 @@
   margin-top: 24px;
 }
 
-.scatter .margin {
+.scatter .scribble {
   margin: 70px 0 0 8%;
 }
 
@@ -125,10 +135,10 @@
 .step {
   position: absolute;
   z-index: 5;
-  top: -14px;
-  left: -6px;
-  font-size: 30px;
-  color: var(--gold);
+  top: -20px;
+  left: -4px;
+  font-size: 14px;
+  color: var(--pink);
 }
 
 /* ---------- experiments: a contact sheet ---------- */
@@ -139,9 +149,8 @@
 }
 
 .labelInner {
-  padding: 8px 18px;
-  font: 15px/1.4 "Courier New", ui-monospace, monospace;
-  letter-spacing: 0.04em;
+  padding: 9px 18px 8px;
+  font-size: 12px;
 }
 
 .contact {
@@ -191,11 +200,17 @@
 }
 
 .typed .slipInner {
-  font: 15px/1.6 "Courier New", ui-monospace, monospace;
+  font: 12px/1.9 var(--pixel);
+  letter-spacing: 0.04em;
   font-style: normal;
 }
 
-.note > .margin {
+.heart {
+  width: 16px;
+  height: 14px;
+}
+
+.note > .scribble {
   margin-left: 55%;
 }
 
@@ -249,10 +264,9 @@
 }
 
 .finalLabel {
-  font-size: 24px;
-  color: var(--gold);
-  margin-bottom: 18px;
-  rotate: -2deg;
+  font-size: 13px;
+  color: var(--pink);
+  margin-bottom: 22px;
 }
 
 @media (max-width: 720px) {
@@ -271,8 +285,12 @@
     margin-left: 0;
   }
 
-  .note > .margin {
+  .note > .scribble {
     margin-left: 20%;
+  }
+
+  .withScribble {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .small {

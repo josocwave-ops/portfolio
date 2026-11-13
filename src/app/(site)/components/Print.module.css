@@ -128,6 +128,80 @@
   translate: -50% 0;
 }
 
+/* ---------- ways of attaching ---------- */
+.clip {
+  position: absolute;
+  z-index: 4;
+  top: -22px;
+  left: 18%;
+  width: 22px;
+  height: 54px;
+  filter: drop-shadow(0 2px 2px rgba(8, 4, 16, 0.4));
+}
+
+.pin {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: -9px;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 2px, #f6a9c7 3px, #c9567f 70%, #8f3156 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* printer's crop marks just outside the corners */
+.crop {
+  position: relative;
+}
+
+.crop::before {
+  content: "";
+  position: absolute;
+  inset: -13px;
+  pointer-events: none;
+  --m: rgba(236, 223, 208, 0.75);
+  background:
+    linear-gradient(var(--m), var(--m)) left 0 top 8px / 9px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) left 8px top 0 / 1px 9px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 0 top 8px / 9px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 8px top 0 / 1px 9px no-repeat,
+    linear-gradient(var(--m), var(--m)) left 0 bottom 8px / 9px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) left 8px bottom 0 / 1px 9px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 0 bottom 8px / 9px 1px no-repeat,
+    linear-gradient(var(--m), var(--m)) right 8px bottom 0 / 1px 9px no-repeat;
+}
+
+/* stitched on: a pink running stitch around the edge */
+.stitched {
+  outline: 1.6px dashed var(--pink-2);
+  outline-offset: -7px;
+}
+
+/* a hand-drawn circle around part of the photo */
+.circle {
+  position: absolute;
+  z-index: 2;
+  width: 46%;
+  height: 34%;
+  pointer-events: none;
+}
+
+.c-top-left { left: 6%; top: 6%; }
+.c-top-right { right: 6%; top: 6%; }
+.c-middle { left: 27%; top: 33%; }
+.c-bottom-left { left: 6%; bottom: 6%; }
+.c-bottom-right { right: 6%; bottom: 6%; }
+
+.fig {
+  display: block;
+  margin-top: 10px;
+  color: var(--pink);
+  opacity: 0.85;
+}
+
 /* a little sparkle that appears when you point at a print */
 .spark {
   position: absolute;

@@ -9,11 +9,12 @@ teaser: One mug for each memory I can't stop returning to.
 order: 10
 intro: 'This is my capstone, an ongoing project, the work I''ve chosen to mark the end of my high school journey. I thought about memory: about how countless memories exist in my life, yet there are eight I can''t stop returning to, eight that take over my mind with such vivid detail I can see every shadow, hear every sound, feel every texture. From age five to seventeen, these moments have quietly shaped me, and now they are demanding to be made visible.'
 mood:
-  paper: parchment
-  accent: teal
+  paper: blush
+  accent: rose
   line: spiral
   stickers:
     - eye
+    - stitched-heart
     - mug
 blocks:
   - discriminant: text
@@ -48,6 +49,7 @@ blocks:
       title: do you remember the moon outside my window?
       lines: 'all i see is the moon. and she says: i''m here.'
       note: 'Sitting alone at dusk, in the dull orange light of the room, not knowing where my mother was, she seemed to become the moon: distant, quiet, unchanging. The cauldron form holds the magic and trust I felt toward her, while a vine climbs the handle.'
+      shape: spiral
   - discriminant: outcome
     value:
       title: ''

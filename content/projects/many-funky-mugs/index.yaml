@@ -8,8 +8,8 @@ teaser: An ongoing family of mugs held together by their irregularities.
 order: 40
 intro: 'An ongoing collection of mugs connected less by uniformity than by shared irregularities: twisted handles, shifting proportions, glaze that slips or pools unpredictably. I was inspired by spirals found in tiles and snail shells, where variation exists within underlying structure.'
 mood:
-  paper: parchment
-  accent: teal
+  paper: blush
+  accent: rose
   line: spiral
 blocks:
   - discriminant: text

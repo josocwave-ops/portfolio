@@ -19,15 +19,18 @@
   color: var(--vellum);
 }
 
-.title::after {
-  content: "";
+.mark {
   display: inline-block;
-  width: 0.12em;
-  height: 0.12em;
-  margin-left: 0.12em;
-  border-radius: 50%;
-  background: var(--c);
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.18em;
   vertical-align: 0.1em;
+  rotate: -6deg;
+}
+
+.count {
+  margin-top: 14px;
+  color: var(--pink);
 }
 
 .intro {

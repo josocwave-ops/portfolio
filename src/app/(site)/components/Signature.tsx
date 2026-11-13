@@ -1,5 +1,5 @@
 import { getSite } from "@/content/load";
-import Twinkle from "./Twinkle";
+import { PixelSpark } from "./Ornaments";
 import styles from "./Signature.module.css";
 
 // "book + hand": a printed italic "on" tucked against a hand-drawn A.
@@ -13,7 +13,7 @@ export default function Signature({ size = "large" }: { size?: "large" | "small"
         on
       </span>
       <span className={styles.a} aria-hidden="true">
-        A{size === "large" && <Twinkle className={styles.glint} />}
+        A{size === "large" && <PixelSpark colour="#fbe3ec" className={styles.glint} />}
       </span>
       {size === "large" && surname && (
         <span className={styles.surname} aria-hidden="true">

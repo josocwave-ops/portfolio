@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { colourOf, getHomepage, getProjectsIn, getSections, stickersFor } from "@/content/load";
-import { CoverLines } from "./components/Lines";
 import MarginStickers from "./components/MarginStickers";
+import { PixelSpark, Stitch, StitchedSpiral, type PatternName } from "./components/Ornaments";
 import Paper from "./components/Paper";
 import Signature from "./components/Signature";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
-import Twinkle from "./components/Twinkle";
 import { rng, tilt, torn } from "./lib/scatter";
 import styles from "./page.module.css";
 
@@ -27,9 +26,9 @@ export default function Home() {
       <div className={styles.top}>
         <SiteHeader current="home" />
         <header className={styles.cover}>
-          <CoverLines clear="#cover-title" />
+          <StitchedSpiral className={styles.spiral} />
           {SKY.map((t, i) => (
-            <Twinkle
+            <PixelSpark
               key={i}
               className={styles.sky}
               style={{ left: `${t.left}%`, top: `${t.top}%`, width: t.size, height: t.size, animationDelay: `${t.delay}s`, animationDuration: `${t.speed}s` }}
@@ -71,14 +70,18 @@ export default function Home() {
                   </span>
                 )}
                 <Paper id={`door-${s.slug}`} tear={3.5} depth={0.45} className={styles.card} innerClassName={styles.cardInner}>
-                  <span className={`${styles.no} hand`}>{ROMAN[i] ?? i + 1}.</span>
+                  <span className={styles.cardTop}>
+                    <span className={`${styles.no} pixel`}>no. {ROMAN[i] ?? i + 1}</span>
+                    <Stitch pattern={s.mark as PatternName} colour={c.color} seed={s.slug} className={styles.mark} />
+                  </span>
                   <h2 className={styles.name}>{s.name}</h2>
                   {s.intro && <p className={styles.intro}>{s.intro}</p>}
-                  <span className={`${styles.count} hand`}>
-                    {projects.length} {projects.length === 1 ? "project" : "projects"} →
+                  <span className={`${styles.count} pixel`}>
+                    {projects.length} {projects.length === 1 ? "project" : "projects"}
+                    <Stitch pattern="arrow" mode="pixel" colour={c.ink} className={styles.arrow} />
                   </span>
                 </Paper>
-                <Twinkle className={styles.spark} />
+                <PixelSpark className={styles.spark} />
               </Link>
             );
           })}

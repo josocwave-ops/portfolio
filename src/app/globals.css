@@ -5,16 +5,21 @@
   --night-2: #261f36;
   --night-3: #322845;
 
-  /* text on the night: warm parchment, not white */
-  --vellum: #e8dcc4;
-  --vellum-2: #cbbfa9;
-  --vellum-3: #9d917f;
-  --gold: #d9b873;
+  /* text on the night: warm parchment with a blush, not white */
+  --vellum: #ecdfd0;
+  --vellum-2: #cfc0b6;
+  --vellum-3: #9f8f8d;
 
-  /* paper and the ink on it */
-  --paper: #eadfc7;
-  --paper-ink: #3a2c2a;
-  --plum-ink: #5b3f58;
+  /* pink is the main accent; gold only for the tiniest glints */
+  --pink: #f4bfd3;
+  --pink-2: #e391b2;
+  --pink-ink: #b8507a;
+  --gold: #e7c98a;
+
+  /* blush paper and the ink on it */
+  --paper: #f6dfe2;
+  --paper-ink: #3d2b30;
+  --plum-ink: #7a3f5c;
 
   /* swatches, also used by each project's mood */
   --teal: #8cc0b8;
@@ -23,8 +28,9 @@
   --rose: #d3a3b9;
   --sage: #a7c2b0;
 
-  --display: var(--font-display), "Cormorant Garamond", Georgia, serif;
-  --body: var(--font-body), "Newsreader", Georgia, serif;
+  --display: var(--font-display), "Sorts Mill Goudy", Georgia, serif;
+  --body: var(--font-body), "EB Garamond", Georgia, serif;
+  --pixel: var(--font-pixel), "Silkscreen", ui-monospace, monospace;
   --hand: var(--font-hand), "Comic Sans MS", cursive;
 
   --gutter: clamp(16px, 5vw, 56px);
@@ -58,7 +64,7 @@ body {
     var(--night);
   color: var(--vellum-2);
   font-family: var(--body);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -75,12 +81,12 @@ img {
 }
 
 ::selection {
-  background: rgba(217, 184, 115, 0.35);
+  background: rgba(244, 191, 211, 0.35);
   color: var(--vellum);
 }
 
 :focus-visible {
-  outline: 1.5px dashed var(--gold);
+  outline: 1.5px dashed var(--pink);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -170,6 +176,14 @@ footer {
   line-height: 1.25;
 }
 
+/* tiny pixel labels: dates, materials, counts */
+.pixel {
+  font-family: var(--pixel);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+}
+
 /* little yellow "draft" label, only ever seen on your own computer */
 .draft-tag {
   position: absolute;
@@ -179,7 +193,8 @@ footer {
   rotate: 4deg;
   background: #f1e2a8;
   color: #6b5a24;
-  font: 12px/1.4 var(--body);
+  font: 10px/1.6 var(--pixel);
+  letter-spacing: 0.05em;
   padding: 2px 9px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   white-space: nowrap;

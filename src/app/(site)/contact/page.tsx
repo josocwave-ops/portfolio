@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getSite } from "@/content/load";
-import { PageLines } from "../components/Lines";
+import PageInk from "../components/PageInk";
 import Paper from "../components/Paper";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
@@ -24,7 +24,7 @@ export default function ContactPage() {
 
   return (
     <div className={styles.page}>
-      <PageLines kind="wavy" side="right" />
+      <PageInk kind="wavy" seed="contact" />
       <SiteHeader current="contact" />
       <main className={styles.main}>
         <div className={styles.contactHead}>

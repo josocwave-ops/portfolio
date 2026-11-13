@@ -8,8 +8,8 @@ teaser: Pattern as inheritance, from the tiles of old Spanish kitchens.
 order: 50
 intro: Inspired by the ornate, colourful tiles of old Spanish kitchens, particularly those in my grandmother's home. Each piece translates the visual rhythm, colour intensity, and intricate detail of the original tiles into ceramic form, bridging personal memory with craft and pattern.
 mood:
-  paper: parchment
-  accent: teal
+  paper: blush
+  accent: rose
   line: spiral
 blocks:
   - discriminant: outcome

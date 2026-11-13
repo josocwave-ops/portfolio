@@ -8,8 +8,8 @@ teaser: Studies in charcoal.
 order: 170
 intro: Studies in charcoal.
 mood:
-  paper: bluegrey
-  accent: slate
+  paper: blush
+  accent: lavender
   line: wavy
 blocks:
   - discriminant: outcome

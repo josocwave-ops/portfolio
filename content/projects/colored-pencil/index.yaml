@@ -8,8 +8,8 @@ teaser: Sketchbook pages in coloured pencil.
 order: 160
 intro: Sketchbook studies in coloured pencil.
 mood:
-  paper: bluegrey
-  accent: slate
+  paper: blush
+  accent: lavender
   line: wavy
 blocks:
   - discriminant: outcome

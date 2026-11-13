@@ -1,0 +1,53 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.corner {
+  position: absolute;
+  top: 150px;
+  width: clamp(110px, 15vw, 190px);
+  opacity: 0.75;
+}
+
+.tl {
+  left: -18px;
+}
+
+.tr {
+  right: -18px;
+  transform: scaleX(-1);
+}
+
+.vineTop {
+  position: absolute;
+  top: 78px;
+  left: 50%;
+  width: min(760px, 90%);
+  translate: -50% 0;
+  opacity: 0.7;
+}
+
+.vineSide {
+  position: absolute;
+  top: 520px;
+  right: -230px;
+  width: 520px;
+  rotate: 90deg;
+  opacity: 0.55;
+}
+
+@media (max-width: 640px) {
+  .corner {
+    width: 90px;
+    top: 120px;
+    opacity: 0.55;
+  }
+
+  .vineSide {
+    display: none;
+  }
+}

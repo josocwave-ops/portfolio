@@ -45,23 +45,25 @@ export const COLOURS: Record<string, { color: string; ink: string }> = {
   teal: { color: "#8cc0b8", ink: "#3f6f69" },
   lavender: { color: "#b8a6d0", ink: "#634f80" },
   slate: { color: "#98a9cc", ink: "#475b85" },
-  rose: { color: "#d3a3b9", ink: "#8c4d68" },
+  rose: { color: "#e391b2", ink: "#a8466f" },
+  pink: { color: "#f4bfd3", ink: "#b8507a" },
   sage: { color: "#a7c2b0", ink: "#4e6b58" },
   gold: { color: "#d9b873", ink: "#7d5f22" },
 };
 
 export const PAPERS: Record<string, string> = {
+  blush: "#f6dfe2",
   parchment: "#eadfc7",
   bluegrey: "#d6dce2",
   lilac: "#e0d6e6",
   sage: "#d9e1d4",
 };
-export const paperOf = (name: string) => PAPERS[name] ?? PAPERS.parchment;
+export const paperOf = (name: string) => PAPERS[name] ?? PAPERS.blush;
 export const colourOf = (name: string) => COLOURS[name] ?? COLOURS.lavender;
 
 // ---------- sections ----------
 
-export type Section = { slug: string; name: string; menuName: string; intro: string; colour: string; order: number };
+export type Section = { slug: string; name: string; menuName: string; intro: string; colour: string; mark: string; order: number };
 
 export function getSections(): Section[] {
   return list("sections")
@@ -70,7 +72,9 @@ export function getSections(): Section[] {
       const d = read(path.join(ROOT, "sections", f.name));
       const slug = f.name.replace(/\.yaml$/, "");
       const name = str(d.name) || slug;
-      return { slug, name, menuName: str(d.menuName) || name, intro: str(d.intro), colour: str(d.colour) || "lavender", order: d.order ?? 1 };
+      const order = d.order ?? 1;
+      const mark = str(d.mark) || ["daisy", "bloom", "tulip", "rose"][(order - 1) % 4];
+      return { slug, name, menuName: str(d.menuName) || name, intro: str(d.intro), colour: str(d.colour) || "lavender", mark, order };
     })
     .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
 }
@@ -82,15 +86,15 @@ export const getSection = (slug: string) => getSections().find((s) => s.slug ===
 export type Captioned = { image: string | null; caption: string };
 
 export type Block =
-  | { kind: "photo"; image: string | null; caption: string; size: "full" | "medium" | "small" }
+  | { kind: "photo"; image: string | null; caption: string; size: "full" | "medium" | "small"; note: string; circle: string }
   | { kind: "scatter"; photos: Captioned[]; note: string }
   | { kind: "sketchbook"; pages: Captioned[]; note: string }
   | { kind: "process"; title: string; steps: { image: string | null; note: string }[] }
   | { kind: "experiments"; title: string; items: Captioned[] }
   | { kind: "text"; heading: string; body: string }
   | { kind: "note"; text: string; style: "slip" | "hand" | "typed" }
-  | { kind: "poem"; title: string; lines: string; note: string; image: string | null }
-  | { kind: "outcome"; image: string | null; title: string; caption: string };
+  | { kind: "poem"; title: string; lines: string; note: string; image: string | null; shape: "page" | "spiral" }
+  | { kind: "outcome"; image: string | null; title: string; caption: string; note: string; circle: string };
 
 export type Project = {
   slug: string;
@@ -114,7 +118,7 @@ function block(raw: Yaml): Block | null {
   const v: Yaml = raw?.value ?? {};
   switch (raw?.discriminant) {
     case "photo":
-      return { kind: "photo", image: img(v.image), caption: str(v.caption), size: v.size ?? "full" };
+      return { kind: "photo", image: img(v.image), caption: str(v.caption), size: v.size ?? "full", note: str(v.note), circle: str(v.circle) || "none" };
     case "scatter":
       return { kind: "scatter", photos: captioned(v.photos), note: str(v.note) };
     case "sketchbook":
@@ -132,9 +136,9 @@ function block(raw: Yaml): Block | null {
     case "note":
       return { kind: "note", text: str(v.text), style: v.style ?? "slip" };
     case "poem":
-      return { kind: "poem", title: str(v.title), lines: str(v.lines), note: str(v.note), image: img(v.image) };
+      return { kind: "poem", title: str(v.title), lines: str(v.lines), note: str(v.note), image: img(v.image), shape: v.shape === "spiral" ? "spiral" : "page" };
     case "outcome":
-      return { kind: "outcome", image: img(v.image), title: str(v.title), caption: str(v.caption) };
+      return { kind: "outcome", image: img(v.image), title: str(v.title), caption: str(v.caption), note: str(v.note), circle: str(v.circle) || "none" };
     default:
       return null;
   }
@@ -154,7 +158,7 @@ function readProject(slug: string): Project {
     order: d.order ?? 100,
     intro: str(d.intro),
     mood: {
-      paper: d.mood?.paper ?? "parchment",
+      paper: d.mood?.paper ?? "blush",
       accent: d.mood?.accent ?? "lavender",
       line: d.mood?.line ?? "spiral",
       stickers: Array.isArray(d.mood?.stickers) ? d.mood.stickers : [],

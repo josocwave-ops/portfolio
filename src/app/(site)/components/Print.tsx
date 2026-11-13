@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { getSite } from "@/content/load";
 import { tapeColour, tilt, torn } from "../lib/scatter";
-import Twinkle from "./Twinkle";
+import { HandCircle, Paperclip, PixelSpark } from "./Ornaments";
 import styles from "./Print.module.css";
 
-// A photo on old photo paper: a little tilted, with tape or album corners.
-// With no photo yet, it's an empty frame with a note (only you will see those, on drafts).
+export type Fix = "tape" | "clip" | "crop" | "stitch" | "pin" | "corners" | "none";
+export type CircleSpot = "none" | "top-left" | "top-right" | "middle" | "bottom-left" | "bottom-right";
+
+// A photo on photo paper: a little tilted, held on with tape, a paperclip, a pin or stitches,
+// or framed by printer's crop marks. With no photo yet, it's an empty frame with a note
+// (only you will see those, on drafts). Optionally a hand-drawn circle around part of it.
 export default function Print({
   id,
   image,
@@ -20,6 +24,8 @@ export default function Print({
   depth = 0.5,
   maxTilt = 3,
   eager,
+  fig,
+  circle = "none",
   className,
   style,
 }: {
@@ -31,12 +37,15 @@ export default function Print({
   alt?: string;
   /** crop to a fixed shape (galleries) instead of keeping the photo's own shape */
   crop?: "portrait" | "square" | "landscape";
-  fix?: "tape" | "corners" | "none";
+  fix?: Fix;
   tape?: string;
   draft?: boolean;
   depth?: number;
   maxTilt?: number;
   eager?: boolean;
+  /** a little pixel "fig. 3" label under the photo */
+  fig?: number;
+  circle?: CircleSpot;
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -44,9 +53,11 @@ export default function Print({
   const body = (
     <>
       {fix === "tape" && <span className="tape" style={{ "--tape": tape ?? tapeColour(id), "--tr": `${tilt(`t${id}`, 6)}deg` } as React.CSSProperties} />}
+      {fix === "clip" && <Paperclip className={styles.clip} style={{ rotate: `${tilt(`c${id}`, 10)}deg` }} />}
+      {fix === "pin" && <span className={styles.pin} aria-hidden="true" />}
       {draft && <span className="draft-tag">draft · only you can see this</span>}
-      <span className="lift" style={{ "--d": depth } as React.CSSProperties}>
-        <span className={`paper ${styles.frame}`} style={{ clipPath: torn(id, 1.3, 30) }}>
+      <span className={`lift ${fix === "crop" ? styles.crop : ""}`} style={{ "--d": depth } as React.CSSProperties}>
+        <span className={`paper ${styles.frame} ${fix === "stitch" ? styles.stitched : ""}`} style={fix === "stitch" ? undefined : { clipPath: torn(id, 1.3, 30) }}>
           <span className={`${styles.photo} ${crop ? styles[crop] : ""}`}>
             {image ? (
               // eslint-disable-next-line @next/next/no-img-element -- uploaded photos have no known size, so a plain img keeps their shape
@@ -54,6 +65,7 @@ export default function Print({
             ) : (
               <span className={`${styles.empty} hand`}>{words.emptyPhoto}</span>
             )}
+            {circle !== "none" && <HandCircle className={`${styles.circle} ${styles[`c-${circle}`]}`} />}
           </span>
           {(caption || note) && (
             <span className={styles.caption}>
@@ -63,8 +75,9 @@ export default function Print({
           )}
         </span>
       </span>
+      {fig !== undefined && <span className={`${styles.fig} pixel`}>fig. {fig}</span>}
       {href && words.peek && <span className={`${styles.peek} hand`}>{words.peek}</span>}
-      {href && <Twinkle className={styles.spark} />}
+      {href && <PixelSpark className={styles.spark} />}
     </>
   );
   const cls = `${styles.print} ${fix === "corners" ? "corners" : ""} ${href ? styles.link : ""} ${className ?? ""}`;

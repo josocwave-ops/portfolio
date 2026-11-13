@@ -2,6 +2,7 @@ import "./globals.css";
 import Link from "next/link";
 import { getSite } from "@/content/load";
 import Atmosphere from "./(site)/components/Atmosphere";
+import { InkDefs } from "./(site)/components/Ornaments";
 import Paper from "./(site)/components/Paper";
 import SiteFooter from "./(site)/components/SiteFooter";
 import SiteHeader from "./(site)/components/SiteHeader";
@@ -14,6 +15,7 @@ export default function NotFound() {
   return (
     <>
       <Atmosphere />
+      <InkDefs />
       <SiteHeader />
       <main className={styles.main}>
         <div className={styles.moth} data-depth="0.8">

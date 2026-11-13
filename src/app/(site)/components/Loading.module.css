@@ -1,0 +1,38 @@
+.wrap {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 38vh 16px;
+  color: var(--vellum-3);
+  font-size: 20px;
+}
+
+.row {
+  width: 120px;
+  height: 15px;
+  fill: none;
+  stroke: var(--pink-2);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.row path {
+  opacity: 0.25;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .row path {
+    opacity: 0;
+    animation: sew 1.6s steps(1) infinite;
+  }
+}
+
+@keyframes sew {
+  0% {
+    opacity: 0;
+  }
+  10%,
+  80% {
+    opacity: 1;
+  }
+}

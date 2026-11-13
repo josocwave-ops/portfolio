@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { colourOf, getProjectsIn, getSection, getSections, getSite } from "@/content/load";
-import { PageLines } from "../components/Lines";
+import { Stitch, type PatternName } from "../components/Ornaments";
+import Loading from "../components/Loading";
+import PageInk from "../components/PageInk";
 import Print from "../components/Print";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/[section]">): Pro
 // params are read inside Suspense so navigation into the route can show the shell instantly
 export default function SectionPage({ params }: PageProps<"/[section]">) {
   return (
-    <Suspense fallback={<p className={`${styles.loading} hand`}>{getSite().words.loading}</p>}>
+    <Suspense fallback={<Loading />}>
       <SectionBody params={params} />
     </Suspense>
   );
@@ -38,12 +40,18 @@ async function SectionBody({ params }: { params: PageProps<"/[section]">["params
 
   return (
     <div className={styles.page} style={{ "--c": c.color } as React.CSSProperties}>
-      <PageLines kind={index % 2 ? "wavy" : "spiral"} side={index % 2 ? "left" : "right"} />
+      <PageInk kind={index % 2 ? "wavy" : "spiral"} seed={section} colour={c.color} />
       <SiteHeader current={section} />
       <main className={styles.main}>
         <Trail steps={[{ href: "/", label: "home" }, { label: meta.name }]} />
         <div className={styles.head} data-depth="0.08">
-          <h1 className={styles.title}>{meta.name}</h1>
+          <h1 className={styles.title}>
+            <Stitch pattern={meta.mark as PatternName} colour={c.color} seed={meta.slug} className={styles.mark} />
+            {meta.name}
+          </h1>
+          <p className={`${styles.count} pixel`}>
+            {items.length} {items.length === 1 ? "project" : "projects"}
+          </p>
           {meta.intro && <p className={styles.intro}>{meta.intro}</p>}
         </div>
 
@@ -68,7 +76,7 @@ async function SectionBody({ params }: { params: PageProps<"/[section]">["params
                     note={p.teaser || p.details}
                     href={`/${section}/${p.slug}`}
                     crop={i % 3 === 2 ? "square" : "portrait"}
-                    fix={i % 4 === 1 ? "corners" : "tape"}
+                    fix={(["tape", "clip", "crop", "tape", "stitch", "clip"] as const)[i % 6]}
                     tape={i % 2 ? undefined : c.color + "99"}
                     draft={p.draft}
                     maxTilt={4}

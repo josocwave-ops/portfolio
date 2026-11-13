@@ -12,6 +12,19 @@
   margin-top: -20px;
 }
 
+/* the stitched spiral, fading away around the signature so it stays readable */
+.spiral {
+  position: absolute;
+  inset: -6% -4%;
+  width: 108%;
+  height: 112%;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 40% 36% at 50% 52%, transparent 68%, #000 100%), linear-gradient(transparent 0%, #000 18%, #000 80%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(ellipse 40% 36% at 50% 52%, transparent 68%, #000 100%), linear-gradient(transparent 0%, #000 18%, #000 80%, transparent 100%);
+  mask-composite: intersect;
+}
+
 .titleblock {
   position: relative;
   z-index: 2;
@@ -98,26 +111,28 @@
   padding: 26px 24px 24px;
 }
 
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
 .no {
-  font-size: 18px;
   color: var(--ink);
+  margin-top: 4px;
+}
+
+/* the area's cross-stitch flower */
+.mark {
+  width: 40px;
+  height: 40px;
+  rotate: 6deg;
 }
 
 .name {
-  margin-top: 4px;
+  margin-top: 6px;
   font: italic 400 clamp(32px, 3.2vw, 44px) / 1 var(--display);
   color: var(--paper-ink);
-}
-
-.name::after {
-  content: "";
-  display: inline-block;
-  width: 0.16em;
-  height: 0.16em;
-  margin-left: 0.14em;
-  border-radius: 50%;
-  background: var(--c);
-  vertical-align: 0.08em;
 }
 
 .intro {
@@ -128,10 +143,22 @@
 }
 
 .count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-top: auto;
   padding-top: 18px;
-  font-size: 18px;
   color: var(--ink);
+}
+
+.arrow {
+  width: 14px;
+  height: 12px;
+  transition: translate 0.3s steps(3);
+}
+
+.door:hover .arrow {
+  translate: 4px 0;
 }
 
 /* covers peeking out from behind the card, fanning out on hover */

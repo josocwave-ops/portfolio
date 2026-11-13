@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { colourOf, getProject, getProjects, getProjectsIn, getSection, getSections, getSite, paperOf, paragraphs, stickersFor } from "@/content/load";
 import Blocks from "../../components/Blocks";
-import { PageLines } from "../../components/Lines";
+import { Stitch, type PatternName } from "../../components/Ornaments";
+import Loading from "../../components/Loading";
+import PageInk from "../../components/PageInk";
 import MarginStickers from "../../components/MarginStickers";
 import Paper from "../../components/Paper";
 import Print from "../../components/Print";
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/[section]/[slug]"
 // params are read inside Suspense so navigation into the route can show the shell instantly
 export default function ProjectPage({ params }: PageProps<"/[section]/[slug]">) {
   return (
-    <Suspense fallback={<p className={`${styles.loading} hand`}>{getSite().words.loading}</p>}>
+    <Suspense fallback={<Loading />}>
       <ProjectBody params={params} />
     </Suspense>
   );
@@ -57,7 +59,7 @@ async function ProjectBody({ params }: { params: PageProps<"/[section]/[slug]">[
 
   return (
     <div className={styles.page} style={mood}>
-      <PageLines kind={project.mood.line === "wavy" ? "wavy" : project.mood.line === "none" ? "none" : "spiral"} />
+      <PageInk kind={project.mood.line} seed={slug} colour={accent.color} />
       <MarginStickers id={slug} stickers={stickersFor(project.mood.stickers)} />
       <SiteHeader current={section} />
       <main className={styles.main}>
@@ -67,19 +69,38 @@ async function ProjectBody({ params }: { params: PageProps<"/[section]/[slug]">[
           {project.draft && <span className="draft-tag">draft · only you can see this page</span>}
           <Paper id={`hero-${slug}`} tear={5} depth={0.35} className={styles.sheet} innerClassName={styles.sheetInner}>
             <h1 className={styles.title}>{project.title}</h1>
-            {facts && <p className={styles.facts}>{facts}</p>}
+            {facts && <p className={`${styles.facts} pixel`}>{facts}</p>}
             <p className={styles.sections}>
               {allSections.map((s) => (
                 <Link key={s.slug} href={`/${s.slug}`} style={{ "--c": colourOf(s.colour).ink } as React.CSSProperties}>
+                  <Stitch pattern={s.mark as PatternName} colour={colourOf(s.colour).color} seed={s.slug} className={styles.tagMark} />
                   {s.name}
                 </Link>
               ))}
             </p>
             {project.intro && (
               <div className={styles.intro}>
-                {paragraphs(project.intro).map((p) => (
-                  <p key={p.slice(0, 32)}>{p}</p>
-                ))}
+                {paragraphs(project.intro).map((p, i) =>
+                  i === 0 ? (
+                    <p key={p.slice(0, 32)}>
+                      {/* an ornamental first letter in a stitched box */}
+                      <span className={styles.initial} aria-hidden="true">
+                        <svg viewBox="0 0 74 74">
+                          <g fill="none" stroke="var(--accent-ink)" strokeLinecap="round" filter="url(#ink)">
+                            <rect x="4" y="4" width="66" height="66" rx="3" strokeWidth="1.2" strokeDasharray="5 4" />
+                            <path d="M8 66 C 20 50, 14 34, 24 24 C 30 18, 38 22, 34 28" strokeWidth="1.4" />
+                            <circle cx="62" cy="12" r="1.6" />
+                          </g>
+                        </svg>
+                        <b>{p[0]}</b>
+                      </span>
+                      <span className="sr-only">{p[0]}</span>
+                      {p.slice(1)}
+                    </p>
+                  ) : (
+                    <p key={p.slice(0, 32)}>{p}</p>
+                  ),
+                )}
               </div>
             )}
           </Paper>

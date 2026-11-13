@@ -25,11 +25,10 @@
 
 /* tiny twinkles between the words */
 .sep {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   margin: 0 11px;
-  opacity: 0.55;
-  filter: none;
+  opacity: 0.9;
 }
 
 .link {
@@ -41,67 +40,29 @@
   transition: color 0.3s;
 }
 
-/* a hand-drawn gold squiggle: drawn in on hover, always there under the page you're on */
-.link::before,
+/* a pink running stitch: sewn in on hover, always there under the page you're on */
 .link::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 6px;
-  pointer-events: none;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 6' preserveAspectRatio='none'%3E%3Cpath d='M1 3 Q 8 0 15 3 T 30 3 T 45 3 T 59 3' fill='none' stroke='black' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") left / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 6' preserveAspectRatio='none'%3E%3Cpath d='M1 3 Q 8 0 15 3 T 30 3 T 45 3 T 59 3' fill='none' stroke='black' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") left / 100% 100% no-repeat;
-}
-
-.link::before {
-  background: var(--gold);
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--pink-2) 0 6px, transparent 6px 10px);
+  rotate: -0.6deg;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.45s ease;
-}
-
-/* the shimmer: a band of light that runs along the squiggle once */
-.link::after {
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 246, 214, 0.95) 50%, transparent 100%) no-repeat;
-  background-size: 45% 100%;
-  background-position: -80% 0;
-  opacity: 0;
+  transition: clip-path 0.5s steps(8);
+  pointer-events: none;
 }
 
 .link:hover,
 .link[aria-current="page"] {
-  color: var(--vellum);
+  color: var(--pink);
 }
 
-.link[aria-current="page"] {
-  color: var(--gold);
-}
-
-.link:hover::before,
-.link[aria-current="page"]::before {
+.link:hover::after,
+.link[aria-current="page"]::after {
   clip-path: inset(0 0 0 0);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .link[aria-current="page"]::after {
-    animation: shimmer 1.4s ease-out 0.6s 1 both;
-  }
-
-  .link:hover::after {
-    animation: shimmer 1.2s ease-out 0.25s 1 both;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    opacity: 1;
-    background-position: -80% 0;
-  }
-  100% {
-    opacity: 1;
-    background-position: 180% 0;
-  }
 }
 
 @media (max-width: 640px) {

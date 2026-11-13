@@ -14,17 +14,15 @@
 }
 
 .step a:hover {
-  color: var(--gold);
+  color: var(--pink);
 }
 
 .step [aria-current] {
-  color: var(--vellum-2);
+  color: var(--pink);
 }
 
 .sep {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   margin: 0 10px;
-  opacity: 0.6;
-  filter: none;
 }
