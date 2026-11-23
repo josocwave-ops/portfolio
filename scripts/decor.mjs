@@ -257,14 +257,14 @@ function asciiLily() {
     else if (fill && rand() < 0.85) bars.push(g);
     else if (rand() < 0.08) dashes.push(g);
   }
-  return svg(W, H, `<g fill="#e8b5d0"><path d="${rects(bars, 1.6, 3.4)}"/><path d="${rects(dashes, 3.2, 1.4)}"/></g>`);
+  return svg(W, H, `<path fill="#e8b5d0" d="${rects(bars, 1.6, 3.4)}"/><path fill="#d68db5" d="${rects(dashes, 3.2, 1.4)}"/>`);
 }
 
 // 2b. more text-mode flowers in the same bars-and-dashes print as the lily,
 // each in one palette colour, for the "ascii-garden" background and page edges
 
 // print any set of shapes the ASCII way: bars inside, dashes on the edges
-function asciiPrint(shapes, W, H, colour, s = 5, pitch = 4) {
+function asciiPrint(shapes, W, H, colour, edge = colour, s = 5, pitch = 4) {
   const grid = raster(shapes, W, H, pitch);
   seed = s;
   const bars = [];
@@ -277,7 +277,8 @@ function asciiPrint(shapes, W, H, colour, s = 5, pitch = 4) {
     else if (fill && rand() < 0.85) bars.push(g);
     else if (rand() < 0.08) dashes.push(g);
   }
-  return svg(W, H, `<g fill="${colour}"><path d="${rects(bars, 1.6, 3.4)}"/><path d="${rects(dashes, 3.2, 1.4)}"/></g>`);
+  // two tones: soft bars inside, deeper dashes on the edges
+  return svg(W, H, `<path fill="${colour}" d="${rects(bars, 1.6, 3.4)}"/><path fill="${edge}" d="${rects(dashes, 3.2, 1.4)}"/>`);
 }
 
 const leafAt = (x, y, a, L, w = 18) => ({ ...petal(x, y, a, L, w, 0.15), tag: "leaf" });
@@ -328,6 +329,53 @@ function asciiBells() {
   }
   S.push(leafAt(34, 320, -1.2, 120, 20), leafAt(38, 324, -2.0, 90, 18));
   return S;
+}
+
+// 2c. the drawing under the onA signature on the home page
+function asciiLayers(W, H, groups, pitch = 3) {
+  let body = "";
+  groups.forEach(({ shapes, colour, edge }, i) => {
+    const inner = asciiPrint(shapes, W, H, colour, edge, 31 + i, pitch);
+    body += inner.slice(inner.indexOf(">") + 1, inner.lastIndexOf("</svg>"));
+  });
+  return svg(W, H, body);
+}
+
+const group = (shapes, [colour, edge]) => ({ shapes, colour, edge });
+
+// A little dragonfly under the name, drawn in thin strokes so the print
+// stays light and lacy.
+const FLY = ["#7046b0", "#5552a0"];
+const WINGS = ["#b4c2dd", "#8583c4"];
+
+// a delicate dragonfly from above: thin body, wings as outlines with a vein
+function fineDragonfly(cx, cy, s = 1, tilt = 0) {
+  const rot = ([x, y]) => [cx + (x * Math.cos(tilt) - y * Math.sin(tilt)) * s, cy + (x * Math.sin(tilt) + y * Math.cos(tilt)) * s];
+  const line = (pts, w0, w1, tag) => ({ ...stroke(pts.map(rot), w0 * s, w1 * s), tag });
+  const body = [
+    line([[-14, 0], [-13, 0]], 8, 8, "stamen"),
+    line([[-8, 0], [2, 0]], 6, 6, "stamen"),
+    line(bez([4, 0], [26, 0], [50, 1], [74, 2], 24), 3.5, 2.2, "stamen"),
+  ];
+  const wing = (x, a, L) => {
+    const pts = Array.from({ length: 24 }, (_, i) => [x + Math.cos(a) * L * (i / 23), Math.sin(a) * L * (i / 23)]);
+    return { ...blob(pts.map(rot), (t) => 11 * s * Math.sin(Math.PI * Math.pow(t, 0.7)) * 0.5 + 0.6, "leaf") };
+  };
+  const wings = [
+    wing(-4, -Math.PI / 2 - 0.3, 50),
+    wing(-4, Math.PI / 2 + 0.3, 50),
+    wing(3, -Math.PI / 2 + 0.25, 44),
+    wing(3, Math.PI / 2 - 0.25, 44),
+  ];
+  return { body, wings };
+}
+
+// just the dragonfly, hovering under the name, flying up and to the right
+function nameFrame() {
+  const W = 240;
+  const H = 170;
+  const { body, wings } = fineDragonfly(98, 92, 1.25, -0.45);
+  return asciiLayers(W, H, [group(wings, WINGS), group(body, FLY)]);
 }
 
 // 3. cross-stitch lily, three pinks + periwinkle leaves (board pin #3)
@@ -555,9 +603,10 @@ const files = {
   "doodle.svg": doodle(),
   "flourish.svg": flourish(),
   "lily-ascii.svg": asciiLily(),
-  "tulips-ascii.svg": asciiPrint(asciiTulips(), 240, 430, "#c9a5ed", 13),
-  "daisies-ascii.svg": asciiPrint(asciiDaisies(), 230, 350, "#8583c4", 17),
-  "bells-ascii.svg": asciiPrint(asciiBells(), 280, 340, "#b4c2dd", 19),
+  "tulips-ascii.svg": asciiPrint(asciiTulips(), 240, 430, "#c9a5ed", "#8583c4", 13),
+  "daisies-ascii.svg": asciiPrint(asciiDaisies(), 230, 350, "#b9b8e3", "#8583c4", 17),
+  "name-frame.svg": nameFrame(),
+  "bells-ascii.svg": asciiPrint(asciiBells(), 280, 340, "#b4c2dd", "#526a9c", 19),
   "lily-stitch.svg": stitchLily(),
   "halftone.svg": halftone(),
   "garden.svg": garden(),

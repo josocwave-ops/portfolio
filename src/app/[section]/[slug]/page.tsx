@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { pieceBy, pieces, piecesIn, sectionById, writings } from "@/content/work";
+import { pieceBy, pieces, piecesIn, sectionById, toneAt, writings } from "@/content/work";
 import Placeholder from "../../components/Placeholder";
 import TextLink from "../../components/TextLink";
 import SiteFooter from "../../components/SiteFooter";
@@ -96,7 +96,7 @@ async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["p
                 extraShapes.map((r, i) => (
                   // empty spots take turns with the board's sprite family
                   <span key={i} className={`${styles.photo} px-frame`}>
-                    <Placeholder ratio={r} {...ph} sprite={meta.family[(i + 1) % meta.family.length]} />
+                    <Placeholder ratio={r} {...ph} sprite={meta.family[(i + 1) % meta.family.length]} tone={toneAt(i + 1)} />
                   </span>
                 ))}
           </div>

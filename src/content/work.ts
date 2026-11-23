@@ -102,6 +102,11 @@ export const site = {
 
 export const sectionById = (id: string) => sections.find((s) => s.id === id);
 
+// light (0), mid (1) or deep (2) shade for the nth pin or photo spot, in a
+// shuffled order so neighbours on a board rarely match
+const TONE_ORDER = [1, 2, 0, 2, 0, 1, 0, 1, 2];
+export const toneAt = (i: number) => TONE_ORDER[i % TONE_ORDER.length];
+
 // ---- placeholders -------------------------------------------------------
 
 // varied photo shapes so the Pinterest-style grid has a real rhythm

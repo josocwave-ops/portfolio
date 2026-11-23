@@ -12,14 +12,20 @@ type Common = {
   color: string;
   ink: string;
   sprite: SpriteName;
+  /** 0 light, 1 mid, 2 deep: neighbouring pins get different shades */
+  tone?: number;
 };
+
+const TEXT_TONES = ["38%", "58%", "80%"];
+const vars = (p: Common) =>
+  ({ "--c": p.color, "--ink-c": p.ink, "--tone": TEXT_TONES[(p.tone ?? 1) % 3] }) as React.CSSProperties;
 
 // One pin on a Pinterest-style board: a photo at its own shape in a pixel
 // frame, title underneath. On hover it lifts onto a pixel shadow and a sparkle
 // appears.
 export function PhotoPin({ image, ratio, index = 0, ...p }: Common & { image?: Img; ratio?: number; index?: number }) {
   return (
-    <Link href={p.href} className={styles.pin} style={{ "--c": p.color, "--ink-c": p.ink } as React.CSSProperties}>
+    <Link href={p.href} className={styles.pin} style={vars(p)}>
       <span className="lift">
         <span className={`${styles.photo} px-frame`}>
           {image ? (
@@ -32,7 +38,7 @@ export function PhotoPin({ image, ratio, index = 0, ...p }: Common & { image?: I
               loading={index < 6 ? "eager" : "lazy"}
             />
           ) : (
-            <Placeholder ratio={ratio ?? 4 / 5} color={p.color} ink={p.ink} sprite={p.sprite} />
+            <Placeholder ratio={ratio ?? 4 / 5} color={p.color} ink={p.ink} sprite={p.sprite} tone={p.tone} />
           )}
           <Pixel name="sparkle" size={2} className={styles.spark} />
         </span>
@@ -48,7 +54,7 @@ export function PhotoPin({ image, ratio, index = 0, ...p }: Common & { image?: I
 // A pin made of words, for poems.
 export function TextPin({ lines, ...p }: Common & { lines: string }) {
   return (
-    <Link href={p.href} className={styles.pin} style={{ "--c": p.color, "--ink-c": p.ink } as React.CSSProperties}>
+    <Link href={p.href} className={styles.pin} style={vars(p)}>
       <span className="lift">
         <span className={`${styles.text} px-frame`}>
           <Pixel name={p.sprite} size={2} className={styles.textSprite} />

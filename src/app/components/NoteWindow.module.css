@@ -21,7 +21,8 @@
   padding: 5px 12px;
   font-size: 14px;
   color: var(--navy);
-  background: var(--pearl);
+  /* pearl by default; a window can set --bar to its own colours */
+  background: var(--bar, var(--pearl));
   border-bottom: 2px solid var(--navy);
 }
 

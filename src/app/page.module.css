@@ -20,6 +20,15 @@
   font-weight: 400;
 }
 
+/* a little ASCII dragonfly hovering under "cabedo wells" */
+.nameFrame {
+  width: min(200px, 50vw);
+  height: auto;
+  margin-top: calc(var(--s4) * -1);
+  pointer-events: none;
+  user-select: none;
+}
+
 .hello {
   position: relative;
   z-index: 1;
@@ -36,9 +45,16 @@
   margin-top: var(--s3);
 }
 
-/* every card is the same little window as hello.txt (it hops on hover) */
+/* every card is the same little window as hello.txt (it lifts on hover),
+   with a title bar in its own section's colours instead of the pearl */
 .win {
   height: 100%;
+  --bar: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--c) 50%, var(--paper)),
+    var(--c) 45%,
+    color-mix(in srgb, var(--c) 60%, var(--lilac))
+  );
 }
 
 /* featured projects */

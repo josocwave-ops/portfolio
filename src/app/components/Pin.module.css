@@ -6,10 +6,13 @@
   width: 100%;
 }
 
-/* the frame and stepped corners come from .px-frame, the hover from .lift */
+/* the frame and stepped corners come from .px-frame (outlined in the pin's
+   own ink rather than navy, so boards aren't all one colour); the hover
+   comes from .lift */
 .photo,
 .text {
   display: block;
+  --frame: var(--ink-c);
 }
 
 .photo img {
@@ -60,7 +63,7 @@
   padding: var(--s5) var(--s4) var(--s6);
   background:
     radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--paper) 90%, transparent), transparent 60%),
-    color-mix(in srgb, var(--c) 60%, var(--paper));
+    color-mix(in srgb, var(--c) var(--tone, 60%), var(--paper));
 }
 
 .textSprite {

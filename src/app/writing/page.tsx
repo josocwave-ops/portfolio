@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { sectionById, writings } from "@/content/work";
+import { sectionById, toneAt, writings } from "@/content/work";
 import BoardHeader from "../components/BoardHeader";
 import { TextPin } from "../components/Pin";
 import SiteFooter from "../components/SiteFooter";
@@ -28,6 +28,7 @@ export default function WritingPage() {
               color={meta.color}
               ink={meta.ink}
               sprite={meta.family[i % meta.family.length]}
+              tone={toneAt(i)}
             />
           ))}
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { piecesIn, sectionById, sections } from "@/content/work";
+import { piecesIn, sectionById, sections, toneAt } from "@/content/work";
 import BoardHeader from "../components/BoardHeader";
 import { PhotoPin } from "../components/Pin";
 import SiteFooter from "../components/SiteFooter";
@@ -56,6 +56,7 @@ async function SectionBody({ params }: { params: PageProps<"/[section]">["params
                 color={t.color}
                 ink={t.ink}
                 sprite={meta.family[i % meta.family.length]}
+                tone={toneAt(i)}
               />
             );
           })}
