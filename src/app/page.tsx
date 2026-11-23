@@ -31,10 +31,10 @@ export default function Home() {
         <section className={styles.hero}>
           <h1 className={styles.title}>
             <Signature size="large" />
+            {/* an ASCII dragonfly in the empty corner above "on" (made by scripts/decor.mjs) */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- static decorative SVG */}
+            <img src="/decor/dragonfly.svg" alt="" aria-hidden="true" className={styles.dragonfly} draggable={false} />
           </h1>
-          {/* a little ASCII dragonfly under the name (made by scripts/decor.mjs) */}
-          {/* eslint-disable-next-line @next/next/no-img-element -- static decorative SVG */}
-          <img src="/decor/name-frame.svg" alt="" aria-hidden="true" className={styles.nameFrame} draggable={false} />
           <NoteWindow title="♡ hello.txt" className={styles.hello}>
             <p className={styles.intro}>
               <Cute text={site.intro} />

@@ -370,12 +370,13 @@ function fineDragonfly(cx, cy, s = 1, tilt = 0) {
   return { body, wings };
 }
 
-// just the dragonfly, hovering under the name, flying up and to the right
-function nameFrame() {
-  const W = 240;
-  const H = 170;
-  const { body, wings } = fineDragonfly(98, 92, 1.25, -0.45);
-  return asciiLayers(W, H, [group(wings, WINGS), group(body, FLY)]);
+// the dragonfly that flies beside the onA signature. Drawn at the size it is
+// shown (about 1:1) on a fine 2.5px grid, so it never gets scaled up blocky.
+function nameDragonfly() {
+  const W = 124;
+  const H = 114;
+  const { body, wings } = fineDragonfly(44, 56, 1, -0.45);
+  return asciiLayers(W, H, [group(wings, WINGS), group(body, FLY)], 2.5);
 }
 
 // 3. cross-stitch lily, three pinks + periwinkle leaves (board pin #3)
@@ -605,7 +606,7 @@ const files = {
   "lily-ascii.svg": asciiLily(),
   "tulips-ascii.svg": asciiPrint(asciiTulips(), 240, 430, "#c9a5ed", "#8583c4", 13),
   "daisies-ascii.svg": asciiPrint(asciiDaisies(), 230, 350, "#b9b8e3", "#8583c4", 17),
-  "name-frame.svg": nameFrame(),
+  "dragonfly.svg": nameDragonfly(),
   "bells-ascii.svg": asciiPrint(asciiBells(), 280, 340, "#b4c2dd", "#526a9c", 19),
   "lily-stitch.svg": stitchLily(),
   "halftone.svg": halftone(),

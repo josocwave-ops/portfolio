@@ -20,11 +20,15 @@
   font-weight: 400;
 }
 
-/* a little ASCII dragonfly hovering under "cabedo wells" */
-.nameFrame {
-  width: min(200px, 50vw);
+/* the ASCII dragonfly, loosely tucked into the space above "on" and flying
+   toward the A; sized as a share of the name so it scales with it */
+.dragonfly {
+  position: absolute;
+  top: 2%;
+  left: -4%;
+  width: 39%;
   height: auto;
-  margin-top: calc(var(--s4) * -1);
+  rotate: -7deg;
   pointer-events: none;
   user-select: none;
 }
