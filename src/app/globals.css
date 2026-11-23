@@ -1,20 +1,66 @@
 :root {
-  --page: #fcfbfc;
-  --ink: #2a2f3a;
-  --muted: #6b6f7c;
-  --line: #e6e1e6;
-  --print: #ffffff;
+  /* Ona's palette */
+  --page: #f8eeee; /* light pink */
+  --paper: #fff8f8; /* cards and pins, a touch lighter than the page */
+  --ink: #30314f; /* deep navy: body text */
+  --plum: #30314f; /* headings */
+  --muted: #5e5f7e; /* captions, small print (5.4:1 on the page) */
+  --line: #ebd9dd;
+  --silver: #b7b3cf;
 
-  --sage: #8fa89a;
-  --rose: #c98fa6;
-  --slate: #8394b5;
-  --mauve: #a99bb5;
+  --pink: #e8b5d0;
+  --lilac: #c9a5ed;
+  --peri: #8583c4; /* periwinkle */
+  --blue: #526a9c; /* dusty blue */
+  --navy: #30314f;
 
-  --hand: var(--font-hand), "Comic Sans MS", cursive;
+  /* supporting colours: in-betweens of the palette above. Use these, never a
+     new hex, so every colour on the site comes from this list. */
+  --ice: #b4c2dd; /* ice blue */
+  --mist: #b9b8e3; /* lilac-blue mist */
+  --rose: #d68db5; /* deeper pink, for flowers and hearts */
+
+  /* text-safe versions (4.5:1 or better on the page) */
+  --pink-ink: #9c4a78;
+  --lilac-ink: #7046b0;
+  --peri-ink: #5552a0;
+  --blue-ink: #526a9c;
+
+  /* a soft holographic sheen, for special frames */
+  --pearl: linear-gradient(120deg, var(--pink), var(--lilac) 35%, var(--mist) 65%, var(--pink));
+
+  /* the two kinds of dotted line:
+     beads  — a chain of big and small beads, for dividers and edges
+     stitch — square 2px stitches, for underlines (uses the text colour) */
+  --beads:
+    radial-gradient(circle, var(--pink) 3px, transparent 3.5px) 0 50% / 24px 8px repeat-x,
+    radial-gradient(circle, var(--peri) 1.5px, transparent 2px) 8px 50% / 24px 8px repeat-x,
+    radial-gradient(circle, var(--lilac) 1.5px, transparent 2px) 16px 50% / 24px 8px repeat-x;
+  --stitch: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 6px) 0 100% / 100% 2px no-repeat;
+
+  /* one size for every page title */
+  --title: clamp(40px, 7vw, 60px);
+
+  --hand: var(--font-serif), Didot, Georgia, serif; /* the onA signature */
+  --pixel: var(--font-pixel), ui-monospace, monospace;
   --body: var(--font-body), system-ui, sans-serif;
+  --serif: var(--font-serif), Georgia, serif;
+  --mono: var(--font-mono), "Courier New", monospace;
+
+  /* 8px grid, so pixel art and layout line up */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 32px;
+  --s6: 48px;
+  --s7: 64px;
+  --s8: 96px;
+  --s9: 128px;
 
   --gutter: clamp(16px, 5vw, 48px);
-  --max: 1120px;
+  --max: 1200px;
+  --read: 680px;
 }
 
 *,
@@ -35,9 +81,11 @@ body {
   color: var(--ink);
   font-family: var(--body);
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* everything on the site is lowercase, Ona's own words included */
+  text-transform: lowercase;
 }
 
 /* the soft colour haze behind every page */
@@ -48,10 +96,10 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(38% 30% at 18% 22%, rgba(215, 161, 184, 0.28), transparent 70%),
-    radial-gradient(34% 28% at 84% 30%, rgba(131, 148, 181, 0.22), transparent 70%),
-    radial-gradient(40% 32% at 70% 86%, rgba(143, 168, 154, 0.24), transparent 70%),
-    radial-gradient(30% 26% at 20% 80%, rgba(169, 155, 181, 0.22), transparent 70%);
+    radial-gradient(38% 30% at 16% 18%, rgba(232, 181, 208, 0.35), transparent 70%),
+    radial-gradient(34% 28% at 86% 26%, rgba(201, 165, 237, 0.25), transparent 70%),
+    radial-gradient(40% 32% at 72% 88%, rgba(133, 131, 196, 0.16), transparent 70%),
+    radial-gradient(30% 26% at 18% 82%, rgba(232, 181, 208, 0.3), transparent 70%);
   filter: blur(10px);
 }
 
@@ -60,19 +108,38 @@ a {
   text-decoration: none;
 }
 
+/* pixel cursors: a sparkle, and a heart over anything clickable.
+   These are plain images the browser draws itself, so they cost nothing. */
+html {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27' height='27' viewBox='0 0 9 9' shape-rendering='crispEdges'%3E%3Cpath fill='%23fff' d='M3 0h3v3h3v3H6v3H3V6H0V3h3z'/%3E%3Cpath fill='%237046b0' d='M4 0h1v3H4zM4 6h1v3H4zM0 4h3v1H0zM6 4h3v1H6z'/%3E%3Cpath fill='%23d68db5' d='M3 3h3v3H3z'/%3E%3Cpath fill='%23fff' d='M4 4h1v1H4z'/%3E%3C/svg%3E")
+      13 13,
+    auto;
+}
+
+a,
+button,
+summary,
+label[for],
+[role="button"] {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27' height='24' viewBox='0 0 9 8' shape-rendering='crispEdges'%3E%3Cpath fill='%2330314f' d='M1 0h2v1H1zM6 0h2v1H6zM0 1h1v3H0zM8 1h1v3H8zM3 1h1v1H3zM5 1h1v1H5zM4 2h1v1H4zM1 4h1v1H1zM7 4h1v1H7zM2 5h1v1H2zM6 5h1v1H6zM3 6h1v1H3zM5 6h1v1H5zM4 7h1v1H4z'/%3E%3Cpath fill='%23e8b5d0' d='M1 1h2v3H1zM6 1h2v3H6zM3 2h1v4H3zM5 2h1v4H5zM4 3h1v4H4zM2 4h1v1H2zM6 4h1v1H6z'/%3E%3Cpath fill='%23fff' d='M1 1h1v1H1z'/%3E%3C/svg%3E")
+      4 2,
+    pointer;
+}
+
 img {
   display: block;
   max-width: 100%;
 }
 
 ::selection {
-  background: #ecd1d8;
+  background: var(--pink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--slate);
+  outline: 2px dashed var(--plum);
   outline-offset: 3px;
-  border-radius: 3px;
 }
 
 .sr-only {
@@ -87,4 +154,100 @@ img {
 main {
   position: relative;
   z-index: 1;
+}
+
+/* the pixel font is drawn on a grid; keep it crisp */
+.pixel {
+  font-family: var(--pixel);
+  -webkit-font-smoothing: none;
+}
+
+/* The site's one frame: a 2px outline with stepped pixel corners, used by
+   windows, pins and photos. The element is clipped to the stepped shape and
+   ::after draws the outline on top. Tune per element with
+     --frame (outline colour), --st (step size), --bw (outline width). */
+:where(.px-frame) {
+  --frame: var(--navy);
+  --st: 4px;
+  --bw: 2px;
+  --o1: var(--st);
+  --o3: calc(var(--st) * 3);
+  --i0: var(--bw);
+  --i1: calc(var(--bw) + var(--st));
+  --i3: calc(var(--bw) + var(--st) * 3);
+  position: relative;
+  padding: var(--bw);
+  isolation: isolate;
+  clip-path: polygon(
+    0 var(--o3), var(--o1) var(--o3), var(--o1) var(--o1), var(--o3) var(--o1), var(--o3) 0,
+    calc(100% - var(--o3)) 0, calc(100% - var(--o3)) var(--o1), calc(100% - var(--o1)) var(--o1), calc(100% - var(--o1)) var(--o3), 100% var(--o3),
+    100% calc(100% - var(--o3)), calc(100% - var(--o1)) calc(100% - var(--o3)), calc(100% - var(--o1)) calc(100% - var(--o1)), calc(100% - var(--o3)) calc(100% - var(--o1)), calc(100% - var(--o3)) 100%,
+    var(--o3) 100%, var(--o3) calc(100% - var(--o1)), var(--o1) calc(100% - var(--o1)), var(--o1) calc(100% - var(--o3)), 0 calc(100% - var(--o3))
+  );
+}
+
+.px-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--frame);
+  /* the outer outline, then the same shape inset by --bw: even-odd leaves a ring */
+  clip-path: polygon(
+    evenodd,
+    0 var(--o3), var(--o1) var(--o3), var(--o1) var(--o1), var(--o3) var(--o1), var(--o3) 0,
+    calc(100% - var(--o3)) 0, calc(100% - var(--o3)) var(--o1), calc(100% - var(--o1)) var(--o1), calc(100% - var(--o1)) var(--o3), 100% var(--o3),
+    100% calc(100% - var(--o3)), calc(100% - var(--o1)) calc(100% - var(--o3)), calc(100% - var(--o1)) calc(100% - var(--o1)), calc(100% - var(--o3)) calc(100% - var(--o1)), calc(100% - var(--o3)) 100%,
+    var(--o3) 100%, var(--o3) calc(100% - var(--o1)), var(--o1) calc(100% - var(--o1)), var(--o1) calc(100% - var(--o3)), 0 calc(100% - var(--o3)),
+    0 var(--o3),
+    var(--i0) var(--i3), var(--i0) calc(100% - var(--i3)), var(--i1) calc(100% - var(--i3)), var(--i1) calc(100% - var(--i1)), var(--i3) calc(100% - var(--i1)), var(--i3) calc(100% - var(--i0)),
+    calc(100% - var(--i3)) calc(100% - var(--i0)), calc(100% - var(--i3)) calc(100% - var(--i1)), calc(100% - var(--i1)) calc(100% - var(--i1)), calc(100% - var(--i1)) calc(100% - var(--i3)), calc(100% - var(--i0)) calc(100% - var(--i3)),
+    calc(100% - var(--i0)) var(--i3), calc(100% - var(--i1)) var(--i3), calc(100% - var(--i1)) var(--i1), calc(100% - var(--i3)) var(--i1), calc(100% - var(--i3)) var(--i0),
+    var(--i3) var(--i0), var(--i3) var(--i1), var(--i1) var(--i1), var(--i1) var(--i3), var(--i0) var(--i3)
+  );
+}
+
+/* a bead-chain line, for dividers */
+.beads {
+  display: block;
+  height: 8px;
+  background: var(--beads);
+}
+
+/* how everything clickable moves: on hover it lifts up-left onto a hard
+   pixel shadow, and pressing pushes it back down flat. The shadow is a
+   drop-shadow (not box-shadow) so it follows .px-frame's stepped corners;
+   put .lift on a wrapper AROUND the framed element, since clip-path would
+   cut off a shadow on the element itself. */
+.lift {
+  display: block;
+  transition:
+    translate 0.16s steps(2),
+    filter 0.16s steps(2);
+}
+
+a:hover .lift,
+a:focus-visible .lift,
+.lift:is(a):hover,
+.lift:is(a):focus-visible {
+  translate: -3px -3px;
+  filter: drop-shadow(4px 4px 0 var(--ink-c, var(--navy)));
+}
+
+a:active .lift,
+.lift:is(a):active {
+  translate: 0 0;
+  filter: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

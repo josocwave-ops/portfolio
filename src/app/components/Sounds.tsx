@@ -1,0 +1,118 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import styles from "./Sounds.module.css";
+
+// Little video-game blips when you click things, like an early-2000s
+// personal site. The sounds are synthesised in the browser (no audio files):
+//   blip — windows, pins and cards
+//   ding — the 88×31 web buttons, and turning sound on
+//   pop  — opening the phone menu
+//   tick — any other link
+// Anything can pick its sound with data-sfx="blip|ding|pop|tick|none".
+// Visitors can turn it off in the footer; the choice is remembered.
+
+type Sfx = "blip" | "ding" | "pop" | "tick";
+
+const KEY = "onA-sounds";
+const VOLUME = 0.05;
+
+let ctx: AudioContext | null = null;
+
+function audio() {
+  if (!ctx) {
+    const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+  }
+  if (ctx.state === "suspended") void ctx.resume();
+  return ctx;
+}
+
+// one note: a quick attack, then a fade
+function note(a: AudioContext, freq: number, at: number, dur: number, type: OscillatorType, vol = 1, slideTo?: number) {
+  const osc = a.createOscillator();
+  const gain = a.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, at);
+  if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, at + dur);
+  gain.gain.setValueAtTime(0.0001, at);
+  gain.gain.exponentialRampToValueAtTime(VOLUME * vol, at + 0.006);
+  gain.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+  osc.connect(gain).connect(a.destination);
+  osc.start(at);
+  osc.stop(at + dur + 0.02);
+}
+
+export function play(sfx: Sfx) {
+  const a = audio();
+  if (!a) return;
+  const t = a.currentTime;
+  if (sfx === "tick") note(a, 1760, t, 0.035, "square", 0.45);
+  if (sfx === "blip") {
+    note(a, 988, t, 0.06, "square", 0.6);
+    note(a, 1480, t + 0.06, 0.09, "square", 0.6);
+  }
+  if (sfx === "ding") {
+    note(a, 1568, t, 0.32, "triangle", 1.2);
+    note(a, 2349, t + 0.07, 0.42, "triangle", 0.9);
+  }
+  if (sfx === "pop") note(a, 420, t, 0.09, "sine", 1.4, 980);
+}
+
+const isOn = () => {
+  try {
+    return localStorage.getItem(KEY) !== "off";
+  } catch {
+    return true;
+  }
+};
+
+// listens for clicks anywhere on the page; mounted once in the layout
+export default function SoundEffects() {
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (!isOn() || !(e.target instanceof Element)) return;
+      const el = e.target.closest<HTMLElement>("[data-sfx], a, summary, button");
+      if (!el) return;
+      const chosen = el.dataset.sfx;
+      if (chosen === "none") return;
+      const sfx: Sfx =
+        chosen === "blip" || chosen === "ding" || chosen === "pop" || chosen === "tick"
+          ? chosen
+          : el.tagName === "SUMMARY"
+            ? "pop"
+            : el.querySelector(".lift")
+              ? "blip"
+              : "tick";
+      play(sfx);
+    };
+    document.addEventListener("click", onClick, { capture: true });
+    return () => document.removeEventListener("click", onClick, { capture: true });
+  }, []);
+  return null;
+}
+
+// the "♪ sounds: on / off" switch in the footer
+export function SoundToggle() {
+  const [on, setOn] = useState(true);
+  useEffect(() => setOn(isOn()), []);
+  return (
+    <button
+      type="button"
+      className={`${styles.toggle} pixel`}
+      aria-pressed={on}
+      data-sfx="none"
+      onClick={() => {
+        const next = !on;
+        setOn(next);
+        try {
+          localStorage.setItem(KEY, next ? "on" : "off");
+        } catch {}
+        if (next) play("ding");
+      }}
+    >
+      ♪ sounds: {on ? "on" : "off"}
+    </button>
+  );
+}

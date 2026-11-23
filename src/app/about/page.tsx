@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { links } from "@/content/work";
+import NoteWindow from "../components/NoteWindow";
+import Placeholder from "../components/Placeholder";
+import TextLink from "../components/TextLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import Swirls from "../components/Swirls";
+import Background from "../components/Background";
 import styles from "../inner.module.css";
-import portrait from "../../../public/about.jpg";
 
 export const metadata: Metadata = { title: "about" };
 
@@ -14,13 +14,15 @@ export const metadata: Metadata = { title: "about" };
 export default function AboutPage() {
   return (
     <>
-      <Swirls density="page" />
+      <Background />
       <SiteHeader current="about" />
       <main className={styles.main}>
         <div className={styles.about}>
-          <Image src={portrait} alt="Painting of Ona" className={styles.portrait} sizes="(max-width: 720px) 92vw, 420px" />
-          <div className={styles.prose}>
-            <h1 className={styles.heading} style={{ marginTop: 0 }}>
+          <NoteWindow title="✿ me.jpg" flush>
+            <Placeholder ratio={4 / 5} color="var(--pink)" ink="var(--pink-ink)" sprite="heart" label="a photo of you" />
+          </NoteWindow>
+          <NoteWindow title="♡ about_me.txt" bodyClassName={styles.prose}>
+            <h1 className={`${styles.heading} pixel`} style={{ marginTop: 0 }}>
               hi, i&rsquo;m ona
             </h1>
             <p>
@@ -32,19 +34,13 @@ export default function AboutPage() {
               discarded fabric and unravelled sweaters; and I draw and paint in between.
             </p>
             <p>
-              I also run a small ceramics studio,{" "}
-              <a href={links.shop} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
-                Clay by Ona
-              </a>
-              , where some of my pieces are for sale.
+              I also run a small ceramics studio, <TextLink href={links.shop}>Clay by Ona</TextLink>, where some of my
+              pieces are for sale.
             </p>
             <p>
-              <Link href="/contact" style={{ textDecoration: "underline" }}>
-                Say hello
-              </Link>
-              .
+              <TextLink href="/contact">Say hello</TextLink>.
             </p>
-          </div>
+          </NoteWindow>
         </div>
       </main>
       <SiteFooter />

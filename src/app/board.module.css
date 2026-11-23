@@ -1,0 +1,128 @@
+/* category "boards": Pinterest-style masonry */
+.main {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.head {
+  display: grid;
+  justify-items: center;
+  gap: var(--s2);
+  text-align: center;
+  padding: var(--s6) 0 var(--s6);
+}
+
+.halo {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s3);
+  margin-bottom: var(--s2);
+}
+
+.headSprite,
+.kin {
+  --c: var(--ink-c);
+}
+
+.kin {
+  margin-bottom: 8px;
+}
+
+.h1 {
+  --c: var(--ink-c);
+  margin-bottom: 30px;
+}
+
+.h2 {
+  --delay: 1.4s;
+}
+
+.title {
+  font-size: var(--title);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.blurb {
+  max-width: 48ch;
+  color: var(--muted);
+}
+
+.count {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-c);
+}
+
+.line {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--pink-ink);
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s2);
+  margin-top: var(--s4);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--c) 45%, var(--paper));
+  transition:
+    translate 0.16s steps(2),
+    filter 0.16s steps(2),
+    background 0.16s steps(2);
+}
+
+.chip:hover,
+.chip[aria-current="page"] {
+  background: var(--c);
+}
+
+/* the sparkle only shows on hover and on the current board */
+.chipSpark {
+  --c: var(--ink-c);
+  width: 0;
+  opacity: 0;
+  transition: width 0.16s steps(2), margin 0.16s steps(2), opacity 0.16s steps(2);
+}
+
+.chip:hover .chipSpark,
+.chip[aria-current="page"] .chipSpark {
+  width: 18px;
+  margin-right: 6px;
+  opacity: 1;
+}
+
+.chip[aria-current="page"] .chipText {
+  padding-bottom: 2px;
+  background: var(--stitch);
+}
+
+/* columns give the staggered, every-photo-its-own-shape look */
+.masonry {
+  columns: 5 200px;
+  column-gap: var(--s3);
+}
+
+@media (max-width: 600px) {
+  .masonry {
+    columns: 2;
+    column-gap: var(--s3);
+  }
+}

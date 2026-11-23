@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { links } from "@/content/work";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import Spiral from "../components/Spiral";
-import Swirls from "../components/Swirls";
+import NoteWindow from "../components/NoteWindow";
+import Pixel from "../components/Pixel";
+import Background from "../components/Background";
 import styles from "../inner.module.css";
 
 export const metadata: Metadata = { title: "contact" };
@@ -11,14 +12,14 @@ export const metadata: Metadata = { title: "contact" };
 export default function ContactPage() {
   return (
     <>
-      <Swirls density="page" />
+      <Background />
       <SiteHeader current="contact" />
       <main className={styles.main}>
         <h1 className={styles.heading}>contact</h1>
         <p className={styles.lead}>For commissions, collaborations, or just to say hi.</p>
-        <div className={styles.contactList}>
+        <NoteWindow title="✉ contact.txt" className={styles.contactWin} bodyClassName={styles.contactList}>
           <a href={`mailto:${links.email}`}>
-            <Spiral color="#c98fa6" seed={4} className={styles.headingSpiral} />
+            <Pixel name="envelope" size={3} color="var(--rose)" />
             <span>
               {links.email}
               <br />
@@ -26,7 +27,7 @@ export default function ContactPage() {
             </span>
           </a>
           <a href={links.instagram} target="_blank" rel="noopener noreferrer">
-            <Spiral color="#8394b5" seed={5} className={styles.headingSpiral} />
+            <Pixel name="heart" size={3} color="var(--peri)" />
             <span>
               @claybyona
               <br />
@@ -34,14 +35,14 @@ export default function ContactPage() {
             </span>
           </a>
           <a href={links.shop} target="_blank" rel="noopener noreferrer">
-            <Spiral color="#8fa89a" seed={6} className={styles.headingSpiral} />
+            <Pixel name="vase" size={3} color="var(--peri)" />
             <span>
               claybyona.com
               <br />
               <small>the shop</small>
             </span>
           </a>
-        </div>
+        </NoteWindow>
       </main>
       <SiteFooter />
     </>

@@ -3,15 +3,58 @@
   z-index: 1;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 56px var(--gutter) 40px;
+  padding: var(--s8) var(--gutter) var(--s5);
+  display: grid;
+  justify-items: center;
+  gap: var(--s3);
+  text-align: center;
+}
+
+.garden {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px 24px;
-  font-size: 14px;
+  align-items: flex-end;
+  gap: var(--s2) var(--s3);
+  width: min(100%, 760px);
+  padding-bottom: calc(var(--s1) + 12px);
+  /* the flower bed sits on a bead chain */
+  background: var(--beads);
+  background-position-y: 100%;
+  --c3: var(--peri);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s2) var(--s4);
+  font-size: 15px;
+  color: var(--plum);
+}
+
+.links a:hover {
+  color: var(--pink-ink);
+}
+
+.small {
+  font-family: var(--mono);
+  font-size: 13px;
   color: var(--muted);
 }
 
-.footer a:hover {
-  color: var(--ink);
+.ascii {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--pink-ink);
+  opacity: 0.75;
+  white-space: pre;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.heart {
+  font-family: var(--pixel);
+  color: var(--pink-ink);
 }

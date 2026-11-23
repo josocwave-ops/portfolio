@@ -1,0 +1,27 @@
+.link {
+  color: var(--pink-ink);
+  font-size: 0.95em;
+  background: var(--stitch);
+  padding-bottom: 2px;
+  transition: color 0.16s steps(2);
+}
+
+.link:hover {
+  color: var(--ink-c, var(--lilac-ink));
+}
+
+.spark {
+  --c: currentColor;
+  width: 0;
+  margin-right: 0;
+  vertical-align: -1px;
+  opacity: 0;
+  transition: width 0.16s steps(2), margin 0.16s steps(2), opacity 0.16s steps(2);
+}
+
+.link:hover .spark,
+.link:focus-visible .spark {
+  width: 9px;
+  margin-right: 4px;
+  opacity: 1;
+}

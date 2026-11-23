@@ -1,0 +1,17 @@
+.toggle {
+  font-size: 14px;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 2px 0 4px;
+  transition: color 0.16s steps(2);
+}
+
+.toggle:hover {
+  color: var(--pink-ink);
+}
+
+.toggle[aria-pressed="true"] {
+  color: var(--peri-ink);
+  background: var(--stitch);
+}

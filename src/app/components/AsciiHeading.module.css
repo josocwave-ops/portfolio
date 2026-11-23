@@ -1,0 +1,29 @@
+.h {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin: 0 0 var(--s5);
+  font-weight: 400;
+}
+
+.line {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--pink-ink);
+  opacity: 0.75;
+}
+
+/* clip the right-hand line from its outer edge so both meet the title neatly */
+.right {
+  direction: rtl;
+}
+
+.text {
+  flex: none;
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: var(--ink);
+}

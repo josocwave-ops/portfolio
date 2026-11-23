@@ -1,0 +1,75 @@
+/* the wrapper carries the hover lift and shadow (.lift); the window inside
+   gets its outline and stepped corners from .px-frame (both in globals.css) */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--paper);
+  text-align: left;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 5px 12px;
+  font-size: 14px;
+  color: var(--navy);
+  background: var(--pearl);
+  border-bottom: 2px solid var(--navy);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* only shows when the window is a link and you hover it */
+.spark {
+  --c: var(--ink-c, var(--navy));
+  margin-left: calc(var(--s3) * -0.5);
+  opacity: 0;
+  transition: opacity 0.16s steps(2);
+}
+
+a:hover .spark,
+a:focus-visible .spark {
+  opacity: 1;
+}
+
+.dots {
+  display: flex;
+  gap: 5px;
+}
+
+.dots i {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--navy);
+  background: var(--paper);
+}
+
+.body {
+  display: block;
+  flex: 1;
+  padding: var(--s3) var(--s4) var(--s4);
+}
+
+.flush {
+  padding: 0;
+}

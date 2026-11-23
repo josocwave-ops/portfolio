@@ -1,0 +1,221 @@
+.bg {
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fixed {
+  position: fixed;
+  inset: 0;
+}
+
+.contained {
+  position: absolute;
+  inset: 0;
+}
+
+.spot {
+  position: absolute;
+  translate: -50% -50%;
+}
+
+/* dot-matrix lilies tucked into two corners */
+.lace {
+  position: absolute;
+  width: clamp(200px, 30vw, 420px);
+  height: auto;
+  opacity: 0.85;
+}
+
+.contained .lace {
+  width: 42%;
+}
+
+.tl {
+  top: -4%;
+  left: -4%;
+}
+
+.br {
+  bottom: -4%;
+  right: -4%;
+  rotate: 180deg;
+}
+
+/* drawings from public/decor */
+.art {
+  position: absolute;
+  height: auto;
+  user-select: none;
+}
+
+.halftoneTr {
+  top: 0;
+  right: 0;
+  width: clamp(180px, 26vw, 380px);
+  rotate: 90deg;
+  opacity: 0.55;
+}
+
+.halftoneBl {
+  bottom: 0;
+  left: 0;
+  width: clamp(180px, 26vw, 380px);
+  rotate: -90deg;
+  opacity: 0.55;
+}
+
+.flourishTl {
+  top: 10px;
+  left: 10px;
+  width: clamp(200px, 30vw, 440px);
+  opacity: 0.8;
+}
+
+.flourishBr {
+  bottom: 10px;
+  right: 10px;
+  width: clamp(200px, 30vw, 440px);
+  rotate: 180deg;
+  opacity: 0.8;
+}
+
+.asciiLily {
+  bottom: -2%;
+  right: 2%;
+  height: min(78vh, 640px);
+  width: auto;
+  opacity: 0.9;
+}
+
+/* more text-mode flowers tucked around the edges */
+.tulips {
+  bottom: -1%;
+  left: 1%;
+  height: min(52vh, 430px);
+  width: auto;
+  opacity: 0.85;
+}
+
+.daisies {
+  top: 34%;
+  right: -10px;
+  height: min(34vh, 300px);
+  width: auto;
+  opacity: 0.6;
+}
+
+.bells {
+  top: 38%;
+  left: -12px;
+  height: min(30vh, 260px);
+  width: auto;
+  rotate: -6deg;
+  opacity: 0.7;
+}
+
+/* cross-stitch lilies growing in from both sides, like the magazine page */
+.stitchL {
+  left: -60px;
+  top: 12%;
+  height: min(84vh, 680px);
+  width: auto;
+  opacity: 0.9;
+}
+
+.stitchR {
+  right: -70px;
+  bottom: -6%;
+  height: min(64vh, 520px);
+  width: auto;
+  scale: -1 1;
+  opacity: 0.75;
+}
+
+.chrome {
+  top: 0;
+  left: 0;
+  width: clamp(240px, 36vw, 520px);
+}
+
+/* printer's crop marks */
+.crop {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--peri);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.7;
+}
+.cTl {
+  top: 12px;
+  left: 12px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.cTr {
+  top: 12px;
+  right: 12px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+.cBl {
+  bottom: 12px;
+  left: 12px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+.cBr {
+  bottom: 12px;
+  right: 12px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+.contained .art {
+  max-width: 55%;
+  max-height: 90%;
+}
+
+.contained .stitchL,
+.contained .stitchR,
+.contained .asciiLily {
+  height: 95%;
+}
+
+.contained .stitchL {
+  left: -30px;
+  top: 4%;
+}
+
+.contained .stitchR {
+  right: -40px;
+}
+
+@media (max-width: 700px) {
+  .lace {
+    width: 46vw;
+    opacity: 0.6;
+  }
+
+  /* on phones, keep the big drawings small and faint so text stays readable */
+  .art {
+    opacity: 0.35;
+  }
+
+  .stitchL,
+  .stitchR,
+  .asciiLily {
+    height: 46vh;
+  }
+
+  .tulips {
+    height: 30vh;
+  }
+
+  .daisies,
+  .bells {
+    display: none;
+  }
+}

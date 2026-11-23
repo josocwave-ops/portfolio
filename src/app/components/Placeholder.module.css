@@ -1,0 +1,31 @@
+.ph {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  overflow: hidden;
+  /* a pastel wash with a faint pearly sheen and a dot-matrix texture */
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ink-c) 14%, transparent) 1px, transparent 1.5px) 0 0 / 8px 8px,
+    radial-gradient(120% 90% at 15% 10%, color-mix(in srgb, var(--paper) 85%, transparent), transparent 55%),
+    linear-gradient(160deg, color-mix(in srgb, var(--tint) 55%, var(--paper)), color-mix(in srgb, var(--tint) 90%, var(--paper)));
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+}
+
+.mark {
+  --c: var(--ink-c);
+  display: grid;
+  justify-items: center;
+  gap: var(--s2);
+  opacity: 0.55;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--ink-c);
+  letter-spacing: 0.06em;
+}

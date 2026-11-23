@@ -1,0 +1,14 @@
+.face {
+  display: inline-block;
+  padding: 0 2px;
+  color: var(--peri-ink);
+  font-size: 0.95em;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  /* keep :D and :P as typed, even though the site is lowercase */
+  text-transform: none;
+}
+
+.heart {
+  color: var(--pink-ink);
+}

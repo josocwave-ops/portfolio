@@ -1,0 +1,61 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s2) var(--s3);
+}
+
+/* an 88×31 web badge: a square icon block, a label, a little bevel */
+.btn {
+  display: inline-flex;
+  align-items: stretch;
+  height: 31px;
+  min-width: 88px;
+  border: 1px solid var(--ink-c);
+  background: linear-gradient(180deg, var(--paper), var(--tint) 70%);
+  box-shadow:
+    inset 1px 1px 0 var(--paper),
+    inset -1px -1px 0 color-mix(in srgb, var(--ink-c) 35%, transparent);
+  color: var(--ink-c);
+  transition:
+    translate 0.16s steps(2),
+    box-shadow 0.16s steps(2);
+}
+
+.icon {
+  --c: var(--paper);
+  --c2: var(--ink-c);
+  display: grid;
+  place-items: center;
+  width: 29px;
+  background: var(--ink-c);
+}
+
+.text {
+  display: grid;
+  place-items: center;
+  padding: 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* the same lift onto a hard pixel shadow as the windows and pins */
+.btn:hover {
+  translate: -3px -3px;
+  box-shadow:
+    inset 1px 1px 0 var(--paper),
+    4px 4px 0 var(--navy);
+  background: var(--ink-c);
+  color: var(--paper);
+}
+
+.btn:hover .icon {
+  --c: var(--tint);
+}
+
+.btn:active {
+  translate: 0 0;
+  box-shadow: none;
+  transition: none;
+}

@@ -1,56 +1,178 @@
-.cover {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 34px;
-  padding: 48px var(--gutter);
+.main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* hello */
+.hero {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--s4);
+  padding: var(--s6) 0 0;
   text-align: center;
 }
 
 .title {
+  position: relative;
+  z-index: 1;
   font-weight: 400;
 }
 
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px 26px;
-  max-width: 560px;
+.hello {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin-top: var(--s2);
 }
 
-.link {
-  display: inline-flex;
+.intro {
+  color: var(--ink);
+}
+
+.buttons {
+  justify-content: flex-start;
+  margin-top: var(--s3);
+}
+
+/* every card is the same little window as hello.txt (it hops on hover) */
+.win {
+  height: 100%;
+}
+
+/* featured projects */
+.featured {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s5);
+}
+
+.feature {
+  display: block;
+}
+
+.featureImg {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-bottom: 2px solid var(--navy);
+}
+
+.featureImg img {
+  object-fit: cover;
+}
+
+.featureText {
+  display: grid;
+  gap: 4px;
+  padding: var(--s3) var(--s3) var(--s4);
+}
+
+.featureSection {
+  --c: var(--ink-c);
+  --c2: var(--paper);
+  display: flex;
   align-items: center;
   gap: 6px;
-  font-size: clamp(19px, 2.4vw, 23px);
+  font-size: 13px;
+  color: var(--ink-c);
+}
+
+.featureTitle {
+  font-size: 20px;
+  line-height: 1.2;
   color: var(--ink);
-  transition: color 0.25s;
 }
 
-.link:hover {
-  color: var(--c);
+.featureSummary {
+  font-size: 15px;
+  color: var(--muted);
 }
 
-.spiral {
-  width: 18px;
-  height: 18px;
-  transition: rotate 0.6s ease;
+/* the four category folders */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s5);
 }
 
-.link:hover .spiral {
-  rotate: 220deg;
+.card {
+  display: block;
 }
 
-.small {
+.cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--c) 45%, var(--paper));
+  border-bottom: 2px solid var(--navy);
+}
+
+.cover img {
+  object-fit: cover;
+}
+
+.poemCover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding: var(--s5);
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.25;
+  color: var(--ink);
+  white-space: pre-line;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--ink-c) 20%, transparent) 1px, transparent 1.5px) 0 0 / 8px 8px,
+    color-mix(in srgb, var(--c) 40%, var(--paper));
+}
+
+.cardText {
+  display: grid;
+  gap: var(--s2);
+  padding: var(--s3) var(--s4) var(--s4);
+}
+
+.cardHead {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.sprite {
+  --c: var(--ink-c);
+  --c2: var(--paper);
+}
+
+.cardTitle {
+  font-size: clamp(20px, 2.2vw, 24px);
+  color: var(--ink-c);
+}
+
+.open {
+  margin-left: auto;
   font-size: 14px;
   color: var(--muted);
 }
 
-.small a:hover {
+.card:hover .open {
+  color: var(--ink-c);
+}
+
+.blurb {
   color: var(--ink);
+  font-size: 15px;
+}
+
+@media (max-width: 760px) {
+  .cards,
+  .featured {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,33 +1,19 @@
 .sig {
-  font-family: var(--hand);
-  line-height: 0.8;
-  white-space: nowrap;
-  color: var(--ink);
-  display: inline-block;
-  text-align: center;
+  display: inline-grid;
+  justify-items: center;
+  color: var(--plum);
+  line-height: 1;
 }
 
-.on {
-  font-size: 1em;
-}
-
-.a {
-  font-size: 2.3em;
-  display: inline-block;
-  vertical-align: -0.12em;
+.ascii {
+  display: block;
 }
 
 .surname {
   display: block;
-  font-size: 0.5em;
-  margin-top: 0.3em;
-  opacity: 0.75;
-}
-
-.large {
-  font-size: clamp(54px, 9vw, 92px);
-}
-
-.small {
-  font-size: 22px;
+  margin-top: var(--s2);
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: var(--peri-ink);
 }
