@@ -1,135 +1,169 @@
-.header {
+/* A mid-2000s profile-site header: square, flat, two bands of colour and a
+   status box, all inside one 2px navy outline. */
+
+.wrap {
   position: relative;
   z-index: 3;
   max-width: var(--max);
   margin: 0 auto;
-  padding: var(--s3) var(--gutter);
+  padding: var(--s3) var(--gutter) 0;
+}
+
+.box {
+  border: 2px solid var(--navy);
+  background: var(--paper);
+}
+
+/* ---- dark band ---- */
+
+.top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--s3);
+  padding: 8px var(--s3);
+  background: var(--navy);
+  color: var(--paper);
 }
 
-.onHome {
-  justify-content: center;
+.logo {
+  display: flex;
+  flex: none;
 }
 
-.home {
-  color: var(--plum);
+.tagline {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--mist);
 }
+
+.tagline::before {
+  content: "· ";
+  color: var(--pink);
+}
+
+.online {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--pink);
+}
+
+/* a square pixel light that blinks, like an old "online now!" gif */
+.online i {
+  width: 8px;
+  height: 8px;
+  background: var(--pink);
+  box-shadow: 0 0 0 2px var(--rose);
+  animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    background: var(--navy);
+  }
+}
+
+/* ---- light band: links split by pipes ---- */
 
 .nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
-  gap: var(--s2) var(--s4);
-  font-size: 17px;
+  gap: 2px var(--s2);
+  padding: 6px var(--s3);
+  font-size: 14px;
+  background: var(--blue);
+  border-top: 2px solid var(--navy);
+  border-bottom: 2px solid var(--navy);
 }
 
-.onHome .nav {
-  justify-content: center;
+.pipe {
+  color: var(--ice);
 }
 
 .link {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  color: var(--plum);
-  padding: 2px 0 4px;
-  transition: color 0.16s steps(2);
+  gap: 4px;
+  color: var(--paper);
+  padding: 2px 0;
 }
 
-/* a sparkle pops in beside the link on hover; stays on the current page */
-.spark {
-  --c: var(--ink-c, var(--plum));
-  width: 0;
-  margin-right: 0;
-  opacity: 0;
-  scale: 0.3;
-  transition: width 0.2s steps(3), margin 0.2s steps(3), opacity 0.2s steps(3), scale 0.2s steps(3);
+/* plain old underline on hover, in pink */
+.link:hover {
+  color: var(--pink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
-.link:hover .spark,
-.link[aria-current="page"] .spark {
-  width: 18px;
-  margin-right: 6px;
-  opacity: 1;
-  scale: 1;
-}
-
-.link:hover,
+/* the current page: pink, a sparkle, and a stitched underline */
 .link[aria-current="page"] {
-  color: var(--ink-c, var(--ink));
-}
-
-/* the current page: sparkle plus a stitched underline */
-.link[aria-current="page"] {
+  color: var(--pink);
   background: var(--stitch);
+  text-decoration: none;
 }
 
-/* a single bead between the boards and the rest */
-.divider {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--pink);
+.spark {
+  --c: var(--pink);
 }
 
-.out {
-  color: var(--muted);
+/* ---- status box ---- */
+
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px var(--s4);
+  padding: 8px var(--s3);
+  font-size: 13px;
+  color: var(--ink);
 }
 
-.menu {
-  display: none;
+.doing b {
+  font-weight: 400;
+  color: var(--pink-ink);
 }
 
-@media (max-width: 900px) {
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--s3);
+  margin: 0;
+}
+
+.facts div {
+  display: flex;
+  gap: 6px;
+}
+
+.facts dt {
+  color: var(--blue-ink);
+}
+
+.facts dd {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .tagline {
+    display: none;
+  }
+
   .nav {
-    display: none;
+    justify-content: center;
   }
 
-  .menu {
-    display: block;
-    position: relative;
-  }
-
-  .menu summary {
-    list-style: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s2);
-    padding: calc(var(--s2) + 2px) calc(var(--s3) + 2px);
-    color: var(--plum);
-    background: var(--paper);
-    --st: 2px;
-  }
-
-  .menu summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .menu .sheet {
-    position: absolute;
-    right: 0;
-    top: calc(100% + var(--s2));
-    min-width: 220px;
+  .status {
     display: grid;
-    gap: var(--s2);
-    padding: var(--s3) var(--s4);
-    background: var(--paper);
-    font-size: 18px;
   }
+}
 
-  .sheet .divider {
-    width: 100%;
-    height: 8px;
-    border-radius: 0;
-    background: var(--beads);
-  }
-
-  .onHome {
-    justify-content: flex-end;
+@media (prefers-reduced-motion: reduce) {
+  .online i {
+    animation: none;
   }
 }

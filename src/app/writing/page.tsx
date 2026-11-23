@@ -4,6 +4,7 @@ import BoardHeader from "../components/BoardHeader";
 import { TextPin } from "../components/Pin";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import Masonry from "../components/Masonry";
 import Background from "../components/Background";
 import styles from "../board.module.css";
 
@@ -17,7 +18,7 @@ export default function WritingPage() {
       <SiteHeader current="writing" />
       <main className={styles.main}>
         <BoardHeader section="writing" count={`${writings.length} poems`} />
-        <div className={styles.masonry}>
+        <Masonry>
           {writings.map((w, i) => (
             <TextPin
               key={w.slug}
@@ -31,7 +32,7 @@ export default function WritingPage() {
               tone={toneAt(i)}
             />
           ))}
-        </div>
+        </Masonry>
       </main>
       <SiteFooter />
     </>

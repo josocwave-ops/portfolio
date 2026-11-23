@@ -115,14 +115,4 @@
 }
 
 /* columns give the staggered, every-photo-its-own-shape look */
-.masonry {
-  columns: 5 200px;
-  column-gap: var(--s3);
-}
-
-@media (max-width: 600px) {
-  .masonry {
-    columns: 2;
-    column-gap: var(--s3);
-  }
-}
+/* the masonry layout itself lives in components/Masonry */

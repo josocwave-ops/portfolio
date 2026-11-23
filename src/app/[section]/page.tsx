@@ -6,6 +6,7 @@ import BoardHeader from "../components/BoardHeader";
 import { PhotoPin } from "../components/Pin";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import Masonry from "../components/Masonry";
 import Background from "../components/Background";
 import styles from "../board.module.css";
 
@@ -41,7 +42,7 @@ async function SectionBody({ params }: { params: PageProps<"/[section]">["params
       <SiteHeader current={section} />
       <main className={styles.main}>
         <BoardHeader section={meta.id} count={`${items.length} projects`} />
-        <div className={styles.masonry}>
+        <Masonry>
           {items.map((p, i) => {
             const t = tints[i % tints.length];
             return (
@@ -60,7 +61,7 @@ async function SectionBody({ params }: { params: PageProps<"/[section]">["params
               />
             );
           })}
-        </div>
+        </Masonry>
       </main>
       <SiteFooter />
     </>

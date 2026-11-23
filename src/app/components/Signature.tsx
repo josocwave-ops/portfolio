@@ -13,7 +13,7 @@ export default function Signature({ size = "large", tone = "ink" }: { size?: "la
         fontFamily={serif.style.fontFamily}
         italic
         weight={800}
-        size={large ? 96 : 26}
+        size={large ? 96 : 32}
         pitch={large ? 3 : 2}
         className={styles.ascii}
         {...(tone === "light" ? { color: "#fff8f8", edgeColor: "#e8b5d0" } : {})}
