@@ -20,10 +20,15 @@
   gap: var(--s3);
   padding: 5px 12px;
   font-size: 14px;
-  /* an old-Windows title bar: solid navy with light text by default; a
-     window can set --bar (a dark colour) and --bar-ink (its text) */
+  /* an old-Windows title bar: navy fading to a softer tone on the right,
+     with light text. A window can set --bar (the dark start), --bar-glow
+     (the pastel it fades toward) and --bar-ink (its text) */
   color: var(--bar-ink, var(--paper));
-  background: var(--bar, var(--navy));
+  background: linear-gradient(
+    to right,
+    var(--bar, var(--navy)) 20%,
+    color-mix(in srgb, var(--bar, var(--navy)) 55%, var(--bar-glow, var(--mist)))
+  );
   border-bottom: 2px solid var(--navy);
 }
 
@@ -63,7 +68,8 @@ a:focus-visible .spark {
 .dots i {
   width: 9px;
   height: 9px;
-  border: 2px solid var(--bar-ink, var(--paper));
+  /* little paper buttons with a dark rim, like the old grey ones */
+  border: 2px solid var(--bar, var(--navy));
   background: var(--paper);
 }
 
