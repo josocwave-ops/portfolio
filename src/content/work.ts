@@ -90,9 +90,14 @@ export const site = {
   // little faces like :) :D ^_^ and hearts like <3 get drawn in pink pixel type
   intro:
     "hi, i'm ona :) i make things with clay, fabric, paint and words <3 most of my work starts with a memory, a place, or a mistake i decided to keep.",
-  // the scrolling strip under the menu
-  ticker:
-    "✧ welcome to my little corner of the internet :) ✧ currently: glazing a new set of mugs ✧ reading: old fairy tales ✧ listening: rain on the window <3 ✧",
+  // the status box under the menu, like an old profile page
+  tagline: "a little corner of the internet",
+  status: {
+    doing: "glazing a new set of mugs :)", // shown as "ona is …"
+    mood: "dreamy ☁",
+    reading: "old fairy tales",
+    listening: "rain on the window <3",
+  },
   // the projects shown under "featured" on the home page, in order
   featured: ["ceramics-1", "fashion-1", "art-1"],
   // page background: any mix of the options on the /style page, e.g.

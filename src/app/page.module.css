@@ -50,15 +50,10 @@
 }
 
 /* every card is the same little window as hello.txt (it lifts on hover),
-   with a title bar in its own section's colours instead of the pearl */
+   its title bar in its own section's deep ink instead of navy */
 .win {
   height: 100%;
-  --bar: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--c) 50%, var(--paper)),
-    var(--c) 45%,
-    color-mix(in srgb, var(--c) 60%, var(--lilac))
-  );
+  --bar: var(--ink-c);
 }
 
 /* featured projects */

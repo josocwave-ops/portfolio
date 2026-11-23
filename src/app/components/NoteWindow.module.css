@@ -20,9 +20,10 @@
   gap: var(--s3);
   padding: 5px 12px;
   font-size: 14px;
-  color: var(--navy);
-  /* pearl by default; a window can set --bar to its own colours */
-  background: var(--bar, var(--pearl));
+  /* an old-Windows title bar: solid navy with light text by default; a
+     window can set --bar (a dark colour) and --bar-ink (its text) */
+  color: var(--bar-ink, var(--paper));
+  background: var(--bar, var(--navy));
   border-bottom: 2px solid var(--navy);
 }
 
@@ -37,12 +38,13 @@
 .meta {
   font-family: var(--mono);
   font-size: 13px;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--bar-ink, var(--paper)) 75%, transparent);
 }
 
 /* only shows when the window is a link and you hover it */
 .spark {
-  --c: var(--ink-c, var(--navy));
+  --c: var(--bar-ink, var(--paper));
+  --c2: var(--bar, var(--navy));
   margin-left: calc(var(--s3) * -0.5);
   opacity: 0;
   transition: opacity 0.16s steps(2);
@@ -61,7 +63,7 @@ a:focus-visible .spark {
 .dots i {
   width: 9px;
   height: 9px;
-  border: 2px solid var(--navy);
+  border: 2px solid var(--bar-ink, var(--paper));
   background: var(--paper);
 }
 
