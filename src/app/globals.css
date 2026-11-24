@@ -221,7 +221,8 @@ main {
    drop-shadow (not box-shadow) so it follows .px-frame's stepped corners;
    put .lift on a wrapper AROUND the framed element, since clip-path would
    cut off a shadow on the element itself. A section can tint the block with
-   --shade. */
+   --shade. Add .hover-lift to make something that isn't a link lift too
+   (every window does). */
 .lift {
   display: block;
   filter: drop-shadow(5px 5px 0 var(--shade, var(--peri))) drop-shadow(2px 2px 0 var(--navy));
@@ -233,7 +234,8 @@ main {
 a:hover .lift,
 a:focus-visible .lift,
 .lift:is(a):hover,
-.lift:is(a):focus-visible {
+.lift:is(a):focus-visible,
+.lift.hover-lift:hover {
   translate: -3px -3px;
   filter: drop-shadow(8px 8px 0 var(--shade, var(--peri))) drop-shadow(2px 2px 0 var(--ink-c, var(--navy)));
 }

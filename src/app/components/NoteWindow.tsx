@@ -4,8 +4,8 @@ import styles from "./NoteWindow.module.css";
 
 // A little window with a title bar: the site's one frame for everything
 // (the hello note, category folders, featured projects), so it all matches.
-// Inside a link, it lifts onto a pixel shadow on hover and a sparkle appears
-// in the title bar.
+// Every window lifts onto a bigger pixel shadow when you hover it; inside a
+// link a sparkle also appears in the title bar.
 export default function NoteWindow({
   title,
   meta,
@@ -32,7 +32,7 @@ export default function NoteWindow({
 }) {
   const win = (
     <div
-      className={`${styles.wrap} lift ${trim ? "" : (className ?? "")}`}
+      className={`${styles.wrap} lift hover-lift ${trim ? "" : (className ?? "")}`}
       role={label ? "region" : undefined}
       aria-label={label ? title : undefined}
     >

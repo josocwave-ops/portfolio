@@ -125,6 +125,19 @@
   justify-content: center;
 }
 
+.mail {
+  margin: 0 0 var(--s5);
+  font-size: 15px;
+  color: var(--pink-ink);
+  animation: mail-blink 1.6s steps(1) infinite;
+}
+
+@keyframes mail-blink {
+  70% {
+    opacity: 0.25;
+  }
+}
+
 .contactWin {
   width: 100%;
   max-width: 560px;

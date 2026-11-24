@@ -68,7 +68,7 @@ export default function MusicPlayer() {
   }
 
   return (
-    <aside className={`${styles.player} lift`} aria-label="music player">
+    <aside className={`${styles.player} lift hover-lift`} aria-label="music player">
       <div className={`${styles.inner} px-frame`}>
         <div className={`${styles.bar} pixel`}>
           <span className={styles.title}>♫ now playing</span>

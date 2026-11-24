@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { links } from "@/content/work";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import Wave from "../components/Wave";
-import NoteWindow from "../components/NoteWindow";
-import Pixel from "../components/Pixel";
+import Postcard from "../components/Postcard";
 import Background from "../components/Background";
 import styles from "../inner.module.css";
 
@@ -19,33 +17,9 @@ export default function ContactPage() {
         <h1 className={styles.heading}>
           <Wave text="contact" />
         </h1>
-        <p className={styles.lead}>For commissions, collaborations, or just to say hi.</p>
-        <NoteWindow title="✉ contact.txt" className={styles.contactWin} bodyClassName={styles.contactList}>
-          <a href={`mailto:${links.email}`}>
-            <Pixel name="envelope" size={3} color="var(--rose)" />
-            <span>
-              {links.email}
-              <br />
-              <small>email</small>
-            </span>
-          </a>
-          <a href={links.instagram} target="_blank" rel="noopener noreferrer">
-            <Pixel name="heart" size={3} color="var(--peri)" />
-            <span>
-              @claybyona
-              <br />
-              <small>instagram</small>
-            </span>
-          </a>
-          <a href={links.shop} target="_blank" rel="noopener noreferrer">
-            <Pixel name="vase" size={3} color="var(--peri)" />
-            <span>
-              claybyona.com
-              <br />
-              <small>the shop</small>
-            </span>
-          </a>
-        </NoteWindow>
+        {/* an old "you've got mail!" line, blinking, over the postcard */}
+        <p className={`${styles.mail} pixel`}>✉ you&rsquo;ve got mail!</p>
+        <Postcard />
       </main>
       <SiteFooter />
     </>

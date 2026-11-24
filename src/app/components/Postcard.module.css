@@ -1,0 +1,202 @@
+.wrap {
+  width: 100%;
+  max-width: 640px;
+  rotate: -1deg;
+}
+
+/* the card: warm white with faint dots, stepped pixel corners (.px-frame) */
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2px minmax(0, 1fr);
+  gap: var(--s4);
+  padding: 46px var(--s5) var(--s5);
+  text-align: left;
+  background:
+    radial-gradient(circle, rgba(133, 131, 196, 0.16) 1px, transparent 1.5px) 0 0 / 10px 10px,
+    #fffdf8;
+}
+
+.heading {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--blue-ink);
+}
+
+/* the note, in pixel type */
+.note {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: var(--s3);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.sign {
+  color: var(--pink-ink);
+}
+
+.doodle {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-top: var(--s2);
+}
+
+/* the dotted line down the middle of a postcard */
+.divider {
+  background: repeating-linear-gradient(180deg, var(--peri) 0 6px, transparent 6px 10px);
+}
+
+.side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 270px;
+  padding-top: 110px;
+}
+
+/* the stamp: perforated edges cut with a repeating circle mask */
+.stamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 78px;
+  height: 92px;
+  padding: 6px;
+  rotate: 4deg;
+  background: #fffdf8;
+  mask:
+    radial-gradient(circle at 4px 4px, transparent 3px, #000 3.5px) -4px -4px / 8px 8px,
+    linear-gradient(#000 0 0) content-box;
+  filter: drop-shadow(1px 1px 0 var(--peri));
+}
+
+.stampArt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--pink);
+  background: linear-gradient(180deg, #3b3c63, var(--navy));
+}
+
+.stampStar {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  --c2: var(--pink);
+}
+
+/* the round postmark, stamped half over the stamp */
+.postmark {
+  position: absolute;
+  top: 26px;
+  right: 54px;
+  width: 110px;
+  height: 64px;
+  color: var(--pink-ink);
+  opacity: 0.8;
+  rotate: -8deg;
+  pointer-events: none;
+}
+
+.markText {
+  font-family: var(--pixel);
+  font-size: 9px;
+  fill: currentColor;
+}
+
+.markSmall {
+  font-family: var(--pixel);
+  font-size: 7px;
+  fill: currentColor;
+}
+
+/* the address lines: ruled, with each way to reach ona written on one */
+.lines {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lines li {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--mist);
+}
+
+.lines a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lines a:hover,
+.lines a:focus-visible {
+  color: var(--pink-ink);
+}
+
+.lines small {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* on a phone: one column, note on top, address lines underneath */
+@media (max-width: 600px) {
+  .wrap {
+    rotate: 0deg;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+    padding: 46px var(--s4) var(--s4);
+  }
+
+  .divider {
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--peri) 0 6px, transparent 6px 10px);
+  }
+
+  .note {
+    padding-right: 90px;
+  }
+
+  .side {
+    position: static;
+    min-height: 0;
+    padding-top: 0;
+  }
+
+  .stamp {
+    top: 40px;
+    right: var(--s4);
+  }
+
+  .postmark {
+    top: 80px;
+    right: 60px;
+  }
+}
