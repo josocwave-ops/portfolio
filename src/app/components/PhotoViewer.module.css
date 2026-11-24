@@ -10,6 +10,25 @@
   background: var(--paper);
 }
 
+/* the camera flash: white, then gone */
+.flash {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: #fff;
+  animation: flash 0.32s ease-out forwards;
+}
+
+@keyframes flash {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .slide {
   position: absolute;
   inset: 0;

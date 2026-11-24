@@ -37,6 +37,35 @@
   border-bottom: 2px solid var(--navy);
 }
 
+/* a glimmer of light that slides across the title bar when you hover the
+   window, like light catching glass */
+.bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.55) 48%, rgba(255, 248, 248, 0.2) 54%, transparent 62%);
+  translate: -110% 0;
+}
+
+.wrap:hover .bar::after {
+  animation: glimmer 0.9s ease-out;
+}
+
+@keyframes glimmer {
+  from {
+    translate: -110% 0;
+  }
+  to {
+    translate: 110% 0;
+  }
+}
+
 .title {
   flex: 1;
   min-width: 0;

@@ -24,6 +24,38 @@
   font-weight: 400;
 }
 
+/* a soft pink-and-lilac glow that fades in behind onA when you hover it
+   and fades gently away when you leave. It breathes all the time (you only
+   see it while it's lit), so fading out never jumps. */
+.title::before {
+  content: "";
+  position: absolute;
+  inset: 8% 6% 18%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 55% 50%,
+    rgba(232, 181, 208, 0.7),
+    rgba(201, 165, 237, 0.4) 38%,
+    transparent 68%
+  );
+  filter: blur(16px);
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  animation: breathe 2.6s ease-in-out infinite;
+}
+
+.title:hover::before {
+  opacity: 1;
+  transition-duration: 0.5s;
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(1.06);
+  }
+}
+
 /* the ASCII dragonfly, loosely tucked into the space above "on" and flying
    toward the A; sized as a share of the name so it scales with it */
 .dragonfly {

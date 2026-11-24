@@ -68,6 +68,59 @@
   line-height: 0;
 }
 
+/* shooting stars: a bright pixel head with a pink tail, crossing the empty
+   middle of the sky once every so often, then gone */
+.shoot {
+  position: absolute;
+  top: 22%;
+  left: 27%;
+  width: 72px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(232, 181, 208, 0.7) 60%, var(--paper));
+  rotate: 12deg;
+  opacity: 0;
+  animation: shoot 11s linear 3s infinite;
+}
+
+/* the star itself, at the front of the tail */
+.shoot::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -1px;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  box-shadow: 0 0 6px 1px var(--pink);
+}
+
+.shoot2 {
+  top: 14%;
+  left: 44%;
+  width: 54px;
+  rotate: 18deg;
+  animation-duration: 17s;
+  animation-delay: 10s;
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 1;
+  }
+  6.5%,
+  100% {
+    opacity: 0;
+    translate: 240px 52px;
+  }
+}
+
 .moon {
   position: absolute;
   top: 14px;
@@ -78,9 +131,29 @@
 
 .logo {
   position: relative;
+  isolation: isolate;
   display: flex;
   flex: none;
   align-items: center;
+}
+
+/* the same glow as the big onA, in moonlight colours, on hover */
+.logo::before {
+  content: "";
+  position: absolute;
+  inset: 4% 8% 10%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 45% 55%, rgba(232, 181, 208, 0.6), rgba(201, 165, 237, 0.3) 40%, transparent 68%);
+  filter: blur(9px);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.logo:hover::before,
+.logo:focus-visible::before {
+  opacity: 1;
+  transition-duration: 0.4s;
 }
 
 /* the homepage's ASCII dragonfly, recoloured for the night by using it as a
@@ -144,52 +217,111 @@
   }
 }
 
-/* ---- links, split by tiny flowers ---- */
+/* ---- links: the work on the left, about ona on the right ---- */
 
 .nav {
-  font-size: 14px;
+  font-size: 16px;
   background: var(--blue);
   border-top: 2px solid var(--navy);
 }
 
 .nav .inner {
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 2px var(--s2);
-  padding-top: 6px;
-  padding-bottom: 4px;
+  justify-content: space-between;
+  gap: 6px var(--s5);
+  padding-top: 8px;
+  padding-bottom: 6px;
 }
 
-.pipe {
-  font-size: 11px;
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.group li {
+  display: flex;
+  align-items: center;
+}
+
+/* a tiny pink flower between links in the same group */
+.group li + li::before {
+  content: "✿";
+  margin: 0 4px;
+  font-size: 10px;
   color: var(--pink);
+  opacity: 0.85;
+}
+
+/* the about-ona group sits on a slightly darker strip so the two groups
+   read as two different things */
+.me {
+  padding: 2px 6px;
+  background: rgba(48, 49, 79, 0.28);
+  box-shadow: inset 0 0 0 2px rgba(48, 49, 79, 0.35);
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  padding: 3px 5px;
   color: var(--paper);
-  padding: 2px 0;
+  letter-spacing: 0.02em;
 }
 
-/* plain old underline on hover, in pink */
-.link:hover {
+/* hover: a soft light patch behind the word, and it turns pink */
+.link:hover,
+.link:focus-visible {
   color: var(--pink);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  background: rgba(255, 248, 248, 0.14);
 }
 
-/* the current page: pink, a sparkle, and a stitched underline */
+/* the current page: pink, a sparkle, a stitched underline and a darker patch */
 .link[aria-current="page"] {
   color: var(--pink);
-  background: var(--stitch);
-  text-decoration: none;
+  background: var(--stitch), rgba(48, 49, 79, 0.35);
 }
 
 .spark {
   --c: var(--pink);
+}
+
+/* on smaller screens the two groups stack, centred, with a dotted line between */
+@media (max-width: 900px) {
+  .nav .inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .group {
+    justify-content: center;
+  }
+
+  .me {
+    position: relative;
+    margin-top: 6px;
+  }
+
+  .me::before {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: -7px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--pink) 0 2px, transparent 2px 6px);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav {
+    font-size: 15px;
+  }
 }
 
 /* lace trim hanging under the links: scallops in the band's blue with a
@@ -206,6 +338,10 @@
     display: none;
   }
 
+  .shoot {
+    display: none;
+  }
+
   /* on a phone the logo fills the left half, so only the right-hand stars stay */
   .star:nth-child(-n + 3) {
     display: none;
@@ -216,6 +352,10 @@
   .online i,
   .dragonfly {
     animation: none;
+  }
+
+  .shoot {
+    display: none;
   }
 }
 

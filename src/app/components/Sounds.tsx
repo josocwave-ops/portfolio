@@ -9,10 +9,11 @@ import styles from "./Sounds.module.css";
 //   ding — the 88×31 web buttons, and turning sound on
 //   pop  — opening the phone menu
 //   tick — any other link
-// Anything can pick its sound with data-sfx="blip|ding|pop|tick|none".
+//   shutter — an old camera click, when the photo viewer changes photo
+// Anything can pick its click sound with data-sfx="blip|ding|pop|tick|none".
 // Visitors can turn it off in the footer; the choice is remembered.
 
-type Sfx = "blip" | "ding" | "pop" | "tick";
+type Sfx = "blip" | "ding" | "pop" | "tick" | "shutter";
 
 const KEY = "onA-sounds";
 const VOLUME = 0.05;
@@ -44,6 +45,27 @@ export function note(a: AudioContext, freq: number, at: number, dur: number, typ
   osc.stop(at + dur + 0.02);
 }
 
+// a burst of filtered noise: the stuff of camera clicks
+function noise(a: AudioContext, at: number, dur: number, vol: number, freq: number, q: number, type: BiquadFilterType = "bandpass") {
+  const len = Math.max(1, Math.floor(a.sampleRate * dur));
+  const buf = a.createBuffer(1, len, a.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+  const src = a.createBufferSource();
+  src.buffer = buf;
+  const filter = a.createBiquadFilter();
+  filter.type = type;
+  filter.frequency.value = freq;
+  filter.Q.value = q;
+  const gain = a.createGain();
+  gain.gain.setValueAtTime(0.0001, at);
+  gain.gain.exponentialRampToValueAtTime(VOLUME * vol, at + 0.004);
+  gain.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+  src.connect(filter).connect(gain).connect(a.destination);
+  src.start(at);
+  src.stop(at + dur + 0.02);
+}
+
 export function play(sfx: Sfx) {
   const a = audio();
   if (!a) return;
@@ -58,6 +80,11 @@ export function play(sfx: Sfx) {
     note(a, 2349, t + 0.07, 0.42, "triangle", 0.9);
   }
   if (sfx === "pop") note(a, 420, t, 0.09, "sine", 1.4, 980);
+  if (sfx === "shutter") {
+    // the two halves of an old shutter: a sharp click, then a softer clack
+    noise(a, t, 0.025, 1.6, 4200, 0.8, "highpass");
+    noise(a, t + 0.065, 0.045, 1.3, 1800, 1.2);
+  }
 }
 
 export const isOn = () => {

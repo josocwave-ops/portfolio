@@ -58,6 +58,7 @@ export default function Home() {
                   color={s.color}
                   deep={s.ink}
                   small
+                  twinkle={[0, 4, 8][i]}
                   photo={
                     im ? (
                       <Image src={im.src} alt="" fill sizes="(max-width: 760px) 80vw, 300px" loading={i === 0 ? "eager" : "lazy"} />
@@ -78,7 +79,7 @@ export default function Home() {
           <AsciiHeading id="work-heading">the work</AsciiHeading>
           <NoteWindow title="✿ my_work/" meta="4 folders" label={false}>
             <div className={styles.folders}>
-              {sections.map((s) => {
+              {sections.map((s, i) => {
                 const items = piecesIn(s.id);
                 const [a, b] = items.flatMap((p) => p.images);
                 const count = s.id === "writing" ? `${writings.length} poems` : `${items.length} projects`;
@@ -103,6 +104,7 @@ export default function Home() {
                     deep={s.ink}
                     photo={inside}
                     photoBehind={behind}
+                    twinkle={[2, 6, 10, 12][i]}
                   />
                 );
               })}

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Fragment } from "react";
 import { links, sections, site } from "@/content/work";
 import Mood from "./Mood";
 import Pixel from "./Pixel";
@@ -14,9 +13,12 @@ import styles from "./SiteHeader.module.css";
 
 type Item = { id: string; label: string; href: string; out?: boolean };
 
-const ITEMS: Item[] = [
+// two groups: home and the work on the left, about ona on the right
+const WORK: Item[] = [
   { id: "home", label: "home", href: "/" },
   ...sections.map((s) => ({ id: s.id, label: s.label, href: `/${s.id}` })),
+];
+const ME: Item[] = [
   { id: "about", label: "about", href: "/about" },
   { id: "contact", label: "contact", href: "/contact" },
   { id: "shop", label: "clay by ona ↗", href: links.shop, out: true },
@@ -53,6 +55,9 @@ export default function SiteHeader({ current, home = false }: { current?: string
               <Pixel name={s.name} size={s.size} color={s.color} twinkle />
             </span>
           ))}
+          {/* now and then a shooting star streaks across the open sky */}
+          <span className={styles.shoot} />
+          <span className={`${styles.shoot} ${styles.shoot2}`} />
           <span className={styles.moon}>
             <Pixel name="moon" size={3} color="var(--pink)" />
           </span>
@@ -76,27 +81,26 @@ export default function SiteHeader({ current, home = false }: { current?: string
         </div>
       </div>
 
-      {/* every page, split by tiny flowers */}
+      {/* every page: the work on the left, about ona on the right */}
       <nav className={`${styles.nav} pixel`} aria-label="Main">
         <div className={styles.inner}>
-          {ITEMS.map((it, i) => (
-            <Fragment key={it.id}>
-              {i > 0 && (
-                <span className={styles.pipe} aria-hidden="true">
-                  ✿
-                </span>
-              )}
-              {it.out ? (
-                <a href={it.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                  {it.label}
-                </a>
-              ) : (
-                <Link href={it.href} className={styles.link} aria-current={here === it.id ? "page" : undefined}>
-                  {here === it.id && <Pixel name="sparkle" size={2} className={styles.spark} />}
-                  {it.label}
-                </Link>
-              )}
-            </Fragment>
+          {[WORK, ME].map((group, g) => (
+            <ul key={g} className={`${styles.group} ${g === 1 ? styles.me : ""}`}>
+              {group.map((it) => (
+                <li key={it.id}>
+                  {it.out ? (
+                    <a href={it.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                      {it.label}
+                    </a>
+                  ) : (
+                    <Link href={it.href} className={styles.link} aria-current={here === it.id ? "page" : undefined}>
+                      {here === it.id && <Pixel name="sparkle" size={2} className={styles.spark} />}
+                      {it.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
           ))}
         </div>
       </nav>

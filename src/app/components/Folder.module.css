@@ -15,6 +15,7 @@
 
 /* the tab sticking up at the top left, with the name on it */
 .tab {
+  transform-origin: bottom left;
   position: absolute;
   left: 0;
   top: 0;
@@ -78,9 +79,56 @@
   translate: 0 -18px;
 }
 
+.link:hover .tab,
+.link:focus-visible .tab {
+  animation: wiggle 0.4s steps(4, jump-none);
+}
+
+@keyframes wiggle {
+  25% {
+    rotate: -3deg;
+  }
+  75% {
+    rotate: 2deg;
+  }
+}
+
 .link:hover .behind,
 .link:focus-visible .behind {
   translate: 0 -9px;
+}
+
+/* a tiny star that sparkles on the folder's corner now and then; the
+   folders take turns (see twinkle in page.tsx) so only one shines at once */
+.twinkle {
+  position: absolute;
+  z-index: 2;
+  right: 6px;
+  top: calc(46% - 16px);
+  line-height: 0;
+  --c2: var(--pink);
+  opacity: 0;
+  animation: twinkle 14s steps(3, jump-none) infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  9%,
+  100% {
+    opacity: 0;
+    scale: 0.4;
+  }
+  3%,
+  6% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twinkle {
+    display: none;
+  }
 }
 
 /* the front pocket, with a stitched line along its top */
