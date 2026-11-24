@@ -26,7 +26,7 @@ export default function AboutPage() {
               <Placeholder ratio={4 / 5} color="var(--pink)" ink="var(--pink-ink)" sprite="heart" label="a photo of you" />
             </DialUp>
           </NoteWindow>
-          <NoteWindow title="♡ about_me.txt" bodyClassName={styles.prose} trim>
+          <NoteWindow title="<3 about_me.txt" bodyClassName={styles.prose} trim>
             <h1 className={`${styles.heading} pixel`} style={{ marginTop: 0 }}>
               <Wave text="hi, i’m ona" />
             </h1>

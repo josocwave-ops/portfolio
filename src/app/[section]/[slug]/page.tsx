@@ -80,7 +80,7 @@ async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["p
             </NoteWindow>
 
             {/* the words, in a notes window beside it */}
-            <NoteWindow title="♡ notes.txt" className={styles.notesWin} bodyClassName={styles.notes}>
+            <NoteWindow title="<3 notes.txt" className={styles.notesWin} bodyClassName={styles.notes}>
               <h1 className={styles.pieceTitle}>{piece.title}</h1>
               {piece.details && <p className={styles.details}>{piece.details}</p>}
               <div className={styles.statement}>

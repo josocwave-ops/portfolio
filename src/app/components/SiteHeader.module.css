@@ -15,33 +15,6 @@
   align-items: center;
 }
 
-/* ---- the pink window bar at the very top ---- */
-
-.window {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  height: 20px;
-  padding: 0 8px;
-  background: var(--line);
-  border-bottom: 2px solid var(--navy);
-}
-
-.window i {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--rose);
-}
-
-.window i:nth-child(2) {
-  background: var(--lilac);
-}
-
-.window i:nth-child(3) {
-  background: var(--ice);
-}
-
 /* ---- the night sky ---- */
 
 .sky {

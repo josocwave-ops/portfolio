@@ -22,7 +22,7 @@ export default function Postcard() {
             <Cute text="for commissions, collaborations, or just to say hi, i'd love to hear from you :)" />
           </p>
           <p className={styles.sign}>
-            <Cute text="love, ona ♡" />
+            <Cute text="love, ona <3" />
           </p>
           {/* a little flower row; every other one bobs, like the rest of the site */}
           <span className={`${styles.doodle} bob-row`} aria-hidden="true">
@@ -53,7 +53,7 @@ export default function Postcard() {
               onA
             </text>
             <text x="32" y="40" textAnchor="middle" className={styles.markSmall}>
-              ♡ 2026
+              &lt;3 2026
             </text>
             <path
               d="M60 20 h8 v-3 h8 v3 h8 v-3 h8 v3 h8 M60 30 h8 v-3 h8 v3 h8 v-3 h8 v3 h8 M60 40 h8 v-3 h8 v3 h8 v-3 h8 v3 h8"

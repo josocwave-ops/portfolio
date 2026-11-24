@@ -4,6 +4,7 @@ import AsciiHeading from "./components/AsciiHeading";
 import Background from "./components/Background";
 import Cute from "./components/Cute";
 import Divider from "./components/Divider";
+import DragonflyHello from "./components/DragonflyHello";
 import Folder from "./components/Folder";
 import NoteWindow from "./components/NoteWindow";
 import Placeholder from "./components/Placeholder";
@@ -27,11 +28,10 @@ export default function Home() {
         <section className={styles.hero}>
           <h1 className={styles.title}>
             <Signature size="large" />
-            {/* an ASCII dragonfly in the empty corner above "on" (made by scripts/decor.mjs) */}
-            {/* eslint-disable-next-line @next/next/no-img-element -- static decorative SVG */}
-            <img src="/decor/dragonfly.svg" alt="" aria-hidden="true" className={styles.dragonfly} draggable={false} />
+            {/* the ASCII dragonfly in the empty corner above "on"; click it to say hi */}
+            <DragonflyHello className={styles.dragonfly} />
           </h1>
-          <NoteWindow title="♡ hello.txt" className={styles.hello} trim>
+          <NoteWindow title="<3 hello.txt" className={styles.hello} trim>
             <p className={styles.intro}>
               <Cute text={site.intro} />
             </p>

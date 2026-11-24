@@ -10,10 +10,15 @@ import styles from "./Sounds.module.css";
 //   pop  — opening the phone menu
 //   tick — any other link
 //   shutter — an old camera click, when the photo viewer changes photo
+//   nope    — an old "wrong!" buzz, for the pop-up × that won't close
+//   signin  — a messenger chime, when "ona has signed in"
+//   message — a little knock-knock, when ona sends a chat
+//   achieve — a happy fanfare, for an achievement
+//   buzz    — the dragonfly saying hi
 // Anything can pick its click sound with data-sfx="blip|ding|pop|tick|none".
 // Visitors can turn it off in the footer; the choice is remembered.
 
-type Sfx = "blip" | "ding" | "pop" | "tick" | "shutter";
+type Sfx = "blip" | "ding" | "pop" | "tick" | "shutter" | "nope" | "signin" | "message" | "achieve" | "buzz";
 
 const KEY = "onA-sounds";
 const VOLUME = 0.05;
@@ -66,20 +71,68 @@ function noise(a: AudioContext, at: number, dur: number, vol: number, freq: numb
   src.stop(at + dur + 0.02);
 }
 
+// Each kind of click has a few variations, all from the same soft (pentatonic)
+// scale, so clicking around sounds like a little tune instead of one beep on
+// repeat. It never picks the same variation twice in a row.
+const TICKS = [1319, 1568, 1760, 2093, 2349];
+const BLIPS: [number, number][] = [
+  [988, 1480],
+  [880, 1319],
+  [1047, 1568],
+  [784, 1175],
+  [1175, 1760],
+  [1319, 1976],
+];
+const DINGS: [number, number][] = [
+  [1568, 2349],
+  [1319, 1976],
+  [1760, 2637],
+];
+const last: Record<string, number> = {};
+function pick<T>(kind: string, list: T[]): T {
+  let i = Math.floor(Math.random() * list.length);
+  if (list.length > 1 && i === last[kind]) i = (i + 1) % list.length;
+  last[kind] = i;
+  return list[i];
+}
+
 export function play(sfx: Sfx) {
   const a = audio();
   if (!a) return;
   const t = a.currentTime;
-  if (sfx === "tick") note(a, 1760, t, 0.035, "square", 0.45);
+  if (sfx === "tick") note(a, pick("tick", TICKS), t, 0.035, "square", 0.45);
   if (sfx === "blip") {
-    note(a, 988, t, 0.06, "square", 0.6);
-    note(a, 1480, t + 0.06, 0.09, "square", 0.6);
+    const [lo, hi] = pick("blip", BLIPS);
+    note(a, lo, t, 0.06, "square", 0.6);
+    note(a, hi, t + 0.06, 0.09, "square", 0.6);
   }
   if (sfx === "ding") {
-    note(a, 1568, t, 0.32, "triangle", 1.2);
-    note(a, 2349, t + 0.07, 0.42, "triangle", 0.9);
+    const [lo, hi] = pick("ding", DINGS);
+    note(a, lo, t, 0.32, "triangle", 1.2);
+    note(a, hi, t + 0.07, 0.42, "triangle", 0.9);
   }
-  if (sfx === "pop") note(a, 420, t, 0.09, "sine", 1.4, 980);
+  if (sfx === "pop") note(a, 420, t, 0.09, "sine", 1.4, pick("pop", [880, 980, 1100, 1240]));
+  if (sfx === "signin") {
+    note(a, 784, t, 0.12, "triangle", 1.1);
+    note(a, 1175, t + 0.1, 0.12, "triangle", 1.1);
+    note(a, 1568, t + 0.2, 0.3, "triangle", 1);
+  }
+  if (sfx === "message") {
+    note(a, 1319, t, 0.05, "square", 0.5);
+    note(a, 1319, t + 0.11, 0.07, "square", 0.5);
+  }
+  if (sfx === "achieve") {
+    [1047, 1319, 1568, 2093].forEach((f, i) => note(a, f, t + i * 0.08, i === 3 ? 0.35 : 0.1, "square", 0.55));
+  }
+  if (sfx === "buzz") {
+    // a tiny wing-flutter: a quick wobble of high notes
+    for (let i = 0; i < 6; i++) note(a, i % 2 ? 1760 : 1568, t + i * 0.035, 0.03, "square", 0.35);
+  }
+  if (sfx === "nope") {
+    // two low, buzzy notes going down: "uh-uh"
+    note(a, 233, t, 0.13, "square", 0.9);
+    note(a, 175, t + 0.14, 0.22, "square", 0.9);
+  }
   if (sfx === "shutter") {
     // the two halves of an old shutter: a sharp click, then a softer clack
     noise(a, t, 0.025, 1.6, 4200, 0.8, "highpass");

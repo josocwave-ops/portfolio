@@ -223,7 +223,7 @@ export default function StylePage() {
           <figure className={styles.card}>
             <Num>✓</Num>
             <div className={styles.demo}>
-              <NoteWindow title="♡ hello.txt">
+              <NoteWindow title="<3 hello.txt">
                 <span className={styles.noteText}>Now holding the intro on the homepage.</span>
               </NoteWindow>
             </div>
@@ -261,7 +261,7 @@ export default function StylePage() {
                 ✧ handmade with love ✧
               </span>
               <span className={`${styles.blinkie} pixel`} style={{ "--b1": "#c9a5ed", "--b2": "#fff" } as React.CSSProperties}>
-                ♡ now making: mugs ♡
+                &lt;3 now making: mugs &lt;3
               </span>
             </div>
             <figcaption>

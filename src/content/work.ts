@@ -100,7 +100,7 @@ export const site = {
   },
   // clicking the mood in the status line steps through these (draft words:
   // change them to your own moods)
-  moods: ["dreamy ☁", "sleepy ☾", "inspired ✦", "cosy ♨", "giddy ♡"],
+  moods: ["dreamy ☁", "sleepy ☾", "inspired ✦", "cosy ♨", "giddy <3"],
   // the projects shown under "featured" on the home page, in order
   featured: ["ceramics-1", "fashion-1", "art-1"],
   // page background: any mix of the options on the /style page, e.g.

@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { sectionById, sections } from "@/content/work";
 import Pixel from "./Pixel";
+import TrackArea from "./TrackArea";
 import Wave from "./Wave";
 import styles from "../board.module.css";
 
 // The top of a category "board": a sprite, the title, a line about it,
 // and pill-shaped links to the other boards (the current one gets a sparkle
 // and a stitched underline, like the main nav).
+const ALL = sections.map((s) => s.id);
+
 export default function BoardHeader({ section, count }: { section: string; count: string }) {
   const meta = sectionById(section)!;
   return (
     <header className={styles.head} style={{ "--c": meta.color, "--ink-c": meta.ink } as React.CSSProperties}>
+      <TrackArea area={section} all={ALL} />
       {/* the board's main sprite, flanked by the rest of its family */}
       <span className={styles.halo} aria-hidden="true">
         <Pixel name="sparkle" size={2} twinkle className={styles.h1} />

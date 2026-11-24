@@ -11,6 +11,9 @@
 }
 
 .bar {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -23,6 +26,10 @@
 
 .title {
   flex: 1;
+}
+
+.bar:active {
+  cursor: grabbing;
 }
 
 .min {

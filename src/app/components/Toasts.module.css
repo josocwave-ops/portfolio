@@ -1,0 +1,142 @@
+/* the corner where notices stack up, newest at the bottom */
+.stack {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 40;
+  display: grid;
+  gap: 12px;
+  width: min(290px, calc(100% - 32px));
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  animation: slide-up 0.4s steps(5, jump-none);
+}
+
+@keyframes slide-up {
+  from {
+    translate: 0 30px;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+.win {
+  background: var(--paper);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 5px 3px 10px;
+  font-size: 12px;
+  color: var(--paper);
+  background: linear-gradient(to right, var(--tone) 20%, color-mix(in srgb, var(--tone) 55%, var(--mist)));
+  border-bottom: 2px solid var(--navy);
+}
+
+/* each kind of notice has its own title-bar colour */
+.signin {
+  --tone: var(--blue);
+}
+
+.chat {
+  --tone: var(--lilac-ink);
+}
+
+.achievement {
+  --tone: var(--pink-ink);
+}
+
+.x {
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  font: 12px/1 var(--pixel);
+  color: var(--navy);
+  background: var(--paper);
+  border: 2px solid var(--navy);
+  padding: 0 0 2px;
+  cursor: pointer;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px 12px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.body p {
+  display: grid;
+  gap: 2px;
+}
+
+.body b {
+  font-weight: 400;
+  color: var(--pink-ink);
+}
+
+.body small {
+  font-family: var(--body);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.chat .body p {
+  display: block;
+}
+
+.star {
+  flex: none;
+  --c2: #fff;
+  animation: spin 1.2s steps(8, jump-none) 2;
+}
+
+@keyframes spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+/* "typing" with three dots appearing one after another */
+.typing {
+  color: var(--muted);
+}
+
+.typing::after {
+  content: "";
+  animation: dots 1s steps(4, jump-none) infinite;
+}
+
+@keyframes dots {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .star {
+    animation: none;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { audio, note } from "./Sounds";
+import { unlock } from "./notices";
 import styles from "./MusicPlayer.module.css";
 
 // A little music player tucked into the bottom corner of every page, like a
@@ -9,7 +10,8 @@ import styles from "./MusicPlayer.module.css";
 // the browser (no audio file), and never starts on its own. It lives in the
 // layout, so the song keeps going as you click between pages. The _ button
 // tucks it away into a small ♫ tab; that choice is remembered. On a phone it
-// starts tucked.
+// starts tucked. Drag it around by its title bar, like an old desktop window;
+// it stays where you put it while you browse.
 
 const TITLE = "rain on the window <3";
 // the tune: one melody note every beat, a soft bass note every other beat
@@ -23,6 +25,32 @@ export default function MusicPlayer() {
   const [tucked, setTucked] = useState(false);
   const [bars, setBars] = useState<number[]>(() => Array(8).fill(2));
   const beat = useRef(0);
+  const box = useRef<HTMLElement>(null);
+  // where it's been dragged to (null = its usual corner)
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+
+  const drag = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0 || (e.target as Element).closest("button") || !box.current) return;
+    const r = box.current.getBoundingClientRect();
+    const dx = e.clientX - r.left;
+    const dy = e.clientY - r.top;
+    const bar = e.currentTarget;
+    bar.setPointerCapture(e.pointerId);
+    const move = (ev: PointerEvent) => {
+      // keep it on screen
+      const x = Math.min(Math.max(0, ev.clientX - dx), window.innerWidth - r.width);
+      const y = Math.min(Math.max(0, ev.clientY - dy), window.innerHeight - r.height);
+      setPos({ x, y });
+    };
+    const up = () => {
+      bar.removeEventListener("pointermove", move);
+      bar.removeEventListener("pointerup", up);
+      bar.removeEventListener("pointercancel", up);
+    };
+    bar.addEventListener("pointermove", move);
+    bar.addEventListener("pointerup", up);
+    bar.addEventListener("pointercancel", up);
+  };
 
   useEffect(() => {
     // on a phone it starts tucked away, so it doesn't cover the page
@@ -68,9 +96,14 @@ export default function MusicPlayer() {
   }
 
   return (
-    <aside className={`${styles.player} lift hover-lift`} aria-label="music player">
+    <aside
+      ref={box}
+      className={`${styles.player} lift hover-lift`}
+      aria-label="music player"
+      style={pos ? { left: pos.x, top: pos.y, right: "auto", bottom: "auto" } : undefined}
+    >
       <div className={`${styles.inner} px-frame`}>
-        <div className={`${styles.bar} pixel`}>
+        <div className={`${styles.bar} pixel`} onPointerDown={drag} title="drag me around">
           <span className={styles.title}>♫ now playing</span>
           <button type="button" className={styles.min} onClick={() => tuck(true)} data-sfx="pop" aria-label="tuck the music player away">
             _
@@ -80,7 +113,10 @@ export default function MusicPlayer() {
           <button
             type="button"
             className={`${styles.play} pixel`}
-            onClick={() => setPlaying((p) => !p)}
+            onClick={() => {
+              setPlaying((p) => !p);
+              unlock("music");
+            }}
             data-sfx="none"
             aria-pressed={playing}
             aria-label={playing ? "pause" : "play"}

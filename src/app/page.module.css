@@ -65,8 +65,7 @@
   width: 39%;
   height: auto;
   rotate: -7deg;
-  pointer-events: none;
-  user-select: none;
+  z-index: 2;
 }
 
 .hello {

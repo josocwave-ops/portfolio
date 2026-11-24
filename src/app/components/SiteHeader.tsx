@@ -3,6 +3,7 @@ import { links, sections, site } from "@/content/work";
 import Mood from "./Mood";
 import Pixel from "./Pixel";
 import Signature from "./Signature";
+import WindowBar from "./WindowBar";
 import styles from "./SiteHeader.module.css";
 
 // The top of every page: a little night sky that runs the full width of the
@@ -40,12 +41,8 @@ export default function SiteHeader({ current, home = false }: { current?: string
 
   return (
     <header className={styles.wrap}>
-      {/* a pink window bar along the very top, with three little buttons */}
-      <div className={styles.window} aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </div>
+      {/* a pink window bar along the very top; its red button won't let you leave */}
+      <WindowBar />
 
       {/* the night sky: logo, dragonfly, online now */}
       <div className={styles.sky}>

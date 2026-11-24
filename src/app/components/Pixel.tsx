@@ -234,6 +234,16 @@ const SPRITES = {
     "....ccc......",
     "......c......",
   ],
+  // a little pointing arrow (points left)
+  arrow: [
+    "...a.....",
+    "..aa.....",
+    ".aaaaaaaa",
+    "aaaaaaaaa",
+    ".aaaaaaaa",
+    "..aa.....",
+    "...a.....",
+  ],
   // the pink eight-point star from the board
   star8: [
     "......a......",

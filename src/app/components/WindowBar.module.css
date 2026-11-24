@@ -1,0 +1,65 @@
+/* the pink window bar at the very top, with three little buttons */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  background: var(--line);
+  border-bottom: 2px solid var(--navy);
+}
+
+.dot {
+  display: block;
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.one {
+  background: var(--rose);
+}
+
+.two {
+  background: var(--lilac);
+}
+
+.three {
+  background: var(--ice);
+}
+
+.dot:hover,
+.dot:focus-visible {
+  outline: 2px solid var(--paper);
+  filter: brightness(0.85);
+}
+
+/* "← click me!": always there, bobbing up and down in little pixel steps */
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 6px;
+  font-size: 12px;
+  color: var(--pink-ink);
+  animation: bob 1.2s steps(3, jump-none) infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hint {
+    animation: none;
+  }
+}

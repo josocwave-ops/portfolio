@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import MusicPlayer from "./components/MusicPlayer";
 import SoundEffects from "./components/Sounds";
+import Toasts from "./components/Toasts";
+import Visit from "./components/Visit";
 import { body, mono, pixel, serif } from "./fonts";
 import "./globals.css";
 
@@ -16,6 +18,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <SoundEffects />
         <MusicPlayer />
+        <Toasts />
+        <Visit />
       </body>
     </html>
   );
