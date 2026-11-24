@@ -6,6 +6,7 @@ import Cute from "./components/Cute";
 import Divider from "./components/Divider";
 import DragonflyHello from "./components/DragonflyHello";
 import Folder from "./components/Folder";
+import IntroStar from "./components/IntroStar";
 import NoteWindow from "./components/NoteWindow";
 import Placeholder from "./components/Placeholder";
 import Signature from "./components/Signature";
@@ -23,6 +24,8 @@ export default function Home() {
     <>
       <Background />
       <SiteHeader home />
+      {/* on the first visit, a shooting star sweeps up past the big A */}
+      <IntroStar targetSelector="main h1" />
       <main className={styles.main}>
         {/* hello */}
         <section className={styles.hero}>

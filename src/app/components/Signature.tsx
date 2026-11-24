@@ -21,7 +21,7 @@ export default function Signature({ size = "large", tone = "ink" }: { size?: "la
       />
       {large && (
         <span className={`${styles.surname} pixel`}>
-          <Wave text="cabedo wells" />
+          <Wave text="cabedo wells" always />
         </span>
       )}
     </span>

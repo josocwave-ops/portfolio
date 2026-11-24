@@ -1,0 +1,33 @@
+/* a see-through layer over the whole screen, just for the shooting star */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.sky svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+/* the glowing tail that follows the star */
+.tail {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(232, 181, 208, 0.9));
+}
+
+/* the star itself: a bright little 8-point sparkle */
+.star {
+  position: absolute;
+  left: -7px;
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 10px var(--pink));
+}

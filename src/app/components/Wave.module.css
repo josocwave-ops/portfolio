@@ -23,3 +23,31 @@
     color: var(--wave-c, var(--pink-ink));
   }
 }
+
+/* always: the wave rolls through on its own, then rests a moment */
+.always .letter {
+  animation: roll 2.6s steps(4, jump-none) calc(var(--i) * 70ms) infinite;
+}
+
+/* hovering it still plays the quick ripple */
+.always:hover .letter {
+  animation: hop 0.5s steps(4, jump-none) calc(var(--i) * 45ms) both;
+}
+
+@keyframes roll {
+  0%,
+  22%,
+  100% {
+    translate: 0 0;
+  }
+  11% {
+    translate: 0 -5px;
+    color: var(--wave-c, var(--pink-ink));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .always .letter {
+    animation: none;
+  }
+}

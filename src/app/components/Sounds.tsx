@@ -9,6 +9,7 @@ import styles from "./Sounds.module.css";
 //   ding — the 88×31 web buttons, and turning sound on
 //   pop  — opening the phone menu
 //   tick — any other link
+//   tap  — a soft little tap, when you click anywhere that isn't a button or link
 //   shutter — an old camera click, when the photo viewer changes photo
 //   nope    — an old "wrong!" buzz, for the pop-up × that won't close
 //   signin  — a messenger chime, when "ona has signed in"
@@ -18,7 +19,7 @@ import styles from "./Sounds.module.css";
 // Anything can pick its click sound with data-sfx="blip|ding|pop|tick|none".
 // Visitors can turn it off in the footer; the choice is remembered.
 
-type Sfx = "blip" | "ding" | "pop" | "tick" | "shutter" | "nope" | "signin" | "message" | "achieve" | "buzz";
+type Sfx = "blip" | "ding" | "pop" | "tick" | "tap" | "shutter" | "nope" | "signin" | "message" | "achieve" | "buzz";
 
 const KEY = "onA-sounds";
 const VOLUME = 0.05;
@@ -75,6 +76,7 @@ function noise(a: AudioContext, at: number, dur: number, vol: number, freq: numb
 // scale, so clicking around sounds like a little tune instead of one beep on
 // repeat. It never picks the same variation twice in a row.
 const TICKS = [1319, 1568, 1760, 2093, 2349];
+const TAPS = [523, 587, 659, 784, 880];
 const BLIPS: [number, number][] = [
   [988, 1480],
   [880, 1319],
@@ -101,6 +103,7 @@ export function play(sfx: Sfx) {
   if (!a) return;
   const t = a.currentTime;
   if (sfx === "tick") note(a, pick("tick", TICKS), t, 0.035, "square", 0.45);
+  if (sfx === "tap") note(a, pick("tap", TAPS), t, 0.05, "triangle", 0.5);
   if (sfx === "blip") {
     const [lo, hi] = pick("blip", BLIPS);
     note(a, lo, t, 0.06, "square", 0.6);
@@ -154,7 +157,8 @@ export default function SoundEffects() {
     const onClick = (e: MouseEvent) => {
       if (!isOn() || !(e.target instanceof Element)) return;
       const el = e.target.closest<HTMLElement>("[data-sfx], a, summary, button");
-      if (!el) return;
+      // clicking anywhere else gives a soft little tap
+      if (!el) return play("tap");
       const chosen = el.dataset.sfx;
       if (chosen === "none") return;
       const sfx: Sfx =

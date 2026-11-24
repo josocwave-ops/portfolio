@@ -18,11 +18,6 @@
   animation: wobble 0.6s steps(4, jump-none);
 }
 
-/* click: a happy hop */
-.hop {
-  animation: hop 0.5s steps(5, jump-none);
-}
-
 @keyframes wobble {
   25% {
     rotate: -6deg;
@@ -32,23 +27,17 @@
   }
 }
 
-@keyframes hop {
-  40% {
-    translate: 4px -14px;
-    rotate: 8deg;
-  }
-}
-
-/* the "about to say something" bubble: small and soft, above and to the
-   right, with three dots hopping one after another */
-.hint {
+/* the speech bubble: small and soft, above and to the right of the
+   dragonfly. It holds three hopping dots, or the words it's saying. */
+.bubble {
   position: absolute;
   left: 66%;
   bottom: 84%;
   display: flex;
   align-items: center;
-  gap: 3px;
+  min-height: 20px;
   padding: 4px 6px;
+  white-space: nowrap;
   background: var(--paper);
   border: 2px solid var(--mist);
   border-radius: 8px;
@@ -58,7 +47,7 @@
 }
 
 /* a tiny tail, pointing down-left at the dragonfly */
-.hint::after {
+.bubble::after {
   content: "";
   position: absolute;
   left: 6px;
@@ -73,7 +62,13 @@
   rotate: 45deg;
 }
 
-.hint i {
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dots i {
   width: 4px;
   height: 4px;
   border-radius: 50%;
@@ -81,11 +76,11 @@
   animation: dot-hop 1.1s steps(3, jump-none) infinite;
 }
 
-.hint i:nth-child(2) {
+.dots i:nth-child(2) {
   animation-delay: 0.18s;
 }
 
-.hint i:nth-child(3) {
+.dots i:nth-child(3) {
   animation-delay: 0.36s;
 }
 
@@ -100,61 +95,26 @@
   }
 }
 
-/* the speech bubble: pops up above the dragonfly and floats away */
-.bubble {
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  translate: -50% 0;
-  padding: 3px 10px;
-  font-size: 14px;
-  white-space: nowrap;
+/* the words pop in where the dots were */
+.words {
+  padding: 0 2px;
+  font-size: 13px;
+  line-height: 1;
   color: var(--ink);
-  background: var(--paper);
-  border: 2px solid var(--navy);
-  box-shadow: 3px 3px 0 var(--peri);
-  pointer-events: none;
-  animation: float 1.8s steps(12, jump-none) forwards;
+  animation: words-in 0.25s steps(3, jump-none);
 }
 
-/* the bubble's little tail */
-.bubble::after {
-  content: "";
-  position: absolute;
-  left: 40%;
-  top: 100%;
-  width: 8px;
-  height: 8px;
-  background: var(--paper);
-  border: 2px solid var(--navy);
-  border-top: 0;
-  border-left: 0;
-  translate: 0 -4px;
-  rotate: 45deg;
-}
-
-@keyframes float {
-  0% {
+@keyframes words-in {
+  from {
+    scale: 0.6;
     opacity: 0;
-    translate: -50% 6px;
-  }
-  12% {
-    opacity: 1;
-    translate: -50% 0;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    translate: -50% -26px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hint i,
   .fly:hover img,
-  .hop {
+  .dots i,
+  .words {
     animation: none;
   }
 }
