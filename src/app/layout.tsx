@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MusicPlayer from "./components/MusicPlayer";
 import SoundEffects from "./components/Sounds";
 import { body, mono, pixel, serif } from "./fonts";
 import "./globals.css";
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <SoundEffects />
+        <MusicPlayer />
       </body>
     </html>
   );

@@ -15,7 +15,7 @@ const FLOWERS: { name: SpriteName; color: string }[] = [
 // or a bead chain with a star in the middle.
 export default function Divider({ kind = "star", className }: { kind?: "dots" | "flowers" | "star"; className?: string }) {
   return (
-    <div className={`${styles.divider} ${styles[kind]} ${className ?? ""}`} aria-hidden="true">
+    <div className={`${styles.divider} ${styles[kind]} ${kind === "flowers" ? "bob-row" : ""} ${className ?? ""}`} aria-hidden="true">
       {kind === "flowers" &&
         FLOWERS.map((f, i) => <Pixel key={i} name={f.name} size={2} color={f.color} />)}
       {kind === "star" && <Pixel name="sparkle" size={2} color="var(--peri)" />}

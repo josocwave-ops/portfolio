@@ -23,11 +23,39 @@
   margin-bottom: 44px;
 }
 
-/* project page: big and calm */
+/* project page: the picture viewer and the notes window side by side */
 .piece {
-  max-width: 760px;
+  max-width: 1040px;
   margin: 0 auto;
-  text-align: center;
+}
+
+.viewerLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--s5);
+  align-items: start;
+  margin-top: var(--s4);
+}
+
+.notes {
+  display: grid;
+  gap: var(--s2);
+}
+
+/* the notes stay in view while you click through the photos */
+.notesWin {
+  position: sticky;
+  top: var(--s4);
+}
+
+@media (max-width: 820px) {
+  .viewerLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .notesWin {
+    position: static;
+  }
 }
 
 .back {
@@ -41,52 +69,23 @@
   color: var(--ink);
 }
 
-/* photos sit in a pixel frame (.px-frame in globals.css) */
-.photo {
-  display: block;
-  background: var(--paper);
-}
-
-.photo img {
-  width: 100%;
-  height: auto;
-}
-
-.heroFrame {
-  margin-top: 28px;
-}
-
-.hero {
-  max-height: 78vh;
-  object-fit: contain;
-}
-
 .pieceTitle {
   font-family: var(--pixel);
   font-weight: 400;
-  font-size: var(--title);
+  font-size: clamp(30px, 4vw, 40px);
   line-height: 1.05;
-  margin-top: 30px;
 }
 
 .details {
+  font-family: var(--mono);
   font-size: 13px;
   color: var(--muted);
-  margin-top: 8px;
 }
 
 .statement {
-  max-width: 58ch;
-  margin: 26px auto 0;
-  text-align: left;
+  margin-top: var(--s2);
   display: grid;
   gap: 14px;
-}
-
-.more {
-  display: grid;
-  gap: 34px;
-  margin-top: 52px;
 }
 
 .pager {
@@ -115,8 +114,21 @@
   margin-top: 24px;
 }
 
+/* contact: everything down the middle of the page */
+.centred {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.centred .heading {
+  justify-content: center;
+}
+
 .contactWin {
+  width: 100%;
   max-width: 560px;
+  text-align: left;
 }
 
 .prose {

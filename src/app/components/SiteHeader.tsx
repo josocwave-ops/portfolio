@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { links, sections, site } from "@/content/work";
-import Cute from "./Cute";
+import Mood from "./Mood";
 import Pixel from "./Pixel";
 import Signature from "./Signature";
 import styles from "./SiteHeader.module.css";
 
-// The top of every page, built like a mid-2000s profile site: a dark band
-// with the logo, a lighter band of links split by pipes, and a little status
-// box (what ona is doing, mood, reading, listening). The words live in
-// src/content/work.ts (site.tagline and site.status).
+// The top of every page: a little night sky that runs the full width of the
+// screen, under a pink window bar (logo, dragonfly, twinkling pixel
+// stars, online now! and ona's
+// mood), then a band of links split by tiny flowers and a lace trim. The
+// words live in src/content/work.ts (site.status.mood and site.moods).
 
 type Item = { id: string; label: string; href: string; out?: boolean };
 
@@ -21,32 +22,68 @@ const ITEMS: Item[] = [
   { id: "shop", label: "clay by ona ↗", href: links.shop, out: true },
 ];
 
+// the stars in the sky: where they sit (as a share of the band) and how they twinkle
+const STARS: { name: "sparkle" | "twinkle" | "star"; left: string; top: string; size: number; color: string; delay: string }[] = [
+  // kept in the open sky between the logo and "online now!"
+  { name: "twinkle", left: "26%", top: "12%", size: 1, color: "var(--pink)", delay: "1.6s" },
+  { name: "sparkle", left: "35%", top: "68%", size: 2, color: "var(--ice)", delay: "0s" },
+  { name: "twinkle", left: "46%", top: "16%", size: 2, color: "var(--mist)", delay: "2.2s" },
+  { name: "sparkle", left: "55%", top: "70%", size: 1, color: "var(--pink)", delay: "1.1s" },
+  { name: "sparkle", left: "62%", top: "10%", size: 2, color: "var(--ice)", delay: "2.8s" },
+  { name: "twinkle", left: "69%", top: "66%", size: 1, color: "var(--pink)", delay: "0.8s" },
+];
+
 export default function SiteHeader({ current, home = false }: { current?: string; home?: boolean }) {
   const here = home ? "home" : current;
-  const { doing, ...rest } = site.status;
 
   return (
     <header className={styles.wrap}>
-      <div className={styles.box}>
-        {/* dark band: logo, tagline, online now */}
-        <div className={styles.top}>
-          <Link href="/" className={styles.logo} aria-label="onA, home">
-            <Signature size="small" tone="light" />
-          </Link>
-          <span className={styles.tagline}>{site.tagline}</span>
-          <span className={`${styles.online} pixel`}>
-            <i aria-hidden="true" />
-            online now!
+      {/* a pink window bar along the very top, with three little buttons */}
+      <div className={styles.window} aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
+
+      {/* the night sky: logo, dragonfly, online now */}
+      <div className={styles.sky}>
+        <div className={styles.stars} aria-hidden="true">
+          {STARS.map((s, i) => (
+            <span key={i} className={styles.star} style={{ left: s.left, top: s.top, "--delay": s.delay } as React.CSSProperties}>
+              <Pixel name={s.name} size={s.size} color={s.color} twinkle />
+            </span>
+          ))}
+          <span className={styles.moon}>
+            <Pixel name="moon" size={3} color="var(--pink)" />
           </span>
         </div>
+        <div className={styles.inner}>
+          <Link href="/" className={styles.logo} aria-label="onA, home">
+            <Signature size="small" tone="light" />
+            {/* the same ASCII dragonfly as the homepage, in moonlight colours */}
+            <span className={styles.dragonfly} aria-hidden="true" />
+          </Link>
+          {/* online now!, with ona's mood underneath (click it to change it) */}
+          <span className={styles.corner}>
+            <span className={`${styles.online} pixel`}>
+              <i aria-hidden="true" />
+              online now!
+            </span>
+            <span className={styles.mood}>
+              <span className="pixel">mood:</span> <Mood first={site.status.mood} others={site.moods} />
+            </span>
+          </span>
+        </div>
+      </div>
 
-        {/* light band: every page, split by pipes */}
-        <nav className={`${styles.nav} pixel`} aria-label="Main">
+      {/* every page, split by tiny flowers */}
+      <nav className={`${styles.nav} pixel`} aria-label="Main">
+        <div className={styles.inner}>
           {ITEMS.map((it, i) => (
             <Fragment key={it.id}>
               {i > 0 && (
                 <span className={styles.pipe} aria-hidden="true">
-                  |
+                  ✿
                 </span>
               )}
               {it.out ? (
@@ -61,25 +98,10 @@ export default function SiteHeader({ current, home = false }: { current?: string
               )}
             </Fragment>
           ))}
-        </nav>
-
-        {/* status box */}
-        <div className={styles.status}>
-          <p className={styles.doing}>
-            <b className="pixel">ona is</b> <Cute text={doing} />
-          </p>
-          <dl className={styles.facts}>
-            {Object.entries(rest).map(([k, v]) => (
-              <div key={k}>
-                <dt className="pixel">{k}:</dt>
-                <dd>
-                  <Cute text={v} />
-                </dd>
-              </div>
-            ))}
-          </dl>
         </div>
-      </div>
+      </nav>
+      <div className={styles.lace} aria-hidden="true" />
+
     </header>
   );
 }

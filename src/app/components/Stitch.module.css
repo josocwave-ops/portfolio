@@ -1,0 +1,22 @@
+.stitch {
+  display: inline-block;
+  overflow: visible;
+}
+
+.stitch path {
+  fill: none;
+  stroke-width: 0.42;
+  stroke-linecap: round;
+}
+
+.a {
+  stroke: var(--c, var(--rose));
+}
+
+.b {
+  stroke: var(--c2, var(--peri));
+}
+
+.c {
+  stroke: var(--c3, var(--lilac));
+}

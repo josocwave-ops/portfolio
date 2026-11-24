@@ -1,4 +1,5 @@
 import styles from "./AsciiHeading.module.css";
+import Wave from "./Wave";
 
 // A section heading flanked by typed sparkle-lines, old-personal-website style:
 //   .:*~*:._.:*~*:.  ✿ featured projects ✿  .:*~*:._.:*~*:.
@@ -22,7 +23,7 @@ export default function AsciiHeading({
       </span>
       <span className={`${styles.text} pixel`}>
         <span aria-hidden="true">✿ </span>
-        {children}
+        {typeof children === "string" ? <Wave text={children} /> : children}
         <span aria-hidden="true"> ✿</span>
       </span>
       <span className={`${styles.line} ${styles.right}`} aria-hidden="true">

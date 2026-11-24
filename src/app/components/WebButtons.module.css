@@ -40,6 +40,13 @@
   white-space: nowrap;
 }
 
+/* resting on a small pixel shadow, like the windows */
+.btn {
+  box-shadow:
+    inset 1px 1px 0 var(--paper),
+    2px 2px 0 var(--navy);
+}
+
 /* the same lift onto a hard pixel shadow as the windows and pins */
 .btn:hover {
   translate: -3px -3px;

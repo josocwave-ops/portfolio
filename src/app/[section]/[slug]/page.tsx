@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { pieceBy, pieces, piecesIn, sectionById, toneAt, writings } from "@/content/work";
+import NoteWindow from "../../components/NoteWindow";
+import PhotoViewer from "../../components/PhotoViewer";
 import Placeholder from "../../components/Placeholder";
 import TextLink from "../../components/TextLink";
 import SiteFooter from "../../components/SiteFooter";
@@ -30,8 +32,8 @@ export default function PiecePage({ params }: PageProps<"/[section]/[slug]">) {
   );
 }
 
-// NOTE: this is still the simple first version of a project page.
-// The full case-study layout (starting point, research, sketches, process...) comes next.
+// A project: its photos in a picture viewer, with the words in a notes
+// window beside it, then a link to the next project.
 async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["params"] }) {
   const { section, slug } = await params;
   const piece = pieceBy(section, slug);
@@ -41,68 +43,61 @@ async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["p
   const list = piecesIn(section);
   const at = list.findIndex((p) => p.slug === slug);
   const next = list[(at + 1) % list.length];
-  const [hero, ...rest] = piece.images;
   const extraShapes = piece.shapes?.slice(1) ?? [];
   const poems = writings.filter((w) => w.pairedWith === piece.slug);
   const ph = { color: meta.color, ink: meta.ink, sprite: meta.sprite };
+
+  // the photos, or soft placeholders until there are photos
+  const slides: React.ReactNode[] = [];
+  const thumbs: React.ReactNode[] = [];
+  if (piece.images.length > 0) {
+    piece.images.forEach((im, i) => {
+      slides.push(<Image key={im.src} src={im.src} alt={i === 0 ? piece.title : ""} fill sizes="(max-width: 900px) 92vw, 640px" priority={i === 0} />);
+      thumbs.push(<Image key={im.src} src={im.src} alt="" fill sizes="80px" />);
+    });
+  } else {
+    [undefined, ...extraShapes].forEach((_, i) => {
+      const sprite = i === 0 ? meta.sprite : meta.family[i % meta.family.length];
+      slides.push(<Placeholder key={i} fill {...ph} sprite={sprite} tone={toneAt(i)} label={i === 0 ? "main photo" : "photo"} />);
+      thumbs.push(<Placeholder key={i} fill {...ph} sprite={sprite} tone={toneAt(i)} label="" />);
+    });
+  }
+  const fileName = piece.title.replace(/\s+/g, "_");
 
   return (
     <>
       <Background />
       <SiteHeader current={section} />
       <main className={styles.main}>
-        <article className={styles.piece}>
+        <article className={styles.piece} style={{ "--ink-c": meta.ink } as React.CSSProperties}>
           <Link href={`/${section}`} className={`${styles.back} pixel`}>
             ← {meta.label}
           </Link>
-          {/* every photo sits in the same pixel frame as the pins */}
-          <span className={`${styles.photo} ${styles.heroFrame} px-frame`}>
-            {hero ? (
-              <Image
-                className={styles.hero}
-                src={hero.src}
-                width={hero.width}
-                height={hero.height}
-                alt={piece.title}
-                sizes="(max-width: 800px) 92vw, 760px"
-                priority
-              />
-            ) : (
-              <Placeholder ratio={4 / 3} {...ph} label="main photo" />
-            )}
-          </span>
-          <h1 className={styles.pieceTitle}>{piece.title}</h1>
-          {piece.details && <p className={styles.details}>{piece.details}</p>}
-          <div className={styles.statement}>
-            {piece.statement.map((para) => (
-              <p key={para.slice(0, 24)}>{para}</p>
-            ))}
-          </div>
+          <div className={styles.viewerLayout}>
+            {/* the photos, in an old picture viewer */}
+            <NoteWindow title={`✿ ${fileName}.jpg`} meta={`${slides.length} ${slides.length === 1 ? "photo" : "photos"}`} flush className={styles.viewerWin}>
+              <PhotoViewer slides={slides} thumbs={thumbs} name={piece.title} />
+            </NoteWindow>
 
-          {poems.length > 0 && (
-            <p className={styles.details} style={{ marginTop: 28 }}>
-              The poems that belong to this project are in <TextLink href="/writing">writing</TextLink>.
-            </p>
-          )}
-
-          <div className={styles.more}>
-            {rest.length > 0
-              ? rest.map((im) => (
-                  <span key={im.src} className={`${styles.photo} px-frame`}>
-                    <Image src={im.src} width={im.width} height={im.height} alt="" sizes="(max-width: 800px) 92vw, 760px" />
-                  </span>
-                ))
-              : !hero &&
-                extraShapes.map((r, i) => (
-                  // empty spots take turns with the board's sprite family
-                  <span key={i} className={`${styles.photo} px-frame`}>
-                    <Placeholder ratio={r} {...ph} sprite={meta.family[(i + 1) % meta.family.length]} tone={toneAt(i + 1)} />
-                  </span>
+            {/* the words, in a notes window beside it */}
+            <NoteWindow title="♡ notes.txt" className={styles.notesWin} bodyClassName={styles.notes}>
+              <h1 className={styles.pieceTitle}>{piece.title}</h1>
+              {piece.details && <p className={styles.details}>{piece.details}</p>}
+              <div className={styles.statement}>
+                {piece.statement.map((para) => (
+                  <p key={para.slice(0, 24)}>{para}</p>
                 ))}
+              </div>
+              {poems.length > 0 && (
+                <p className={styles.details}>
+                  The poems that belong to this project are in <TextLink href="/writing">writing</TextLink>.
+                </p>
+              )}
+            </NoteWindow>
           </div>
 
           {next && next.slug !== piece.slug && (
-            <nav className={`${styles.pager} pixel`} style={{ "--ink-c": meta.ink } as React.CSSProperties}>
+            <nav className={`${styles.pager} pixel`}>
               <Link href={`/${section}`}>all {meta.label}</Link>
               <Link href={`/${section}/${next.slug}`}>next: {next.title} →</Link>
             </nav>

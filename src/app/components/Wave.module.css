@@ -1,0 +1,25 @@
+.wave {
+  display: inline-block;
+  cursor: default;
+}
+
+.letter {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* one ripple per hover, in little pixel steps */
+.wave:hover .letter {
+  animation: hop 0.5s steps(4, jump-none) calc(var(--i) * 45ms) both;
+}
+
+@keyframes hop {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  40% {
+    translate: 0 -7px;
+    color: var(--wave-c, var(--pink-ink));
+  }
+}

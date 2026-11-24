@@ -1,5 +1,6 @@
 import { serif } from "../fonts";
 import AsciiName from "./AsciiName";
+import Wave from "./Wave";
 import styles from "./Signature.module.css";
 
 // The onA signature, drawn as ASCII art (bars and dashes, like the lily),
@@ -18,7 +19,11 @@ export default function Signature({ size = "large", tone = "ink" }: { size?: "la
         className={styles.ascii}
         {...(tone === "light" ? { color: "#fff8f8", edgeColor: "#e8b5d0" } : {})}
       />
-      {large && <span className={`${styles.surname} pixel`}>cabedo wells</span>}
+      {large && (
+        <span className={`${styles.surname} pixel`}>
+          <Wave text="cabedo wells" />
+        </span>
+      )}
     </span>
   );
 }

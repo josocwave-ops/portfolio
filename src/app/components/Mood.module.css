@@ -1,0 +1,17 @@
+/* looks like the rest of the status line, with a stitched underline so it
+   reads as something you can click */
+.mood {
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  background: var(--stitch);
+  color: var(--ink);
+  border: 0;
+  padding: 0 0 2px;
+  cursor: pointer;
+}
+
+.mood:hover,
+.mood:focus-visible {
+  color: var(--pink-ink);
+}

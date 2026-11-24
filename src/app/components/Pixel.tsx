@@ -234,6 +234,22 @@ const SPRITES = {
     "....ccc......",
     "......c......",
   ],
+  // the pink eight-point star from the board
+  star8: [
+    "......a......",
+    "......a......",
+    ".a....a....a.",
+    "..a..aba..a..",
+    "...a.aba.a...",
+    "....abbba....",
+    "aaaaabbbaaaaa",
+    "....abbba....",
+    "...a.aba.a...",
+    "..a..aba..a..",
+    ".a....a....a.",
+    "......a......",
+    "......a......",
+  ],
   twinkle: [
     "......a......",
     "......a......",

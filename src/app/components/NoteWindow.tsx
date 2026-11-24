@@ -1,4 +1,5 @@
 import Pixel from "./Pixel";
+import Stitch from "./Stitch";
 import styles from "./NoteWindow.module.css";
 
 // A little window with a title bar: the site's one frame for everything
@@ -13,6 +14,7 @@ export default function NoteWindow({
   bodyClassName,
   flush = false,
   label = true,
+  trim = false,
 }: {
   title: string;
   /** small text on the right of the title bar, e.g. "10 files" */
@@ -24,10 +26,13 @@ export default function NoteWindow({
   flush?: boolean;
   /** set false when the window sits inside a link that already has a name */
   label?: boolean;
+  /** the little extras for a few special windows: cross-stitch swirls in two
+      corners, a fairy sitting on top, and a couple of twinkling stars */
+  trim?: boolean;
 }) {
-  return (
+  const win = (
     <div
-      className={`${styles.wrap} lift ${className ?? ""}`}
+      className={`${styles.wrap} lift ${trim ? "" : (className ?? "")}`}
       role={label ? "region" : undefined}
       aria-label={label ? title : undefined}
     >
@@ -44,6 +49,27 @@ export default function NoteWindow({
         </div>
         <div className={`${styles.body} ${flush ? styles.flush : ""} ${bodyClassName ?? ""}`}>{children}</div>
       </div>
+    </div>
+  );
+  if (!trim) return win;
+  return (
+    <div className={`${styles.trimmed} ${className ?? ""}`}>
+      <span className={`${styles.trim} ${styles.swirlTl}`} aria-hidden="true">
+        <Stitch name="swirl" size={4} />
+      </span>
+      <span className={`${styles.trim} ${styles.swirlBr}`} aria-hidden="true">
+        <Stitch name="swirl" size={4} />
+      </span>
+      <span className={`${styles.trim} ${styles.fairy}`} aria-hidden="true">
+        <Pixel name="fairy" size={3} color="var(--pink-ink)" />
+      </span>
+      <span className={`${styles.trim} ${styles.starA}`} aria-hidden="true">
+        <Pixel name="star8" size={2} color="var(--rose)" twinkle />
+      </span>
+      <span className={`${styles.trim} ${styles.starB}`} aria-hidden="true">
+        <Pixel name="sparkle" size={2} color="var(--peri)" twinkle />
+      </span>
+      {win}
     </div>
   );
 }

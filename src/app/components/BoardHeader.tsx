@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { sectionById, sections } from "@/content/work";
 import Pixel from "./Pixel";
+import Wave from "./Wave";
 import styles from "../board.module.css";
 
 // The top of a category "board": a sprite, the title, a line about it,
@@ -18,7 +19,9 @@ export default function BoardHeader({ section, count }: { section: string; count
         <Pixel name={meta.family[2]} size={3} className={styles.kin} />
         <Pixel name="sparkle" size={2} twinkle className={styles.h2} />
       </span>
-      <h1 className={`${styles.title} pixel`}>{meta.label}</h1>
+      <h1 className={`${styles.title} pixel`}>
+        <Wave text={meta.label} />
+      </h1>
       <p className={styles.blurb}>{meta.blurb}</p>
       <p className={styles.line} aria-hidden="true">
         .:*~*:._.:*~*:._.:*~*:._.:*~*:.

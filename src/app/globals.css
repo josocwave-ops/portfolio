@@ -215,13 +215,16 @@ main {
   background: var(--beads);
 }
 
-/* how everything clickable moves: on hover it lifts up-left onto a hard
-   pixel shadow, and pressing pushes it back down flat. The shadow is a
+/* Every window, pin and chip sits on a chunky pixel shadow: a periwinkle
+   block with a thin navy edge, like old computer windows. On hover it lifts
+   up-left and the shadow grows; pressing pushes it down flat. The shadow is a
    drop-shadow (not box-shadow) so it follows .px-frame's stepped corners;
    put .lift on a wrapper AROUND the framed element, since clip-path would
-   cut off a shadow on the element itself. */
+   cut off a shadow on the element itself. A section can tint the block with
+   --shade. */
 .lift {
   display: block;
+  filter: drop-shadow(5px 5px 0 var(--shade, var(--peri))) drop-shadow(2px 2px 0 var(--navy));
   transition:
     translate 0.16s steps(2),
     filter 0.16s steps(2);
@@ -232,14 +235,45 @@ a:focus-visible .lift,
 .lift:is(a):hover,
 .lift:is(a):focus-visible {
   translate: -3px -3px;
-  filter: drop-shadow(4px 4px 0 var(--ink-c, var(--navy)));
+  filter: drop-shadow(8px 8px 0 var(--shade, var(--peri))) drop-shadow(2px 2px 0 var(--ink-c, var(--navy)));
 }
 
 a:active .lift,
 .lift:is(a):active {
-  translate: 0 0;
-  filter: none;
+  translate: 2px 2px;
+  filter: drop-shadow(2px 2px 0 var(--navy));
   transition: none;
+}
+
+/* flower rows (the divider and the footer garden): every other flower bobs
+   up and down, each a beat after the last, so the row ripples */
+@keyframes flower-bob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -5px;
+  }
+}
+
+.bob-row > :nth-child(even) {
+  animation: flower-bob 1.4s steps(4, jump-none) infinite;
+}
+
+.bob-row > :nth-child(4n) {
+  animation-delay: 0.7s;
+}
+
+/* the dotted paper the whole site sits on: tiny lilac dots on a 12px grid,
+   above the background drawings and below everything else */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(201, 165, 237, 0.42) 1px, transparent 1.6px) 0 0 / 12px 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { links } from "@/content/work";
+import DialUp from "../components/DialUp";
 import NoteWindow from "../components/NoteWindow";
 import Placeholder from "../components/Placeholder";
 import TextLink from "../components/TextLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import Wave from "../components/Wave";
 import Background from "../components/Background";
 import styles from "../inner.module.css";
 
@@ -19,11 +21,14 @@ export default function AboutPage() {
       <main className={styles.main}>
         <div className={styles.about}>
           <NoteWindow title="✿ me.jpg" flush>
-            <Placeholder ratio={4 / 5} color="var(--pink)" ink="var(--pink-ink)" sprite="heart" label="a photo of you" />
+            {/* loads in like an old dial-up photo when you hover it */}
+            <DialUp file="me.jpg">
+              <Placeholder ratio={4 / 5} color="var(--pink)" ink="var(--pink-ink)" sprite="heart" label="a photo of you" />
+            </DialUp>
           </NoteWindow>
-          <NoteWindow title="♡ about_me.txt" bodyClassName={styles.prose}>
+          <NoteWindow title="♡ about_me.txt" bodyClassName={styles.prose} trim>
             <h1 className={`${styles.heading} pixel`} style={{ marginTop: 0 }}>
-              hi, i&rsquo;m ona
+              <Wave text="hi, i’m ona" />
             </h1>
             <p>
               I make things with clay, fabric, paint and words. Most of my work starts with a memory, a place, or a

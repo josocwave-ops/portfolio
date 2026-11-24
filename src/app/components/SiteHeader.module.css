@@ -1,48 +1,127 @@
-/* A mid-2000s profile-site header: square, flat, two bands of colour and a
-   status box, all inside one 2px navy outline. */
+/* The top of every page. Every band runs the full width of the screen; the
+   things inside line up with the page (.inner). */
 
 .wrap {
   position: relative;
   z-index: 3;
+}
+
+.inner {
+  position: relative;
   max-width: var(--max);
   margin: 0 auto;
-  padding: var(--s3) var(--gutter) 0;
-}
-
-.box {
-  border: 2px solid var(--navy);
-  background: var(--paper);
-}
-
-/* ---- dark band ---- */
-
-.top {
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
-  gap: var(--s3);
-  padding: 8px var(--s3);
-  background: var(--navy);
+}
+
+/* ---- the pink window bar at the very top ---- */
+
+.window {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 20px;
+  padding: 0 8px;
+  background: var(--line);
+  border-bottom: 2px solid var(--navy);
+}
+
+.window i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.window i:nth-child(2) {
+  background: var(--lilac);
+}
+
+.window i:nth-child(3) {
+  background: var(--ice);
+}
+
+/* ---- the night sky ---- */
+
+.sky {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0;
   color: var(--paper);
+  /* a night that's a touch darker at the top, like real sky */
+  background: linear-gradient(180deg, #24253f, var(--navy) 55%, #3a3b62);
+}
+
+.sky .inner {
+  gap: var(--s3);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  line-height: 0;
+}
+
+.moon {
+  position: absolute;
+  top: 14px;
+  /* just to the left of "online now!" */
+  right: calc(max(0px, (100% - var(--max)) / 2) + var(--gutter) + 160px);
+  line-height: 0;
 }
 
 .logo {
+  position: relative;
   display: flex;
   flex: none;
+  align-items: center;
 }
 
-.tagline {
-  font-family: var(--mono);
+/* the homepage's ASCII dragonfly, recoloured for the night by using it as a
+   stencil over a moonlit pink */
+.dragonfly {
+  width: 44px;
+  aspect-ratio: 124 / 114;
+  margin-left: 2px;
+  align-self: flex-start;
+  rotate: -7deg;
+  background: linear-gradient(135deg, var(--paper), var(--pink));
+  mask: url("/decor/dragonfly.svg") center / contain no-repeat;
+  animation: hover 2.6s ease-in-out infinite;
+}
+
+@keyframes hover {
+  50% {
+    translate: 0 -3px;
+  }
+}
+
+/* online now! with the mood tucked underneath */
+.corner {
+  margin-left: auto;
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  text-align: right;
+}
+
+.mood {
   font-size: 13px;
   color: var(--mist);
+  --ink: var(--paper);
 }
 
-.tagline::before {
-  content: "· ";
-  color: var(--pink);
+.mood .pixel {
+  color: var(--ice);
 }
 
 .online {
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -65,22 +144,25 @@
   }
 }
 
-/* ---- light band: links split by pipes ---- */
+/* ---- links, split by tiny flowers ---- */
 
 .nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2px var(--s2);
-  padding: 6px var(--s3);
   font-size: 14px;
   background: var(--blue);
   border-top: 2px solid var(--navy);
-  border-bottom: 2px solid var(--navy);
+}
+
+.nav .inner {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px var(--s2);
+  padding-top: 6px;
+  padding-bottom: 4px;
 }
 
 .pipe {
-  color: var(--ice);
+  font-size: 11px;
+  color: var(--pink);
 }
 
 .link {
@@ -110,60 +192,35 @@
   --c: var(--pink);
 }
 
-/* ---- status box ---- */
-
-.status {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px var(--s4);
-  padding: 8px var(--s3);
-  font-size: 13px;
-  color: var(--ink);
-}
-
-.doing b {
-  font-weight: 400;
-  color: var(--pink-ink);
-}
-
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px var(--s3);
-  margin: 0;
-}
-
-.facts div {
-  display: flex;
-  gap: 6px;
-}
-
-.facts dt {
-  color: var(--blue-ink);
-}
-
-.facts dd {
-  margin: 0;
+/* lace trim hanging under the links: scallops in the band's blue with a
+   navy rim, each with a little eyelet hole */
+.lace {
+  height: 12px;
+  background:
+    radial-gradient(circle at 8px 3px, var(--page) 1.6px, transparent 2.1px) 0 0 / 16px 12px repeat-x,
+    radial-gradient(circle at 8px 0, var(--blue) 6px, var(--navy) 6.5px 8.5px, transparent 9px) 0 0 / 16px 12px repeat-x;
 }
 
 @media (max-width: 640px) {
-  .tagline {
+  .moon {
     display: none;
   }
 
-  .nav {
-    justify-content: center;
-  }
-
-  .status {
-    display: grid;
+  /* on a phone the logo fills the left half, so only the right-hand stars stay */
+  .star:nth-child(-n + 3) {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .online i {
+  .online i,
+  .dragonfly {
     animation: none;
   }
+}
+
+/* the mood button sits on the night sky, so it lights up pink on hover */
+.mood button:hover,
+.mood button:focus-visible {
+  color: var(--pink);
 }

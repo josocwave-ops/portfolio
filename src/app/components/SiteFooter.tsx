@@ -31,7 +31,7 @@ const UPDATED = "november 2026";
 export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.garden} aria-hidden="true">
+      <div className={`${styles.garden} bob-row`} aria-hidden="true">
         {GARDEN.map((g, i) => (
           <Pixel key={i} name={g.name} color={g.color} size={g.size} />
         ))}

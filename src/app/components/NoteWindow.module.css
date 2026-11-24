@@ -7,6 +7,11 @@
 }
 
 .note {
+  /* a raised edge, like an old window: light top-left, soft pink
+     bottom-right (4px, half of it tucked under the 2px outline) */
+  box-shadow:
+    inset 4px 4px 0 #fff,
+    inset -4px -4px 0 var(--line);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -76,9 +81,68 @@ a:focus-visible .spark {
 .body {
   display: block;
   flex: 1;
+
   padding: var(--s3) var(--s4) var(--s4);
 }
 
 .flush {
   padding: 0;
+}
+
+/* ---- trim: the little extras on a few special windows ---- */
+
+.trimmed {
+  position: relative;
+}
+
+.trim {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 0;
+}
+
+.swirlTl {
+  top: -34px;
+  left: -40px;
+  scale: -1 1;
+}
+
+.swirlBr {
+  right: -38px;
+  bottom: -30px;
+}
+
+/* a fairy sitting on the top edge of the window */
+.fairy {
+  --c2: var(--rose);
+  --c3: var(--pink);
+  top: -32px;
+  right: 18%;
+  animation: bob 2.6s ease-in-out infinite;
+}
+
+.starA {
+  top: 34%;
+  left: -26px;
+}
+
+.starB {
+  bottom: 14%;
+  right: -22px;
+}
+
+@keyframes bob {
+  50% {
+    translate: 0 -3px;
+  }
+}
+
+@media (max-width: 640px) {
+  .swirlTl,
+  .swirlBr,
+  .starA,
+  .starB {
+    display: none;
+  }
 }

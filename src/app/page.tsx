@@ -1,12 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import { pieces, piecesIn, sectionById, sections, site, writings } from "@/content/work";
 import AsciiHeading from "./components/AsciiHeading";
 import Background from "./components/Background";
 import Cute from "./components/Cute";
 import Divider from "./components/Divider";
+import Folder from "./components/Folder";
 import NoteWindow from "./components/NoteWindow";
-import Pixel from "./components/Pixel";
 import Placeholder from "./components/Placeholder";
 import Signature from "./components/Signature";
 import SiteFooter from "./components/SiteFooter";
@@ -14,9 +13,6 @@ import SiteHeader from "./components/SiteHeader";
 import WebButtons from "./components/WebButtons";
 import styles from "./page.module.css";
 
-const vars = (c: string, ink: string) => ({ "--c": c, "--ink-c": ink }) as React.CSSProperties;
-// "project one" -> "project_one.jpg", like a file on an old desktop
-const fileName = (title: string) => `${title.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "")}.jpg`;
 
 export default function Home() {
   const featured = site.featured.map((slug) => pieces.find((p) => p.slug === slug)).filter((p) => p !== undefined);
@@ -35,7 +31,7 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element -- static decorative SVG */}
             <img src="/decor/dragonfly.svg" alt="" aria-hidden="true" className={styles.dragonfly} draggable={false} />
           </h1>
-          <NoteWindow title="♡ hello.txt" className={styles.hello}>
+          <NoteWindow title="♡ hello.txt" className={styles.hello} trim>
             <p className={styles.intro}>
               <Cute text={site.intro} />
             </p>
@@ -45,7 +41,7 @@ export default function Home() {
 
         <Divider kind="flowers" />
 
-        {/* a few favourites, first */}
+        {/* a few favourites, first: each one a little folder */}
         <section aria-labelledby="featured-heading">
           <AsciiHeading id="featured-heading">featured projects</AsciiHeading>
           <div className={styles.featured}>
@@ -53,25 +49,23 @@ export default function Home() {
               const s = sectionById(p.section)!;
               const im = p.images[0];
               return (
-                <Link key={p.slug} href={`/${p.section}/${p.slug}`} className={styles.feature} style={vars(s.color, s.ink)}>
-                  <NoteWindow title={`✿ ${fileName(p.title)}`} label={false} flush className={styles.win}>
-                    <span className={styles.featureImg}>
-                      {im ? (
-                        <Image src={im.src} alt="" fill sizes="(max-width: 760px) 92vw, 380px" loading={i === 0 ? "eager" : "lazy"} />
-                      ) : (
-                        <Placeholder fill color={s.color} ink={s.ink} sprite={s.sprite} />
-                      )}
-                    </span>
-                    <span className={styles.featureText}>
-                      <span className={`${styles.featureSection} pixel`}>
-                        <Pixel name={s.sprite} size={2} />
-                        {s.label}
-                      </span>
-                      <span className={`${styles.featureTitle} pixel`}>{p.title}</span>
-                      <span className={styles.featureSummary}>{p.summary}</span>
-                    </span>
-                  </NoteWindow>
-                </Link>
+                <Folder
+                  key={p.slug}
+                  href={`/${p.section}/${p.slug}`}
+                  tab={s.label}
+                  title={p.title}
+                  meta={p.details ?? p.summary}
+                  color={s.color}
+                  deep={s.ink}
+                  small
+                  photo={
+                    im ? (
+                      <Image src={im.src} alt="" fill sizes="(max-width: 760px) 80vw, 300px" loading={i === 0 ? "eager" : "lazy"} />
+                    ) : (
+                      <Placeholder fill color={s.color} ink={s.ink} sprite={s.sprite} />
+                    )
+                  }
+                />
               );
             })}
           </div>
@@ -79,45 +73,41 @@ export default function Home() {
 
         <Divider kind="star" />
 
-        {/* the four ways in */}
+        {/* the four ways in: one window of folders */}
         <section aria-labelledby="work-heading">
           <AsciiHeading id="work-heading">the work</AsciiHeading>
-          <div className={styles.cards}>
-            {sections.map((s) => {
-              const items = piecesIn(s.id);
-              const cover = items[0]?.images[0];
-              const count = s.id === "writing" ? `${writings.length} poems` : `${items.length} projects`;
-              return (
-                <Link key={s.id} href={`/${s.id}`} className={styles.card} style={vars(s.color, s.ink)}>
-                  <NoteWindow title={`✿ ${s.label}/`} meta={count} label={false} flush className={styles.win}>
-                    <span className={styles.cover}>
-                      {s.id !== "writing" ? (
-                        cover ? (
-                          <Image src={cover.src} alt="" fill sizes="(max-width: 760px) 92vw, 560px" />
-                        ) : (
-                          <Placeholder fill color={s.color} ink={s.ink} sprite={s.sprite} label="cover photo" />
-                        )
-                      ) : (
-                        <span className={styles.poemCover}>
-                          <span>&ldquo;{poem.lines}&rdquo;</span>
-                        </span>
-                      )}
-                    </span>
-                    <span className={styles.cardText}>
-                      <span className={styles.cardHead}>
-                        <Pixel name={s.sprite} size={3} className={styles.sprite} />
-                        <span className={`${styles.cardTitle} pixel`}>{s.label}</span>
-                        <span className={`${styles.open} pixel`} aria-hidden="true">
-                          open →
-                        </span>
-                      </span>
-                      <span className={styles.blurb}>{s.blurb}</span>
-                    </span>
-                  </NoteWindow>
-                </Link>
-              );
-            })}
-          </div>
+          <NoteWindow title="✿ my_work/" meta="4 folders" label={false}>
+            <div className={styles.folders}>
+              {sections.map((s) => {
+                const items = piecesIn(s.id);
+                const [a, b] = items.flatMap((p) => p.images);
+                const count = s.id === "writing" ? `${writings.length} poems` : `${items.length} projects`;
+                const inside =
+                  s.id === "writing" ? (
+                    <span className={styles.poemScrap}>&ldquo;{poem.lines}&rdquo;</span>
+                  ) : a ? (
+                    <Image src={a.src} alt="" fill sizes="(max-width: 760px) 40vw, 220px" />
+                  ) : (
+                    <Placeholder fill color={s.color} ink={s.ink} sprite={s.sprite} label="" />
+                  );
+                const behind = b ? <Image src={b.src} alt="" fill sizes="200px" /> : <Placeholder fill color={s.color} ink={s.ink} sprite={s.family[1] ?? s.sprite} label="" tone={2} />;
+                return (
+                  <Folder
+                    key={s.id}
+                    href={`/${s.id}`}
+                    tab={`✿ ${s.label}`}
+                    title={s.label}
+                    meta={count}
+                    sprite={s.sprite}
+                    color={s.color}
+                    deep={s.ink}
+                    photo={inside}
+                    photoBehind={behind}
+                  />
+                );
+              })}
+            </div>
+          </NoteWindow>
         </section>
       </main>
       <SiteFooter />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { links } from "@/content/work";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import Wave from "../components/Wave";
 import NoteWindow from "../components/NoteWindow";
 import Pixel from "../components/Pixel";
 import Background from "../components/Background";
@@ -14,8 +15,10 @@ export default function ContactPage() {
     <>
       <Background />
       <SiteHeader current="contact" />
-      <main className={styles.main}>
-        <h1 className={styles.heading}>contact</h1>
+      <main className={`${styles.main} ${styles.centred}`}>
+        <h1 className={styles.heading}>
+          <Wave text="contact" />
+        </h1>
         <p className={styles.lead}>For commissions, collaborations, or just to say hi.</p>
         <NoteWindow title="✉ contact.txt" className={styles.contactWin} bodyClassName={styles.contactList}>
           <a href={`mailto:${links.email}`}>

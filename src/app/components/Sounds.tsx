@@ -19,7 +19,7 @@ const VOLUME = 0.05;
 
 let ctx: AudioContext | null = null;
 
-function audio() {
+export function audio() {
   if (!ctx) {
     const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AC) return null;
@@ -30,7 +30,7 @@ function audio() {
 }
 
 // one note: a quick attack, then a fade
-function note(a: AudioContext, freq: number, at: number, dur: number, type: OscillatorType, vol = 1, slideTo?: number) {
+export function note(a: AudioContext, freq: number, at: number, dur: number, type: OscillatorType, vol = 1, slideTo?: number) {
   const osc = a.createOscillator();
   const gain = a.createGain();
   osc.type = type;
@@ -60,7 +60,7 @@ export function play(sfx: Sfx) {
   if (sfx === "pop") note(a, 420, t, 0.09, "sine", 1.4, 980);
 }
 
-const isOn = () => {
+export const isOn = () => {
   try {
     return localStorage.getItem(KEY) !== "off";
   } catch {
