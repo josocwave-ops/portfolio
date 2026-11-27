@@ -342,6 +342,17 @@ const SPRITES = {
     "abbbbbbbbbbba",
     ".aaaaaaaaaaa.",
   ],
+  note: [
+    "...aaaaaa",
+    "...aaaaaa",
+    "...a....a",
+    "...a....a",
+    "...a....a",
+    ".aaa..aaa",
+    "abaa.abaa",
+    "aaaa.aaaa",
+    ".aa...aa.",
+  ],
   crown: [
     "a....a....a",
     "aa..aba..aa",

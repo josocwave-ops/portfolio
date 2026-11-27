@@ -54,7 +54,7 @@ export const sections: {
     ink: "var(--peri-ink)",
     sprite: "vase",
     family: ["vase", "key", "crown"],
-    blurb: "Stoneware vessels, mugs and faces: memory, mistakes, and the places I come from.",
+    blurb: "Mugs, bowls, vases, etc.",
   },
   {
     id: "art",
@@ -72,7 +72,7 @@ export const sections: {
     ink: "var(--pink-ink)",
     sprite: "dress",
     family: ["dress", "bow", "swan"],
-    blurb: "Garments built from discarded fabric, unravelled sweaters, castle walls and folklore.",
+    blurb: "Garments, clothes, etc.",
   },
   {
     id: "writing",
@@ -81,7 +81,7 @@ export const sections: {
     ink: "var(--lilac-ink)",
     sprite: "quill",
     family: ["quill", "moon", "cloud", "fairy"],
-    blurb: "Poems, some standing on their own, some carved into the work.",
+    blurb: "Poems, songs and prose.",
   },
 ];
 
@@ -102,7 +102,8 @@ export const site = {
   // change them to your own moods)
   moods: ["dreamy ☁", "sleepy ☾", "inspired ✦", "cosy ♨", "giddy <3"],
   // the projects shown under "featured" on the home page, in order
-  featured: ["ceramics-1", "fashion-1", "art-1"],
+  // (project slugs or poem slugs both work)
+  featured: ["ceramics-1", "art-1", "poem-1"],
   // page background: any mix of the options on the /style page, e.g.
   // "flourish", "ascii-lily", "ascii-garden", "stitch-lily", "halftone", "chrome", "cropmarks", "sparkles", "flowers"
   background: ["ascii-lily", "ascii-garden", "flourish"] as import("@/app/components/Background").BackgroundKind[],
@@ -122,12 +123,26 @@ const SHAPES = [4 / 5, 1, 2 / 3, 4 / 3, 3 / 4, 3 / 5, 1, 4 / 5, 5 / 4, 2 / 3];
 const COUNT: Record<Piece["section"], number> = { ceramics: 10, art: 8, fashion: 7 };
 const NUMBER = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 
+// real names given so far; everything else keeps its placeholder name
+const TITLES: Record<string, string> = {
+  "ceramics-1": "the memory cup project",
+  "fashion-1": "castle walls corset",
+  "art-1": "experiments with oil",
+  "poem-1": "operating manual for a silenced thing",
+};
+// and their years (shown on their folders instead of "medium, year")
+const YEARS: Record<string, string> = {
+  "ceramics-1": "2026",
+  "art-1": "2026",
+  "poem-1": "2025",
+};
+
 export const pieces: Piece[] = (["ceramics", "art", "fashion"] as const).flatMap((section, si) =>
   Array.from({ length: COUNT[section] }, (_, i) => ({
     slug: `${section}-${i + 1}`,
     section,
-    title: `project ${NUMBER[i]}`,
-    details: "medium, year",
+    title: TITLES[`${section}-${i + 1}`] ?? `project ${NUMBER[i]}`,
+    details: YEARS[`${section}-${i + 1}`] ?? "medium, year",
     summary: "A line about this project.",
     statement: [
       "Where it started: the memory, object, place or question that began this project.",
@@ -140,10 +155,10 @@ export const pieces: Piece[] = (["ceramics", "art", "fashion"] as const).flatMap
 
 export const writings: Writing[] = Array.from({ length: 6 }, (_, i) => ({
   slug: `poem-${i + 1}`,
-  title: `poem title ${NUMBER[i]}`,
+  title: TITLES[`poem-${i + 1}`] ?? `poem title ${NUMBER[i]}`,
   lines: ["the first line of the poem,\nand maybe the second.", "a short line.", "a few words that\nstay with you,\nthree lines long."][i % 3],
   text: "your poem goes here,\nline by line,\nwith its own breaks kept\n\nand its stanzas too.",
-  year: "year",
+  year: YEARS[`poem-${i + 1}`] ?? "year",
 }));
 
 export const piecesIn = (section: string) => pieces.filter((p) => p.section === section);

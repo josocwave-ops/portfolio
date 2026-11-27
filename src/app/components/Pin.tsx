@@ -21,13 +21,15 @@ const vars = (p: Common) =>
   ({ "--c": p.color, "--ink-c": p.ink, "--tone": TEXT_TONES[(p.tone ?? 1) % 3] }) as React.CSSProperties;
 
 // One pin on a Pinterest-style board: a photo at its own shape in a pixel
-// frame, title underneath. On hover it lifts onto a pixel shadow and a sparkle
+// frame, title underneath. Real photos get a plain navy frame and a thin
+// paper border so the colours in the work stand out; the empty placeholder
+// spots keep the board's pastels. On hover it lifts onto a pixel shadow and a sparkle
 // appears.
 export function PhotoPin({ image, ratio, index = 0, ...p }: Common & { image?: Img; ratio?: number; index?: number }) {
   return (
     <Link href={p.href} className={styles.pin} style={vars(p)}>
       <span className="lift">
-        <span className={`${styles.photo} px-frame`}>
+        <span className={`${styles.photo} ${image ? styles.print : ""} px-frame`}>
           {image ? (
             <Image
               src={image.src}

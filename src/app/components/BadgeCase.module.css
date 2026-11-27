@@ -1,0 +1,285 @@
+/* The badge case: a window over a softly dimmed page, below the notices
+   (z-index 40) so a badge found while it's open still slides in on top. */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 38;
+  display: grid;
+  place-items: center;
+  padding: var(--s4);
+  overflow-y: auto;
+  background: rgba(48, 49, 79, 0.25);
+}
+
+.case {
+  width: min(560px, 100%);
+  animation: pop-in 0.35s steps(5, jump-none);
+}
+
+@keyframes pop-in {
+  from {
+    scale: 0.7;
+    opacity: 0;
+  }
+  60% {
+    scale: 1.03;
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+.window {
+  background: var(--paper);
+  box-shadow:
+    inset 4px 4px 0 #fff,
+    inset -4px -4px 0 var(--line);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 4px 12px;
+  font-size: 14px;
+  color: var(--paper);
+  background: linear-gradient(to right, var(--pink-ink) 20%, color-mix(in srgb, var(--pink-ink) 55%, var(--pink)));
+  border-bottom: 2px solid var(--navy);
+}
+
+.bar > span:first-child {
+  flex: 1;
+}
+
+.meta {
+  font-family: var(--mono);
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.x {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  font: 14px/1 var(--pixel);
+  color: var(--navy);
+  background: var(--paper);
+  border: 2px solid var(--navy);
+  padding: 0 0 2px;
+  cursor: pointer;
+}
+
+.x:hover,
+.x:focus-visible {
+  background: var(--pink);
+}
+
+.body {
+  padding: var(--s3) var(--s4) var(--s4);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+/* a row of little flowers under the intro */
+.flowers {
+  margin: var(--s3) auto;
+}
+
+.intro {
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.hearts {
+  display: flex;
+  gap: 4px;
+}
+
+.full {
+  --c: var(--rose);
+  --c2: #fff;
+}
+
+.empty {
+  --c: var(--line);
+  --c2: var(--line);
+}
+
+/* ---- the badges ---- */
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.slot {
+  --st: 3px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+.has {
+  background: var(--page);
+}
+
+/* not found yet: dotted paper, a faded silhouette */
+.locked {
+  --frame: var(--silver);
+  background: radial-gradient(circle, var(--line) 1px, transparent 1.5px) 0 0 / 8px 8px, var(--paper);
+}
+
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--navy);
+  background: var(--tint);
+  --c: var(--navy);
+  --c2: var(--paper);
+  --c3: var(--peri);
+}
+
+.locked .icon {
+  border-color: var(--silver);
+  background: var(--paper);
+  --c: var(--silver);
+  --c2: var(--paper);
+  --c3: var(--silver);
+}
+
+.q {
+  font-size: 24px;
+  color: var(--silver);
+}
+
+.words {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.words b {
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--pink-ink);
+}
+
+.locked .words b {
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.text {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.locked .text {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.when {
+  margin-top: 2px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--peri-ink);
+}
+
+/* a little tag on badges found since the case was last opened */
+.new {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 11px;
+  color: var(--paper);
+  background: var(--rose);
+  padding: 1px 5px 2px;
+  animation: blink 1s steps(2, jump-none) 3;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.foot {
+  margin-top: var(--s3);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---- "badges: ♥♥♡♡" in the header status, on the night sky ---- */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 0 4px;
+  border: 0;
+  background: var(--stitch);
+  color: var(--mist);
+  cursor: pointer;
+}
+
+.status:hover,
+.status:focus-visible {
+  color: var(--pink);
+}
+
+.on {
+  --c: var(--pink);
+  --c2: #fff;
+}
+
+.off {
+  --c: var(--blue);
+  --c2: var(--blue);
+}
+
+.status:hover .off,
+.status:focus-visible .off {
+  --c: var(--peri);
+  --c2: var(--peri);
+}
+
+/* a badge you haven't looked at yet */
+.blink {
+  animation: blink 1.2s steps(2, jump-none) infinite;
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case,
+  .new,
+  .blink {
+    animation: none;
+  }
+}

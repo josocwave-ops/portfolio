@@ -8,8 +8,20 @@ import styles from "./PhotoViewer.module.css";
 // next ▶, a "2 of 5" counter and a row of thumbnails. Every change of photo
 // makes an old-camera click and a quick white flash. The
 // left/right arrow keys work too once you've clicked into it. The photos are
-// drawn on the server and handed in as `slides` and `thumbs`.
-export default function PhotoViewer({ slides, thumbs, name }: { slides: React.ReactNode[]; thumbs: React.ReactNode[]; name: string }) {
+// drawn on the server and handed in as `slides` and `thumbs`. The photo area
+// takes each photo's own shape (`ratios`, width / height), so tall and wide
+// photos both fill it without being cropped or boxed in.
+export default function PhotoViewer({
+  slides,
+  thumbs,
+  ratios,
+  name,
+}: {
+  slides: React.ReactNode[];
+  thumbs: React.ReactNode[];
+  ratios?: number[];
+  name: string;
+}) {
   const [i, setI] = useState(0);
   const [flash, setFlash] = useState(0);
   const n = slides.length;
@@ -32,7 +44,7 @@ export default function PhotoViewer({ slides, thumbs, name }: { slides: React.Re
       aria-roledescription="photo viewer"
       aria-label={`${name}, photos`}
     >
-      <div className={styles.stage}>
+      <div className={styles.stage} style={ratios?.[i] ? ({ "--r": ratios[i] } as React.CSSProperties) : undefined}>
         {slides.map((s, k) => (
           <div key={k} className={styles.slide} hidden={k !== i} aria-hidden={k !== i}>
             {s}

@@ -17,7 +17,7 @@ export default function WritingPage() {
       <Background />
       <SiteHeader current="writing" />
       <main className={styles.main}>
-        <BoardHeader section="writing" count={`${writings.length} poems`} />
+        <BoardHeader section="writing" count={`${writings.length} pieces`} />
         <Masonry>
           {writings.map((w, i) => (
             <TextPin

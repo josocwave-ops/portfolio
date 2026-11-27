@@ -57,7 +57,14 @@
   color: var(--paper);
 }
 
-.btn:hover .icon {
+/* the page you're on (the board switcher) stays filled in */
+.btn[aria-current="page"] {
+  background: var(--ink-c);
+  color: var(--paper);
+}
+
+.btn:hover .icon,
+.btn[aria-current="page"] .icon {
   --c: var(--tint);
 }
 

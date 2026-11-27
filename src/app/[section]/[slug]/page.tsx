@@ -50,13 +50,17 @@ async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["p
   // the photos, or soft placeholders until there are photos
   const slides: React.ReactNode[] = [];
   const thumbs: React.ReactNode[] = [];
+  // each photo's own shape (width / height), so the viewer fits it exactly
+  const ratios: number[] = [];
   if (piece.images.length > 0) {
     piece.images.forEach((im, i) => {
+      ratios.push(im.width / im.height);
       slides.push(<Image key={im.src} src={im.src} alt={i === 0 ? piece.title : ""} fill sizes="(max-width: 900px) 92vw, 640px" priority={i === 0} />);
       thumbs.push(<Image key={im.src} src={im.src} alt="" fill sizes="80px" />);
     });
   } else {
-    [undefined, ...extraShapes].forEach((_, i) => {
+    [piece.shapes?.[0] ?? 4 / 3, ...extraShapes].forEach((shape, i) => {
+      ratios.push(shape);
       const sprite = i === 0 ? meta.sprite : meta.family[i % meta.family.length];
       slides.push(<Placeholder key={i} fill {...ph} sprite={sprite} tone={toneAt(i)} label={i === 0 ? "main photo" : "photo"} />);
       thumbs.push(<Placeholder key={i} fill {...ph} sprite={sprite} tone={toneAt(i)} label="" />);
@@ -76,7 +80,7 @@ async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["p
           <div className={styles.viewerLayout}>
             {/* the photos, in an old picture viewer */}
             <NoteWindow title={`✿ ${fileName}.jpg`} meta={`${slides.length} ${slides.length === 1 ? "photo" : "photos"}`} flush className={styles.viewerWin}>
-              <PhotoViewer slides={slides} thumbs={thumbs} name={piece.title} />
+              <PhotoViewer slides={slides} thumbs={thumbs} ratios={ratios} name={piece.title} />
             </NoteWindow>
 
             {/* the words, in a notes window beside it */}

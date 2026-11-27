@@ -12,12 +12,22 @@ import Placeholder from "./components/Placeholder";
 import Signature from "./components/Signature";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
+import Viewer from "./components/Viewer";
 import WebButtons from "./components/WebButtons";
 import styles from "./page.module.css";
 
 
 export default function Home() {
-  const featured = site.featured.map((slug) => pieces.find((p) => p.slug === slug)).filter((p) => p !== undefined);
+  // featured can mix projects and poems; both become a little viewer window
+  const featured = site.featured
+    .map((slug) => {
+      const p = pieces.find((x) => x.slug === slug);
+      if (p) return { slug, section: p.section, href: `/${p.section}/${p.slug}`, title: p.title, year: p.details, image: p.images[0], lines: undefined };
+      const w = writings.find((x) => x.slug === slug);
+      if (w) return { slug, section: "writing", href: `/writing/${w.slug}`, title: w.title, year: w.year, image: undefined, lines: w.lines };
+      return undefined;
+    })
+    .filter((f) => f !== undefined);
   const poem = writings[0];
 
   return (
@@ -47,29 +57,32 @@ export default function Home() {
         {/* a few favourites, first: each one a little folder */}
         <section aria-labelledby="featured-heading">
           <AsciiHeading id="featured-heading">featured projects</AsciiHeading>
+          {/* a few favourites, each in its own little image-viewer window: the first one big */}
           <div className={styles.featured}>
             {featured.map((p, i) => {
               const s = sectionById(p.section)!;
-              const im = p.images[0];
+              const big = i === 0;
               return (
-                <Folder
+                <Viewer
                   key={p.slug}
-                  href={`/${p.section}/${p.slug}`}
-                  tab={s.label}
+                  href={p.href}
+                  file={`${p.slug.replace("-", "_")}.${p.lines ? "txt" : "jpg"}`}
+                  section={s.label}
+                  sprite={s.sprite}
                   title={p.title}
-                  meta={p.details ?? p.summary}
+                  year={p.year}
                   color={s.color}
-                  deep={s.ink}
-                  small
-                  twinkle={[0, 4, 8][i]}
-                  photo={
-                    im ? (
-                      <Image src={im.src} alt="" fill sizes="(max-width: 760px) 80vw, 300px" loading={i === 0 ? "eager" : "lazy"} />
-                    ) : (
-                      <Placeholder fill color={s.color} ink={s.ink} sprite={s.sprite} />
-                    )
-                  }
-                />
+                  ink={s.ink}
+                  big={big}
+                >
+                  {p.image ? (
+                    <Image src={p.image.src} alt="" fill sizes={big ? "(max-width: 760px) 92vw, 640px" : "(max-width: 760px) 92vw, 420px"} loading={i === 0 ? "eager" : "lazy"} />
+                  ) : p.lines ? (
+                    <span className={styles.poemPrint}>{p.lines}</span>
+                  ) : (
+                    <Placeholder fill color={s.color} ink={s.ink} sprite={s.sprite} label={big ? "photo" : ""} />
+                  )}
+                </Viewer>
               );
             })}
           </div>
@@ -79,13 +92,13 @@ export default function Home() {
 
         {/* the four ways in: one window of folders */}
         <section aria-labelledby="work-heading">
-          <AsciiHeading id="work-heading">the work</AsciiHeading>
-          <NoteWindow title="✿ my_work/" meta="4 folders" label={false}>
+          <AsciiHeading id="work-heading">gallery</AsciiHeading>
+          <NoteWindow title="✿ gallery/" meta="4 folders" label={false}>
             <div className={styles.folders}>
               {sections.map((s, i) => {
                 const items = piecesIn(s.id);
                 const [a, b] = items.flatMap((p) => p.images);
-                const count = s.id === "writing" ? `${writings.length} poems` : `${items.length} projects`;
+                const count = s.id === "writing" ? `${writings.length} pieces` : `${items.length} projects`;
                 const inside =
                   s.id === "writing" ? (
                     <span className={styles.poemScrap}>&ldquo;{poem.lines}&rdquo;</span>
@@ -99,7 +112,7 @@ export default function Home() {
                   <Folder
                     key={s.id}
                     href={`/${s.id}`}
-                    tab={`✿ ${s.label}`}
+                    tab={`✿ ${s.label.split(" ")[0]}`}
                     title={s.label}
                     meta={count}
                     sprite={s.sprite}

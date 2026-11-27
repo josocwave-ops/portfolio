@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BadgeCase from "./components/BadgeCase";
 import BeatMaker from "./components/BeatMaker";
 import SoundEffects from "./components/Sounds";
 import Toasts from "./components/Toasts";
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SoundEffects />
         <BeatMaker />
         <Toasts />
+        <BadgeCase />
         <Visit />
       </body>
     </html>

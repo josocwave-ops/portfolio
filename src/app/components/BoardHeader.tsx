@@ -1,13 +1,11 @@
-import Link from "next/link";
 import { sectionById, sections } from "@/content/work";
 import Pixel from "./Pixel";
 import TrackArea from "./TrackArea";
 import Wave from "./Wave";
 import styles from "../board.module.css";
 
-// The top of a category "board": a sprite, the title, a line about it,
-// and pill-shaped links to the other boards (the current one gets a sparkle
-// and a stitched underline, like the main nav).
+// The top of a category "board": a sprite, the title, a line about it and a
+// count. Switching boards is left to the site header's nav.
 const ALL = sections.map((s) => s.id);
 
 export default function BoardHeader({ section, count }: { section: string; count: string }) {
@@ -31,20 +29,6 @@ export default function BoardHeader({ section, count }: { section: string; count
         .:*~*:._.:*~*:._.:*~*:._.:*~*:.
       </p>
       <p className={styles.count}>[ {count} ]</p>
-      <nav className={styles.chips} aria-label="Other boards">
-        {sections.map((s) => (
-          <Link
-            key={s.id}
-            href={`/${s.id}`}
-            className={`${styles.chip} pixel lift`}
-            aria-current={s.id === section ? "page" : undefined}
-            style={{ "--c": s.color, "--ink-c": s.ink } as React.CSSProperties}
-          >
-            <Pixel name="sparkle" size={2} className={styles.chipSpark} />
-            <span className={styles.chipText}>{s.label}</span>
-          </Link>
-        ))}
-      </nav>
     </header>
   );
 }

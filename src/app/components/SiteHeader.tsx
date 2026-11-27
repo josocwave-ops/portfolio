@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { links, sections, site } from "@/content/work";
+import { BadgeStatus } from "./BadgeCase";
 import Mood from "./Mood";
+import NavMenu from "./NavMenu";
 import Pixel from "./Pixel";
 import Signature from "./Signature";
 import WindowBar from "./WindowBar";
@@ -8,9 +10,8 @@ import styles from "./SiteHeader.module.css";
 
 // The top of every page: a little night sky that runs the full width of the
 // screen, under a pink window bar (logo, dragonfly, twinkling pixel
-// stars, online now! and ona's
-// mood), then a band of links split by tiny flowers and a lace trim. The
-// words live in src/content/work.ts (site.status.mood and site.moods).
+// stars, online now!, ona's mood and your badges), then a band of links
+// split by tiny flowers and a lace trim. The words live in src/content/work.ts (site.status.mood and site.moods).
 
 type Item = { id: string; label: string; href: string; out?: boolean };
 
@@ -38,6 +39,7 @@ const STARS: { name: "sparkle" | "twinkle" | "star"; left: string; top: string; 
 
 export default function SiteHeader({ current, home = false }: { current?: string; home?: boolean }) {
   const here = home ? "home" : current;
+  const hereLabel = [...WORK, ...ME].find((it) => it.id === here)?.label;
 
   return (
     <header className={styles.wrap}>
@@ -74,6 +76,10 @@ export default function SiteHeader({ current, home = false }: { current?: string
             <span className={styles.mood}>
               <span className="pixel">mood:</span> <Mood first={site.status.mood} others={site.moods} />
             </span>
+            {/* the badges you've found here; click to see them all */}
+            <span className={styles.mood}>
+              <span className="pixel">badges:</span> <BadgeStatus />
+            </span>
           </span>
         </div>
       </div>
@@ -81,6 +87,10 @@ export default function SiteHeader({ current, home = false }: { current?: string
       {/* every page: the work on the left, about ona on the right */}
       <nav className={`${styles.nav} pixel`} aria-label="Main">
         <div className={styles.inner}>
+          <NavMenu
+            here={hereLabel}
+            classes={{ menu: styles.menu, open: styles.open, toggle: styles.toggle, here: styles.here, links: styles.links }}
+          >
           {[WORK, ME].map((group, g) => (
             <ul key={g} className={`${styles.group} ${g === 1 ? styles.me : ""}`}>
               {group.map((it) => (
@@ -99,6 +109,7 @@ export default function SiteHeader({ current, home = false }: { current?: string
               ))}
             </ul>
           ))}
+          </NavMenu>
         </div>
       </nav>
       <div className={styles.lace} aria-hidden="true" />

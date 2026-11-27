@@ -1,0 +1,140 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: rotate 0.16s steps(2);
+}
+
+/* straightens up a little when you hover it */
+.card:hover,
+.card:focus-visible {
+  rotate: 0deg !important;
+}
+
+.lift {
+  flex: 1;
+  display: flex;
+}
+
+/* the print: a paper border, a bit wider along the bottom for the writing */
+.paper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: 10px 10px 0;
+  background: var(--paper);
+}
+
+.photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  outline: 2px solid var(--navy);
+  outline-offset: -2px;
+  background: var(--page);
+}
+
+.big .photo {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: 280px;
+}
+
+.photo > * {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+.caption {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  padding: 2px 4px 14px;
+}
+
+/* which part of the work it's from, in that section's colour */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px 1px 6px;
+  font-size: 12px;
+  color: var(--navy);
+  background: var(--c);
+  box-shadow: inset 0 0 0 2px var(--navy);
+  --c2: var(--paper);
+}
+
+.title {
+  font-size: 19px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.big .title {
+  font-size: 24px;
+}
+
+.year {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* a strip of washi tape holding it down, in the section's colour */
+.tape {
+  position: absolute;
+  z-index: 4;
+  top: -10px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  translate: -50% 0;
+  rotate: -3deg;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 248, 248, 0.35) 0 4px, transparent 4px 8px),
+    color-mix(in srgb, var(--c) 80%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink-c) 40%, transparent);
+}
+
+.spark {
+  --c: var(--ink-c);
+  --c2: var(--paper);
+  position: absolute;
+  z-index: 2;
+  top: 18px;
+  right: 18px;
+  opacity: 0;
+  transition: opacity 0.16s steps(2);
+}
+
+.card:hover .spark,
+.card:focus-visible .spark {
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .big .photo {
+    flex: none;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+
+  .big .title {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

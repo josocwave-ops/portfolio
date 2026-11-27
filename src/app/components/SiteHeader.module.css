@@ -1,5 +1,5 @@
-/* The top of every page. Every band runs the full width of the screen; the
-   things inside line up with the page (.inner). */
+/* The top of every page. Every band runs the full width of the screen, and
+   the things inside reach out to its edges too (.inner, just a gutter in). */
 
 .wrap {
   position: relative;
@@ -8,8 +8,6 @@
 
 .inner {
   position: relative;
-  max-width: var(--max);
-  margin: 0 auto;
   padding: 0 var(--gutter);
   display: flex;
   align-items: center;
@@ -98,7 +96,7 @@
   position: absolute;
   top: 14px;
   /* just to the left of "online now!" */
-  right: calc(max(0px, (100% - var(--max)) / 2) + var(--gutter) + 160px);
+  right: calc(var(--gutter) + 160px);
   line-height: 0;
 }
 
@@ -108,25 +106,6 @@
   display: flex;
   flex: none;
   align-items: center;
-}
-
-/* the same glow as the big onA, in moonlight colours, on hover */
-.logo::before {
-  content: "";
-  position: absolute;
-  inset: 4% 8% 10%;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 45% 55%, rgba(232, 181, 208, 0.6), rgba(201, 165, 237, 0.3) 40%, transparent 68%);
-  filter: blur(9px);
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-.logo:hover::before,
-.logo:focus-visible::before {
-  opacity: 1;
-  transition-duration: 0.4s;
 }
 
 /* the homepage's ASCII dragonfly, recoloured for the night by using it as a
@@ -294,6 +273,86 @@
 @media (max-width: 900px) {
   .nav {
     font-size: 15px;
+  }
+}
+
+/* the phone menu (NavMenu): on bigger screens the wrapper disappears and the
+   two groups sit straight in the band */
+.menu,
+.links {
+  display: contents;
+}
+
+.toggle {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .menu {
+    display: block;
+    width: 100%;
+  }
+
+  .toggle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s3);
+    padding: 4px 2px;
+    font: inherit;
+    text-transform: inherit;
+    color: var(--paper);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .toggle:hover,
+  .toggle:focus-visible {
+    color: var(--pink);
+  }
+
+  /* the page you're on, with a stitched underline like the current link */
+  .here {
+    color: var(--pink);
+    padding: 1px 4px;
+    background: var(--stitch);
+  }
+
+  .links {
+    display: none;
+  }
+
+  /* open: the work in one column, about ona in the other */
+  .open .links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s3);
+    padding: var(--s2) 0 var(--s2);
+    border-top: 2px dotted rgba(232, 181, 208, 0.7);
+    margin-top: 6px;
+  }
+
+  .open .links .group {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2px;
+  }
+
+  .open .links .group li + li::before {
+    display: none;
+  }
+
+  .open .links .me {
+    align-self: start;
+    margin-top: 0;
+    padding: 4px 6px;
+  }
+
+  .open .links .me::before {
+    display: none;
   }
 }
 

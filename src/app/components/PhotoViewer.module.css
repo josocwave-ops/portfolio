@@ -2,11 +2,15 @@
   display: grid;
 }
 
-/* the photo area: always the same shape, so the page doesn't jump as you
-   click through; photos fit inside without cropping */
+/* the photo area takes the shape of the photo on show (--r, width / height,
+   set inline); a very tall photo stops at most of the screen's height and
+   sits centred on the paper */
 .stage {
   position: relative;
-  aspect-ratio: 4 / 3;
+  justify-self: center;
+  width: 100%;
+  max-width: calc(min(78vh, 820px) * var(--r, 1.333));
+  aspect-ratio: var(--r, 4 / 3);
   background: var(--paper);
 }
 

@@ -66,53 +66,5 @@
   max-width: 100%;
 }
 
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--s2);
-  margin-top: var(--s4);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 14px;
-  border: 2px solid var(--navy);
-  border-radius: 999px;
-  font-size: 15px;
-  color: var(--ink);
-  background: color-mix(in srgb, var(--c) 45%, var(--paper));
-  transition:
-    translate 0.16s steps(2),
-    filter 0.16s steps(2),
-    background 0.16s steps(2);
-}
-
-.chip:hover,
-.chip[aria-current="page"] {
-  background: var(--c);
-}
-
-/* the sparkle only shows on hover and on the current board */
-.chipSpark {
-  --c: var(--ink-c);
-  width: 0;
-  opacity: 0;
-  transition: width 0.16s steps(2), margin 0.16s steps(2), opacity 0.16s steps(2);
-}
-
-.chip:hover .chipSpark,
-.chip[aria-current="page"] .chipSpark {
-  width: 18px;
-  margin-right: 6px;
-  opacity: 1;
-}
-
-.chip[aria-current="page"] .chipText {
-  padding-bottom: 2px;
-  background: var(--stitch);
-}
-
 /* columns give the staggered, every-photo-its-own-shape look */
 /* the masonry layout itself lives in components/Masonry */

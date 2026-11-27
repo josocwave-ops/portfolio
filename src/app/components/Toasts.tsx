@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Pixel from "./Pixel";
 import { isOn, play } from "./Sounds";
-import { onNotice, type Notice } from "./notices";
+import { onNotice, openBadgeCase, type Notice } from "./notices";
 import styles from "./Toasts.module.css";
 
 // Little windows that slide up in the bottom-left corner, like an old
@@ -46,30 +46,41 @@ export default function Toasts() {
                 ×
               </button>
             </div>
-            <div className={styles.body}>
-              {t.kind === "signin" && (
-                <>
-                  <Pixel name="heart" size={3} color="var(--rose)" />
-                  <p className="pixel">
-                    {t.name} has signed in ✦<small>welcome to onA &lt;3</small>
-                  </p>
-                </>
-              )}
-              {t.kind === "chat" && (
-                <p>
-                  <b className="pixel">ona says:</b> {t.typing ? <span className={styles.typing}>typing</span> : t.text}
-                </p>
-              )}
-              {t.kind === "achievement" && (
-                <>
-                  <Pixel name="star8" size={3} color="var(--rose)" className={styles.star} />
+            {/* an achievement: click anywhere on it to see all your badges */}
+            {t.kind === "achievement" ? (
+              <button
+                type="button"
+                className={`${styles.body} ${styles.open}`}
+                onClick={() => {
+                  close(t.id);
+                  openBadgeCase();
+                }}
+                data-sfx="ding"
+              >
+                <Pixel name="star8" size={3} color="var(--rose)" className={styles.star} />
+                <span className={styles.words}>
+                  <b className="pixel">{t.title}</b>
+                  <small>{t.text}</small>
+                  <span className={`${styles.see} pixel`}>see all badges →</span>
+                </span>
+              </button>
+            ) : (
+              <div className={styles.body}>
+                {t.kind === "signin" && (
+                  <>
+                    <Pixel name="heart" size={3} color="var(--rose)" />
+                    <p className="pixel">
+                      {t.name} has signed in ✦<small>welcome to onA &lt;3</small>
+                    </p>
+                  </>
+                )}
+                {t.kind === "chat" && (
                   <p>
-                    <b className="pixel">{t.title}</b>
-                    <small>{t.text}</small>
+                    <b className="pixel">ona says:</b> {t.typing ? <span className={styles.typing}>typing</span> : t.text}
                   </p>
-                </>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       ))}

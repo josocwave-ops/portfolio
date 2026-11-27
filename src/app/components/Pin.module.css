@@ -20,6 +20,19 @@
   height: auto;
 }
 
+/* a real photo: navy frame, paper mat, and the hover outline in navy too */
+.print {
+  --frame: var(--navy);
+  padding: 7px;
+  background: var(--paper);
+}
+
+.print img {
+  display: block;
+  outline: 2px solid var(--navy);
+  outline-offset: -2px;
+}
+
 /* a sparkle pops into the corner on hover */
 .spark {
   --c: var(--ink-c);

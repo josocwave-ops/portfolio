@@ -18,6 +18,20 @@ const SOLID = 0.3;
 const FAINT = 0.07;
 
 type Cell = { x: number; y: number; edge: boolean; ink: number };
+export type Art = { cols: number; rows: number; pitch: number; grid: string };
+
+// a pre-drawn grid (see signatureArt.ts) back into cells
+function fromArt(art: Art) {
+  const cells: Cell[] = [];
+  art.grid.split("\n").forEach((line, y) => {
+    [...line].forEach((ch, x) => {
+      if (ch === "#") cells.push({ x, y, edge: false, ink: 1 });
+      else if (ch === "-") cells.push({ x, y, edge: true, ink: 1 });
+      else if (ch === ".") cells.push({ x, y, edge: false, ink: FAINT });
+    });
+  });
+  return { w: art.cols, h: art.rows, cells };
+}
 
 export default function AsciiName({
   fontFamily,
@@ -28,6 +42,8 @@ export default function AsciiName({
   size = 120,
   color = "#30314f",
   edgeColor = "#8583c4",
+  backColor = "#fff8f8",
+  art,
   className,
 }: {
   /** the CSS font-family to draw the letters in (e.g. from next/font's style.fontFamily) */
@@ -41,13 +57,18 @@ export default function AsciiName({
   size?: number;
   color?: string;
   edgeColor?: string;
+  /** fills the letter's shape behind the bars; "" leaves the gaps see-through */
+  backColor?: string;
+  /** a pre-drawn grid: shown straight away, with no font loading or canvas */
+  art?: Art;
   className?: string;
 }) {
-  const [grid, setGrid] = useState<{ w: number; h: number; cells: Cell[] } | null>(null);
+  if (art) pitch = art.pitch;
+  const [grid, setGrid] = useState<{ w: number; h: number; cells: Cell[] } | null>(() => (art ? fromArt(art) : null));
   const done = useRef(false);
 
   useEffect(() => {
-    if (done.current) return;
+    if (done.current || art) return;
     done.current = true;
     const style = `${italic ? "italic " : ""}${weight} `;
     const big = size * 2.3;
@@ -106,7 +127,7 @@ export default function AsciiName({
       setGrid({ w: cols, h: rows, cells });
     };
     draw();
-  }, [fontFamily, italic, weight, pitch, size]);
+  }, [fontFamily, italic, weight, pitch, size, art]);
 
   const label = <span className="sr-only">onA, Ona Cabedo Wells</span>;
   if (!grid) return <span className={`${styles.wrap} ${className ?? ""}`} style={{ height: size * 2.3 * 1.15 }}>{label}</span>;
@@ -127,8 +148,15 @@ export default function AsciiName({
     );
   }
 
-  const d = (cells: Cell[], w: number, h: number) =>
-    cells.map((c) => `M${(c.x * pitch + (pitch - w) / 2).toFixed(1)} ${(c.y * pitch + (pitch - h) / 2).toFixed(1)}h${w}v${h}h-${w}z`).join("");
+  // every mark sits on whole grid pixels (no half-pixel offsets), so the
+  // bars come out the same width everywhere instead of flickering 1px/2px
+  const d = (cells: Cell[], w: number, h: number) => cells.map((c) => `M${c.x * pitch} ${c.y * pitch}h${w}v${h}h-${w}z`).join("");
+  // faint cells right next to the letter are just its soft fringe; printed
+  // solid they look like stray dots outside the outline, so leave them out
+  // and keep only faint cells that stand on their own (real hairlines)
+  const solid = new Set(grid.cells.filter((c) => c.ink >= SOLID).map((c) => `${c.x},${c.y}`));
+  const fringe = (c: Cell) => c.ink < SOLID && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([a, b]) => solid.has(`${c.x + a},${c.y + b}`));
+  const shown = grid.cells.filter((c) => !fringe(c));
   return (
     <span className={`${styles.wrap} ${className ?? ""}`}>
       {label}
@@ -140,10 +168,14 @@ export default function AsciiName({
         aria-hidden="true"
         className={styles.svg}
       >
-        {/* bars inside, dashes on the edges, dots for the hairlines */}
-        <path fill={color} d={d(grid.cells.filter((c) => c.ink >= SOLID && !c.edge), Math.max(1.6, pitch * 0.56), pitch * 0.86)} />
-        <path fill={edgeColor} d={d(grid.cells.filter((c) => c.ink >= SOLID && c.edge), pitch * 0.86, Math.max(1.4, pitch * 0.42))} />
-        <path fill={color} d={d(grid.cells.filter((c) => c.ink < SOLID), Math.max(1.4, pitch * 0.46), Math.max(1.4, pitch * 0.46))} />
+        {/* the letter's whole shape filled in first, so the background
+            doesn't show through between the bars; then unbroken bars inside
+            (one pixel of gap between them), a solid pixel outline, and any
+            lone hairlines in the outline colour */}
+        {backColor && <path fill={backColor} d={d(shown, pitch, pitch)} />}
+        <path fill={color} d={d(shown.filter((c) => c.ink >= SOLID && !c.edge), Math.max(1, pitch - 1), pitch)} />
+        <path fill={edgeColor} d={d(shown.filter((c) => c.ink >= SOLID && c.edge), pitch, pitch)} />
+        <path fill={edgeColor} d={d(shown.filter((c) => c.ink < SOLID), pitch, pitch)} />
       </svg>
     </span>
   );
