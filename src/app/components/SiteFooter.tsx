@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { links } from "@/content/work";
 import Pixel, { type SpriteName } from "./Pixel";
 import { SoundToggle } from "./Sounds";
 import styles from "./SiteFooter.module.css";
@@ -36,21 +34,9 @@ export default function SiteFooter() {
           <Pixel key={i} name={g.name} color={g.color} size={g.size} />
         ))}
       </div>
-      <nav className={`${styles.links} pixel`} aria-label="Footer">
-        <Link href="/about">about</Link>
-        <Link href="/contact">contact</Link>
-        <a href={links.instagram} target="_blank" rel="noopener noreferrer">
-          instagram ↗
-        </a>
-        <a href={links.shop} target="_blank" rel="noopener noreferrer">
-          clay by ona ↗
-        </a>
-      </nav>
-      <WebButtons />
+      <WebButtons instagram />
       <pre className={styles.ascii} aria-hidden="true">{`  .:*~*:._.:*~*:._.:*~*:._.:*~*:.  `}</pre>
-      <p className={styles.small}>
-        made by hand by Ona Cabedo Wells <span className={styles.heart}>&lt;3</span> · last updated {UPDATED}
-      </p>
+      <p className={styles.small}>last updated {UPDATED}</p>
       <SoundToggle />
     </footer>
   );

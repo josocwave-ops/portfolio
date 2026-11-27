@@ -291,6 +291,17 @@ const SPRITES = {
     "abbbbbbbbba",
     "aaaaaaaaaaa",
   ],
+  camera: [
+    ".aaaaaaaaa.",
+    "abbbbbbbaba",
+    "abbbaaabbba",
+    "abbabbbabba",
+    "abbabbbabba",
+    "abbabbbabba",
+    "abbbaaabbba",
+    "abbbbbbbbba",
+    ".aaaaaaaaa.",
+  ],
   bow: [
     "aa.......aa",
     "abaa...aaba",

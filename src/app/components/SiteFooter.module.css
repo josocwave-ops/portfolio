@@ -24,19 +24,6 @@
   --c3: var(--peri);
 }
 
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--s2) var(--s4);
-  font-size: 15px;
-  color: var(--plum);
-}
-
-.links a:hover {
-  color: var(--pink-ink);
-}
-
 .small {
   font-family: var(--mono);
   font-size: 13px;
@@ -54,7 +41,3 @@
   max-width: 100%;
 }
 
-.heart {
-  font-family: var(--pixel);
-  color: var(--pink-ink);
-}
