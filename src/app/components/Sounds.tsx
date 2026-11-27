@@ -52,7 +52,7 @@ export function note(a: AudioContext, freq: number, at: number, dur: number, typ
 }
 
 // a burst of filtered noise: the stuff of camera clicks
-function noise(a: AudioContext, at: number, dur: number, vol: number, freq: number, q: number, type: BiquadFilterType = "bandpass") {
+export function noise(a: AudioContext, at: number, dur: number, vol: number, freq: number, q: number, type: BiquadFilterType = "bandpass") {
   const len = Math.max(1, Math.floor(a.sampleRate * dur));
   const buf = a.createBuffer(1, len, a.sampleRate);
   const data = buf.getChannelData(0);
@@ -151,6 +151,28 @@ export const isOn = () => {
   }
 };
 
+// tells anything listening (like the beat maker) that sound was switched
+const CHANGED = "onA-sounds-changed";
+
+function setSound(on: boolean) {
+  try {
+    localStorage.setItem(KEY, on ? "on" : "off");
+  } catch {}
+  window.dispatchEvent(new Event(CHANGED));
+}
+
+// whether sound is on, kept up to date when the footer switch changes
+export function useSoundOn() {
+  const [on, setOn] = useState(true);
+  useEffect(() => {
+    const sync = () => setOn(isOn());
+    sync();
+    window.addEventListener(CHANGED, sync);
+    return () => window.removeEventListener(CHANGED, sync);
+  }, []);
+  return on;
+}
+
 // listens for clicks anywhere on the page; mounted once in the layout
 export default function SoundEffects() {
   useEffect(() => {
@@ -179,8 +201,7 @@ export default function SoundEffects() {
 
 // the "♪ sounds: on / off" switch in the footer
 export function SoundToggle() {
-  const [on, setOn] = useState(true);
-  useEffect(() => setOn(isOn()), []);
+  const on = useSoundOn();
   return (
     <button
       type="button"
@@ -188,12 +209,8 @@ export function SoundToggle() {
       aria-pressed={on}
       data-sfx="none"
       onClick={() => {
-        const next = !on;
-        setOn(next);
-        try {
-          localStorage.setItem(KEY, next ? "on" : "off");
-        } catch {}
-        if (next) play("ding");
+        setSound(!on);
+        if (!on) play("ding");
       }}
     >
       ♪ sounds: {on ? "on" : "off"}

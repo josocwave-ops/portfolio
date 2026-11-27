@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import MusicPlayer from "./components/MusicPlayer";
+import BeatMaker from "./components/BeatMaker";
 import SoundEffects from "./components/Sounds";
 import Toasts from "./components/Toasts";
 import Visit from "./components/Visit";
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <SoundEffects />
-        <MusicPlayer />
+        <BeatMaker />
         <Toasts />
         <Visit />
       </body>
