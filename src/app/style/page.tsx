@@ -223,7 +223,7 @@ export default function StylePage() {
           <figure className={styles.card}>
             <Num>✓</Num>
             <div className={styles.demo}>
-              <NoteWindow title="<3 hello.txt">
+              <NoteWindow title="hiiii.txt <3">
                 <span className={styles.noteText}>Now holding the intro on the homepage.</span>
               </NoteWindow>
             </div>

@@ -11,7 +11,7 @@
 
 .surname {
   display: block;
-  margin-top: var(--s2);
+  margin-top: -18px;
   font-size: clamp(15px, 2vw, 18px);
   font-weight: 400;
   letter-spacing: 0.35em;

@@ -44,7 +44,7 @@ export default function Home() {
             {/* the ASCII dragonfly in the empty corner above "on"; click it to say hi */}
             <DragonflyHello className={styles.dragonfly} />
           </h1>
-          <NoteWindow title="<3 hello.txt" className={styles.hello} trim>
+          <NoteWindow title="hiiii.txt <3" className={styles.hello} trim loading>
             <p className={styles.intro}>
               <Cute text={site.intro} />
             </p>

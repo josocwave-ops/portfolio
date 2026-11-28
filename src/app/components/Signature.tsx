@@ -4,11 +4,13 @@ import { LARGE, SMALL } from "./signatureArt";
 import Wave from "./Wave";
 import styles from "./Signature.module.css";
 
-// The onA signature, drawn as ASCII art (bars and dashes, like the lily),
-// with "cabedo wells" typed underneath. Both sizes are pre-drawn
-// (signatureArt.ts) so the name is there the moment the page loads.
-// tone "light" prints it in paper and pink, for dark bars.
-export default function Signature({ size = "large", tone = "ink" }: { size?: "large" | "small"; tone?: "ink" | "light" }) {
+// The onA signature, drawn in pixels, with "cabedo wells" typed underneath.
+// Both sizes are "strawberry milk": solid soft pink, a deeper pink outline and
+// a little shine along the top/left edges. The small header one is too thin
+// for an outline, so it gets the deeper pink only on its bottom/right edges.
+// Both are pre-drawn (signatureArt.ts) so the name is there the moment the
+// page loads.
+export default function Signature({ size = "large" }: { size?: "large" | "small" }) {
   const large = size === "large";
   return (
     <span className={styles.sig}>
@@ -20,7 +22,11 @@ export default function Signature({ size = "large", tone = "ink" }: { size?: "la
         pitch={large ? 3 : 2}
         art={large ? LARGE : SMALL}
         className={styles.ascii}
-        {...(tone === "light" ? { color: "#fff8f8", edgeColor: "#e8b5d0", backColor: "" } : {})}
+        fill="solid"
+        color="#f7c4db"
+        edgeColor="#d0709f"
+        shine="#fff6fa"
+        smallShade={!large}
       />
       {large && (
         <span className={`${styles.surname} pixel`}>

@@ -12,7 +12,6 @@ import styles from "../inner.module.css";
 
 export const metadata: Metadata = { title: "about" };
 
-// TODO(Ona): this bio is a first draft pieced together from the portfolio; rewrite it in your own words.
 export default function AboutPage() {
   return (
     <>
@@ -34,23 +33,22 @@ export default function AboutPage() {
           <div>
             <NoteWindow title="<3 about_me.txt" bodyClassName={styles.prose} trim>
               <h1 className={`${styles.heading} pixel`} style={{ marginTop: 0 }}>
-                <Wave text="hi, i’m ona" />
+                <Wave text="hi, im ona !!" />
               </h1>
               <p>
-                I make things with clay, fabric, paint and words. Most of my work starts with a memory, a place, or a
-                mistake I decided to keep.
+                i’ve always loved making things, in pretty much any way i can. i like working with my hands,
+                experimenting with materials, seeing where things take me, and losing myself in creation.
               </p>
               <p>
-                My ceramics range from mugs with poems carved into them to sculptural faces; my clothes are built from
-                discarded fabric and unravelled sweaters; and I draw and paint in between.
+                i love stories, memories and creating little worlds for things to exist in. most of my ideas start with
+                writing, but they rarely stay there. they find their way into clay, fabric, drawings, paintings, or
+                whatever else i happen to be working with.
               </p>
               <p>
-                I also run a small ceramics studio, <TextLink href={links.shop}>Clay by Ona</TextLink>, where some of my
-                pieces are for sale.
+                i’m based in barcelona, and some of my ceramic work is available at{" "}
+                <TextLink href={links.shop}>clay by ona</TextLink>.
               </p>
-              <p>
-                <TextLink href="/contact">Say hello</TextLink>.
-              </p>
+              <p>have a look around!! :)</p>
             </NoteWindow>
             {/* a little bed of flowers under the window so the column isn't so empty */}
             <Divider kind="flowers" size={4} className={styles.aboutFlowers} />

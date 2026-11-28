@@ -32,10 +32,15 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  /* the open sky the stars spread across: from just past the name (--from,
+     measured from the left) to just before the moon (--to, from the right) */
+  --from: calc(var(--gutter) + 124px);
+  --to: calc(var(--gutter) + 200px);
 }
 
 .star {
   position: absolute;
+  left: calc(var(--from) + (100% - var(--from) - var(--to)) * var(--at));
   line-height: 0;
 }
 
@@ -111,10 +116,14 @@
 /* the homepage's ASCII dragonfly, recoloured for the night by using it as a
    stencil over a moonlit pink */
 .dragonfly {
-  width: 44px;
+  /* same spot as on the homepage's big name: tucked above "on", flying
+     toward the A (top 2%, left -4%, 39% of the name's width) */
+  position: absolute;
+  top: 2%;
+  left: -4%;
+  width: 39%;
+  z-index: 1;
   aspect-ratio: 124 / 114;
-  margin-left: 2px;
-  align-self: flex-start;
   rotate: -7deg;
   background: linear-gradient(135deg, var(--paper), var(--pink));
   mask: url("/decor/dragonfly.svg") center / contain no-repeat;
@@ -374,8 +383,14 @@
     display: none;
   }
 
-  /* on a phone the logo fills the left half, so only the right-hand stars stay */
-  .star:nth-child(-n + 3) {
+  /* on a phone the logo fills the left half, so a few stars share the
+     strip between it and "online now!" */
+  .stars {
+    --from: 36%;
+    --to: 52%;
+  }
+
+  .notPhone {
     display: none;
   }
 }

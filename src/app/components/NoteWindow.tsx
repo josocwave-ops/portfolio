@@ -15,6 +15,7 @@ export default function NoteWindow({
   flush = false,
   label = true,
   trim = false,
+  loading = false,
 }: {
   title: string;
   /** small text on the right of the title bar, e.g. "10 files" */
@@ -29,6 +30,9 @@ export default function NoteWindow({
   /** the little extras for a few special windows: cross-stitch swirls in two
       corners, a fairy sitting on top, and a couple of twinkling stars */
   trim?: boolean;
+  /** the three title-bar dots light up pink one by one, then reset,
+      like a little loading bar */
+  loading?: boolean;
 }) {
   const win = (
     <div
@@ -41,7 +45,7 @@ export default function NoteWindow({
           <span className={styles.title}>{title}</span>
           {meta && <span className={styles.meta}>{meta}</span>}
           <Pixel name="sparkle" size={2} className={styles.spark} />
-          <span className={styles.dots}>
+          <span className={`${styles.dots} ${loading ? styles.loading : ""}`}>
             <i />
             <i />
             <i />

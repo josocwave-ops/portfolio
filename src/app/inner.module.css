@@ -164,8 +164,18 @@
 
 .prose {
   display: grid;
-  gap: 16px;
+  /* small gap under the "hi, im ona !!" heading... */
+  gap: 0;
   max-width: 54ch;
+}
+
+.prose > h1 {
+  margin-bottom: 4px;
+}
+
+/* ...and clear breaks between the paragraphs so the text is easy to read */
+.prose p + p {
+  margin-top: 24px;
 }
 
 .contactList {

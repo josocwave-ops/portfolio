@@ -44,8 +44,20 @@ export default function AsciiName({
   edgeColor = "#8583c4",
   backColor = "#fff8f8",
   art,
+  fill = "bars",
+  shine,
+  smallShade = false,
   className,
 }: {
+  /** fill "solid" only: colours for chunky bands instead of one colour */
+  gradient?: readonly string[];
+  gradientDir?: "down" | "diagonal";
+  /** fill "solid" only: colour of a thin shine line under the top edges */
+  shine?: string;
+  /** fill "solid" only, for small sizes: deeper colour on the bottom/right edges only, no shine */
+  smallShade?: boolean;
+  /** how the letters are filled in (bars = the original stripes) */
+  fill?: "bars" | "solid" | "dither" | "stitch";
   /** the CSS font-family to draw the letters in (e.g. from next/font's style.fontFamily) */
   fontFamily: string;
   italic?: boolean;
@@ -157,6 +169,59 @@ export default function AsciiName({
   const solid = new Set(grid.cells.filter((c) => c.ink >= SOLID).map((c) => `${c.x},${c.y}`));
   const fringe = (c: Cell) => c.ink < SOLID && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([a, b]) => solid.has(`${c.x + a},${c.y + b}`));
   const shown = grid.cells.filter((c) => !fringe(c));
+
+  // "solid": no stripes. The letter is filled with one colour, outlined in
+  // edgeColor, with an optional shine: a line of light pixels just inside the
+  // top and left edges of each stroke, like light falling from the top left.
+  if (fill === "solid" && smallShade) {
+    // small sizes: the strokes are only 2-3 pixels thick, so an outline all
+    // the way round would eat the fill and look speckled. Fill the letter and
+    // use the deeper colour only on its bottom/right edges, like a soft shadow.
+    const inShape = new Set(shown.map((c) => `${c.x},${c.y}`));
+    const shaded = (c: Cell) => !inShape.has(`${c.x + 1},${c.y}`) || !inShape.has(`${c.x},${c.y + 1}`);
+    return (
+      <span className={`${styles.wrap} ${className ?? ""}`}>
+        {label}
+        <svg
+          viewBox={`0 0 ${grid.w * pitch} ${grid.h * pitch}`}
+          width={grid.w * pitch}
+          height={grid.h * pitch}
+          shapeRendering="crispEdges"
+          aria-hidden="true"
+          className={styles.svg}
+        >
+          <path fill={color} d={d(shown.filter((c) => !shaded(c)), pitch, pitch)} />
+          <path fill={edgeColor} d={d(shown.filter(shaded), pitch, pitch)} />
+        </svg>
+      </span>
+    );
+  }
+
+  if (fill === "solid") {
+    const at = new Map(shown.map((c) => [`${c.x},${c.y}`, c]));
+    const lit = (c: Cell, dx: number, dy: number) =>
+      !!at.get(`${c.x + dx},${c.y + dy}`)?.edge && !at.has(`${c.x + 2 * dx},${c.y + 2 * dy}`);
+    const isShine = (c: Cell) => !!shine && !c.edge && c.ink >= SOLID && (lit(c, 0, -1) || lit(c, -1, 0));
+    const isEdge = (c: Cell) => c.edge || c.ink < SOLID;
+    return (
+      <span className={`${styles.wrap} ${className ?? ""}`}>
+        {label}
+        <svg
+          viewBox={`0 0 ${grid.w * pitch} ${grid.h * pitch}`}
+          width={grid.w * pitch}
+          height={grid.h * pitch}
+          shapeRendering="crispEdges"
+          aria-hidden="true"
+          className={styles.svg}
+        >
+          <path fill={color} d={d(shown.filter((c) => !isEdge(c) && !isShine(c)), pitch, pitch)} />
+          {shine && <path fill={shine} d={d(shown.filter(isShine), pitch, pitch)} />}
+          <path fill={edgeColor} d={d(shown.filter(isEdge), pitch, pitch)} />
+        </svg>
+      </span>
+    );
+  }
+
   return (
     <span className={`${styles.wrap} ${className ?? ""}`}>
       {label}

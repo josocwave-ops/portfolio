@@ -67,6 +67,12 @@ export default function BeatMaker() {
 
   useEffect(() => setGrid(load()), []);
 
+  // pops open on every visit on bigger screens (the visitor can tuck it away);
+  // on phones it starts tucked away so it doesn't cover the page
+  useEffect(() => {
+    if (window.matchMedia("(min-width: 641px)").matches) setOpen(true);
+  }, []);
+
   useEffect(() => {
     gridRef.current = grid;
   }, [grid]);

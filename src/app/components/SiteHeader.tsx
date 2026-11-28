@@ -26,15 +26,31 @@ const ME: Item[] = [
   { id: "shop", label: "clay by ona ↗", href: links.shop, out: true },
 ];
 
-// the stars in the sky: where they sit (as a share of the band) and how they twinkle
-const STARS: { name: "sparkle" | "twinkle" | "star"; left: string; top: string; size: number; color: string; delay: string }[] = [
-  // kept in the open sky between the logo and "online now!"
-  { name: "twinkle", left: "26%", top: "12%", size: 1, color: "var(--pink)", delay: "1.6s" },
-  { name: "sparkle", left: "35%", top: "68%", size: 2, color: "var(--ice)", delay: "0s" },
-  { name: "twinkle", left: "46%", top: "16%", size: 2, color: "var(--mist)", delay: "2.2s" },
-  { name: "sparkle", left: "55%", top: "70%", size: 1, color: "var(--pink)", delay: "1.1s" },
-  { name: "sparkle", left: "62%", top: "10%", size: 2, color: "var(--ice)", delay: "2.8s" },
-  { name: "twinkle", left: "69%", top: "66%", size: 1, color: "var(--pink)", delay: "0.8s" },
+// the stars in the sky. `at` is how far along the open sky each one sits:
+// 0 is right beside the name, 1 is just before the moon (see .star in the
+// CSS). `top` is a share of the band's height. Only the `phone` ones show on
+// a phone, where the logo fills the left half.
+const STARS: {
+  name: "sparkle" | "twinkle" | "star";
+  at: number;
+  top: string;
+  size: number;
+  color: string;
+  delay: string;
+  phone?: boolean;
+}[] = [
+  { name: "sparkle", at: 0, top: "62%", size: 1, color: "var(--pink)", delay: "0.4s" },
+  { name: "twinkle", at: 0.06, top: "14%", size: 2, color: "var(--ice)", delay: "1.9s", phone: true },
+  { name: "twinkle", at: 0.15, top: "72%", size: 1, color: "var(--mist)", delay: "2.5s" },
+  { name: "twinkle", at: 0.24, top: "12%", size: 1, color: "var(--pink)", delay: "1.6s" },
+  { name: "sparkle", at: 0.33, top: "68%", size: 2, color: "var(--ice)", delay: "0s", phone: true },
+  { name: "twinkle", at: 0.44, top: "16%", size: 2, color: "var(--mist)", delay: "2.2s" },
+  { name: "sparkle", at: 0.54, top: "70%", size: 1, color: "var(--pink)", delay: "1.1s" },
+  { name: "sparkle", at: 0.63, top: "10%", size: 2, color: "var(--ice)", delay: "2.8s", phone: true },
+  { name: "twinkle", at: 0.73, top: "66%", size: 1, color: "var(--pink)", delay: "0.8s" },
+  { name: "sparkle", at: 0.84, top: "20%", size: 1, color: "var(--mist)", delay: "1.3s", phone: true },
+  { name: "twinkle", at: 0.93, top: "62%", size: 2, color: "var(--ice)", delay: "2s" },
+  { name: "sparkle", at: 1, top: "74%", size: 1, color: "var(--pink)", delay: "0.6s" },
 ];
 
 export default function SiteHeader({ current, home = false }: { current?: string; home?: boolean }) {
@@ -50,7 +66,11 @@ export default function SiteHeader({ current, home = false }: { current?: string
       <div className={styles.sky}>
         <div className={styles.stars} aria-hidden="true">
           {STARS.map((s, i) => (
-            <span key={i} className={styles.star} style={{ left: s.left, top: s.top, "--delay": s.delay } as React.CSSProperties}>
+            <span
+              key={i}
+              className={`${styles.star} ${s.phone ? "" : styles.notPhone}`}
+              style={{ "--at": s.at, top: s.top, "--delay": s.delay } as React.CSSProperties}
+            >
               <Pixel name={s.name} size={s.size} color={s.color} twinkle />
             </span>
           ))}
@@ -63,7 +83,7 @@ export default function SiteHeader({ current, home = false }: { current?: string
         </div>
         <div className={styles.inner}>
           <Link href="/" className={styles.logo} aria-label="onA, home">
-            <Signature size="small" tone="light" />
+            <Signature size="small" />
             {/* the same ASCII dragonfly as the homepage, in moonlight colours */}
             <span className={styles.dragonfly} aria-hidden="true" />
           </Link>
