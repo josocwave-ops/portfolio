@@ -4,7 +4,7 @@ import TrackArea from "./TrackArea";
 import Wave from "./Wave";
 import styles from "../board.module.css";
 
-// The top of a category "board": a sprite, the title, a line about it and a
+// The top of a category "board": a sprite, the title and a
 // count. Switching boards is left to the site header's nav.
 const ALL = sections.map((s) => s.id);
 
@@ -24,7 +24,6 @@ export default function BoardHeader({ section, count }: { section: string; count
       <h1 className={`${styles.title} pixel`}>
         <Wave text={meta.label} />
       </h1>
-      <p className={styles.blurb}>{meta.blurb}</p>
       <p className={styles.line} aria-hidden="true">
         .:*~*:._.:*~*:._.:*~*:._.:*~*:.
       </p>

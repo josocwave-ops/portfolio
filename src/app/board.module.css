@@ -45,11 +45,6 @@
   color: var(--ink);
 }
 
-.blurb {
-  max-width: 48ch;
-  color: var(--muted);
-}
-
 .count {
   font-family: var(--mono);
   font-size: 13px;

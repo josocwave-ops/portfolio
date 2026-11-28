@@ -9,7 +9,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "onA — Ona Cabedo Wells", template: "%s — onA" },
-  description: "Ceramics, art & drawing, fashion & textiles and writing by Ona Cabedo Wells.",
+  description: "Ceramics, art & drawing, fashion & textiles and poetry by Ona Cabedo Wells.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

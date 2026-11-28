@@ -7,13 +7,13 @@
   },
   {
    "src": "/work/memory-cups/2.jpg",
-   "width": 2518,
-   "height": 1772
+   "width": 2300,
+   "height": 1180
   },
   {
    "src": "/work/memory-cups/3.jpg",
    "width": 2750,
-   "height": 1860
+   "height": 1300
   },
   {
    "src": "/work/memory-cups/4.jpg",
@@ -23,7 +23,7 @@
   {
    "src": "/work/memory-cups/5.jpg",
    "width": 1612,
-   "height": 1434
+   "height": 1370
   },
   {
    "src": "/work/memory-cups/6.jpg",
@@ -54,8 +54,8 @@
   },
   {
    "src": "/work/many-funky-mugs/4.jpg",
-   "width": 1422,
-   "height": 1172
+   "width": 1420,
+   "height": 1036
   }
  ],
  "anatomy-of-a-mistake": [
@@ -96,7 +96,7 @@
   {
    "src": "/work/bee-swarm/2.jpg",
    "width": 1064,
-   "height": 772
+   "height": 610
   }
  ],
  "crema-catalana-bowl": [
@@ -225,7 +225,7 @@
   {
    "src": "/work/earthern-skirt/3.jpg",
    "width": 742,
-   "height": 1366
+   "height": 1120
   }
  ],
  "castle-walls-corset": [
@@ -261,7 +261,7 @@
   {
    "src": "/work/colored-pencil/2.jpg",
    "width": 1112,
-   "height": 1300
+   "height": 1085
   },
   {
    "src": "/work/colored-pencil/3.jpg",

@@ -94,7 +94,7 @@ async function PieceBody({ params }: { params: PageProps<"/[section]/[slug]">["p
               </div>
               {poems.length > 0 && (
                 <p className={styles.details}>
-                  The poems that belong to this project are in <TextLink href="/writing">writing</TextLink>.
+                  The poems that belong to this project are in <TextLink href="/writing">poetry</TextLink>.
                 </p>
               )}
             </NoteWindow>
